@@ -4,9 +4,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  /* You can define the custom layout spacing here if using Tailwind v4 */
+  /* Or keep it as a standard CSS variable for v3 */
+  --app-layout-spacing: 2.5rem; /* Equivalent to spacing.10 (40px) */
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface-soft: var(--surface-soft);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -50,11 +57,13 @@
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.147 0.004 49.25);
+  --surface-soft: oklch(0.98 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.61 0.11 222);
+  /* --primary: oklch(0.61 0.11 222); */
+  --primary: oklch(0.63 0.27 276);
   --primary-foreground: oklch(0.98 0.02 201);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
@@ -65,7 +74,8 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.923 0.003 48.717);
   --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.709 0.01 56.259);
+  /* --ring: oklch(0.709 0.01 56.259); */
+  --ring: oklch(0.5028 0.2884 282.83);
   --chart-1: oklch(0.87 0.12 207);
   --chart-2: oklch(0.8 0.13 212);
   --chart-3: oklch(0.71 0.13 215);
@@ -85,11 +95,13 @@
 .dark {
   --background: oklch(0.147 0.004 49.25);
   --foreground: oklch(0.985 0.001 106.423);
+  --surface-soft: oklch(0.22 0 0);
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: oklch(0.71 0.13 215);
+  /* --primary: oklch(0.71 0.13 215); */
+  --primary: oklch(0.5028 0.2884 282.83);
   --primary-foreground: oklch(0.3 0.05 230);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
@@ -100,7 +112,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.553 0.013 58.071);
+  --ring: oklch(0.985 0.001 106.423);
   --chart-1: oklch(0.87 0.12 207);
   --chart-2: oklch(0.8 0.13 212);
   --chart-3: oklch(0.71 0.13 215);
@@ -123,14 +135,62 @@
   body {
     @apply bg-background text-foreground;
   }
+  :root {
+    /* Default spacing for Mobile */
+    --app-layout-spacing: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    :root {
+      /* New value for Tablet/Desktop */
+      --app-layout-spacing: 2.5rem;
+    }
+  }
+}
+
+@layer components {
+  .app-container {
+    /* This will now automatically use 1.5rem, 2.5rem, or 4rem 
+       depending on the screen size! */
+    @apply mx-auto w-[calc(100%-var(--app-layout-spacing))] max-w-6xl;
+  }
+}
+
+/* Global Scrollbar (All Scroll Containers) */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
+
+.dark * {
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
 /* Custom styles */
 /* Hide scrollbar but keep scroll functionality */
-.scrollbar-hide {
+.no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-.scrollbar-hide::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
