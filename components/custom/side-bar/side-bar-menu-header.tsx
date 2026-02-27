@@ -20,42 +20,18 @@ export function SideBarMenuHeader({
     if (!menu) return;
 
     const hasActive = menu.querySelector('[data-active="true"]');
-    /* if (hasActive) {
-      menu.setAttribute('data-locked', 'true');
-      return;
-    } */
+
+    // If active item exists → keep open and lock
     if (hasActive) {
       menu.setAttribute('data-open', 'true');
       menu.setAttribute('data-locked', 'true');
       return;
     }
+
     menu.removeAttribute('data-locked');
 
     const isOpen = menu.getAttribute('data-open') === 'true';
-    // const nextOpen = !isOpen;
-
-    // menu.setAttribute('data-open', nextOpen ? 'true' : 'false');
     menu.setAttribute('data-open', isOpen ? 'false' : 'true');
-
-    /* const items = menu.querySelectorAll<HTMLButtonElement>(
-      'button[data-active]'
-    ); */
-
-    /* items.forEach((item) => {
-      const isActive = item.getAttribute('data-active') === 'true';
-
-      if (nextOpen) {
-        // Menu expanding → everything interactive
-        item.removeAttribute('inert');
-      } else {
-        // Menu collapsing → only active item interactive
-        if (isActive) {
-          item.removeAttribute('inert');
-        } else {
-          item.setAttribute('inert', '');
-        }
-      }
-    }); */
   };
 
   return (
@@ -72,6 +48,7 @@ export function SideBarMenuHeader({
         <Icon className="text-muted-foreground h-3.5 w-3.5" />
         <span>{children}</span>
       </div>
+
       <ChevronDown className="text-muted-foreground h-3.5 w-3.5 transition-transform duration-300 group-data-[locked=true]:opacity-30 group-data-[open=true]:rotate-180" />
     </button>
   );

@@ -130,7 +130,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
-              <SideBarMenu basePath="/admin1">
+              <SideBarMenu basePath="/sessions">
                 <SideBarMenuHeader icon={MdOutlineDesktopWindows}>
                   Sessions
                 </SideBarMenuHeader>

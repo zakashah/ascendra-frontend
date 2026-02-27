@@ -11,26 +11,45 @@ export function SideBarMenu({
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const hasActive = basePath ? pathname.startsWith(basePath) : false;
+  const hasActive = pathname.startsWith(basePath);
 
-  // Sync inert per menu
   useEffect(() => {
     const menu = menuRef.current;
     if (!menu) return;
 
-    const isOpen = hasActive;
+    // 🔥 Ensure correct open state from route
+    if (hasActive) {
+      menu.setAttribute('data-open', 'true');
+      menu.setAttribute('data-locked', 'true');
+    }
 
-    const items = menu.querySelectorAll<HTMLButtonElement>(
-      'button[data-active]'
-    );
+    const syncInert = () => {
+      const isOpen = menu.getAttribute('data-open') === 'true';
 
-    items.forEach((item) => {
-      if (isOpen) {
-        item.removeAttribute('inert');
-      } else {
-        item.setAttribute('inert', '');
-      }
+      const items = menu.querySelectorAll<HTMLButtonElement>(
+        'button[data-active]'
+      );
+
+      items.forEach((item) => {
+        if (isOpen) {
+          item.removeAttribute('inert');
+        } else {
+          item.setAttribute('inert', '');
+        }
+      });
+    };
+
+    // Initial sync
+    syncInert();
+
+    // 🔥 Watch for manual data-open changes
+    const observer = new MutationObserver(syncInert);
+    observer.observe(menu, {
+      attributes: true,
+      attributeFilter: ['data-open'],
     });
+
+    return () => observer.disconnect();
   }, [hasActive]);
 
   return (
