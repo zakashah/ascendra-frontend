@@ -11,24 +11,24 @@ export function SideBarMenu({
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const hasActive = pathname.startsWith(basePath);
-
   useEffect(() => {
     const menu = menuRef.current;
     if (!menu) return;
 
-    // 🔥 Ensure correct open state from route
+    const hasActive = pathname.startsWith(basePath);
+
     if (hasActive) {
       menu.setAttribute('data-open', 'true');
       menu.setAttribute('data-locked', 'true');
+    } else {
+      menu.removeAttribute('data-locked');
+      // IMPORTANT: do NOT collapse automatically
+      // leave data-open untouched for multi-open behavior
     }
 
     const syncInert = () => {
       const isOpen = menu.getAttribute('data-open') === 'true';
-
-      const items = menu.querySelectorAll<HTMLButtonElement>(
-        'button[data-active]'
-      );
+      const items = menu.querySelectorAll<HTMLElement>('[data-active]');
 
       items.forEach((item) => {
         if (isOpen) {
@@ -39,10 +39,8 @@ export function SideBarMenu({
       });
     };
 
-    // Initial sync
     syncInert();
 
-    // 🔥 Watch for manual data-open changes
     const observer = new MutationObserver(syncInert);
     observer.observe(menu, {
       attributes: true,
@@ -50,13 +48,12 @@ export function SideBarMenu({
     });
 
     return () => observer.disconnect();
-  }, [hasActive]);
+  }, [pathname, basePath]);
 
   return (
     <div
       ref={menuRef}
-      data-open={hasActive ? 'true' : 'false'}
-      data-locked={hasActive ? 'true' : undefined}
+      data-open="false"
       className={cn('group flex flex-col p-0.5', className)}
       {...props}
     >

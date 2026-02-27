@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { ScrollToTop } from '@/components/custom/scroll-to-top';
 
 /* const inter = Inter({ subsets: ['latin'], variable: '--font-sans' }); */
 
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="font-sans text-sm font-normal tracking-normal antialiased">
+        <ScrollToTop />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

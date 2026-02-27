@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { useIsSmallScreen } from '@/hooks/use-is-small-screen';
 
 type IconType = React.ComponentType<{ className?: string }>;
 
@@ -20,6 +21,15 @@ export function SideBarMenuItem({
   icon: Icon,
   ...props
 }: Props) {
+  const isSmallScreen = useIsSmallScreen();
+  const closeSidebar = () => {
+    if (isSmallScreen) {
+      const root = document.getElementById('app-layout');
+      if (!root) return;
+      root.setAttribute('data-sidebar', 'closed');
+    }
+  };
+
   const pathname = usePathname();
   const isActive = pathname.endsWith(path);
 
@@ -33,6 +43,13 @@ export function SideBarMenuItem({
           className
         )}
         {...props}
+        onClick={(e) => {
+          if (isSmallScreen) {
+            console.log('it is small screen');
+            closeSidebar();
+          }
+          props.onClick?.(e);
+        }}
       >
         <div className={cn('flex items-center gap-3', Icon ? '' : 'ml-6.5')}>
           {Icon && <Icon className="text-muted-foreground h-3.5 w-3.5" />}
@@ -51,6 +68,12 @@ export function SideBarMenuItem({
         className
       )}
       {...props}
+      onClick={(e) => {
+        if (isSmallScreen) {
+          closeSidebar();
+        }
+        props.onClick?.(e);
+      }}
     >
       <span className="bg-foreground absolute top-2 bottom-2 left-4.5 w-px opacity-0 transition-opacity duration-200 group-data-[active=true]:opacity-100" />
       <span className="pl-6 capitalize">{children}</span>

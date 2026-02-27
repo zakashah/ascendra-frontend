@@ -45,8 +45,10 @@ export function SideBarMenuHeader({
       {...props}
     >
       <div className="flex items-center gap-3">
-        <Icon className="text-muted-foreground h-3.5 w-3.5" />
-        <span>{children}</span>
+        <Icon className="text-muted-foreground group-data-[locked=true]:text-foreground h-3.5 w-3.5 transition-colors" />
+        <span className="text-muted-foreground group-data-[locked=true]:text-foreground transition-colors">
+          {children}
+        </span>
       </div>
 
       <ChevronDown className="text-muted-foreground h-3.5 w-3.5 transition-transform duration-300 group-data-[locked=true]:opacity-30 group-data-[open=true]:rotate-180" />
