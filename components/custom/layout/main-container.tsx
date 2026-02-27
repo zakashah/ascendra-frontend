@@ -11,7 +11,7 @@ export function MainContainer({
       className={cn('app-container mt-8 pb-12 lg:mt-10 lg:pb-16', className)}
       {...props}
     >
-      <div className="flex flex-col gap-4 lg:flex-row">{children}</div>
+      <div className="flex flex-col gap-10 lg:flex-row">{children}</div>
     </main>
   );
 }

@@ -1,35 +1,64 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
+
+type IconType = React.ComponentType<{ className?: string }>;
 
 type Props = React.ComponentProps<'button'> & {
+  path: string;
+  icon?: IconType;
+  alternate?: 'default' | 'stand-alone';
   children: React.ReactNode;
 };
 
 export function SideBarMenuItem({
-  children,
+  path,
+  alternate = 'default',
   className,
+  children,
+  icon: Icon,
   ...props
-}: React.ComponentProps<'button'>) {
+}: Props) {
+  const pathname = usePathname();
+  const isActive = pathname.endsWith(path);
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const sidebar = document.getElementById('sidebar-root');
     if (!sidebar) return;
-
     // Remove active from all items
     sidebar
       .querySelectorAll('[data-active="true"]')
       .forEach((el) => el.setAttribute('data-active', 'false'));
-
     // Set active on clicked item
     e.currentTarget.setAttribute('data-active', 'true');
   };
 
+  if (alternate === 'stand-alone')
+    return (
+      <button
+        type="button"
+        data-active={isActive ? 'true' : 'false'}
+        // onClick={handleClick}
+        className={cn(
+          'hover:bg-foreground/4 focus-visible:outline-primary data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground flex h-8 w-full cursor-pointer items-center justify-between rounded-md px-3 transition-colors focus-visible:outline-2',
+          className
+        )}
+        {...props}
+      >
+        <div className={cn('flex items-center gap-3', Icon ? '' : 'ml-6.5')}>
+          {Icon && <Icon className="text-muted-foreground h-3.5 w-3.5" />}
+          <span>{children}</span>
+        </div>
+      </button>
+    );
   return (
     <button
       type="button"
-      data-active="false"
-      onClick={handleClick}
+      data-active={isActive ? 'true' : 'false'}
+      // onClick={handleClick}
+      // inert={isActive ? false : true}
       className={cn(
-        'group focus-visible:outline-primary hover:bg-muted/75 hover:text-foreground data-[active=true]:bg-muted data-[active=true]:text-foreground relative flex h-8 w-full cursor-pointer items-center rounded-md px-3 text-left text-sm transition-colors focus-visible:outline-2',
+        'group focus-visible:outline-primary hover:bg-foreground/4 hover:text-foreground data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground relative flex h-8 w-full cursor-pointer items-center rounded-md px-3 text-left text-sm transition-colors focus-visible:outline-2',
         className
       )}
       {...props}

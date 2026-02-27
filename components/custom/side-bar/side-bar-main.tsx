@@ -6,7 +6,7 @@ export function SideBarMain({
   ...props
 }: React.ComponentProps<'main'>) {
   return (
-    <main className={cn('text-foreground/80 my-4', className)} {...props}>
+    <main className={cn('text-foreground/70 my-4', className)} {...props}>
       {children}
     </main>
   );
