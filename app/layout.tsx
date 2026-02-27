@@ -35,11 +35,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>
-            <div className="grid flex-1 min-h-screen grid-cols-1 grid-rows-[auto_auto_1fr]">
-              {children}
-            </div>
-          </TooltipProvider>
+          <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
