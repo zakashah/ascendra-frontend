@@ -26,10 +26,8 @@ export function NavLink({
     <Link
       href={href}
       className={clsx(
-        'focus-visible:outline-primary inline-flex h-6 items-center rounded-[0.375rem] px-2 transition-colors focus-visible:outline-2',
-        isActive
-          ? 'text-foreground'
-          : 'text-muted-foreground hover:text-foreground'
+        'focus-visible:outline-primary text-muted-foreground hover:text-foreground inline-flex h-6 items-center rounded-[0.375rem] px-2 transition-colors focus-visible:outline-2',
+        isActive ? 'text-foreground' : ''
       )}
     >
       <span

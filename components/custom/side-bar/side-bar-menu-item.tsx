@@ -39,13 +39,12 @@ export function SideBarMenuItem({
         href={path}
         data-active={isActive ? 'true' : 'false'}
         className={cn(
-          'hover:bg-foreground/4 focus-visible:outline-primary data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground flex h-8 w-full cursor-pointer items-center justify-between rounded-md px-3 transition-colors focus-visible:outline-2',
+          'text-muted-foreground hover:bg-foreground/4 focus-visible:outline-primary data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground flex h-8 w-full cursor-pointer items-center justify-between rounded-md px-3 transition-colors focus-visible:outline-2',
           className
         )}
         {...props}
         onClick={(e) => {
           if (isSmallScreen) {
-            console.log('it is small screen');
             closeSidebar();
           }
           props.onClick?.(e);
@@ -53,7 +52,7 @@ export function SideBarMenuItem({
       >
         <div className={cn('flex items-center gap-3', Icon ? '' : 'ml-6.5')}>
           {Icon && <Icon className="text-muted-foreground h-3.5 w-3.5" />}
-          <span>{children}</span>
+          <span className="text-muted-foreground">{children}</span>
         </div>
       </Link>
     );

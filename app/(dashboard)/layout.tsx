@@ -275,9 +275,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </SideBarMain>
           <SideBarFooter />
         </SideBar>
-        <section className="flex-1">
-          <div className="border-border border border-dashed">{children}</div>
-        </section>
+        <section className="flex-1">{children}</section>
       </MainContainer>
     </PageLayout>
   );

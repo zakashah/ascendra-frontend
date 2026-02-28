@@ -50,8 +50,7 @@ export function SideBarMenuHeader({
           {children}
         </span>
       </div>
-
-      <ChevronDown className="text-muted-foreground h-3.5 w-3.5 transition-transform duration-300 group-data-[locked=true]:opacity-30 group-data-[open=true]:rotate-180" />
+      <ChevronDown className="text-muted-foreground h-3.5 w-3.5 transition-transform duration-300 group-data-[locked=true]:opacity-0 group-data-[open=true]:rotate-180" />
     </button>
   );
 }
