@@ -19,7 +19,7 @@ export function SecondaryButton({
         'min-w-fit overflow-hidden rounded-sm',
         /* Base Colors */
         'text-foreground font-medium',
-        'dark:bg-background/50 bg-white',
+        'bg-secondary',
         // 'bg-white dark:bg-zinc-700',
         /* Layered Shadow System */
         'shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]',
@@ -28,10 +28,10 @@ export function SecondaryButton({
         /* 'before:absolute before:inset-0 before:size-full',
         'before:bg-linear-to-b before:from-transparent before:to-black/2', */
         'before:pointer-events-none before:absolute before:inset-0',
-        'before:bg-gradient-to-b',
+        'before:bg-linear-to-b',
         'before:from-black/0',
-        'before:to-black/[0.02]',
-        'before:from-[30%]',
+        'before:to-black/2',
+        'before:from-30%',
         'before:transition-opacity',
         'before:transition-opacity',
         'dark:before:to-black/12',

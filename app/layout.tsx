@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans text-sm font-normal tracking-normal antialiased">
+      <body className="text-foreground font-sans text-sm font-normal tracking-normal antialiased">
         <ScrollToTop />
         <ThemeProvider
           attribute="class"

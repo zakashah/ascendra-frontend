@@ -9,7 +9,7 @@ export function MenuHeader({
   return (
     <header
       className={cn(
-        'border-border/60 bg-muted/50 text-foreground flex h-14 items-center justify-between border-b pr-[calc(var(--app-layout-spacing)/2)] pl-[calc(var(--app-layout-spacing)/2-12px)]',
+        'border-border/60 bg-muted text-foreground flex h-14 items-center justify-between border-b pr-[calc(var(--app-layout-spacing)/2)] pl-[calc(var(--app-layout-spacing)/2-12px)]',
         className
       )}
       {...props}

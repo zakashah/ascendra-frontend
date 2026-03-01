@@ -87,8 +87,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <Nav>
         <NavLink href="#">Overview</NavLink>
         <NavLink href="#">Users</NavLink>
-        <NavLink href="#">Organizatioins</NavLink>
         <NavLink href="#" exact>
+          Organizatioins
+        </NavLink>
+        <NavLink href="#">
           Billing
           <NavLinkBadge>Beta</NavLinkBadge>
         </NavLink>
