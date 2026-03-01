@@ -1,34 +1,58 @@
 'use client';
 
-import { TabsNav } from '@/components/custom/nav/tabs-nav';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { SecondaryButton } from '@/components/custom/input/secondary-button';
+import { PageHeader } from '@/components/custom/layout/page-header';
+import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
+import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
+import { PageMain } from '@/components/custom/layout/page-main';
+import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageTitle } from '@/components/custom/layout/page-title';
+import { Tabs } from '@/components/custom/tab/tabs';
+import { TabsContent } from '@/components/custom/tab/tabs-content';
+import { TabsList } from '@/components/custom/tab/tabs-list';
+import { TabsTrigger } from '@/components/custom/tab/tabs-trigger';
+import { LuChevronDown } from 'react-icons/lu';
 
 export default function OverviewPage() {
-  const pathname = usePathname();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const [openItem, setOpenItem] = useState(true);
-  const [active, setActive] = useState('users');
-
   return (
     <>
-      <header className="flex flex-wrap items-center justify-between pb-6">
-        <div>this is long left side left this is long left side left</div>
-        <div className="w-full sm:w-fit">right</div>
-      </header>
-      <main className="flex flex-col gap-8">
-        <TabsNav
-          tabs={[
-            { id: 'tab1', label: 'Tab 1' },
-            { id: 'tab2', label: 'Tab 2' },
-            { id: 'tab3', label: 'Tab 3' },
-          ]}
-          defaultActive="tab1"
-        />
-        <main className="h-300">div content</main>
-      </main>
+      <PageHeader>
+        <PageTitle>Account Portal</PageTitle>
+        {/* <PageHeaderGroup>
+          <PageTitle>Account Portal</PageTitle>
+          <PageSubTitle>
+            Clerks Account Portal is the fastest way to add authentication and
+            user management to your application. We provide a fully managed and
+            hosted solution that lives on your domain. <a>Learn more</a>
+          </PageSubTitle>
+        </PageHeaderGroup> */}
+        <PageHeaderAction>
+          <SecondaryButton>
+            Preview
+            <LuChevronDown />
+          </SecondaryButton>
+        </PageHeaderAction>
+      </PageHeader>
+      <PageMain>
+        <Tabs defaultValue="username">
+          <TabsList>
+            <TabsTrigger value="email">Email</TabsTrigger>
+            <TabsTrigger value="phone">Phone</TabsTrigger>
+            <TabsTrigger value="username">Username</TabsTrigger>
+            <TabsTrigger value="password" disabled>
+              Password
+            </TabsTrigger>
+            <TabsTrigger value="passkeys">Passkeys</TabsTrigger>
+            <TabsTrigger value="user-model">User Model</TabsTrigger>
+          </TabsList>
+          <TabsContent value="email">email</TabsContent>
+          <TabsContent value="phone">phone</TabsContent>
+          <TabsContent value="username">username</TabsContent>
+          <TabsContent value="password">password</TabsContent>
+          <TabsContent value="passkeys">passkeys</TabsContent>
+          <TabsContent value="user-model">user-model</TabsContent>
+        </Tabs>
+      </PageMain>
     </>
   );
 }

@@ -22,60 +22,41 @@ export function SideBarMenuItem({
   ...props
 }: Props) {
   const isSmallScreen = useIsSmallScreen();
-  const closeSidebar = () => {
-    if (isSmallScreen) {
-      const root = document.getElementById('app-layout');
-      if (!root) return;
-      root.setAttribute('data-sidebar', 'closed');
-    }
-  };
-
   const pathname = usePathname();
   const isActive = pathname.endsWith(path);
 
-  if (alternate === 'stand-alone') {
-    return (
-      <Link
-        href={path}
-        data-active={isActive ? 'true' : 'false'}
-        className={cn(
-          'text-muted-foreground hover:bg-foreground/4 focus-visible:outline-primary data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground flex h-8 w-full cursor-pointer items-center justify-between rounded-md px-3 transition-colors focus-visible:outline-2',
-          className
-        )}
-        {...props}
-        onClick={(e) => {
-          if (isSmallScreen) {
-            closeSidebar();
-          }
-          props.onClick?.(e);
-        }}
-      >
-        <div className={cn('flex items-center gap-3', Icon ? '' : 'ml-6.5')}>
-          {Icon && <Icon className="text-muted-foreground h-3.5 w-3.5" />}
-          <span className="text-muted-foreground">{children}</span>
-        </div>
-      </Link>
-    );
-  }
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isSmallScreen) {
+      document
+        .getElementById('app-layout')
+        ?.setAttribute('data-sidebar', 'closed');
+    }
+    props.onClick?.(e);
+  };
 
   return (
     <Link
       href={path}
       data-active={isActive ? 'true' : 'false'}
       className={cn(
-        'group focus-visible:outline-primary hover:bg-foreground/4 hover:text-foreground data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground relative flex h-8 w-full cursor-pointer items-center rounded-md px-3 text-left text-sm transition-colors focus-visible:outline-2',
+        'group relative flex h-8 w-full items-center rounded-md px-3 text-sm transition-colors',
+        'text-muted-foreground hover:bg-foreground/4 hover:text-foreground',
+        'data-[active=true]:bg-foreground/8 data-[active=true]:text-foreground',
+        'focus-visible:outline-primary focus-visible:outline-2',
         className
       )}
+      onClick={handleClick}
       {...props}
-      onClick={(e) => {
-        if (isSmallScreen) {
-          closeSidebar();
-        }
-        props.onClick?.(e);
-      }}
     >
-      <span className="bg-foreground absolute top-2 bottom-2 left-4.5 w-px opacity-0 transition-opacity duration-200 group-data-[active=true]:opacity-100" />
-      <span className="pl-6 capitalize">{children}</span>
+      {/* Active Left Indicator */}
+      {alternate === 'default' && (
+        <span className="bg-foreground absolute top-2 bottom-2 left-4.5 w-px opacity-0 transition-opacity duration-200 group-data-[active=true]:opacity-100" />
+      )}
+
+      <div className={cn('flex w-full items-center gap-3', !Icon && 'pl-6')}>
+        {Icon && <Icon className="h-3.5 w-3.5 shrink-0" />}
+        <span className="capitalize">{children}</span>
+      </div>
     </Link>
   );
 }
