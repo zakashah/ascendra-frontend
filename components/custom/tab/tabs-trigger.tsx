@@ -22,7 +22,7 @@ export function TabsTrigger({
       disabled={disabled}
       onClick={handleClick}
       className={cn(
-        'relative h-9 px-1 text-sm transition-colors',
+        'focus-visible:outline-primary relative h-9 rounded-sm px-1 text-sm transition-colors focus-visible:outline-2',
         disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         isActive && 'text-foreground cursor-default',
         !isActive && !disabled && 'text-muted-foreground hover:text-foreground',
@@ -32,7 +32,7 @@ export function TabsTrigger({
     >
       {children}
       {isActive && (
-        <span className="bg-foreground absolute inset-x-0 -bottom-[0.5px] h-[0.5px]" />
+        <span className="bg-foreground absolute inset-x-0 -bottom-[4.75px] h-px" />
       )}
     </button>
   );

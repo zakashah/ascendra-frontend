@@ -1,3 +1,5 @@
+'use client';
+
 export default function FeaturesPage() {
-  return <div>Features</div>;
+  return 'features page';
 }

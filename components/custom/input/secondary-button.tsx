@@ -15,7 +15,7 @@ export function SecondaryButton({
       className={cn(
         /* Layout */
         'h-8',
-        'group relative inline-flex items-center justify-between',
+        'group relative inline-flex items-center justify-center',
         'min-w-fit overflow-hidden rounded-sm',
         /* Base Colors */
         'text-foreground font-medium',
