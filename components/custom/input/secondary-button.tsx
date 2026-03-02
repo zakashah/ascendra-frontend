@@ -23,7 +23,7 @@ export function SecondaryButton({
         // 'bg-white dark:bg-zinc-700',
         /* Layered Shadow System */
         'shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]',
-        'dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(255,255,255,0.1)]',
+        'dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]',
         /* Gradient Overlay */
         /* 'before:absolute before:inset-0 before:size-full',
         'before:bg-linear-to-b before:from-transparent before:to-black/2', */
@@ -40,8 +40,7 @@ export function SecondaryButton({
         /* 'hover:bg-zinc-50 hover:before:opacity-0', */
         'hover:before:opacity-0',
         'hover:bg-gray-50',
-        'dark:hover:bg-zinc-800',
-        'active:scale-[0.98]',
+        'dark:hover:bg-secondary',
         'disabled:cursor-not-allowed disabled:opacity-40',
         /* Focus */
         'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
@@ -62,7 +61,7 @@ export function SecondaryButton({
       {...props}
     >
       {/* <span className="flex w-full items-center gap-1.5 p-8"> */}
-      <span className="flex items-center gap-1 px-3">{children}</span>
+      <span className="flex items-center gap-2 px-3">{children}</span>
       {/* </span> */}
     </button>
   );
