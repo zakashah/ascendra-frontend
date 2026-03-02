@@ -23,7 +23,7 @@ export function TabsTrigger({
       onClick={handleClick}
       className={cn(
         'relative h-9 px-1 text-sm transition-colors',
-        disabled ? 'opacity-50' : 'cursor-pointer',
+        disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         isActive && 'text-foreground cursor-default',
         !isActive && !disabled && 'text-muted-foreground hover:text-foreground',
         className

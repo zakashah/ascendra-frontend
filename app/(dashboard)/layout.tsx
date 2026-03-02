@@ -29,7 +29,6 @@ import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
 import { SurfaceButton } from '@/components/custom/surface-button';
 import { ThemeToggle } from '@/components/custom/theme-toggle';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Folder } from 'lucide-react';
 import { LuCircleArrowUp } from 'react-icons/lu';
 import { SideBarMenuContent } from '@/components/custom/side-bar/side-bar-menu-content';
 import { SideBarMenuItem } from '@/components/custom/side-bar/side-bar-menu-item';
@@ -47,6 +46,7 @@ import { BiNotification } from 'react-icons/bi';
 import { TbSettingsCheck } from 'react-icons/tb';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
+import { SectionMain } from '@/components/custom/layout/section-main';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -277,7 +277,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </SideBarMain>
           <SideBarFooter />
         </SideBar>
-        <section className="flex-1">{children}</section>
+        <SectionMain>{children}</SectionMain>
       </MainContainer>
     </PageLayout>
   );
