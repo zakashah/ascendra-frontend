@@ -47,6 +47,7 @@ import { TbSettingsCheck } from 'react-icons/tb';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
 import { SectionMain } from '@/components/custom/layout/section-main';
+import { SecondaryButton } from '@/components/custom/input/secondary-button';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -79,7 +80,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <LuCircleArrowUp className="mr-1" />
             Upgrades
           </MenuHeaderBadge>
-          <SurfaceButton variant={'invite'}>Invite</SurfaceButton>
+          <SecondaryButton className="h-6 w-full text-xs">
+            Invite
+          </SecondaryButton>
+          {/* <SurfaceButton variant={'invite'}>Invite</SurfaceButton> */}
           <ThemeToggle />
           <NameAvatar name="burhan shah" />
         </MenuHeaderActions>

@@ -59,6 +59,9 @@ export function SecondaryButton({
         'before:from-ceramic-black/0 before:to-ceramic-black/[0.02] before:from-30%' */
       )}
       {...props}
+      onClick={(e) => {
+        e.currentTarget.blur();
+      }}
     >
       {/* <span className="flex w-full items-center gap-1.5 p-8"> */}
       <span className="flex items-center gap-2 px-3">{children}</span>

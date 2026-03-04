@@ -22,7 +22,7 @@ export function TabsTrigger({
       disabled={disabled}
       onClick={handleClick}
       className={cn(
-        'focus-visible:outline-primary relative h-9 rounded-sm px-1 text-sm transition-colors focus-visible:outline-2',
+        'focus-visible:outline-primary relative inline-flex h-9 items-center gap-1.5 rounded-sm px-1 text-sm transition-colors focus-visible:outline-2',
         disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         isActive && 'text-foreground cursor-default',
         !isActive && !disabled && 'text-muted-foreground hover:text-foreground',
