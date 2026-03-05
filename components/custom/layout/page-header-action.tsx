@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 
+/* use class "w-fit" if do not require expanding */
 export function PageHeaderAction({
   className,
   children,

@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 
+/* use class "flex-nowrap" if no line wrape is required */
 export function PageHeader({
   className,
   children,

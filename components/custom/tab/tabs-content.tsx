@@ -12,5 +12,7 @@ export function TabsContent({ value, children, className }: TabsContentProps) {
 
   if (active !== value) return null;
 
-  return <div className={cn('mt-8', className)}>{children}</div>;
+  return (
+    <div className={cn('mt-8 flex flex-col gap-6', className)}>{children}</div>
+  );
 }

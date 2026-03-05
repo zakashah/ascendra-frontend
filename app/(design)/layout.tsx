@@ -29,7 +29,7 @@ import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
 import { SurfaceButton } from '@/components/custom/surface-button';
 import { ThemeToggle } from '@/components/custom/theme-toggle';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { LuCircleArrowUp } from 'react-icons/lu';
+import { LuChevronDown, LuCircleArrowUp } from 'react-icons/lu';
 import { SideBarMenuContent } from '@/components/custom/side-bar/side-bar-menu-content';
 import { SideBarMenuItem } from '@/components/custom/side-bar/side-bar-menu-item';
 import { SiMonkeytie } from 'react-icons/si';
@@ -48,6 +48,7 @@ import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
 import { SectionMain } from '@/components/custom/layout/section-main';
 import { SecondaryButton } from '@/components/custom/input/secondary-button';
+import { cn } from '@/lib/utils';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -118,7 +119,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/user-and-auth/sso-connections">
                     SSO Connections
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/configure/web3">Web3</SideBarMenuItem>
+                  <SideBarMenuItem path="/user-and-auth/web3">
+                    Web3
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/configure/mfa">
                     Multi-factor
                   </SideBarMenuItem>

@@ -6,6 +6,7 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
+import { Anchor } from '@/components/custom/nav/anchor';
 import { Tabs } from '@/components/custom/tab/tabs';
 import { TabsContent } from '@/components/custom/tab/tabs-content';
 import { TabsList } from '@/components/custom/tab/tabs-list';
@@ -19,7 +20,7 @@ import {
 } from '@/components/custom/ui/dropdown-menu';
 import { Switch } from '@/components/custom/ui/switch';
 import { cn } from '@/lib/utils';
-import { LuChevronDown, LuCode, LuEye } from 'react-icons/lu';
+import { LuChevronDown, LuCode, LuEye, LuInfo } from 'react-icons/lu';
 
 export default function UserAndAuthenticationPage() {
   return (
@@ -66,9 +67,7 @@ export default function UserAndAuthenticationPage() {
             </TabsTrigger>
             <TabsTrigger value="phone">Phone</TabsTrigger>
             <TabsTrigger value="username">Username</TabsTrigger>
-            <TabsTrigger value="password" disabled>
-              Password
-            </TabsTrigger>
+            <TabsTrigger value="password">Password</TabsTrigger>
             <TabsTrigger value="passkeys">Passkeys</TabsTrigger>
             <TabsTrigger value="user-model">User Model</TabsTrigger>
           </TabsList>
@@ -100,8 +99,142 @@ export default function UserAndAuthenticationPage() {
               <section className="bg-muted h-20 rounded-lg">bottom</section>
             </div>
           </TabsContent>
-          <TabsContent value="phone">phone</TabsContent>
-          <TabsContent value="username">username</TabsContent>
+          <TabsContent value="phone">
+            <div
+              className={cn(
+                /* 'relative flex max-w-6xl items-baseline gap-2 rounded-md p-2',
+                'bg-ceramic-blue/4 dark:bg-ceramic-blue/12',
+                'ring-ceramic-blue/12 ring-1 ring-inset',
+                'text-ceramic-body-3 rich-text-info', */
+                'inline-flex max-w-6xl items-start gap-2 rounded-md p-2',
+                'bg-blue-700/4 dark:bg-blue-700/12',
+                'ring-1 ring-blue-700/12 ring-inset',
+                'text-xs text-blue-800/80'
+              )}
+            >
+              <LuInfo className="mt-0.5" />
+              <div>
+                SMS functionality is restricted to phone numbers from countries
+                enabled on your SMS allowlist.
+                <Anchor>Manage allowlist settings.</Anchor>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-start gap-8">
+              <div className="flex min-w-105 flex-1 flex-col gap-6">
+                <section className="bg-muted flex flex-col rounded-xl py-1">
+                  <header className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <label className="text-base font-medium">
+                        Sign-up with phone
+                      </label>
+                      <span
+                        className={cn(
+                          'relative inline-flex shrink-0 items-center rounded-[.35rem] text-white',
+                          'overflow-hidden px-1 py-0.5 text-[10px]',
+                          'bg-[linear-gradient(120deg,rgb(73,90,193)_0%,rgb(64,63,115)_16%,rgb(99,131,162)_50%,rgb(81,36,82)_87%,rgb(132,61,112)_100%)] shadow-[inset_0_2px_0_rgba(43,117,225,0.35)] ring-1 ring-black/42 ring-inset dark:bg-[linear-gradient(120deg,rgb(39,46,123)_0%,rgb(48,47,91)_16%,rgb(73,95,119)_50%,rgb(66,35,57)_87%,rgb(92,46,79)_100%)] dark:shadow-none dark:ring-white/12'
+                        )}
+                      >
+                        <span className="px-0.5">Pro</span>
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                      Allow users to sign up with a phone number
+                    </p>
+                  </header>
+                </section>
+                <section className="bg-muted flex flex-col rounded-xl py-1">
+                  <header className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <label className="text-base font-medium">
+                        Sign-up with phone
+                      </label>
+                      <span
+                        className={cn(
+                          'relative inline-flex shrink-0 items-center rounded-[.35rem] text-white',
+                          'overflow-hidden px-1 py-0.5 text-[10px]',
+                          'bg-[linear-gradient(120deg,rgb(73,90,193)_0%,rgb(64,63,115)_16%,rgb(99,131,162)_50%,rgb(81,36,82)_87%,rgb(132,61,112)_100%)] shadow-[inset_0_2px_0_rgba(43,117,225,0.35)] ring-1 ring-black/42 ring-inset dark:bg-[linear-gradient(120deg,rgb(39,46,123)_0%,rgb(48,47,91)_16%,rgb(73,95,119)_50%,rgb(66,35,57)_87%,rgb(92,46,79)_100%)] dark:shadow-none dark:ring-white/12'
+                        )}
+                      >
+                        <span className="px-0.5">Pro</span>
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                      Allow users to sign up with a phone number
+                    </p>
+                  </header>
+                </section>
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="username">
+            <div>message</div>
+            <div className="flex flex-wrap items-start gap-8">
+              <main className="flex min-w-full flex-1 flex-col gap-6 sm:min-w-min">
+                <section className="bg-muted flex flex-col rounded-xl py-1">
+                  <header className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <label className="text-base font-medium">
+                        Sign-up with username
+                      </label>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                      Allow users to add a username during sign-up
+                    </p>
+                  </header>
+                </section>
+                <section className="bg-muted flex flex-col rounded-xl py-1">
+                  <header className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <label className="text-base font-medium">
+                        Sign-in with username
+                      </label>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                      Allow users to sign in with their username
+                    </p>
+                  </header>
+                </section>
+              </main>
+              <aside className="w-full max-w-sm sm:w-fit">
+                right content this is long content
+              </aside>
+            </div>
+            {/* <div className="flex flex-wrap items-start gap-8">
+              <div className="flex flex-1 basis-0 flex-col gap-6">
+                <section className="bg-muted flex flex-col rounded-xl py-1">
+                  <header className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <label className="text-base font-medium">
+                        Sign-up with username
+                      </label>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                      Allow users to add a username during sign-up
+                    </p>
+                  </header>
+                </section>
+                <section className="bg-muted flex flex-col rounded-xl py-1">
+                  <header className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <label className="text-base font-medium">
+                        Sign-in with username
+                      </label>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                      Allow users to sign in with their username
+                    </p>
+                  </header>
+                </section>
+              </div>
+              <div className="w-fit max-w-full">right content</div>
+            </div> */}
+          </TabsContent>
           <TabsContent value="password">password</TabsContent>
           <TabsContent value="passkeys">passkeys</TabsContent>
           <TabsContent value="user-model">user-model</TabsContent>

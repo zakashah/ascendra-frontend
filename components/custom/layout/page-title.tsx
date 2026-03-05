@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export function PageTitle({
   className,
@@ -6,10 +6,7 @@ export function PageTitle({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div
-      className={cn('text-2xl font-medium', className)}
-      {...props}
-    >
+    <div className={cn('truncate text-2xl font-medium', className)} {...props}>
       {children}
     </div>
   );
