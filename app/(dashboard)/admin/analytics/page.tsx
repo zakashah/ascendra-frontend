@@ -10,9 +10,9 @@ import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { Anchor } from '@/components/custom/nav/anchor';
 import { Tabs } from '@/components/custom/tab/tabs';
-import { TabsContent } from '@/components/custom/tab/tabs-content';
-import { TabsList } from '@/components/custom/tab/tabs-list';
-import { TabsTrigger } from '@/components/custom/tab/tabs-trigger';
+import { TabsContent } from '@/components/custom/tab/tab-content';
+import { TabsList } from '@/components/custom/tab/tab-list';
+import { TabsTrigger } from '@/components/custom/tab/tab-trigger';
 import { LuChevronDown } from 'react-icons/lu';
 
 export default function OverviewPage() {

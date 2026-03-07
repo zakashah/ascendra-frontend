@@ -8,7 +8,7 @@ import { PageLayout } from '@/components/custom/layout/page-layout';
 import SideBarOverlay from '@/components/custom/layout/side-bar-overlay';
 import { MenuHeader } from '@/components/custom/menu-header/menu-header';
 import { MenuHeaderActions } from '@/components/custom/menu-header/menu-header-actions';
-import { MenuHeaderBadge } from '@/components/custom/menu-header/menu-header-badge';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
 import { MenuHeaderLink } from '@/components/custom/menu-header/menu-header-link';
 import { MenuHeaderLinks } from '@/components/custom/menu-header/menu-header-links';
@@ -61,7 +61,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <AvatarImage src="/images/home.png" className="rounded-sm" />
             </Avatar>
             <span className="truncate">Personal Workspace</span>
-            <MenuHeaderBadge variant="secondary">Hobby</MenuHeaderBadge>
+            <SimpleBadge variant="secondary">Hobby</SimpleBadge>
           </MenuHeaderLink>
           <MenuHeaderChevron />
           <MenuHeaderSlash />
@@ -77,10 +77,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <MenuHeaderChevron />
         </MenuHeaderLinks>
         <MenuHeaderActions>
-          <MenuHeaderBadge>
+          <SimpleBadge>
             <LuCircleArrowUp className="mr-1" />
             Upgrades
-          </MenuHeaderBadge>
+          </SimpleBadge>
           <SecondaryButton className="h-6 w-full text-xs">
             Invite
           </SecondaryButton>

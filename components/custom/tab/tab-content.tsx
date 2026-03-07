@@ -7,12 +7,14 @@ type TabsContentProps = {
   className?: string;
 };
 
-export function TabsContent({ value, children, className }: TabsContentProps) {
+export function TabContent({ value, children, className }: TabsContentProps) {
   const { active } = useTabs();
 
   if (active !== value) return null;
 
   return (
-    <div className={cn('mt-8 flex flex-col gap-6', className)}>{children}</div>
+    <div className={cn('flex flex-col gap-6', className)}>
+      <div className="flex flex-wrap items-start gap-8">{children}</div>
+    </div>
   );
 }
