@@ -10,9 +10,9 @@ import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { Anchor } from '@/components/custom/nav/anchor';
 import { Tabs } from '@/components/custom/tab/tabs';
-import { TabsContent } from '@/components/custom/tab/tab-content';
-import { TabsList } from '@/components/custom/tab/tab-list';
-import { TabsTrigger } from '@/components/custom/tab/tab-trigger';
+import { TabContent } from '@/components/custom/tab/tab-content';
+import { TabList } from '@/components/custom/tab/tab-list';
+import { TabTrigger } from '@/components/custom/tab/tab-trigger';
 import { LuChevronDown } from 'react-icons/lu';
 
 export default function OverviewPage() {
@@ -39,22 +39,22 @@ export default function OverviewPage() {
       <PageMain>
         {/* <PageContent>page content</PageContent> */}
         <Tabs defaultValue="username">
-          <TabsList>
-            <TabsTrigger value="email">Email</TabsTrigger>
-            <TabsTrigger value="phone">Phone</TabsTrigger>
-            <TabsTrigger value="username">Username</TabsTrigger>
-            <TabsTrigger value="password" disabled>
+          <TabList>
+            <TabTrigger value="email">Email</TabTrigger>
+            <TabTrigger value="phone">Phone</TabTrigger>
+            <TabTrigger value="username">Username</TabTrigger>
+            <TabTrigger value="password" disabled>
               Password
-            </TabsTrigger>
-            <TabsTrigger value="passkeys">Passkeys</TabsTrigger>
-            <TabsTrigger value="user-model">User Model</TabsTrigger>
-          </TabsList>
-          <TabsContent value="email">email</TabsContent>
-          <TabsContent value="phone">phone</TabsContent>
-          <TabsContent value="username">username</TabsContent>
-          <TabsContent value="password">password</TabsContent>
-          <TabsContent value="passkeys">passkeys</TabsContent>
-          <TabsContent value="user-model">user-model</TabsContent>
+            </TabTrigger>
+            <TabTrigger value="passkeys">Passkeys</TabTrigger>
+            <TabTrigger value="user-model">User Model</TabTrigger>
+          </TabList>
+          <TabContent value="email">email</TabContent>
+          <TabContent value="phone">phone</TabContent>
+          <TabContent value="username">username</TabContent>
+          <TabContent value="password">password</TabContent>
+          <TabContent value="passkeys">passkeys</TabContent>
+          <TabContent value="user-model">user-model</TabContent>
         </Tabs>
       </PageMain>
     </>

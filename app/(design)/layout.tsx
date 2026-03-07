@@ -1,14 +1,16 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { StatusDot } from '@/components/custom/common-ui/status-dot';
+import { SecondaryButton } from '@/components/custom/input/secondary-button';
 import { MainContainer } from '@/components/custom/layout/main-container';
 import { PageLayout } from '@/components/custom/layout/page-layout';
+import { SectionMain } from '@/components/custom/layout/section-main';
 import SideBarOverlay from '@/components/custom/layout/side-bar-overlay';
 import { MenuHeader } from '@/components/custom/menu-header/menu-header';
 import { MenuHeaderActions } from '@/components/custom/menu-header/menu-header-actions';
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
 import { MenuHeaderLink } from '@/components/custom/menu-header/menu-header-link';
 import { MenuHeaderLinks } from '@/components/custom/menu-header/menu-header-links';
@@ -22,33 +24,29 @@ import { SideBarFooter } from '@/components/custom/side-bar/side-bar-footer';
 import { SideBarHeader } from '@/components/custom/side-bar/side-bar-header';
 import { SideBarMain } from '@/components/custom/side-bar/side-bar-main';
 import { SideBarMenu } from '@/components/custom/side-bar/side-bar-menu';
+import { SideBarMenuContent } from '@/components/custom/side-bar/side-bar-menu-content';
 import { SideBarMenuHeader } from '@/components/custom/side-bar/side-bar-menu-header';
+import { SideBarMenuItem } from '@/components/custom/side-bar/side-bar-menu-item';
+import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
 import { SideBarMenuSet } from '@/components/custom/side-bar/side-bar-menu-set';
 import { SideBarMenuSetTitle } from '@/components/custom/side-bar/side-bar-menu-set-title';
 import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
-import { SurfaceButton } from '@/components/custom/surface-button';
 import { ThemeToggle } from '@/components/custom/theme-toggle';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { LuChevronDown, LuCircleArrowUp } from 'react-icons/lu';
-import { SideBarMenuContent } from '@/components/custom/side-bar/side-bar-menu-content';
-import { SideBarMenuItem } from '@/components/custom/side-bar/side-bar-menu-item';
-import { SiMonkeytie } from 'react-icons/si';
-import { VscSymbolStructure } from 'react-icons/vsc';
-import { MdOutlineDesktopWindows } from 'react-icons/md';
-import { RiBillLine } from 'react-icons/ri';
-import { RiAccountBoxLine } from 'react-icons/ri';
-import { TfiMenuAlt } from 'react-icons/tfi';
-import { MdDashboardCustomize } from 'react-icons/md';
-import { FaCode } from 'react-icons/fa';
-import { RiSettingsLine } from 'react-icons/ri';
-import { PiBracketsCurlyBold } from 'react-icons/pi';
 import { BiNotification } from 'react-icons/bi';
+import { FaCode } from 'react-icons/fa';
+import { LuCircleArrowUp } from 'react-icons/lu';
+import {
+  MdDashboardCustomize,
+  MdOutlineAccountBalanceWallet,
+  MdOutlineDesktopWindows,
+} from 'react-icons/md';
+import { PiBracketsCurlyBold } from 'react-icons/pi';
+import { RiAccountBoxLine, RiBillLine, RiSettingsLine } from 'react-icons/ri';
+import { SiMonkeytie } from 'react-icons/si';
 import { TbSettingsCheck } from 'react-icons/tb';
-import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
-import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
-import { SectionMain } from '@/components/custom/layout/section-main';
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
-import { cn } from '@/lib/utils';
+import { TfiMenuAlt } from 'react-icons/tfi';
+import { VscSymbolStructure } from 'react-icons/vsc';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -78,7 +76,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </MenuHeaderLinks>
         <MenuHeaderActions>
           <SimpleBadge>
-            <LuCircleArrowUp className="mr-1" />
+            <LuCircleArrowUp />
             Upgrades
           </SimpleBadge>
           <SecondaryButton className="h-6 w-full text-xs">

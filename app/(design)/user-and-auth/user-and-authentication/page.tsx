@@ -1,19 +1,26 @@
 'use client';
 
-import { BubbleBadge } from '@/components/custom/common-ui/bubble-badge';
+import { ProBadge } from '@/components/custom/common-ui/pro-badge';
+import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { SecondaryButton } from '@/components/custom/input/secondary-button';
 import { AsideContent } from '@/components/custom/layout/aside-content';
 import { MainContent } from '@/components/custom/layout/main-content';
+import { MainSection } from '@/components/custom/layout/main-section';
+import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
+import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
+import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
+import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
+import { MainSectionPanelItemPartGroup } from '@/components/custom/layout/main-section-panel-item-part-group';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { Anchor } from '@/components/custom/nav/anchor';
-import { Tabs } from '@/components/custom/tab/tabs';
 import { TabContent } from '@/components/custom/tab/tab-content';
 import { TabList } from '@/components/custom/tab/tab-list';
 import { TabTrigger } from '@/components/custom/tab/tab-trigger';
+import { Tabs } from '@/components/custom/tab/tabs';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,18 +29,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
 import { Switch } from '@/components/custom/ui/switch';
-import { cn } from '@/lib/utils';
+import { useState } from 'react';
 import { LuChevronDown, LuCode, LuEye, LuInfo } from 'react-icons/lu';
-import { MainSection } from '@/components/custom/layout/main-section';
-import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
-import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
-import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { MainSectionPanelItemPartGroup } from '@/components/custom/layout/main-section-panel-item-part-group';
-import { MainSectionPanelItemPart } from '@/components/custom/layout/main-section-panel-item-part';
-import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
-import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 
 export default function UserAndAuthenticationPage() {
+  const [hidden, setHidden] = useState(true);
+  const [hidden1, setHidden1] = useState(false);
   return (
     <>
       <PageHeader>
@@ -87,7 +88,10 @@ export default function UserAndAuthenticationPage() {
               <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
-                    <Switch />
+                    <Switch
+                      onClick={() => setHidden((prev) => !prev)}
+                      checked={!hidden}
+                    />
                     <label className="text-base font-medium">
                       Sign-up with email
                     </label>
@@ -96,7 +100,68 @@ export default function UserAndAuthenticationPage() {
                     Allow users to sign up with their email address
                   </p>
                 </MainSectionHeader>
-                <MainSectionPanel>
+                <MainSectionPanel collapsed={hidden}>
+                  <MainSectionPanelItem>
+                    <MainSectionPanelItemPartGroup>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Switch />
+                          <label className="text-base font-medium">
+                            Require email address
+                          </label>
+                        </div>
+                        <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
+                          Users must provide an email address to sign up and
+                          must maintain one on their account at all times.
+                        </p>
+                      </div>
+                      <SimpleAlert className="ml-10">
+                        <LuInfo className="text-sm" />
+                        <div>
+                          Email is the only enabled sign-up option and is
+                          therefore required.
+                        </div>
+                      </SimpleAlert>
+                    </MainSectionPanelItemPartGroup>
+                  </MainSectionPanelItem>
+                  <MainSectionPanelItem>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Switch />
+                        <label className="text-base font-medium">
+                          Verify at sign-up
+                          <SimpleBadge className="ml-1" variant={'blue'}>
+                            Recommended
+                          </SimpleBadge>
+                        </label>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
+                        Require users to verify their email addresses before
+                        they can sign-up
+                      </p>
+                    </div>
+                  </MainSectionPanelItem>
+                </MainSectionPanel>
+                <MainSectionFooter>
+                  this is footer of main section
+                </MainSectionFooter>
+              </MainSection>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch
+                      onClick={() => setHidden1((prev) => !prev)}
+                      checked={!hidden1}
+                    />
+                    <label className="text-base font-medium">
+                      Sign-up with email
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Allow users to sign up with their email address
+                  </p>
+                </MainSectionHeader>
+                <MainSectionPanel collapsed={hidden1}>
                   <MainSectionPanelItem>
                     <MainSectionPanelItemPartGroup>
                       <div>
@@ -138,6 +203,9 @@ export default function UserAndAuthenticationPage() {
                     </div>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
+                <MainSectionFooter>
+                  this is footer of main section
+                </MainSectionFooter>
               </MainSection>
               <MainSection>
                 <MainSectionHeader>
@@ -151,13 +219,16 @@ export default function UserAndAuthenticationPage() {
                     Allow users to sign in with their email address
                   </p>
                 </MainSectionHeader>
+                <MainSectionFooter>
+                  this is footer of main section
+                </MainSectionFooter>
               </MainSection>
             </MainContent>
           </TabContent>
           <TabContent value="phone">
             <MainContent>
               <SimpleAlert>
-                <LuInfo className="mt-0.5" />
+                <LuInfo className="text-sm" />
                 <div>
                   SMS functionality is restricted to phone numbers from
                   countries enabled on your SMS allowlist.
@@ -196,8 +267,8 @@ export default function UserAndAuthenticationPage() {
           </TabContent>
           <TabContent value="username">
             <MainContent>
-              <section className="bg-muted flex flex-col rounded-xl py-1">
-                <header className="px-6 py-4">
+              <MainSection>
+                <MainSectionHeader>
                   <div className="flex items-center gap-2">
                     <Switch />
                     <label className="text-base font-medium">
@@ -207,21 +278,21 @@ export default function UserAndAuthenticationPage() {
                   <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
                     Allow users to add a username during sign-up
                   </p>
-                </header>
-              </section>
-              <section className="bg-muted flex flex-col rounded-xl py-1">
-                <header className="px-6 py-4">
+                </MainSectionHeader>
+              </MainSection>
+              <MainSection>
+                <MainSectionHeader>
                   <div className="flex items-center gap-2">
                     <Switch />
                     <label className="text-base font-medium">
-                      Sign-in with username
+                      Sign-up with username
                     </label>
                   </div>
                   <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
-                    Allow users to sign in with their username
+                    Allow users to add a username during sign-up
                   </p>
-                </header>
-              </section>
+                </MainSectionHeader>
+              </MainSection>
             </MainContent>
             <AsideContent>right content this</AsideContent>
           </TabContent>
