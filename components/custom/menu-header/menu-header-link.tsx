@@ -10,7 +10,7 @@ export function MenuHeaderLink({
     <div className="px-1">
       <Link
         className={cn(
-          'bg-surface-soft focus-visible:outline-primary flex h-6 items-center gap-2 rounded-sm px-2 focus-visible:outline-2',
+          'bg-transparent focus-visible:outline-primary flex h-6 items-center gap-2 rounded-sm px-2 focus-visible:outline-2',
           className
         )}
         {...props}

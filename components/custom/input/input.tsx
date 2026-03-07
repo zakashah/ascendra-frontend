@@ -30,6 +30,13 @@ const Input = React.forwardRef<
         'has-[[data-slot=input]:read-only]:ring-gray-300 dark:has-[[data-slot=input]:read-only]:ring-white/10',
         'has-[[data-slot=input]:read-only]:shadow-none',
 
+        // PURPLE OUTLINE (Focus Visible)
+        // 'has-[[data-slot=input][data-focused][data-focus-visible]:not(:read-only)]:ring-2',
+        // 'has-[[data-slot=input][data-focused][data-focus-visible]:not(:read-only)]:ring-[#6C47FF]',
+        // 'dark:has-[[data-slot=input][data-focused][data-focus-visible]:not(:read-only)]:ring-[#6C47FF]',
+        'has-[[data-slot=input][data-focused][data-focus-visible]:not(:read-only)]:shadow-[0_4px_4px_-1px_rgba(0,0,0,0.2),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
+        'dark:has-[[data-slot=input][data-focused][data-focus-visible]:not(:read-only)]:shadow-[0_4px_4px_-1px_rgba(0,0,0,0.2),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
+
         // HOVER
         'has-[[data-slot=input][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[#191c21]/24',
         'dark:has-[[data-slot=input][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[#525260]',

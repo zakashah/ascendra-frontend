@@ -15,6 +15,9 @@ export function Button({
         'group/button relative inline-flex h-8 min-w-fit shrink-0 items-center justify-between overflow-hidden rounded-[0.375rem] transition-all duration-200 select-none',
         'bg-primary text-sm font-medium text-white',
 
+        /* outline */
+        'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
+
         /* The 4-Layer Shadow Stack (Fixed Syntax) */
         'shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.12),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(255,255,255,0.024),0_0_0_1px_rgb(108,71,255)]',
 
