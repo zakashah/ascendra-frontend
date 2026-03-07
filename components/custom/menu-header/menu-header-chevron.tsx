@@ -12,7 +12,7 @@ export function MenuHeaderChevron({
       type="button"
       data-slot="menu-header-chevron"
       className={cn(
-        'bg-surface-soft hover:bg-background focus-visible:outline-primary flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm border-0 transition-colors hover:border focus-visible:outline-2 focus-visible:-outline-offset-2',
+        'bg-transparent hover:bg-background focus-visible:outline-primary flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm border-0 transition-colors hover:border focus-visible:outline-2 focus-visible:-outline-offset-2',
         className
       )}
       {...props}

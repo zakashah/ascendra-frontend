@@ -7,7 +7,10 @@ export function Anchor({
 }: React.ComponentProps<'a'>) {
   return (
     <a
-      className={cn('text-primary ml-0.5 cursor-pointer', className)}
+      className={cn(
+        'ml-0.5 cursor-pointer font-semibold text-[#236dd7] hover:text-[#1c5bb6] dark:text-[#3180F5] dark:hover:text-[#236dd7]',
+        className
+      )}
       {...props}
     >
       {children}

@@ -7,25 +7,35 @@ import { cn } from '@/lib/utils';
 
 function Switch({
   className,
-  size = 'default',
   ...props
-}: React.ComponentProps<typeof SwitchPrimitive.Root> & {
-  size?: 'sm' | 'default';
-}) {
+}: React.ComponentProps<typeof SwitchPrimitive.Root>) {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
-      data-size={size}
       className={cn(
-        'peer group/switch ',
-        'peer group/switch focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:ring-3 aria-invalid:ring-3 data-disabled:cursor-not-allowed data-disabled:opacity-50 data-[size=default]:h-[18.4px] data-[size=default]:w-[32px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px]',
+        'peer group/switch',
+        'relative top-[.0625rem] inline-flex w-6 shrink-0 items-center justify-start rounded-full p-0.5',
+        'ring-1 data-[state=checked]:ring-[#5F15FE]/88 data-[state=unchecked]:ring-[#191C21]/20 dark:data-[state=checked]:ring-[#846bff] dark:data-[state=unchecked]:ring-white/15',
+        'data-[state=checked]:bg-[#6c47ff]',
+        'data-[state=unchecked]:bg-[#dbdbe0] data-[state=unchecked]:hover:bg-[#C7C7D0] dark:data-[state=unchecked]:hover:bg-[#4C4C5C] data-[state=unchecked]:hover:ring-[#BBBCBE] dark:data-[state=unchecked]:bg-[#3d3d4a] dark:data-[state=unchecked]:hover:bg-[#47475a]',
+        'transition group-data-focus-visible/switch:transition-none',
+        'outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary',
+        'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         className
       )}
       {...props}
     >
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
-        className="bg-background dark:data-checked:bg-primary-foreground dark:data-unchecked:bg-foreground pointer-events-none block rounded-full ring-0 transition-transform group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0"
+        className={cn(
+          'pointer-events-none block size-3 rounded-full',
+          'bg-white dark:bg-[#f6f6f7]',
+          'bg-linear-to-b from-black/0 to-black/2',
+          'shadow-none ring-1 ring-[#191C21]/4 dark:ring-[#191C21]/12',
+          'transition-all duration-120',
+          'data-[state=checked]:translate-x-[8px] data-[state=unchecked]:translate-x-0',
+          'relative size-3 shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.06)]'
+        )}
       />
     </SwitchPrimitive.Root>
   );
