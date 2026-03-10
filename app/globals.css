@@ -84,7 +84,9 @@
   --accent: oklch(0.97 0.001 106.424);
   --accent-foreground: oklch(0.216 0.006 56.043);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.923 0.003 48.717);
+  /* --border: oklch(0.923 0.003 48.717); */
+  /* #ececee */
+  --border: oklch(0.9437 0.0027 286.35);
   --input: oklch(0.923 0.003 48.717);
   /* --ring: oklch(0.709 0.01 56.259); */
   --ring: oklch(0.5573 0.2543 283.67);
@@ -133,7 +135,9 @@
   --accent: oklch(0.268 0.007 34.298);
   --accent-foreground: oklch(0.985 0.001 106.423);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  /* --border: oklch(1 0 0 / 10%); */
+  /* #232328 */
+  --border: oklch(0.2582 0.0093 285.73);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.5573 0.2543 283.67);
   --chart-1: oklch(0.87 0.12 207);
@@ -176,6 +180,10 @@
        depending on the screen size! */
     @apply mx-auto w-[calc(100%-var(--app-layout-spacing))] max-w-6xl;
   }
+}
+
+th {
+  font-weight: inherit;
 }
 
 /* Global Scrollbar (All Scroll Containers) */

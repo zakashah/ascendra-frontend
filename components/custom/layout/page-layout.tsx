@@ -11,7 +11,7 @@ export function PageLayout({
       id="app-layout"
       data-sidebar="closed"
       className={cn(
-        'group relative grid min-h-screen flex-1 grid-cols-1 grid-rows-[auto_auto_1fr]',
+        'relative grid min-h-screen flex-1 grid-cols-1 grid-rows-[auto_auto_1fr]',
         className
       )}
       {...props}

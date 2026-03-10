@@ -29,8 +29,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
 import { Switch } from '@/components/custom/ui/switch';
+import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { LuChevronDown, LuCode, LuEye, LuInfo } from 'react-icons/lu';
+import {
+  LuChevronDown,
+  LuCode,
+  LuEye,
+  LuFolderLock,
+  LuInfo,
+} from 'react-icons/lu';
 
 export default function UserAndAuthenticationPage() {
   const [hidden, setHidden] = useState(true);
@@ -41,10 +48,10 @@ export default function UserAndAuthenticationPage() {
         <PageTitle>User & Auhtentication</PageTitle>
         <PageHeaderAction>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger asChild className="group">
               <SecondaryButton className="w-full">
                 Preview
-                <LuChevronDown className="text-muted-foreground" />
+                <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
               </SecondaryButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -53,18 +60,16 @@ export default function UserAndAuthenticationPage() {
               align="end"
               onCloseAutoFocus={(e) => e.preventDefault()}
             >
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <LuEye /> Preview Sign Up
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <LuEye />
-                  Preview Sign In
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <LuCode /> Sample User Object
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
+              <DropdownMenuItem>
+                <LuEye /> Preview Sign Up
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <LuEye />
+                Preview Sign In
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <LuCode /> Sample User Object
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </PageHeaderAction>
@@ -78,9 +83,7 @@ export default function UserAndAuthenticationPage() {
             <TabTrigger value="phone">Phone</TabTrigger>
             <TabTrigger value="username">Username</TabTrigger>
             <TabTrigger value="password">Password</TabTrigger>
-            <TabTrigger value="passkeys" disabled>
-              Passkeys
-            </TabTrigger>
+            <TabTrigger value="passkeys">Passkeys</TabTrigger>
             <TabTrigger value="user-model">User Model</TabTrigger>
           </TabList>
           <TabContent value="email">
@@ -177,7 +180,7 @@ export default function UserAndAuthenticationPage() {
                         </p>
                       </div>
                       <SimpleAlert className="ml-10">
-                        <LuInfo className="mt-0.5" />
+                        <LuInfo className="text-sm" />
                         <div>
                           Email is the only enabled sign-up option and is
                           therefore required.
@@ -203,9 +206,6 @@ export default function UserAndAuthenticationPage() {
                     </div>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
-                <MainSectionFooter>
-                  this is footer of main section
-                </MainSectionFooter>
               </MainSection>
               <MainSection>
                 <MainSectionHeader>
@@ -219,9 +219,6 @@ export default function UserAndAuthenticationPage() {
                     Allow users to sign in with their email address
                   </p>
                 </MainSectionHeader>
-                <MainSectionFooter>
-                  this is footer of main section
-                </MainSectionFooter>
               </MainSection>
             </MainContent>
           </TabContent>
@@ -270,7 +267,10 @@ export default function UserAndAuthenticationPage() {
               <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
-                    <Switch />
+                    <Switch
+                      onClick={() => setHidden((prev) => !prev)}
+                      checked={!hidden}
+                    />
                     <label className="text-base font-medium">
                       Sign-up with username
                     </label>
@@ -279,6 +279,23 @@ export default function UserAndAuthenticationPage() {
                     Allow users to add a username during sign-up
                   </p>
                 </MainSectionHeader>
+                <MainSectionPanel collapsed={hidden}>
+                  <MainSectionPanelItem>
+                    <MainSectionPanelItemPartGroup>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Switch />
+                          <label className="text-base font-medium">
+                            Require username
+                          </label>
+                        </div>
+                        <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
+                          Users must create a username for their account
+                        </p>
+                      </div>
+                    </MainSectionPanelItemPartGroup>
+                  </MainSectionPanelItem>
+                </MainSectionPanel>
               </MainSection>
               <MainSection>
                 <MainSectionHeader>
@@ -294,11 +311,197 @@ export default function UserAndAuthenticationPage() {
                 </MainSectionHeader>
               </MainSection>
             </MainContent>
-            <AsideContent>right content this</AsideContent>
+            <AsideContent dimmed={hidden}>
+              <div className="flex min-w-60 flex-col">
+                <div className="border-border border-b pb-3">
+                  <p className="mb-1 text-xs">Minimum username length</p>
+                  <p>4 characters</p>
+                </div>
+                <div className="border-border border-b pt-4 pb-3">
+                  <p className="mb-1 text-xs">Maximum username length</p>
+                  <p>64 characters</p>
+                </div>
+                <div className="border-border border-b pt-4 pb-3">
+                  <p className="mb-1 text-xs">Allow extended characters</p>
+                  <p>Off</p>
+                </div>
+                <div className="pt-4">
+                  <Anchor className="text-primary flex gap-1 text-xs font-medium">
+                    <LuFolderLock />
+                    Update username requirement
+                  </Anchor>
+                </div>
+              </div>
+            </AsideContent>
           </TabContent>
-          <TabContent value="password">password</TabContent>
-          <TabContent value="passkeys">passkeys</TabContent>
-          <TabContent value="user-model">user-model</TabContent>
+          <TabContent value="password">
+            <MainContent>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch
+                      onClick={() => setHidden((prev) => !prev)}
+                      checked={!hidden}
+                    />
+                    <label className="text-base font-medium">
+                      Sign-up with password
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Require users to sign up with a password
+                  </p>
+                </MainSectionHeader>
+              </MainSection>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch />
+                    <label className="text-base font-medium">
+                      Add password to account
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Allow users to add a password to their account
+                  </p>
+                </MainSectionHeader>
+              </MainSection>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch />
+                    <label className="text-base font-medium">
+                      Client Trust
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Protect your application and users from credential stuffing
+                    attacks with Client Trust.
+                  </p>
+                  <p className="text-muted-foreground mt-3 pl-10 text-xs">
+                    When signing in with a password on a new client (e.g.
+                    device), users will always be challenged for a second
+                    factor. If they have not configured one, a one-time passcode
+                    or magic link will be used, depending on your
+                    application&apos;s settings.
+                  </p>
+                </MainSectionHeader>
+              </MainSection>
+            </MainContent>
+            <AsideContent dimmed={hidden}>
+              <div className="flex min-w-60 flex-col">
+                <div className="border-border border-b pb-3">
+                  <p className="mb-1 text-xs">Minimum password length</p>
+                  <p>8 characters</p>
+                </div>
+                <div className="border-border border-b pt-4 pb-3">
+                  <p className="mb-1 text-xs">Reject compromised passwords</p>
+                  <p>On</p>
+                </div>
+                <div className="border-border border-b pt-4 pb-3">
+                  <p className="mb-1 text-xs">
+                    Enforce minimum password strength
+                  </p>
+                  <p>Off</p>
+                </div>
+                <div className="border-border border-b pt-4 pb-3">
+                  <p className="mb-1 text-xs">Password rules</p>
+                  <p>None</p>
+                </div>
+                <div className="pt-4">
+                  <Anchor className="text-primary flex gap-1 text-xs font-medium">
+                    <LuFolderLock />
+                    Update password requirement
+                  </Anchor>
+                </div>
+              </div>
+            </AsideContent>
+          </TabContent>
+          <TabContent value="passkeys">
+            <MainContent>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch />
+                    <label className="text-base font-medium">
+                      Sign-in with passkey
+                      <ProBadge className="ml-2">Pro</ProBadge>
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Allow users to sign in with a passkey
+                  </p>
+                </MainSectionHeader>
+                <MainSectionFooter>
+                  <LuInfo className="mt-0.5 mr-2" />
+                  Passkey sign-in requires at least one sign-in method (email,
+                  phone, username, or password) to be enabled first.
+                </MainSectionFooter>
+              </MainSection>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch />
+                    <label className="text-base font-medium">
+                      Add passkey to account
+                      <ProBadge className="ml-2">Pro</ProBadge>
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Allow users to add a passkey to their account
+                  </p>
+                </MainSectionHeader>
+              </MainSection>
+            </MainContent>
+          </TabContent>
+          <TabContent value="user-model">
+            <MainContent>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <Switch />
+                    <label className="text-base font-medium">
+                      First and last name
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                    Users have the ability to set their first and last name
+                  </p>
+                </MainSectionHeader>
+              </MainSection>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <label className="text-base font-medium">
+                      Default user permissions
+                    </label>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 text-xs">
+                    Define the default settings for new users. These values can
+                    be overridden on a per-user basis in the user profile
+                  </p>
+                </MainSectionHeader>
+                <MainSectionPanel>
+                  <MainSectionPanelItem>
+                    <MainSectionPanelItemPartGroup>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Switch checked={true} />
+                          <label className="font-medium">
+                            Allow users to delete their accounts
+                          </label>
+                        </div>
+                      </div>
+                    </MainSectionPanelItemPartGroup>
+                  </MainSectionPanelItem>
+                  <MainSectionPanelItem>
+                    <MainSectionPanelItemPartGroup className="w-fit">
+                      <SecondaryButton>Apply to existing users</SecondaryButton>
+                    </MainSectionPanelItemPartGroup>
+                  </MainSectionPanelItem>
+                </MainSectionPanel>
+              </MainSection>
+            </MainContent>
+          </TabContent>
         </Tabs>
       </PageMain>
     </>

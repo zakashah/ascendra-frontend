@@ -36,8 +36,9 @@ export function Button({
         'hover:bg-primary dark:hover:bg-[#846bff]',
 
         /* Interaction & States */
-        'active:scale-[0.98]',
+        /* 'active:scale-[0.98]', */
         'disabled:cursor-not-allowed disabled:opacity-40',
+        'cursor-pointer',
         className
       )}
       {...props}

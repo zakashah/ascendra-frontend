@@ -14,7 +14,9 @@ export function TabContent({ value, children, className }: TabsContentProps) {
 
   return (
     <div className={cn('flex flex-col gap-6', className)}>
-      <div className="flex flex-wrap items-start gap-8">{children}</div>
+      <div className="flex flex-col items-start gap-8 lg:flex-row">
+        {children}
+      </div>
     </div>
   );
 }

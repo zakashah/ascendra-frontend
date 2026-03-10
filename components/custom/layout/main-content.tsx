@@ -7,10 +7,7 @@ export function MainContent({
 }: React.ComponentProps<'main'>) {
   return (
     <main
-      className={cn(
-        'flex min-w-full flex-1 flex-col gap-6 sm:min-w-min',
-        className
-      )}
+      className={cn('flex w-full flex-col gap-6 lg:flex-1', className)}
       {...props}
     >
       {children}

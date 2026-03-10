@@ -5,7 +5,7 @@ export function MainSectionPanel({
   className,
   children,
   ...props
-}: React.ComponentProps<'div'> & { collapsed: boolean }) {
+}: React.ComponentProps<'div'> & { collapsed?: boolean }) {
   return (
     <div
       data-section-body
