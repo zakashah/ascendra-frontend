@@ -10,10 +10,10 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary/4 bg-gradient-to-t from-black/.02  text-[#846bff] ring-1 ring-inset ring-primary/16 dark:bg-primary/24 cursor-pointer',
+          'text-primary bg-gradient-to-t from-black/[.02] bg-primary/4 dark:text-[#846bff]  ring-1 ring-inset ring-primary/16 dark:bg-primary/24 cursor-pointer',
         secondary:
           'bg-secondary dark:bg-[#767684] text-secondary-foreground border border-border',
-        blue: 'bg-[#236dd7]/4 bg-gradient-to-t from-black/.02 text-[#307ff6] ring-1 ring-inset ring-[#236dd7]/16  dark:bg-[#236dd7]/24',
+        blue: 'bg-gradient-to-t from-black/.02 bg-[#236dd7]/4 text-[#307ff6] ring-1 ring-inset ring-[#236dd7]/16  dark:bg-[#236dd7]/24',
       },
     },
     defaultVariants: {

@@ -34,6 +34,9 @@ import { LuNotebookPen, LuTicketCheck, LuTrash2 } from 'react-icons/lu';
 import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
+import { PageBar } from '@/components/custom/layout/page-bar';
+import { PageBarContent } from '@/components/custom/layout/page-bar-content';
+import { PageBarAction } from '@/components/custom/layout/page-bar-action';
 
 export default function RolesPage() {
   return (
@@ -47,15 +50,15 @@ export default function RolesPage() {
             <TabTrigger value="role-sets">Role sets</TabTrigger>
             <TabTrigger value="all-roles">All roles</TabTrigger>
           </TabList>
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div className="order-1 flex flex-wrap items-center gap-2 sm:order-0">
+          <PageBar>
+            <PageBarContent>
               <Input placeholder="Search..." />
               <div>Sort by select</div>
-            </div>
-            <div className="ml-auto flex sm:ml-0">
+            </PageBarContent>
+            <PageBarAction>
               <div>action button</div>
-            </div>
-          </div>
+            </PageBarAction>
+          </PageBar>
           <TabContent value="role-sets">
             <MainContent>
               <TableWrapper>

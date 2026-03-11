@@ -39,6 +39,7 @@ import {
   LuChevronLeft,
   LuChevronRight,
   LuNotebookPen,
+  LuSearch,
   LuTicketCheck,
   LuTrash2,
 } from 'react-icons/lu';
@@ -54,6 +55,11 @@ import {
   TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@/components/custom/ui/input-group';
 
 export default function SSOConnectionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -113,16 +119,16 @@ export default function SSOConnectionsPage() {
           </TabList>
           <TabContent value="all">
             <MainContent>
-              {/* <InputGroup className="max-w-xs">
+              <InputGroup className="max-w-xs">
                 <InputGroupInput placeholder="Search..." />
                 <InputGroupAddon>
-                  <Search />
+                  <LuSearch className="text-foreground size-3.5" />
                 </InputGroupAddon>
-                <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
-              </InputGroup> */}
-              <div className="w-fit">
+                {/* <InputGroupAddon align="inline-end">12 results</InputGroupAddon> */}
+              </InputGroup>
+              {/* <div className="w-fit">
                 <Input placeholder="Search..." />
-              </div>
+              </div> */}
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

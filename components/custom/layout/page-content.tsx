@@ -8,13 +8,10 @@ export function PageContent({
   return (
     <div
       data-slot="page-content"
-      className={cn('border-t', className)}
-      {...props}
+      className="mt-8 flex flex-col gap-6 [[data-slot=content-action-bar]+&]:mt-0"
     >
-      <div className="mt-8 flex flex-col gap-6">
-        <div className="flex flex-col items-start gap-8 lg:flex-row">
-          {children}
-        </div>
+      <div className="flex flex-col items-start gap-8 lg:flex-row">
+        {children}
       </div>
     </div>
   );

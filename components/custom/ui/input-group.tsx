@@ -2,11 +2,12 @@
 
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+
+// ─── InputGroup ────────────────────────────────────────────────────────────────
+// All the ring/shadow/hover/focus styles from your Input wrapper live here now
 
 function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -14,7 +15,54 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
       data-slot="input-group"
       role="group"
       className={cn(
-        'border-input dark:bg-input/30 has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[[data-slot][aria-invalid=true]]:border-destructive dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40 has-disabled:bg-input/50 dark:has-disabled:bg-input/80 group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border transition-colors outline-none in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-disabled:opacity-50 has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-3 has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-1.5 has-[>[data-align=inline-start]]:[&>input]:pl-1.5',
+        'group/input-group relative flex w-full min-w-0 items-center outline-none',
+        'has-[>textarea]:h-auto',
+        'has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:flex-col',
+        'has-[>[data-align=inline-end]]:*:data-[slot=input-group-control]:pr-1.5',
+        'has-[>[data-align=inline-start]]:*:data-[slot=input-group-control]:pl-2.5',
+
+        // Shape + background
+        'dark:bg-secondary rounded-[.375rem] bg-white',
+
+        // Transition
+        'transition',
+
+        // BASE RING
+        'ring-1 ring-[#191c21]/12',
+        'dark:ring-[#3d3d4a]/88 dark:ring-inset',
+
+        // BASE SHADOW
+        'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
+        'dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]',
+
+        // DISABLED
+        'has-[[data-slot=input-group-control][data-disabled]]:cursor-not-allowed',
+        'has-[[data-slot=input-group-control][data-disabled]]:opacity-40',
+
+        // READ ONLY
+        'has-[[data-slot=input-group-control]:read-only]:bg-gray-100',
+        'dark:has-[[data-slot=input-group-control]:read-only]:bg-white/5',
+        'has-[[data-slot=input-group-control]:read-only]:ring-gray-300',
+        'dark:has-[[data-slot=input-group-control]:read-only]:ring-white/10',
+        'has-[[data-slot=input-group-control]:read-only]:shadow-none',
+
+        // HOVER
+        'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[#191c21]/24',
+        'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[#525260]',
+        'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
+        'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.32),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
+
+        // FOCUS
+        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-1',
+        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-[#191C21]/12',
+        'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-black/88',
+        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
+        'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
+
+        // FOCUS VISIBLE SHADOW
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:shadow-[0_4px_4px_-1px_rgba(0,0,0,0.2),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
+        'dark:has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:shadow-[0_4px_4px_-1px_rgba(0,0,0,0.2),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
+
         className
       )}
       {...props}
@@ -22,24 +70,22 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
+// ─── InputGroupAddon ───────────────────────────────────────────────────────────
+
 const inputGroupAddonVariants = cva(
   "text-muted-foreground h-auto gap-2 py-1.5 text-sm font-medium group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4 flex cursor-text items-center justify-center select-none",
   {
     variants: {
       align: {
         'inline-start':
-          'pl-2 has-[>button]:ml-[-0.3rem] has-[>kbd]:ml-[-0.15rem] order-first',
+          'pl-2.5 has-[>button]:ml-[-0.3rem] has-[>kbd]:ml-[-0.15rem] order-first',
         'inline-end':
           'pr-2 has-[>button]:mr-[-0.3rem] has-[>kbd]:mr-[-0.15rem] order-last',
-        'block-start':
-          'px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2 order-first w-full justify-start',
-        'block-end':
-          'px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-2 order-last w-full justify-start',
+        'block-start': 'px-2.5 pt-2 order-first w-full justify-start',
+        'block-end': 'px-2.5 pb-2 order-last w-full justify-start',
       },
     },
-    defaultVariants: {
-      align: 'inline-start',
-    },
+    defaultVariants: { align: 'inline-start' },
   }
 );
 
@@ -55,15 +101,29 @@ function InputGroupAddon({
       data-align={align}
       className={cn(inputGroupAddonVariants({ align }), className)}
       onClick={(e) => {
-        if ((e.target as HTMLElement).closest('button')) {
-          return;
-        }
+        if ((e.target as HTMLElement).closest('button')) return;
         e.currentTarget.parentElement?.querySelector('input')?.focus();
       }}
       {...props}
     />
   );
 }
+
+// ─── InputGroupText ────────────────────────────────────────────────────────────
+
+function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
+  return (
+    <span
+      className={cn(
+        "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+// ─── InputGroupButton ──────────────────────────────────────────────────────────
 
 const inputGroupButtonVariants = cva(
   'gap-2 text-sm shadow-none flex items-center',
@@ -77,9 +137,7 @@ const inputGroupButtonVariants = cva(
         'icon-sm': 'size-8 p-0 has-[>svg]:p-0',
       },
     },
-    defaultVariants: {
-      size: 'xs',
-    },
+    defaultVariants: { size: 'xs' },
   }
 );
 
@@ -102,49 +160,135 @@ function InputGroupButton({
   );
 }
 
-function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
-  return (
-    <span
-      className={cn(
-        "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
-        className
-      )}
-      {...props}
-    />
-  );
-}
+// ─── InputGroupInput ───────────────────────────────────────────────────────────
+// Bare <input> — no wrapper div, no ring/shadow. InputGroup handles all that.
 
-function InputGroupInput({
-  className,
-  ...props
-}: React.ComponentProps<'input'>) {
-  return (
-    <Input
-      data-slot="input-group-control"
-      className={cn(
-        'flex-1 rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0 dark:bg-transparent dark:disabled:bg-transparent',
-        className
-      )}
-      {...props}
-    />
-  );
-}
+const InputGroupInput = React.forwardRef<
+  HTMLInputElement,
+  React.ComponentProps<'input'>
+>(
+  (
+    {
+      className,
+      disabled,
+      readOnly,
+      onFocus,
+      onBlur,
+      onMouseEnter,
+      onMouseLeave,
+      ...props
+    },
+    ref
+  ) => {
+    const [focused, setFocused] = React.useState(false);
+    const [hovered, setHovered] = React.useState(false);
+    const [focusVisible, setFocusVisible] = React.useState(false);
 
-function InputGroupTextarea({
-  className,
-  ...props
-}: React.ComponentProps<'textarea'>) {
-  return (
-    <Textarea
-      data-slot="input-group-control"
-      className={cn(
-        'flex-1 resize-none rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0 dark:bg-transparent dark:disabled:bg-transparent',
-        className
-      )}
-      {...props}
-    />
-  );
-}
+    return (
+      <input
+        ref={ref}
+        data-slot="input-group-control"
+        data-focused={focused || undefined}
+        data-hovered={hovered || undefined}
+        data-disabled={disabled || undefined}
+        data-focus-visible={focusVisible || undefined}
+        disabled={disabled}
+        readOnly={readOnly}
+        onFocus={(e) => {
+          setFocused(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          setFocusVisible(false);
+          onBlur?.(e);
+        }}
+        onKeyUp={(e) => {
+          if (e.key === 'Tab') setFocusVisible(true);
+        }}
+        onMouseDown={() => setFocusVisible(false)}
+        onMouseEnter={(e) => {
+          setHovered(true);
+          onMouseEnter?.(e);
+        }}
+        onMouseLeave={(e) => {
+          setHovered(false);
+          onMouseLeave?.(e);
+        }}
+        className={cn(
+          'h-8 w-full flex-1 bg-transparent px-3 py-1 text-sm',
+          'border-0 ring-0 outline-none',
+          'placeholder:text-[#ADADB7] dark:placeholder:text-[#767684]',
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+InputGroupInput.displayName = 'InputGroupInput';
+
+// ─── InputGroupTextarea ────────────────────────────────────────────────────────
+
+const InputGroupTextarea = React.forwardRef<
+  HTMLTextAreaElement,
+  React.ComponentProps<'textarea'>
+>(
+  (
+    {
+      className,
+      disabled,
+      readOnly,
+      onFocus,
+      onBlur,
+      onMouseEnter,
+      onMouseLeave,
+      ...props
+    },
+    ref
+  ) => {
+    const [focused, setFocused] = React.useState(false);
+    const [hovered, setHovered] = React.useState(false);
+
+    return (
+      <textarea
+        ref={ref}
+        data-slot="input-group-control"
+        data-focused={focused || undefined}
+        data-hovered={hovered || undefined}
+        data-disabled={disabled || undefined}
+        disabled={disabled}
+        readOnly={readOnly}
+        onFocus={(e) => {
+          setFocused(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          onBlur?.(e);
+        }}
+        onMouseEnter={(e) => {
+          setHovered(true);
+          onMouseEnter?.(e);
+        }}
+        onMouseLeave={(e) => {
+          setHovered(false);
+          onMouseLeave?.(e);
+        }}
+        className={cn(
+          'w-full flex-1 resize-none bg-transparent px-3 py-2 text-sm',
+          'border-0 ring-0 outline-none',
+          'placeholder:text-gray-400',
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+InputGroupTextarea.displayName = 'InputGroupTextarea';
+
+// ─── Exports ───────────────────────────────────────────────────────────────────
 
 export {
   InputGroup,
