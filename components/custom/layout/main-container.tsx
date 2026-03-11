@@ -7,7 +7,7 @@ export function MainContainer({
   ...props
 }: React.ComponentProps<'main'>) {
   return (
-    <main
+    <main data-slot="main-container"
       className={cn('app-container mt-8 pb-12 lg:mt-10 lg:pb-16', className)}
       {...props}
     >

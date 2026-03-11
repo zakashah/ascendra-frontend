@@ -6,7 +6,7 @@ export function SideBarMenuSetTitle({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('text-muted-foreground mb-1 px-3.5', className)} {...props}>
+    <div data-slot="side-bar-menu-set-title" className={cn('text-muted-foreground mb-1 px-3.5', className)} {...props}>
       {children}
     </div>
   );

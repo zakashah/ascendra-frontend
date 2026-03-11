@@ -6,7 +6,11 @@ export function PageContent({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('border-t', className)} {...props}>
+    <div
+      data-slot="page-content"
+      className={cn('border-t', className)}
+      {...props}
+    >
       <div className="mt-8 flex flex-col gap-6">
         <div className="flex flex-col items-start gap-8 lg:flex-row">
           {children}

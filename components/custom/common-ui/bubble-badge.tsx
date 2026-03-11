@@ -60,7 +60,7 @@ export function BubbleBadge({
   };
 
   return (
-    <span
+    <span data-slot="bubble-badge"
       className={cn(
         /* ---------------------------------------- */
         /* Base Layout                              */

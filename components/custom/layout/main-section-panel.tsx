@@ -8,6 +8,7 @@ export function MainSectionPanel({
 }: React.ComponentProps<'div'> & { collapsed?: boolean }) {
   return (
     <div
+      data-slot="main-section-panel"
       data-section-body
       data-collapsed={collapsed ? 'true' : 'false'}
       className={cn(

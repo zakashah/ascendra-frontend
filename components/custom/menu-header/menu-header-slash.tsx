@@ -7,7 +7,7 @@ export function MenuHeaderSlash({
   ...props
 }: React.ComponentProps<typeof LuSlash>) {
   return (
-    <LuSlash
+    <LuSlash 
       data-slot="menu-header-slash"
       className={cn(
         'size-3 shrink-0 -rotate-12 text-gray-300 dark:text-gray-500',

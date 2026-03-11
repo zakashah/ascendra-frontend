@@ -7,7 +7,7 @@ export function MenuHeaderActions({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('flex items-center gap-2', className)} {...props}>
+    <div data-slot="menu-header-actions" className={cn('flex items-center gap-2', className)} {...props}>
       {children}
     </div>
   );

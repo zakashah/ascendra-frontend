@@ -8,6 +8,7 @@ export function Nav({
 }: React.ComponentProps<'nav'>) {
   return (
     <nav
+      data-slot="nav"
       className={cn('bg-background sticky top-0 z-100', className)}
       {...props}
     >

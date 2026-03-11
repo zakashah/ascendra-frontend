@@ -7,7 +7,7 @@ export function MenuHeaderLinks({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div
+    <div data-slot="menu-header-links"
       className={cn(
         'no-scrollbar flex flex-1 items-center overflow-x-auto',
         className

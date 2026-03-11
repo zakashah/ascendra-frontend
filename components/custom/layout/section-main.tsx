@@ -6,7 +6,7 @@ export function SectionMain({
   ...props
 }: React.ComponentProps<'section'>) {
   return (
-    <section className={cn('flex-1', className)} {...props}>
+    <section data-slot="section-main" className={cn('flex-1', className)} {...props}>
       {children}
     </section>
   );

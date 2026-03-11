@@ -7,6 +7,7 @@ export function ProBadge({
 }: React.ComponentProps<'span'>) {
   return (
     <span
+      data-slot="pro-badge"
       className={cn(
         'relative inline-flex shrink-0 items-center rounded-[.35rem] text-white',
         'overflow-hidden px-1 py-0.5 text-[10px]',

@@ -24,7 +24,7 @@ export function NameAvatar({
   const backgroundColor = getAvatarColor(name);
 
   return (
-    <Link
+    <Link data-slot="name-avatar"
       href="#"
       className="rounded-full focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
     >

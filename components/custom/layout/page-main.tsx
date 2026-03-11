@@ -6,7 +6,7 @@ export function PageMain({
   ...props
 }: React.ComponentProps<'main'>) {
   return (
-    <main className={cn('flex flex-col gap-8', className)} {...props}>
+    <main data-slot="page-main" className={cn('flex flex-col gap-8', className)} {...props}>
       {children}
     </main>
   );

@@ -6,7 +6,7 @@ export function SideBarMenuContent({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div
+    <div data-slot="side-bar-menu-content"
       className={cn(
         'max-h-0 overflow-hidden p-[0.5px] opacity-0 transition-all duration-500 ease-in-out group-data-[open=true]:max-h-96 group-data-[open=true]:opacity-100',
         className

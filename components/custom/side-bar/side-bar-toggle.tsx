@@ -13,7 +13,7 @@ export default function SideBarToggle() {
   };
 
   return (
-    <div className="flex items-center gap-4 lg:hidden">
+    <div data-slot="side-bar-toggle" className="flex items-center gap-4 lg:hidden">
       <SurfaceButton variant={'square'} onClick={toggleSidebar}>
         <Menu className="text-muted-foreground size-3.5" />
       </SurfaceButton>

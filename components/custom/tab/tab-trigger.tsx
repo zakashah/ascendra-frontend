@@ -25,7 +25,7 @@ export function TabTrigger({
   };
 
   return (
-    <div className="pl-0.5">
+    <div data-slot="tab-trigger" className="pl-0.5">
       <Link
         href={'#'}
         className={clsx(

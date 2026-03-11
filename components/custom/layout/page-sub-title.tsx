@@ -6,7 +6,7 @@ export function PageSubTitle({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('text-muted-foreground text-xs', className)} {...props}>
+    <div data-slot="page-sub-title" className={cn('text-muted-foreground text-xs', className)} {...props}>
       {children}
     </div>
   );

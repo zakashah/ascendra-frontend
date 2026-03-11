@@ -6,7 +6,7 @@ export function SideBarMenuSet({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('not-first:mt-8', className)} {...props}>
+    <div data-slot="side-bar-menu-set" className={cn('not-first:mt-8', className)} {...props}>
       {children}
     </div>
   );

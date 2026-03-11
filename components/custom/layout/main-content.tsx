@@ -6,7 +6,7 @@ export function MainContent({
   ...props
 }: React.ComponentProps<'main'>) {
   return (
-    <main
+    <main data-slot="main-content"
       className={cn('flex w-full flex-col gap-6 lg:flex-1', className)}
       {...props}
     >

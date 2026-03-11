@@ -7,7 +7,7 @@ export function MenuHeaderLink({
   ...props
 }: React.ComponentProps<typeof Link>) {
   return (
-    <div className="px-1">
+    <div data-slot="menu-header-link" className="px-1">
       <Link
         className={cn(
           'bg-transparent focus-visible:outline-primary flex h-6 items-center gap-2 rounded-sm px-2 focus-visible:outline-2',

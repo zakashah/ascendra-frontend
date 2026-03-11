@@ -148,7 +148,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
-              <SideBarMenu basePath="/admin2">
+              <SideBarMenu basePath="/organizations">
                 <SideBarMenuHeader icon={VscSymbolStructure}>
                   Organizations
                 </SideBarMenuHeader>
@@ -161,7 +161,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
-              <SideBarMenu basePath="/admin3">
+              <SideBarMenu basePath="/billing">
                 <SideBarMenuHeader icon={RiBillLine}>Billing</SideBarMenuHeader>
                 <SideBarMenuContent>
                   <SideBarMenuItem path="/billing/settings">
@@ -188,7 +188,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Features
                 </SideBarMenuItem>
               </SideBarMenuItemGroup>
-              <SideBarMenu basePath="/admin4">
+              <SideBarMenu basePath="/customizations">
                 <SideBarMenuHeader icon={MdDashboardCustomize}>
                   Customizations
                 </SideBarMenuHeader>
@@ -204,7 +204,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
-              <SideBarMenu basePath="/admin5">
+              <SideBarMenu basePath="/developers">
                 <SideBarMenuHeader icon={FaCode}>Developers</SideBarMenuHeader>
                 <SideBarMenuContent>
                   <SideBarMenuItem path="/developers/webhooks">

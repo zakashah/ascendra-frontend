@@ -10,6 +10,7 @@ export function SecondaryButton({
 }: React.ComponentProps<'button'>) {
   return (
     <button
+      data-slot="secondary-button"
       type="button"
       disabled={disabled}
       className={cn(

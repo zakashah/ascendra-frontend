@@ -35,7 +35,7 @@ export function SideBarMenuHeader({
   };
 
   return (
-    <button
+    <button data-slot="side-bar-menu-header"
       type="button"
       onClick={handleToggle}
       className={cn(

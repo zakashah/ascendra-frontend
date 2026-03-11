@@ -7,7 +7,11 @@ export function PageHeaderAction({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('w-full sm:w-fit', className)} {...props}>
+    <div
+      data-slot="page-header-action"
+      className={cn('w-full sm:w-fit', className)}
+      {...props}
+    >
       {children}
     </div>
   );

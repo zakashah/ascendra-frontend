@@ -13,7 +13,10 @@ export function TabContent({ value, children, className }: TabsContentProps) {
   if (active !== value) return null;
 
   return (
-    <div className={cn('flex flex-col gap-6', className)}>
+    <div
+      data-slot="tab-content"
+      className={cn('flex flex-col gap-6', className)}
+    >
       <div className="flex flex-col items-start gap-8 lg:flex-row">
         {children}
       </div>

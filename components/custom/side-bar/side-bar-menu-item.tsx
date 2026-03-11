@@ -36,6 +36,7 @@ export function SideBarMenuItem({
 
   return (
     <Link
+      data-slot="side-bar-menu-item"
       href={path}
       data-active={isActive ? 'true' : 'false'}
       className={cn(

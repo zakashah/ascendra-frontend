@@ -51,7 +51,7 @@ export function SideBarMenu({
   }, [pathname, basePath]);
 
   return (
-    <div
+    <div data-slot="side-bar-menu"
       ref={menuRef}
       data-open="false"
       className={cn('group flex flex-col p-0.5', className)}

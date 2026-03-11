@@ -6,7 +6,7 @@ export function MainSectionHeader({
   ...props
 }: React.ComponentProps<'header'>) {
   return (
-    <header className={cn('px-6 py-4', className)} {...props}>
+    <header data-slot="main-section-header" className={cn('px-6 py-4', className)} {...props}>
       {children}
     </header>
   );

@@ -14,6 +14,7 @@ export function ThemeToggle() {
 
   return (
     <button
+      data-slot="theme-toggle"
       type="button"
       onClick={() => setIsDarkMode((prev) => !prev)}
       className="focus-visible:outline-primary bg-background border-border flex min-h-7 min-w-7 cursor-pointer items-center justify-center rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2"

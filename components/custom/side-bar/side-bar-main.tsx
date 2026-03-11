@@ -6,7 +6,7 @@ export function SideBarMain({
   ...props
 }: React.ComponentProps<'main'>) {
   return (
-    <main className={cn('my-4', className)} {...props}>
+    <main data-slot="side-bar-main" className={cn('my-4', className)} {...props}>
       {children}
     </main>
   );

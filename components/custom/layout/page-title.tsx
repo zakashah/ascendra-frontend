@@ -6,7 +6,7 @@ export function PageTitle({
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div className={cn('truncate text-2xl font-medium', className)} {...props}>
+    <div data-slot="page-title" className={cn('truncate text-2xl font-medium', className)} {...props}>
       {children}
     </div>
   );

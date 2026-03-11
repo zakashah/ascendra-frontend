@@ -7,6 +7,7 @@ export function MainSectionPanelItem({
 }: React.ComponentProps<'div'>) {
   return (
     <div
+      data-slot="main-section-panel-item"
       className={cn(
         'border-border space-y-5 border-t px-5 py-6 first:border-none',
         className
