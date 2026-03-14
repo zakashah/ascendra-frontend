@@ -120,19 +120,19 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/user-and-auth/web3">
                     Web3
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/configure/mfa">
+                  <SideBarMenuItem path="/user-and-auth/mfa">
                     Multi-factor
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/configure/restrictions">
+                  <SideBarMenuItem path="/user-and-auth/restrictions">
                     Restrictions
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/configure/attack-protection">
+                  <SideBarMenuItem path="/user-and-auth/attack-protection">
                     Attack Protection
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/configure/waitlist">
+                  <SideBarMenuItem path="/user-and-auth/waitlist">
                     Waitlist
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/configure/legal">
+                  <SideBarMenuItem path="/user-and-auth/legal">
                     Legal
                   </SideBarMenuItem>
                 </SideBarMenuContent>
@@ -142,7 +142,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Sessions
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/sessions">Sessions</SideBarMenuItem>
+                  <SideBarMenuItem path="/sessions/sessions">Sessions</SideBarMenuItem>
                   <SideBarMenuItem path="/sessions/jwt-templates">
                     JWT Templates
                   </SideBarMenuItem>

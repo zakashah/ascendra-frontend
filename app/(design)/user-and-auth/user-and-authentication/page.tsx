@@ -49,7 +49,7 @@ export default function UserAndAuthenticationPage() {
         <PageHeaderAction>
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="group">
-              <SecondaryButton className="w-full">
+              <SecondaryButton className="w-full" disabled>
                 Preview
                 <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
               </SecondaryButton>
@@ -95,11 +95,11 @@ export default function UserAndAuthenticationPage() {
                       onClick={() => setHidden((prev) => !prev)}
                       checked={!hidden}
                     />
-                    <label className="text-base font-medium">
+                    <span className="text-base font-medium">
                       Sign-up with email
-                    </label>
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to sign up with their email address
                   </p>
                 </MainSectionHeader>
@@ -109,16 +109,16 @@ export default function UserAndAuthenticationPage() {
                       <div>
                         <div className="flex items-center gap-2">
                           <Switch />
-                          <label className="text-base font-medium">
+                          <span className="text-base font-medium">
                             Require email address
-                          </label>
+                          </span>
                         </div>
-                        <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
+                        <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                           Users must provide an email address to sign up and
                           must maintain one on their account at all times.
                         </p>
                       </div>
-                      <SimpleAlert className="ml-10">
+                      <SimpleAlert className="ml-8">
                         <LuInfo className="text-sm" />
                         <div>
                           Email is the only enabled sign-up option and is
@@ -131,14 +131,14 @@ export default function UserAndAuthenticationPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch />
-                        <label className="text-base font-medium">
+                        <span className="text-base font-medium">
                           Verify at sign-up
                           <SimpleBadge className="ml-1" variant={'blue'}>
                             Recommended
                           </SimpleBadge>
-                        </label>
+                        </span>
                       </div>
-                      <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
+                      <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                         Require users to verify their email addresses before
                         they can sign-up
                       </p>
@@ -152,73 +152,18 @@ export default function UserAndAuthenticationPage() {
               <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
-                    <Switch
-                      onClick={() => setHidden1((prev) => !prev)}
-                      checked={!hidden1}
-                    />
-                    <label className="text-base font-medium">
-                      Sign-up with email
-                    </label>
-                  </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
-                    Allow users to sign up with their email address
-                  </p>
-                </MainSectionHeader>
-                <MainSectionPanel collapsed={hidden1}>
-                  <MainSectionPanelItem>
-                    <MainSectionPanelItemPartGroup>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <Switch />
-                          <label className="text-base font-medium">
-                            Require email address
-                          </label>
-                        </div>
-                        <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
-                          Users must provide an email address to sign up and
-                          must maintain one on their account at all times.
-                        </p>
-                      </div>
-                      <SimpleAlert className="ml-10">
-                        <LuInfo className="text-sm" />
-                        <div>
-                          Email is the only enabled sign-up option and is
-                          therefore required.
-                        </div>
-                      </SimpleAlert>
-                    </MainSectionPanelItemPartGroup>
-                  </MainSectionPanelItem>
-                  <MainSectionPanelItem>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <Switch />
-                        <label className="text-base font-medium">
-                          Verify at sign-up
-                          <SimpleBadge className="ml-1" variant={'blue'}>
-                            Recomended
-                          </SimpleBadge>
-                        </label>
-                      </div>
-                      <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
-                        Require users to verify their email addresses before
-                        they can sign-up
-                      </p>
-                    </div>
-                  </MainSectionPanelItem>
-                </MainSectionPanel>
-              </MainSection>
-              <MainSection>
-                <MainSectionHeader>
-                  <div className="flex items-center gap-2">
                     <Switch />
-                    <label className="text-base font-medium">
+                    <span className="text-base font-medium">
                       Sign-in with email
-                    </label>
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to sign in with their email address
                   </p>
                 </MainSectionHeader>
+                <MainSectionFooter>
+                  this is footer of main section
+                </MainSectionFooter>
               </MainSection>
             </MainContent>
           </TabContent>
@@ -236,12 +181,12 @@ export default function UserAndAuthenticationPage() {
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
                     <Switch />
-                    <label className="text-base font-medium">
+                    <span className="text-base font-medium">
                       Sign-up with phone
                       <ProBadge className="ml-2">Pro</ProBadge>
-                    </label>
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to sign up with a phone number
                   </p>
                 </MainSectionHeader>
@@ -250,12 +195,12 @@ export default function UserAndAuthenticationPage() {
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
                     <Switch />
-                    <label className="text-base font-medium">
+                    <span className="text-base font-medium">
                       Sign-up with phone
                       <ProBadge className="ml-2">Pro</ProBadge>
-                    </label>
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to sign up with a phone number
                   </p>
                 </MainSectionHeader>
@@ -271,29 +216,40 @@ export default function UserAndAuthenticationPage() {
                       onClick={() => setHidden((prev) => !prev)}
                       checked={!hidden}
                     />
-                    <label className="text-base font-medium">
+                    <span className="text-base font-medium">
                       Sign-up with username
-                    </label>
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to add a username during sign-up
                   </p>
                 </MainSectionHeader>
                 <MainSectionPanel collapsed={hidden}>
                   <MainSectionPanelItem>
-                    <MainSectionPanelItemPartGroup>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <Switch />
-                          <label className="text-base font-medium">
-                            Require username
-                          </label>
-                        </div>
-                        <p className="text-muted-foreground mt-0.5 ml-10 text-xs">
-                          Users must create a username for their account
-                        </p>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Switch />
+                        <span className="text-base font-medium">
+                          Require username
+                        </span>
                       </div>
-                    </MainSectionPanelItemPartGroup>
+                      <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                        Users must create a username for their account
+                      </p>
+                    </div>
+                  </MainSectionPanelItem>
+                  <MainSectionPanelItem>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Switch />
+                        <span className="text-base font-medium">
+                          Require username
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                        Users must create a username for their account
+                      </p>
+                    </div>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
               </MainSection>
@@ -301,11 +257,11 @@ export default function UserAndAuthenticationPage() {
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
                     <Switch />
-                    <label className="text-base font-medium">
+                    <span className="text-base font-medium">
                       Sign-up with username
-                    </label>
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to add a username during sign-up
                   </p>
                 </MainSectionHeader>
@@ -347,7 +303,7 @@ export default function UserAndAuthenticationPage() {
                       Sign-up with password
                     </label>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Require users to sign up with a password
                   </p>
                 </MainSectionHeader>
@@ -360,7 +316,7 @@ export default function UserAndAuthenticationPage() {
                       Add password to account
                     </label>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to add a password to their account
                   </p>
                 </MainSectionHeader>
@@ -373,11 +329,11 @@ export default function UserAndAuthenticationPage() {
                       Client Trust
                     </label>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Protect your application and users from credential stuffing
                     attacks with Client Trust.
                   </p>
-                  <p className="text-muted-foreground mt-3 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-3 ml-8 text-xs">
                     When signing in with a password on a new client (e.g.
                     device), users will always be challenged for a second
                     factor. If they have not configured one, a one-time passcode
@@ -427,7 +383,7 @@ export default function UserAndAuthenticationPage() {
                       <ProBadge className="ml-2">Pro</ProBadge>
                     </label>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to sign in with a passkey
                   </p>
                 </MainSectionHeader>
@@ -446,7 +402,7 @@ export default function UserAndAuthenticationPage() {
                       <ProBadge className="ml-2">Pro</ProBadge>
                     </label>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to add a passkey to their account
                   </p>
                 </MainSectionHeader>
@@ -463,7 +419,7 @@ export default function UserAndAuthenticationPage() {
                       First and last name
                     </label>
                   </div>
-                  <p className="text-muted-foreground mt-0.5 pl-10 text-xs">
+                  <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Users have the ability to set their first and last name
                   </p>
                 </MainSectionHeader>

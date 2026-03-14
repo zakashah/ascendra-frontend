@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/button/button';
-import { Input } from '@/components/custom/input/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
@@ -11,40 +10,31 @@ import { TabContent } from '@/components/custom/tab/tab-content';
 import { TabList } from '@/components/custom/tab/tab-list';
 import { TabTrigger } from '@/components/custom/tab/tab-trigger';
 import { Tabs } from '@/components/custom/tab/tabs';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/custom/ui/select';
 
-import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
-import { PaginationButton } from '@/components/custom/common-ui/pagination-button';
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { PageBar } from '@/components/custom/layout/page-bar';
+import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
-import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
 import {
-  LuChevronDown,
-  LuChevronFirst,
-  LuChevronLast,
-  LuChevronLeft,
-  LuChevronRight,
-  LuNotebookPen,
-  LuSearch,
-  LuTicketCheck,
-  LuTrash2,
-} from 'react-icons/lu';
-import { useEffect, useRef, useState } from 'react';
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/custom/ui/empty';
 import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@/components/custom/ui/input-group';
+import {
+  EmptyBody,
   Table,
   TableBody,
   TableCell,
@@ -55,11 +45,10 @@ import {
   TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/custom/ui/input-group';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { LuChevronDown, LuGitBranch, LuSearch } from 'react-icons/lu';
+import { GitBranch } from 'lucide-react';
 
 export default function SSOConnectionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -119,209 +108,93 @@ export default function SSOConnectionsPage() {
           </TabList>
           <TabContent value="all">
             <MainContent>
-              <InputGroup className="max-w-xs">
-                <InputGroupInput placeholder="Search..." />
-                <InputGroupAddon>
-                  <LuSearch className="text-foreground size-3.5" />
-                </InputGroupAddon>
-                {/* <InputGroupAddon align="inline-end">12 results</InputGroupAddon> */}
-              </InputGroup>
-              {/* <div className="w-fit">
-                <Input placeholder="Search..." />
-              </div> */}
+              <PageBar>
+                <PageBarContent>
+                  <InputGroup className="max-w-xs">
+                    <InputGroupInput placeholder="Search..." className="w-65" />
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                </PageBarContent>
+              </PageBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
                     <TableHeaderRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Key</TableHead>
-                      <TableHead>Roles</TableHead>
-                      <TableHead></TableHead>
+                      <TableHead>Provider</TableHead>
+                      <TableHead>Configuration</TableHead>
                     </TableHeaderRow>
                   </TableHeader>
                   <TableBody>
                     <TableRow>
                       <TableCell>
-                        <div>
-                          <div className="font-medium">name</div>
-                          <div className="text-muted-foreground text-xs">
-                            description
+                        <div className="flex items-center gap-2">
+                          <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
+                            <Image
+                              src="/images/fb-logo.svg"
+                              alt="Facebook"
+                              className="size-6"
+                              width={6}
+                              height={6}
+                            />
+                          </div>
+                          <div>
+                            <div className="">Facebook</div>
+                            <div className="text-xs text-nowrap">
+                              Social provider
+                            </div>
                           </div>
                         </div>
-                      </TableCell>
-                      <TableCell className="font-['Courier_New',monospace]">
-                        role_set:name
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
                           variant="secondary"
                           className="mr-2 font-normal"
                         >
-                          Admin
+                          Account Linking Only
                         </SimpleBadge>
                         <SimpleBadge
                           variant="secondary"
                           className="font-normal"
                         >
-                          Member
+                          Shared Credentials
                         </SimpleBadge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild className="group">
-                            <CellActionButton />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            sideOffset={8}
-                            className="w-64"
-                            align="end"
-                            onCloseAutoFocus={(e) => e.preventDefault()}
-                          >
-                            <DropdownMenuItem>
-                              <LuTicketCheck /> Set as default role set
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <LuNotebookPen />
-                              Edit role set
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem variant="destructive">
-                              <LuTrash2 /> Delete role set
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>
-                        <div>
-                          <div className="font-medium">
-                            Default role set
-                            <SimpleBadge
-                              variant="secondary"
-                              className="ml-2 font-normal"
-                            >
-                              Default role set
-                            </SimpleBadge>
+                        <div className="flex items-center gap-2">
+                          <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
+                            <Image
+                              src="/images/google-logo.svg"
+                              alt="Facebook"
+                              className="size-4"
+                              width={4}
+                              height={4}
+                            />
                           </div>
-                          <div className="text-muted-foreground text-xs">
-                            Default role set accross the instance
+                          <div>
+                            <div className="">Google</div>
+                            <div className="text-xs text-nowrap">
+                              Social provider
+                            </div>
                           </div>
                         </div>
-                      </TableCell>
-                      <TableCell className="font-['Courier_New',monospace]">
-                        role_set:default
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
                           variant="secondary"
                           className="mr-2 font-normal"
                         >
-                          Admin
-                        </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
-                          Member
+                          Account Linking Only
                         </SimpleBadge>
                         <SimpleBadge
                           variant="secondary"
                           className="font-normal"
                         >
-                          name
+                          Shared Credentials
                         </SimpleBadge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild className="group">
-                            <CellActionButton />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            sideOffset={8}
-                            className="w-64"
-                            align="end"
-                            onCloseAutoFocus={(e) => e.preventDefault()}
-                          >
-                            <DropdownMenuItem>
-                              <LuTicketCheck /> Set as default role set
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <LuNotebookPen />
-                              Edit role set
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem variant="destructive">
-                              <LuTrash2 /> Delete role set
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <div>
-                          <div className="font-medium">
-                            Default role set
-                            <SimpleBadge
-                              variant="secondary"
-                              className="ml-2 font-normal"
-                            >
-                              Default role set
-                            </SimpleBadge>
-                          </div>
-                          <div className="text-muted-foreground text-xs">
-                            Default role set accross the instance
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="font-['Courier_New',monospace]">
-                        role_set:default
-                      </TableCell>
-                      <TableCell>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
-                          Admin
-                        </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
-                          Member
-                        </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="font-normal"
-                        >
-                          name
-                        </SimpleBadge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild className="group">
-                            <CellActionButton />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            sideOffset={8}
-                            className="w-64"
-                            align="end"
-                            onCloseAutoFocus={(e) => e.preventDefault()}
-                          >
-                            <DropdownMenuItem>
-                              <LuTicketCheck /> Set as default role set
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <LuNotebookPen />
-                              Edit role set
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem variant="destructive">
-                              <LuTrash2 /> Delete role set
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
                       </TableCell>
                     </TableRow>
                   </TableBody>
@@ -331,10 +204,139 @@ export default function SSOConnectionsPage() {
             </MainContent>
           </TabContent>
           <TabContent value="social">
-            <MainContent>Social</MainContent>
+            <MainContent>
+              <PageBar>
+                <PageBarContent>
+                  <InputGroup className="max-w-xs">
+                    <InputGroupInput placeholder="Search..." className="w-65" />
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                </PageBarContent>
+              </PageBar>
+              <TableWrapper>
+                <Table scrollable>
+                  <TableHeader>
+                    <TableHeaderRow>
+                      <TableHead>Provider</TableHead>
+                      <TableHead>Configuration</TableHead>
+                    </TableHeaderRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
+                            <Image
+                              src="/images/fb-logo.svg"
+                              alt="Facebook"
+                              className="size-6"
+                              width={6}
+                              height={6}
+                            />
+                          </div>
+                          <div>
+                            <div className="">Facebook</div>
+                            <div className="text-xs text-nowrap">
+                              Social provider
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          Account Linking Only
+                        </SimpleBadge>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="font-normal"
+                        >
+                          Shared Credentials
+                        </SimpleBadge>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
+                            <Image
+                              src="/images/google-logo.svg"
+                              alt="Facebook"
+                              className="size-4"
+                              width={4}
+                              height={4}
+                            />
+                          </div>
+                          <div>
+                            <div className="">Google</div>
+                            <div className="text-xs text-nowrap">
+                              Social provider
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          Account Linking Only
+                        </SimpleBadge>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="font-normal"
+                        >
+                          Shared Credentials
+                        </SimpleBadge>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+                <TableFoot />
+              </TableWrapper>
+            </MainContent>
           </TabContent>
           <TabContent value="enterprise">
-            <MainContent>Enterprise</MainContent>
+            <MainContent>
+              <PageBar>
+                <PageBarContent>
+                  <InputGroup className="max-w-xs">
+                    <InputGroupInput placeholder="Search..." className="w-65" />
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                </PageBarContent>
+              </PageBar>
+              <TableWrapper>
+                <Table scrollable>
+                  <TableHeader>
+                    <TableHeaderRow>
+                      <TableHead>Provider</TableHead>
+                      <TableHead>Configuration</TableHead>
+                    </TableHeaderRow>
+                  </TableHeader>
+                </Table>
+                <EmptyBody>
+                  <Empty>
+                    <EmptyHeader>
+                      <EmptyMedia variant="icon">
+                        <LuGitBranch strokeWidth={2.5} />
+                      </EmptyMedia>
+                      <EmptyTitle>No connections added</EmptyTitle>
+                      <EmptyDescription>
+                        Get started by adding a new connection.
+                      </EmptyDescription>
+                    </EmptyHeader>
+                  </Empty>
+                </EmptyBody>
+                <TableFoot />
+              </TableWrapper>
+            </MainContent>
           </TabContent>
         </Tabs>
       </PageMain>

@@ -30,13 +30,24 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import { LuNotebookPen, LuTicketCheck, LuTrash2 } from 'react-icons/lu';
+import {
+  LuCheck,
+  LuNotebookPen,
+  LuTicketCheck,
+  LuTrash2,
+} from 'react-icons/lu';
 import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { CopyText } from '@/components/custom/util/copy-text';
 
 export default function RolesPage() {
   return (
@@ -50,17 +61,18 @@ export default function RolesPage() {
             <TabTrigger value="role-sets">Role sets</TabTrigger>
             <TabTrigger value="all-roles">All roles</TabTrigger>
           </TabList>
-          <PageBar>
-            <PageBarContent>
-              <Input placeholder="Search..." />
-              <div>Sort by select</div>
-            </PageBarContent>
-            <PageBarAction>
-              <div>action button</div>
-            </PageBarAction>
-          </PageBar>
           <TabContent value="role-sets">
             <MainContent>
+              <PageBar className="-mb-2">
+                <PageBarContent>
+                  <Input placeholder="Search..." />
+                  <div>Sort by select</div>
+                </PageBarContent>
+                <PageBarAction>
+                  <div className="text-[11px]">3/10 used</div>
+                  <div>action button</div>
+                </PageBarAction>
+              </PageBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -82,7 +94,7 @@ export default function RolesPage() {
                         </div>
                       </TableCell>
                       <TableCell className="font-['Courier_New',monospace]">
-                        role_set:name
+                        <CopyText value="role_set:name" />
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
@@ -142,7 +154,7 @@ export default function RolesPage() {
                         </div>
                       </TableCell>
                       <TableCell className="font-['Courier_New',monospace]">
-                        role_set:default
+                        <CopyText value="role_set:default" showTooltip />
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
@@ -156,6 +168,193 @@ export default function RolesPage() {
                           className="mr-2 font-normal"
                         >
                           Member
+                        </SimpleBadge>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="font-normal"
+                        >
+                          name
+                        </SimpleBadge>
+                      </TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <CellActionButton />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent
+                            sideOffset={8}
+                            className="w-64"
+                            align="end"
+                            onCloseAutoFocus={(e) => e.preventDefault()}
+                          >
+                            <DropdownMenuItem>
+                              <LuTicketCheck /> Set as default role set
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              <LuNotebookPen />
+                              Edit role set
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem variant="destructive">
+                              <LuTrash2 /> Delete role set
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableWrapper>
+            </MainContent>
+          </TabContent>
+          <TabContent value="all-roles">
+            <MainContent>
+              <PageBar className="-mb-2">
+                <PageBarContent>
+                  <Input placeholder="Search..." />
+                  <div>Sort by select</div>
+                </PageBarContent>
+                <PageBarAction>
+                  <div>action button</div>
+                </PageBarAction>
+              </PageBar>
+              <TableWrapper>
+                <Table scrollable>
+                  <TableHeader>
+                    <TableHeaderRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Key</TableHead>
+                      <TableHead>Roles</TableHead>
+                      <TableHead></TableHead>
+                    </TableHeaderRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>
+                        <div>
+                          <div className="font-medium">Admin</div>
+                          <div className="text-muted-foreground text-xs">
+                            Role with elevated permissions in the organization.
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="font-['Courier_New',monospace]">
+                        <CopyText value="org:admin" showTooltip />
+                      </TableCell>
+                      <TableCell>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          Mange Organization
+                        </SimpleBadge>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          Delete Organization
+                        </SimpleBadge>
+                        <span className="text-muted-foreground text-xs text-nowrap">
+                          6+ more
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <CellActionButton />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent
+                            sideOffset={8}
+                            className="w-64"
+                            align="end"
+                            onCloseAutoFocus={(e) => e.preventDefault()}
+                          >
+                            <DropdownMenuItem>
+                              <LuTicketCheck /> Set as default role set
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              <LuNotebookPen />
+                              Edit role set
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem variant="destructive">
+                              <LuTrash2 /> Delete role set
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>
+                        <div>
+                          <div className="font-medium">Member</div>
+                          <div className="text-muted-foreground text-xs">
+                            Role with non-privileged permissions in the
+                            organization.
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="font-['Courier_New',monospace]">
+                        <CopyText value="org:member" />
+                      </TableCell>
+                      <TableCell>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          Read members
+                        </SimpleBadge>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          Read billing
+                        </SimpleBadge>
+                      </TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <CellActionButton />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent
+                            sideOffset={8}
+                            className="w-64"
+                            align="end"
+                            onCloseAutoFocus={(e) => e.preventDefault()}
+                          >
+                            <DropdownMenuItem>
+                              <LuTicketCheck /> Set as default role set
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              <LuNotebookPen />
+                              Edit role set
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem variant="destructive">
+                              <LuTrash2 /> Delete role set
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>
+                        <div>
+                          <div className="font-medium">name</div>
+                          <div className="text-muted-foreground text-xs">
+                            description or role
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="font-['Courier_New',monospace]">
+                        <CopyText value="org:name" />
+                      </TableCell>
+                      <TableCell>
+                        <SimpleBadge
+                          variant="secondary"
+                          className="mr-2 font-normal"
+                        >
+                          name_1
                         </SimpleBadge>
                         <SimpleBadge
                           variant="secondary"
@@ -194,9 +393,6 @@ export default function RolesPage() {
                 </Table>
               </TableWrapper>
             </MainContent>
-          </TabContent>
-          <TabContent value="all-roles">
-            <MainContent>All roles</MainContent>
           </TabContent>
         </Tabs>
       </PageMain>

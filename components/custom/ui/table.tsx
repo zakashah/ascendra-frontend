@@ -130,6 +130,24 @@ function TableBody({ className, ...props }: React.ComponentProps<'tbody'>) {
   );
 }
 
+function EmptyBody({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="table-body"
+      className={cn(
+        'relative isolate',
+        'before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg',
+        'before:ring-1 before:ring-[#191C21]/4 dark:before:ring-black/20',
+        'before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]',
+        'dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)',
+        '[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b',
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
 function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>) {
   return (
     <tfoot
@@ -187,7 +205,13 @@ function TableCaption({
 
 function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
   return (
-    <div className="text-muted-foreground flex flex-col text-xs sm:flex-row sm:items-center sm:justify-between">
+    <footer
+      className={cn(
+        'text-muted-foreground flex flex-col text-xs sm:flex-row sm:items-center sm:justify-between',
+        className
+      )}
+      {...props}
+    >
       <div className="mx-2 px-2 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-1">
@@ -240,12 +264,13 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 export {
   Table,
   TableBody,
+  EmptyBody,
   TableCaption,
   TableCell,
   TableFoot,
