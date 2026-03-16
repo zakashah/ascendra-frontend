@@ -100,7 +100,7 @@ export default function RestrictionsPage() {
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
-                  <LuInfo className="mr-2 text-sm" />
+                  <LuInfo className="mt-px mr-2 text-xs shrink-0" />
                   Learn more about<Anchor>Restricted mode</Anchor>
                 </MainSectionFooter>
               </MainSection>

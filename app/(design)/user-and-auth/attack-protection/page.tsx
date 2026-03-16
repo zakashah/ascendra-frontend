@@ -20,7 +20,7 @@ import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { LuArrowRight, LuInfo } from 'react-icons/lu';
 
-export default function MFAPage() {
+export default function AttackProtectionPage() {
   return (
     <>
       <PageHeader>
@@ -148,10 +148,10 @@ export default function MFAPage() {
                 <MainSectionFooter>
                   <div className="flex w-full items-center justify-between">
                     <div className="flex">
-                      <LuInfo className="mr-2 text-sm" />
+                      <LuInfo className="mt-px mr-2 shrink-0 text-xs" />
                       You must require verification on the required identifier.
                     </div>
-                    <Anchor className="flex items-center gap-1">
+                    <Anchor className="text-now flex items-center gap-1">
                       Configure settings
                       <LuArrowRight />
                     </Anchor>

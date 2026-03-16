@@ -9,24 +9,43 @@ import { LuCopy, LuCheck, LuCopyCheck } from 'react-icons/lu';
 
 type CopyTextProps = {
   value: string;
-  children?: React.ReactNode;
+  opaque?: boolean;
   timeout?: number;
-  className?: string;
   showTooltip?: boolean;
+  onClick?: (
+    event: React.MouseEvent<HTMLSpanElement>
+  ) => void | Promise<string>;
 };
 
 export function CopyText({
   value,
-  children,
+  opaque = false,
   timeout = 1200,
-  className,
   showTooltip = false,
-}: CopyTextProps) {
+  onClick,
+  className,
+  children,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<'span'>, 'onClick'> & CopyTextProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(value);
+  const handleCopy = async (e: React.MouseEvent<HTMLSpanElement>) => {
+    let text = value;
+    if (onClick) {
+      const result = await onClick(e);
+      if (result) text = result;
+    }
+    if (text) {
+      console.log('text is: ', text);
+      await navigator.clipboard.writeText(text);
+    }
+    /* if (onClick) {
+      const val = await onClick(e);
+      // await navigator.clipboard.writeText(val);
+    } else {
+      await navigator.clipboard.writeText(value);
+    } */
 
     setCopied(true);
     if (showTooltip) setOpen(true);
@@ -46,13 +65,19 @@ export function CopyText({
         'group/tt inline-flex cursor-copy items-center gap-1 select-none',
         className
       )}
+      {...props}
     >
       {children ?? value}
       <span className="flex h-4 w-4 items-center justify-center">
         {copied ? (
           <LuCopyCheck className="h-3.5 w-3.5 text-green-600" />
         ) : (
-          <LuCopy className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover/row:opacity-100 group-hover/tt:opacity-100" />
+          <LuCopy
+            className={cn(
+              'h-3.5 w-3.5 transition-opacity group-hover/row:opacity-100 group-hover/tt:opacity-100',
+              !opaque && 'opacity-0'
+            )}
+          />
         )}
       </span>
     </span>

@@ -63,7 +63,7 @@ export default function MFAPage() {
                         </p>
                       </div>
                       <SimpleAlert className="ml-8">
-                        <LuInfo className="text-sm" />
+                        <LuInfo className="mt-px text-xs shrink-0" />
                         <div>
                           You cannot enable this feature because it requires
                           phone numbers to be enabled.
@@ -141,7 +141,7 @@ export default function MFAPage() {
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
-                  <LuInfo className="mr-2 text-sm" />
+                  <LuInfo className="mt-px mr-2 text-xs shrink-0" />
                   You need at least one MFA strategy enabled in order to enable
                   this feature.
                 </MainSectionFooter>

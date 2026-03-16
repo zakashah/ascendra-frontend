@@ -49,7 +49,7 @@ export default function UserAndAuthenticationPage() {
         <PageHeaderAction>
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="group">
-              <SecondaryButton className="w-full" disabled>
+              <SecondaryButton className="w-full">
                 Preview
                 <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
               </SecondaryButton>
@@ -119,7 +119,7 @@ export default function UserAndAuthenticationPage() {
                         </p>
                       </div>
                       <SimpleAlert className="ml-8">
-                        <LuInfo className="text-sm" />
+                        <LuInfo className="mt-px shrink-0 text-xs" />
                         <div>
                           Email is the only enabled sign-up option and is
                           therefore required.
@@ -170,7 +170,7 @@ export default function UserAndAuthenticationPage() {
           <TabContent value="phone">
             <MainContent>
               <SimpleAlert>
-                <LuInfo className="text-sm" />
+                <LuInfo className="mt-px shrink-0 text-xs" />
                 <div>
                   SMS functionality is restricted to phone numbers from
                   countries enabled on your SMS allowlist.
@@ -388,7 +388,7 @@ export default function UserAndAuthenticationPage() {
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
-                  <LuInfo className="mt-0.5 mr-2" />
+                  <LuInfo className="mt-px mr-2 shrink-0 text-xs" />
                   Passkey sign-in requires at least one sign-in method (email,
                   phone, username, or password) to be enabled first.
                 </MainSectionFooter>

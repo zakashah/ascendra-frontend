@@ -178,7 +178,7 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
   return (
     <th
       data-slot="table-head"
-      className={cn('px-4 py-3', className)}
+      className={cn('px-6 py-3', className)}
       {...props}
     />
   );
@@ -186,7 +186,11 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
 
 function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
   return (
-    <td data-slot="table-cell" className={cn('p-4', className)} {...props} />
+    <td
+      data-slot="table-cell"
+      className={cn('px-5 py-4 first:pl-6 last:pr-6', className)}
+      {...props}
+    />
   );
 }
 
@@ -212,7 +216,7 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
       )}
       {...props}
     >
-      <div className="mx-2 px-2 py-3 sm:py-4">
+      <div className="mx-1 px-5 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-1">
             <span>1-1</span>
@@ -241,7 +245,7 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
           </div>
         </div>
       </div>
-      <div className="border-border mx-2 border-t px-2 py-3 sm:border-0 sm:py-4">
+      <div className="border-border mx-1 border-t px-5 py-3 sm:border-0 sm:py-4">
         <div className="flex items-center justify-between gap-3 sm:justify-normal">
           <div className="flex items-center gap-2">
             <PaginationButton className="border-0 bg-transparent">
