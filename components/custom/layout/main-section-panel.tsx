@@ -11,6 +11,7 @@ export function MainSectionPanel({
       data-slot="main-section-panel"
       data-section-body
       data-collapsed={collapsed ? 'true' : 'false'}
+      inert={collapsed}
       className={cn(
         'grid transition-all duration-300',
         collapsed ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',

@@ -17,6 +17,7 @@ import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { Anchor } from '@/components/custom/nav/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import { cn } from '@/lib/utils';
+import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
 import { LuInfo } from 'react-icons/lu';
 
@@ -44,7 +45,8 @@ export default function MFAPage() {
                   </div>
                   <p className="text-muted-foreground mt-0.5 text-xs">
                     Select which multi-factor strategies a user can use to
-                    verify their identity.<Anchor>Learn more</Anchor>
+                    verify their identity.{' '}
+                    <Anchor href="#">Learn more</Anchor>
                   </p>
                 </MainSectionHeader>
                 <MainSectionPanel>
@@ -62,13 +64,10 @@ export default function MFAPage() {
                           Send the user a one-time verification code via SMS
                         </p>
                       </div>
-                      <SimpleAlert className="ml-8">
-                        <LuInfo className="mt-px text-xs shrink-0" />
-                        <div>
-                          You cannot enable this feature because it requires
-                          phone numbers to be enabled.
-                          <Anchor>Enable phone numbers.</Anchor>
-                        </div>
+                      <SimpleAlert variant="secondary" className="ml-8">
+                        You cannot enable this feature because it requires phone
+                        numbers to be enabled.{' '}
+                        <Anchor href="#">Enable phone numbers.</Anchor>
                       </SimpleAlert>
                     </MainSectionPanelItemPartGroup>
                   </MainSectionPanelItem>
@@ -134,14 +133,17 @@ export default function MFAPage() {
                     after sign-in and sign-up.
                   </p>
                   <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
-                    Refer to the
-                    <Anchor>setup MFA guide</Anchor>to ensure your Clerk SDKs
-                    meet the minimum required versions, before enabling this
-                    feature.
+                    Refer to the{' '}
+                    <Anchor href="#">setup MFA guide</Anchor> to ensure
+                    your Clerk SDKs meet the minimum required versions, before
+                    enabling this feature.
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
-                  <LuInfo className="mt-px mr-2 text-xs shrink-0" />
+                  <InfoIcon
+                    className="mt-0.5 mr-2 size-3 shrink-0"
+                    strokeWidth={2.5}
+                  />
                   You need at least one MFA strategy enabled in order to enable
                   this feature.
                 </MainSectionFooter>

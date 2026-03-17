@@ -5,15 +5,29 @@ import { Slot } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
-  'h-4.5 px-1 py-0.5  text-[11px] tracking-[0.015em]  leading-[0.875rem] shrink-0 items-center rounded-[4px] relative inline-flex  font-medium transition-all has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&>svg]:size-3! justify-center w-fit whitespace-nowrap [&>svg]:pointer-events-none overflow-hidden',
+  /* Base styles: text-ceramic-label-4 properties */
+  'relative inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-[4px] px-1 py-0.5 font-medium transition-all text-[0.6875rem] leading-[0.875rem] tracking-[0.015em] ring-1 ring-inset overflow-hidden',
   {
     variants: {
       variant: {
+        /* Primary/Purple - keeping your existing default logic but adjusting font */
         default:
-          'text-primary bg-gradient-to-t from-black/[.02] bg-primary/4 dark:text-[#846bff]  ring-1 ring-inset ring-primary/16 dark:bg-primary/24 cursor-pointer',
+          'text-primary  bg-gradient-to-t from-black/[.02] bg-primary/4 ring-primary/16 dark:bg-primary/24',
+
+        /* Gray (New Secondary) */
         secondary:
-          'bg-secondary dark:bg-[#767684] text-secondary-foreground border border-border',
-        blue: 'bg-gradient-to-t from-black/.02 bg-[#236dd7]/4 text-[#307ff6] ring-1 ring-inset ring-[#236dd7]/16  dark:bg-[#236dd7]/24',
+          'text-[#5f5f6f] dark:text-[#adadb7]  bg-gradient-to-t from-black/[.02] bg-[#767684]/4 ring-[#767684]/16 dark:bg-[#767684]/24',
+
+        /* Orange */
+        orange:
+          'text-[#fd7224] bg-gradient-to-t from-black/[.02] bg-[#c3540f]/4 ring-[#c3540f]/16 dark:bg-[#c3540f]/24',
+
+        /* Green */
+        green:
+          'text-[#15892b] dark:text-[#31c854]  bg-gradient-to-t from-black/[.02] bg-[#15892b]/4 ring-[#15892b]/16 dark:bg-[#15892b]/16',
+
+        /* Blue */
+        blue: 'text-[#236dd7] dark:text-[#307ff6] bg-gradient-to-t from-black/[.02]  bg-[#236dd7]/4 ring-[#236dd7]/16 dark:bg-[#236dd7]/24',
       },
     },
     defaultVariants: {
@@ -39,6 +53,9 @@ export function SimpleBadge({
       className={cn(badgeVariants({ variant }), className)}
       {...props}
     >
+      {/* Using px-0.5 inside the wrapper to mimic the Clerk 
+          gap and alignment for badges with icons or text.
+      */}
       <span className="flex items-center gap-1 px-0.5">{children}</span>
     </Comp>
   );

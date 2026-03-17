@@ -30,6 +30,7 @@ import { CellActionButton } from '@/components/custom/common-ui/cell-action-butt
 import { LuEye, LuTrash2 } from 'react-icons/lu';
 import { Separator } from '@/components/ui/separator';
 import { CopyText } from '@/components/custom/util/copy-text';
+import { Button } from '@/components/button/button';
 
 export default function JWTTemplatesPage() {
   return (
@@ -45,9 +46,10 @@ export default function JWTTemplatesPage() {
                 <MainSectionHeader>
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-base font-medium">Templates</span>
-                    <span>+ Add new template</span>
+                    <Button variant="ghost">+ Add new template</Button>
                   </div>
                 </MainSectionHeader>
+
                 <Separator />
                 <TableWrapper>
                   <Table scrollable>

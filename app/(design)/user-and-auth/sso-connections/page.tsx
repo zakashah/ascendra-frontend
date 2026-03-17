@@ -154,10 +154,7 @@ export default function SSOConnectionsPage() {
                         >
                           Account Linking Only
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="font-normal"
-                        >
+                        <SimpleBadge variant="orange" className="font-normal">
                           Shared Credentials
                         </SimpleBadge>
                       </TableCell>
@@ -184,15 +181,12 @@ export default function SSOConnectionsPage() {
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
-                          variant="secondary"
+                          variant="green"
                           className="mr-2 font-normal"
                         >
                           Account Linking Only
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="font-normal"
-                        >
+                        <SimpleBadge variant="orange" className="font-normal">
                           Shared Credentials
                         </SimpleBadge>
                       </TableCell>
@@ -252,7 +246,7 @@ export default function SSOConnectionsPage() {
                           Account Linking Only
                         </SimpleBadge>
                         <SimpleBadge
-                          variant="secondary"
+                          variant="orange"
                           className="font-normal"
                         >
                           Shared Credentials
@@ -281,13 +275,13 @@ export default function SSOConnectionsPage() {
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
-                          variant="secondary"
+                          variant="green"
                           className="mr-2 font-normal"
                         >
                           Account Linking Only
                         </SimpleBadge>
                         <SimpleBadge
-                          variant="secondary"
+                          variant="orange"
                           className="font-normal"
                         >
                           Shared Credentials

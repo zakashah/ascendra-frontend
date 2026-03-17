@@ -201,10 +201,9 @@
   }
 }
 
-@layer utilities {
-  .animate-nudge {
-    animation: nudge 0.4s ease;
-  }
+.animate-nudge {
+  animation: nudge 0.4s ease;
+  will-change: transform;
 }
 
 /* table */

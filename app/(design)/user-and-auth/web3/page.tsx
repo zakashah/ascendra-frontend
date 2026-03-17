@@ -51,7 +51,7 @@ export default function Web3Page() {
                           </span>
                           <span className="text-muted-foreground flex-1 text-xs">
                             Allow users to authenticate using Base Account. See
-                            the <Anchor>Base quickstart.</Anchor>
+                            the <Anchor href="#">Base quickstart.</Anchor>
                           </span>
                         </div>
                       </div>
@@ -74,8 +74,10 @@ export default function Web3Page() {
                           </span>
                           <span className="text-muted-foreground flex-1 text-xs">
                             Allow users to authenticate using MetaMask which
-                            requires the use of the
-                            <Anchor>MetaMask browser extension.</Anchor>
+                            requires the use of the{' '}
+                            <Anchor href="#">
+                              MetaMask browser extension.
+                            </Anchor>
                           </span>
                         </div>
                       </div>
@@ -98,8 +100,8 @@ export default function Web3Page() {
                           </span>
                           <span className="text-muted-foreground flex-1 text-xs">
                             Allow users to authenticate using Coinbase Wallet
-                            which requires the use of the
-                            <Anchor>Coinbase Smart Wallet.</Anchor>
+                            which requires the use of the{' '}
+                            <Anchor href="#">Coinbase Smart Wallet.</Anchor>
                           </span>
                         </div>
                       </div>
@@ -122,8 +124,10 @@ export default function Web3Page() {
                           </span>
                           <span className="text-muted-foreground flex-1 text-xs">
                             Allow users to authenticate using OKX Wallet which
-                            requires the use of the
-                            <Anchor>OKX Wallet browser extension.</Anchor>
+                            requires the use of the{' '}
+                            <Anchor href="#">
+                              OKX Wallet browser extension.
+                            </Anchor>
                           </span>
                         </div>
                       </div>
@@ -145,9 +149,9 @@ export default function Web3Page() {
                             Solana
                           </span>
                           <span className="text-muted-foreground flex-1 text-xs">
-                            Allow users to authenticate using
-                            <Anchor>Solana supported wallets</Anchor> and a
-                            compatible browser extension.
+                            Allow users to authenticate using{' '}
+                            <Anchor href="#">Solana supported wallets</Anchor>{' '}
+                            and a compatible browser extension.
                           </span>
                         </div>
                       </div>

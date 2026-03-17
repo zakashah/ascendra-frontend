@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/button/button';
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { Input } from '@/components/custom/input/input';
@@ -17,7 +18,7 @@ import { Anchor } from '@/components/custom/nav/anchor';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
 import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { LuInfo } from 'react-icons/lu';
+import { LuCircleSlash, LuInfo } from 'react-icons/lu';
 
 export default function OrganizationSettingsPage() {
   return (
@@ -49,8 +50,8 @@ export default function OrganizationSettingsPage() {
                       <p className="text-muted-foreground mt-0.5 text-xs">
                         Set the default number of users allowed for new
                         organizations. This can be customized per-organization
-                        in the <Anchor>Dashboard</Anchor> or via
-                        <Anchor>Clerk&apos;s backend API.</Anchor>
+                        in the <Anchor href="#">Dashboard</Anchor> or via
+                        <Anchor href="#">Clerk&apos;s backend API.</Anchor>
                       </p>
                       <RadioGroup defaultValue="" className="gap-0">
                         <div className="mt-6 flex items-center gap-2">
@@ -98,7 +99,9 @@ export default function OrganizationSettingsPage() {
                         <span className="font-medium">
                           Create first organization automatically
                         </span>
-                        <SimpleBadge>Requires default naming rules</SimpleBadge>
+                        <SimpleBadge variant="orange">
+                          Requires default naming rules
+                        </SimpleBadge>
                       </div>
                       <p className="text-muted-foreground mt-1 ml-8 text-xs">
                         Creates an organization during sign-up using default
@@ -165,11 +168,8 @@ export default function OrganizationSettingsPage() {
                           <Input className="w-49" value={1} />
                         </div>
                         <SimpleAlert className="mt-2 ml-6">
-                          <LuInfo className="mt-px shrink-0 text-xs" />
-                          <div>
-                            This setting only applies to new users and does not
-                            affect existing users.
-                          </div>
+                          This setting only applies to new users and does not
+                          affect existing users.
                         </SimpleAlert>
                       </RadioGroup>
                     </div>
@@ -222,10 +222,15 @@ export default function OrganizationSettingsPage() {
                         </span>
                       </div>
                       <p className="text-muted-foreground mt-0.5 text-xs">
-                        Warning: Users will lose access to organizations and
-                        related features
+                        <span className="text-[#e02e2e]">Warning:</span> Users
+                        will lose access to organizations and related features
                       </p>
-                      <div className="mt-4">button</div>
+                      <div className="mt-4">
+                        <Button variant="destructive" className="gap-2">
+                          <LuCircleSlash strokeWidth={3} />
+                          Disable
+                        </Button>
+                      </div>
                     </div>
                   </MainSectionPanelItem>
                 </MainSectionPanel>

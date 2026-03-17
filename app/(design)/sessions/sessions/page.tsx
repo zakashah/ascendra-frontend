@@ -108,17 +108,16 @@ export default function SessionsPage() {
                   </div>
                   <p className="text-muted-foreground mt-0.5 text-xs">
                     Set session duration limits for the long lived cookie by
-                    configuring the inactivity timeout or the maximum lifetime.
-                    <Anchor>Learn more</Anchor>
+                    configuring the inactivity timeout or the maximum lifetime.{' '}
+                    <Anchor href="#">Learn more</Anchor>
                   </p>
                 </MainSectionHeader>
                 <MainSectionPanel>
                   <MainSectionPanelItem>
-                    <SimpleAlert className="mb-6">
-                      <LuInfo className="mt-px shrink-0 text-xs" />
+                    <SimpleAlert variant="secondary" className="mb-6">
                       <div>
-                        You should be aware of
-                        <Anchor>browser limitations</Anchor> that may cause
+                        You should be aware of{' '}
+                        <Anchor href="#">browser limitations</Anchor> that may cause
                         users to be signed out before the configured maximum
                         lifetime, even when this feature is disabled.
                       </div>
@@ -126,9 +125,7 @@ export default function SessionsPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch checked={true} disabled />
-                        <span className="text-base font-medium">
-                          Maximum lifetime
-                        </span>
+                        <span className="font-medium">Maximum lifetime</span>
                         <ProBadge>Pro</ProBadge>
                       </div>
                       <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
@@ -145,9 +142,7 @@ export default function SessionsPage() {
                     <div>
                       <div className="mt-6 flex items-center gap-2">
                         <Switch />
-                        <span className="text-base font-medium">
-                          Inactivity timeout
-                        </span>
+                        <span className="font-medium">Inactivity timeout</span>
                         <ProBadge>Pro</ProBadge>
                       </div>
                       <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
@@ -168,8 +163,8 @@ export default function SessionsPage() {
                   <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to be signed into more than one account at a
                     time. Users may switch the active account by opening the
-                    User Button and selecting the desired account.
-                    <Anchor>Learn more</Anchor>
+                    User Button and selecting the desired account.{' '}
+                    <Anchor href="#">Learn more</Anchor>
                   </p>
                 </MainSectionHeader>
               </MainSection>
@@ -181,8 +176,8 @@ export default function SessionsPage() {
                     </span>
                   </div>
                   <p className="text-muted-foreground mt-0.5 text-xs">
-                    Augment your session tokens by adding custom claims.
-                    <Anchor>Learn more</Anchor>
+                    Augment your session tokens by adding custom claims.{' '}
+                    <Anchor href="#">Learn more</Anchor>
                   </p>
                 </MainSectionHeader>
                 <MainSectionPanel>
@@ -284,7 +279,9 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {userFields.map((item) => (
-                                  <SimpleBadge key={item}>{item}</SimpleBadge>
+                                  <SimpleBadge variant="blue" key={item}>
+                                    {item}
+                                  </SimpleBadge>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -299,7 +296,9 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {sessionFields.map((item) => (
-                                  <SimpleBadge key={item}>{item}</SimpleBadge>
+                                  <SimpleBadge variant="blue" key={item}>
+                                    {item}
+                                  </SimpleBadge>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -314,7 +313,9 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {orgFields.map((item) => (
-                                  <SimpleBadge key={item}>{item}</SimpleBadge>
+                                  <SimpleBadge variant="blue" key={item}>
+                                    {item}
+                                  </SimpleBadge>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -329,7 +330,9 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full flex-col border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {tokenFields.map((item) => (
-                                  <SimpleBadge key={item}>{item}</SimpleBadge>
+                                  <SimpleBadge variant="secondary" key={item}>
+                                    {item}
+                                  </SimpleBadge>
                                 ))}
                               </div>
                               <div className="mt-2 flex items-center gap-2">
@@ -337,7 +340,7 @@ export default function SessionsPage() {
                                 <span className="font-medium">
                                   Show default claims example
                                 </span>
-                                <Anchor className="ml-auto text-xs no-underline!">
+                                <Anchor href="#" className="ml-auto text-xs no-underline!">
                                   Learn more
                                 </Anchor>
                               </div>
@@ -347,13 +350,12 @@ export default function SessionsPage() {
                       </div>
                     </div>
                     <SimpleAlert>
-                      <LuInfo className="mt-px shrink-0 text-xs" />
                       <div>
                         Clerk automatically includes standard claims in your
                         session tokens for common use cases and third-party
                         compatibility.
                       </div>
-                      <Anchor className="ml-auto">Learn more</Anchor>
+                      <Anchor href="#" className="ml-auto">Learn more</Anchor>
                     </SimpleAlert>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
@@ -364,7 +366,7 @@ export default function SessionsPage() {
                       Not sure how template syntax works? Learn how it helps you
                       customize your JWTs.
                     </div>
-                    <Anchor className="flex items-center gap-1">
+                    <Anchor href="#" variant="muted" className="flex items-center gap-1">
                       Learn more
                       <LuArrowRight />
                     </Anchor>

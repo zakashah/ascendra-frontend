@@ -1,7 +1,10 @@
 'use client';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
-import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
+import {
+  AlertIcon,
+  SimpleAlert,
+} from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { SecondaryButton } from '@/components/custom/input/secondary-button';
 import { AsideContent } from '@/components/custom/layout/aside-content';
@@ -30,6 +33,7 @@ import {
 } from '@/components/custom/ui/dropdown-menu';
 import { Switch } from '@/components/custom/ui/switch';
 import { cn } from '@/lib/utils';
+import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
 import {
   LuChevronDown,
@@ -118,12 +122,10 @@ export default function UserAndAuthenticationPage() {
                           must maintain one on their account at all times.
                         </p>
                       </div>
-                      <SimpleAlert className="ml-8">
-                        <LuInfo className="mt-px shrink-0 text-xs" />
-                        <div>
-                          Email is the only enabled sign-up option and is
-                          therefore required.
-                        </div>
+                      <SimpleAlert>
+                        Email is the only enabled sign-up option and is
+                        therefore required.
+                        {/* </span> */}
                       </SimpleAlert>
                     </MainSectionPanelItemPartGroup>
                   </MainSectionPanelItem>
@@ -170,12 +172,13 @@ export default function UserAndAuthenticationPage() {
           <TabContent value="phone">
             <MainContent>
               <SimpleAlert>
-                <LuInfo className="mt-px shrink-0 text-xs" />
-                <div>
+                <span>
                   SMS functionality is restricted to phone numbers from
-                  countries enabled on your SMS allowlist.
-                  <Anchor>Manage allowlist settings.</Anchor>
-                </div>
+                  countries enabled on your SMS allowlist.{' '}
+                  <Anchor href={'#'} variant="blue">
+                    Manage allowlist settings.
+                  </Anchor>
+                </span>
               </SimpleAlert>
               <MainSection>
                 <MainSectionHeader>
@@ -281,8 +284,11 @@ export default function UserAndAuthenticationPage() {
                   <p className="mb-1 text-xs">Allow extended characters</p>
                   <p>Off</p>
                 </div>
-                <div className="pt-4">
-                  <Anchor className="text-primary flex gap-1 text-xs font-medium">
+                <div className="p-1 pt-4">
+                  <Anchor
+                    href="#"
+                    className="text-primary flex gap-1 text-xs font-medium"
+                  >
                     <LuFolderLock />
                     Update username requirement
                   </Anchor>
@@ -363,8 +369,11 @@ export default function UserAndAuthenticationPage() {
                   <p className="mb-1 text-xs">Password rules</p>
                   <p>None</p>
                 </div>
-                <div className="pt-4">
-                  <Anchor className="text-primary flex gap-1 text-xs font-medium">
+                <div className="p-1 pt-4">
+                  <Anchor
+                    href="#"
+                    className="text-primary flex gap-1 text-xs font-medium"
+                  >
                     <LuFolderLock />
                     Update password requirement
                   </Anchor>
@@ -388,7 +397,10 @@ export default function UserAndAuthenticationPage() {
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
-                  <LuInfo className="mt-px mr-2 shrink-0 text-xs" />
+                  <InfoIcon
+                    className="mt-0.5 mr-2 size-3 shrink-0"
+                    strokeWidth={2.5}
+                  />
                   Passkey sign-in requires at least one sign-in method (email,
                   phone, username, or password) to be enabled first.
                 </MainSectionFooter>

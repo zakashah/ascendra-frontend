@@ -17,9 +17,9 @@ function Switch({
         'relative top-[.0625rem] inline-flex w-6 shrink-0 items-center justify-start rounded-full p-0.5',
         'ring-1 data-[state=checked]:ring-[#5F15FE]/88 data-[state=unchecked]:ring-[#191C21]/20 dark:data-[state=checked]:ring-[#846bff] dark:data-[state=unchecked]:ring-white/15',
         'data-[state=checked]:bg-[#6c47ff]',
-        'data-[state=unchecked]:bg-[#dbdbe0] data-[state=unchecked]:hover:bg-[#C7C7D0] dark:data-[state=unchecked]:hover:bg-[#4C4C5C] data-[state=unchecked]:hover:ring-[#BBBCBE] dark:data-[state=unchecked]:bg-[#3d3d4a] dark:data-[state=unchecked]:hover:bg-[#47475a]',
+        'data-[state=unchecked]:bg-[#dbdbe0] data-[state=unchecked]:hover:bg-[#C7C7D0] data-[state=unchecked]:hover:ring-[#BBBCBE] dark:data-[state=unchecked]:bg-[#3d3d4a] dark:data-[state=unchecked]:hover:bg-[#4C4C5C] dark:data-[state=unchecked]:hover:bg-[#47475a]',
         'transition group-data-focus-visible/switch:transition-none',
-        'outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary',
+        'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
         'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         className
       )}

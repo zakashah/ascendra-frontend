@@ -18,6 +18,7 @@ import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { Anchor } from '@/components/custom/nav/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { InfoIcon } from 'lucide-react';
 import { LuArrowRight, LuInfo } from 'react-icons/lu';
 
 export default function AttackProtectionPage() {
@@ -100,9 +101,9 @@ export default function AttackProtectionPage() {
                   </div>
                   <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     New sign-ups will include a browser verification step
-                    powered by<Anchor>Cloudflare Turnstile.</Anchor>In some
-                    cases, users may be asked to check a box to confirm they are
-                    human.
+                    powered by <Anchor href="#">Cloudflare Turnstile.</Anchor>{' '}
+                    In some cases, users may be asked to check a box to confirm
+                    they are human.
                   </p>
                 </MainSectionHeader>
               </MainSection>
@@ -148,12 +149,19 @@ export default function AttackProtectionPage() {
                 <MainSectionFooter>
                   <div className="flex w-full items-center justify-between">
                     <div className="flex">
-                      <LuInfo className="mt-px mr-2 shrink-0 text-xs" />
+                      <InfoIcon
+                        className="mt-0.5 mr-2 size-3 shrink-0"
+                        strokeWidth={2.5}
+                      />
                       You must require verification on the required identifier.
                     </div>
-                    <Anchor className="text-now flex items-center gap-1">
+                    <Anchor
+                      href="#"
+                      variant="primary"
+                      className="text-now text-primary flex items-center gap-1 dark:text-[#846BFF]"
+                    >
                       Configure settings
-                      <LuArrowRight />
+                      <LuArrowRight strokeWidth={2} />
                     </Anchor>
                   </div>
                 </MainSectionFooter>

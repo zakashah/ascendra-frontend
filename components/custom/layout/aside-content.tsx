@@ -7,7 +7,9 @@ export function AsideContent({
   ...props
 }: React.ComponentProps<'aside'> & { dimmed?: boolean }) {
   return (
-    <aside data-slot="aside-content"
+    <aside
+      data-slot="aside-content"
+      inert={dimmed}
       className={cn(
         'relative flex w-full lg:w-fit',
         dimmed ? 'opacity-50' : '',

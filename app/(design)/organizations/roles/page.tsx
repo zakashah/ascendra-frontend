@@ -12,6 +12,9 @@ import { Tabs } from '@/components/custom/tab/tabs';
 
 import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { PageBar } from '@/components/custom/layout/page-bar';
+import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,32 +25,15 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFoot,
   TableHead,
   TableHeader,
   TableHeaderRow,
   TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
-import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import {
-  LuCheck,
-  LuNotebookPen,
-  LuTicketCheck,
-  LuTrash2,
-} from 'react-icons/lu';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
-import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
-import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { CopyText } from '@/components/custom/util/copy-text';
+import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { LuNotebookPen, LuTicketCheck, LuTrash2 } from 'react-icons/lu';
 
 export default function RolesPage() {
   return (
@@ -97,18 +83,10 @@ export default function RolesPage() {
                         <CopyText value="role_set:name" />
                       </TableCell>
                       <TableCell>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Admin
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="font-normal"
-                        >
-                          Member
-                        </SimpleBadge>
+                        <SimpleBadge variant="secondary">Member</SimpleBadge>
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>
@@ -141,10 +119,7 @@ export default function RolesPage() {
                         <div>
                           <div className="font-medium">
                             Default role set
-                            <SimpleBadge
-                              variant="secondary"
-                              className="ml-2 font-normal"
-                            >
+                            <SimpleBadge variant="secondary" className="ml-2">
                               Default role set
                             </SimpleBadge>
                           </div>
@@ -157,24 +132,13 @@ export default function RolesPage() {
                         <CopyText value="role_set:default" showTooltip />
                       </TableCell>
                       <TableCell>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Admin
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Member
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="font-normal"
-                        >
-                          name
-                        </SimpleBadge>
+                        <SimpleBadge variant="secondary">name</SimpleBadge>
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>
@@ -242,16 +206,10 @@ export default function RolesPage() {
                         <CopyText value="org:admin" showTooltip />
                       </TableCell>
                       <TableCell>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Mange Organization
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Delete Organization
                         </SimpleBadge>
                         <span className="text-muted-foreground text-xs text-nowrap">
@@ -298,16 +256,10 @@ export default function RolesPage() {
                         <CopyText value="org:member" />
                       </TableCell>
                       <TableCell>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Read members
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           Read billing
                         </SimpleBadge>
                       </TableCell>
@@ -350,18 +302,10 @@ export default function RolesPage() {
                         <CopyText value="org:name" />
                       </TableCell>
                       <TableCell>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="mr-2 font-normal"
-                        >
+                        <SimpleBadge variant="secondary" className="mr-2">
                           name_1
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="secondary"
-                          className="font-normal"
-                        >
-                          name
-                        </SimpleBadge>
+                        <SimpleBadge variant="secondary">name</SimpleBadge>
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>

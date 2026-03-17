@@ -28,10 +28,11 @@ export function TabTrigger({
     <div data-slot="tab-trigger" className="pl-0.5">
       <Link
         href={'#'}
+        inert={disabled}
         className={clsx(
           'focus-visible:outline-primary hover:text-foreground inline-flex h-6 items-center rounded-[0.375rem] px-2 text-nowrap transition-colors focus-visible:outline-2',
           isActive ? 'text-foreground cursor-default' : 'text-muted-foreground',
-          disabled ? 'cursor-not-allowed opacity-50' : '',
+          disabled ? 'pointer-events-none cursor-not-allowed opacity-50' : '',
           className
         )}
         onClick={(e) => {

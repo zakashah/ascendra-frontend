@@ -25,8 +25,8 @@ export default function OverviewPage() {
           <PageSubTitle>
             Clerks Account Portal is the fastest way to add authentication and
             user management to your application. We provide a fully managed and
-            hosted solution that lives on your domain.
-            <Anchor>Learn more</Anchor>
+            hosted solution that lives on your domain.{' '}
+            <Anchor href="#">Learn more</Anchor>
           </PageSubTitle>
         </PageHeaderGroup>
         <PageHeaderAction>

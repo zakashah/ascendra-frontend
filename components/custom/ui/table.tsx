@@ -230,7 +230,7 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
             />
             <span className="sm:hidden">Show</span>
             <span className="hidden sm:block">Results per page</span>
-            <Select>
+            {/* <Select>
               <SelectTrigger className="ml-2 h-5! w-15! rounded-sm text-xs">
                 <SelectValue placeholder="10" />
               </SelectTrigger>
@@ -238,6 +238,18 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
                 {['10', '20', '30', '40', '50'].map((item, i) => (
                   <SelectItem key={i} value={item} className="w-15! text-xs">
                     10
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select> */}
+            <Select>
+              <SelectTrigger className="ml-2">
+                <SelectValue placeholder="10" />
+              </SelectTrigger>
+              <SelectContent side="bottom">
+                {['10', '15', '20', '100'].map((item, i) => (
+                  <SelectItem key={i} value={item} className="">
+                    {item}
                   </SelectItem>
                 ))}
               </SelectContent>

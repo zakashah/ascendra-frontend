@@ -9,7 +9,8 @@ const Input = React.forwardRef<
   const [hovered, setHovered] = React.useState(false);
 
   return (
-    <div data-slot="input"
+    <div
+      data-slot="input"
       className={cn(
         'dark:bg-secondary flex items-center rounded-[.375rem] bg-white transition',
 

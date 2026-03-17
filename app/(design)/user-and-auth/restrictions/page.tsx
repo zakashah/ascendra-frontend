@@ -60,6 +60,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
+import { InfoIcon } from 'lucide-react';
 
 export default function RestrictionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -100,8 +101,12 @@ export default function RestrictionsPage() {
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
-                  <LuInfo className="mt-px mr-2 text-xs shrink-0" />
-                  Learn more about<Anchor>Restricted mode</Anchor>
+                  <InfoIcon
+                    className="mt-0.5 mr-2 size-3 shrink-0"
+                    strokeWidth={2.5}
+                  />
+                  Learn more about
+                  <Anchor href="#" className="ml-0.5">Restricted mode</Anchor>
                 </MainSectionFooter>
               </MainSection>
               <MainSection>
@@ -119,8 +124,10 @@ export default function RestrictionsPage() {
                 </MainSectionHeader>
                 <MainSectionFooter>
                   <LuLockKeyhole className="mr-2 text-sm" />
-                  You must enable the <Anchor>allowlist</Anchor> or
-                  <Anchor>blocklist</Anchor> to use this setting.
+                  You must enable the{' '}
+                  <Anchor href="#" className="mx-0.5">allowlist</Anchor> or
+                  <Anchor href="#" className="mx-0.5">blocklist</Anchor> to use this
+                  setting.
                 </MainSectionFooter>
               </MainSection>
               <MainSection>

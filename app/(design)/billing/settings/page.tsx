@@ -21,6 +21,7 @@ import { Anchor } from '@/components/custom/nav/anchor';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
 import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { InfoIcon } from 'lucide-react';
 import { LuArrowRight, LuInfo } from 'react-icons/lu';
 
 export default function BillingSettingsPage() {
@@ -59,7 +60,7 @@ export default function BillingSettingsPage() {
                       </div>
                       <p className="text-muted-foreground mt-1 ml-8 text-xs">
                         Turn on individual subscriptions for users. Typically
-                        used if you are a<Anchor>B2C business.</Anchor>
+                        used if you are a <Anchor href="#">B2C business.</Anchor>
                       </p>
                     </div>
                   </MainSectionPanelItem>
@@ -73,8 +74,8 @@ export default function BillingSettingsPage() {
                       </div>
                       <p className="text-muted-foreground mt-1 ml-8 text-xs">
                         Turn on individual subscriptions for organizations.
-                        Typically used if you are a
-                        <Anchor>B2C business.</Anchor>
+                        Typically used if you are a{' '}
+                        <Anchor href="#">B2C business.</Anchor>
                       </p>
                     </div>
                   </MainSectionPanelItem>
@@ -96,10 +97,13 @@ export default function BillingSettingsPage() {
                 <MainSectionFooter>
                   <div className="flex w-full items-center justify-between">
                     <div className="flex">
-                      <LuInfo className="mr-2 text-sm" />
+                      <InfoIcon
+                        className="mt-0.5 mr-2 size-3 shrink-0"
+                        strokeWidth={2.5}
+                      />
                       Clerk Billing costs just 0.7% per transaction.
                     </div>
-                    <Anchor className="flex items-center gap-1">
+                    <Anchor href="#" className="flex items-center gap-1">
                       Read Billing Guide
                       <LuArrowRight />
                     </Anchor>

@@ -42,7 +42,10 @@ export default function WailistPage() {
                 </MainSectionHeader>
                 <MainSectionFooter>
                   <LuBookOpen className="mr-2 text-sm" />
-                  Learn more about setting up a <Anchor>Waitlist</Anchor>
+                  Learn more about setting up a
+                  <Anchor  href="#" className="mx-0.5">
+                    Waitlist
+                  </Anchor>
                 </MainSectionFooter>
               </MainSection>
             </MainContent>

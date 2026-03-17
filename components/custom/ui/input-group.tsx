@@ -15,7 +15,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
       data-slot="input-group"
       role="group"
       className={cn(
-        'group/input-group relative flex w-full min-w-0 items-center outline-none',
+        'group/input-group relative flex w-full min-w-0 items-center',
         'has-[>textarea]:h-auto',
         'has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:flex-col',
         'has-[>[data-align=inline-end]]:*:data-[slot=input-group-control]:pr-1.5',
@@ -60,9 +60,9 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
 
         // FOCUS VISIBLE SHADOW
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:shadow-[0_4px_4px_-1px_rgba(0,0,0,0.2),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
-        'dark:has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:shadow-[0_4px_4px_-1px_rgba(0,0,0,0.2),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
-
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline',
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-2',
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-primary',
         className
       )}
       {...props}
