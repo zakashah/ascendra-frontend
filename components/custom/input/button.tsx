@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
   /* Base Layout & Shared "Gloss" Logic */
-  'group relative inline-flex shrink-0 items-center focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3 font-medium leading-[1.25rem] justify-center overflow-hidden transition-all duration-200 select-none disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer before:pointer-events-none before:absolute before:inset-0 before:size-full before:transition-opacity before:duration-200',
+  'gap-1.5 group relative inline-flex shrink-0 items-center focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3 font-medium leading-[1.25rem] justify-center overflow-hidden transition-all duration-200 select-none disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer before:pointer-events-none before:absolute before:inset-0 before:size-full before:transition-opacity before:duration-200',
   {
     variants: {
       variant: {
@@ -46,7 +46,7 @@ const buttonVariants = cva(
         sm: 'h-7 px-2.5 text-xs rounded-[0.3125rem]',
         default: 'h-8 px-3 text-sm rounded-[0.375rem]',
         lg: 'h-10 px-4 text-base rounded-[0.5rem]',
-        icon: 'size-8 rounded-[0.375rem]',
+        icon: 'h-8 w-8 rounded-[0.375rem]',
       },
     },
     defaultVariants: {

@@ -33,7 +33,7 @@ import {
 } from '@/components/ui/accordion';
 import Link from 'next/link';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Checkbox } from '@/components/custom/ui/checkbox';
 import { MdCode } from 'react-icons/md';
 import { CopyText } from '@/components/custom/util/copy-text';
 import { sleep } from '@/lib/utils';

@@ -8,10 +8,7 @@ export function PageBarContent({
   return (
     <div
       data-slot="page-bar-content"
-      className={cn(
-        'order-1 flex flex-wrap items-center gap-2 sm:order-0',
-        className
-      )}
+      className={cn('order-1 flex items-center gap-2 sm:order-0', className)}
       {...props}
     >
       {children}

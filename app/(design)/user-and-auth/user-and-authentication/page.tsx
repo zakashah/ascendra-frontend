@@ -112,7 +112,7 @@ export default function UserAndAuthenticationPage() {
                     <MainSectionPanelItemPartGroup>
                       <div>
                         <div className="flex items-center gap-2">
-                          <Switch />
+                          <Switch checked={true} />
                           <span className="text-base font-medium">
                             Require email address
                           </span>
@@ -143,6 +143,20 @@ export default function UserAndAuthenticationPage() {
                       <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                         Require users to verify their email addresses before
                         they can sign-up
+                      </p>
+                    </div>
+                  </MainSectionPanelItem>
+                  <MainSectionPanelItem>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Switch />
+                        <span className="text-base font-medium">
+                          Restrict changes
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                        Prevent users from changing their email address after
+                        sign-up
                       </p>
                     </div>
                   </MainSectionPanelItem>
@@ -231,7 +245,7 @@ export default function UserAndAuthenticationPage() {
                   <MainSectionPanelItem>
                     <div>
                       <div className="flex items-center gap-2">
-                        <Switch />
+                        <Switch checked={true} />
                         <span className="text-base font-medium">
                           Require username
                         </span>

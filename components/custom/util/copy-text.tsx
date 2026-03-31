@@ -8,7 +8,7 @@ import {
 import { LuCopy, LuCheck, LuCopyCheck } from 'react-icons/lu';
 
 type CopyTextProps = {
-  value: string;
+  value?: string;
   opaque?: boolean;
   timeout?: number;
   showTooltip?: boolean;

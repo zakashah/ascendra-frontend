@@ -44,7 +44,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        'h-5 py-[3px]',
+        'py-[3px]',
         'group relative inline-flex items-center justify-center px-[3px]',
         'min-w-fit overflow-hidden rounded-[0.25rem]',
         /* Base Colors */
@@ -69,6 +69,8 @@ function SelectTrigger({
         'disabled:cursor-not-allowed disabled:opacity-40',
         /* Focus */
         'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
+        size === 'sm' && 'h-5',
+        size === 'default' && 'h-8',
         className
       )}
       {...props}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/button/button';
+import { Button } from '@/components/custom/input/button';
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { Input } from '@/components/custom/input/input';
@@ -16,8 +16,15 @@ import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { Anchor } from '@/components/custom/nav/anchor';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
 import { Switch } from '@/components/custom/ui/switch';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
 import { LuCircleSlash, LuInfo } from 'react-icons/lu';
 
 export default function OrganizationSettingsPage() {
@@ -184,7 +191,18 @@ export default function OrganizationSettingsPage() {
                         organization is created
                       </p>
                       <div className="mt-2 w-fit">
-                        <Input className="w-49" value={1} />
+                        <Select>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Default role set" />
+                          </SelectTrigger>
+                          <SelectContent side="bottom">
+                            {['Default role set', 'name'].map((item, i) => (
+                              <SelectItem key={i} value={item}>
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
                   </MainSectionPanelItem>

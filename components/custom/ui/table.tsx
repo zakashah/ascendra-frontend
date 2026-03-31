@@ -166,7 +166,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
     <tr
       data-slot="table-row"
       className={cn(
-        'group/row cursor-pointer transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4',
+        'group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4',
         className
       )}
       {...props}
@@ -243,7 +243,7 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
               </SelectContent>
             </Select> */}
             <Select>
-              <SelectTrigger className="ml-2">
+              <SelectTrigger className="ml-2" size="sm">
                 <SelectValue placeholder="10" />
               </SelectTrigger>
               <SelectContent side="bottom">

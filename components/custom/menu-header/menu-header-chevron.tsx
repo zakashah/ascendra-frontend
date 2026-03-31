@@ -2,22 +2,28 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { LucideChevronsUpDown } from 'lucide-react';
 
+type IconType = React.ComponentType<{
+  className?: string;
+  strokeWidth?: number;
+}>;
+
 export function MenuHeaderChevron({
+  icon: Icon = LucideChevronsUpDown,
   className,
   children,
   ...props
-}: React.ComponentProps<'button'>) {
+}: React.ComponentProps<'button'> & { icon?: IconType }) {
   return (
     <button
       type="button"
       data-slot="menu-header-chevron"
       className={cn(
-        'bg-transparent hover:bg-background focus-visible:outline-primary flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm border-0 transition-colors hover:border focus-visible:outline-2 focus-visible:-outline-offset-2',
+        'hover:bg-background focus-visible:outline-primary flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent transition-colors hover:border focus-visible:outline-2 focus-visible:-outline-offset-2',
         className
       )}
       {...props}
     >
-      <LucideChevronsUpDown className="size-3.5 text-gray-500" />
+      <Icon className="size-3.5 text-gray-500" />
     </button>
   );
 }

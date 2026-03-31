@@ -16,8 +16,15 @@ import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { Anchor } from '@/components/custom/nav/anchor';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
 import { Switch } from '@/components/custom/ui/switch';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
 import { InfoIcon } from 'lucide-react';
 import { LuArrowRight, LuInfo } from 'react-icons/lu';
 
@@ -56,7 +63,7 @@ export default function AttackProtectionPage() {
                         Send the user a one-time verification code via SMS
                       </p>
                       <div className="mt-2 w-fit">
-                        <Input className="w-35" value={100} />
+                        <Input className="w-35" value={100} type="text" />
                       </div>
                     </div>
                   </MainSectionPanelItem>
@@ -83,8 +90,22 @@ export default function AttackProtectionPage() {
                           <RadioGroupItem value="default" id="r1" />
                           <span className="">Time limit</span>
                         </div>
-                        <div className="mt-2 ml-6 w-fit">
+                        <div className="mt-2 ml-6 flex w-fit gap-2">
                           <Input className="w-35" value={1} />
+                          <Select>
+                            <SelectTrigger>
+                              <SelectValue placeholder="day" />
+                            </SelectTrigger>
+                            <SelectContent side="bottom">
+                              {['day', 'hour', 'minute', 'year'].map(
+                                (item, i) => (
+                                  <SelectItem key={i} value={item}>
+                                    {item}
+                                  </SelectItem>
+                                )
+                              )}
+                            </SelectContent>
+                          </Select>
                         </div>
                       </RadioGroup>
                     </div>

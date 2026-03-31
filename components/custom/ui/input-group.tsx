@@ -63,6 +63,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline',
         'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-2',
         'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-primary',
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-offset-1',
         className
       )}
       {...props}

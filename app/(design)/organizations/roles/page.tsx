@@ -33,7 +33,25 @@ import {
 } from '@/components/custom/ui/table';
 import { CopyText } from '@/components/custom/util/copy-text';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import { LuNotebookPen, LuTicketCheck, LuTrash2 } from 'react-icons/lu';
+import {
+  LuNotebookPen,
+  LuSearch,
+  LuTicketCheck,
+  LuTrash2,
+} from 'react-icons/lu';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@/components/custom/ui/input-group';
+import { Button } from '@/components/custom/input/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
 
 export default function RolesPage() {
   return (
@@ -51,12 +69,30 @@ export default function RolesPage() {
             <MainContent>
               <PageBar className="-mb-2">
                 <PageBarContent>
-                  <Input placeholder="Search..." />
-                  <div>Sort by select</div>
+                  <InputGroup className="max-w-xs">
+                    <InputGroupInput placeholder="Search..." className="w-65" />
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {/* <div>Sort by select</div> */}
+                  <Select>
+                    <SelectTrigger>
+                      <span className="font-normal">sort by: </span>
+                      <SelectValue placeholder="Name" />
+                    </SelectTrigger>
+                    <SelectContent side="bottom">
+                      {['Name', 'Key', 'Created'].map((item, i) => (
+                        <SelectItem key={i} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </PageBarContent>
                 <PageBarAction>
                   <div className="text-[11px]">3/10 used</div>
-                  <div>action button</div>
+                  <Button>+ Create role set</Button>
                 </PageBarAction>
               </PageBar>
               <TableWrapper>
@@ -175,11 +211,30 @@ export default function RolesPage() {
             <MainContent>
               <PageBar className="-mb-2">
                 <PageBarContent>
-                  <Input placeholder="Search..." />
-                  <div>Sort by select</div>
+                  <InputGroup className="max-w-xs">
+                    <InputGroupInput placeholder="Search..." className="w-65" />
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {/* <div>Sort by select</div> */}
+                  <Select>
+                    <SelectTrigger>
+                      <span className="font-normal">sort by: </span>
+                      <SelectValue placeholder="Name" />
+                    </SelectTrigger>
+                    <SelectContent side="bottom">
+                      {['Name', 'Key', 'Created'].map((item, i) => (
+                        <SelectItem key={i} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </PageBarContent>
                 <PageBarAction>
-                  <div>action button</div>
+                  <div className="text-[11px]">3/10 used</div>
+                  <Button>+ Add role</Button>
                 </PageBarAction>
               </PageBar>
               <TableWrapper>

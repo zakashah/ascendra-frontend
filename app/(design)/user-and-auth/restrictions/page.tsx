@@ -61,6 +61,7 @@ import {
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
 import { InfoIcon } from 'lucide-react';
+import { Button } from '@/components/custom/input/button';
 
 export default function RestrictionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -106,7 +107,9 @@ export default function RestrictionsPage() {
                     strokeWidth={2.5}
                   />
                   Learn more about
-                  <Anchor href="#" className="ml-0.5">Restricted mode</Anchor>
+                  <Anchor href="#" className="ml-0.5">
+                    Restricted mode
+                  </Anchor>
                 </MainSectionFooter>
               </MainSection>
               <MainSection>
@@ -125,9 +128,14 @@ export default function RestrictionsPage() {
                 <MainSectionFooter>
                   <LuLockKeyhole className="mr-2 text-sm" />
                   You must enable the{' '}
-                  <Anchor href="#" className="mx-0.5">allowlist</Anchor> or
-                  <Anchor href="#" className="mx-0.5">blocklist</Anchor> to use this
-                  setting.
+                  <Anchor href="#" className="mx-0.5">
+                    allowlist
+                  </Anchor>{' '}
+                  or
+                  <Anchor href="#" className="mx-0.5">
+                    blocklist
+                  </Anchor>{' '}
+                  to use this setting.
                 </MainSectionFooter>
               </MainSection>
               <MainSection>
@@ -190,7 +198,7 @@ export default function RestrictionsPage() {
                   </InputGroup>
                 </PageBarContent>
                 <PageBarAction>
-                  <div>action button</div>
+                  <Button disabled>+ Add</Button>
                 </PageBarAction>
               </PageBar>
               <TableWrapper>
@@ -246,7 +254,7 @@ export default function RestrictionsPage() {
                   </InputGroup>
                 </PageBarContent>
                 <PageBarAction>
-                  <div>action button</div>
+                  <Button disabled>+ Add</Button>
                 </PageBarAction>
               </PageBar>
               <TableWrapper>

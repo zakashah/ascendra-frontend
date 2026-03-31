@@ -142,7 +142,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Sessions
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/sessions/sessions">Sessions</SideBarMenuItem>
+                  <SideBarMenuItem path="/sessions/sessions">
+                    Sessions
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/sessions/jwt-templates">
                     JWT Templates
                   </SideBarMenuItem>
@@ -167,7 +169,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/billing/settings">
                     Settings
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/billing/plans">
+                  <SideBarMenuItem path="/billing/subscription-plans">
                     Subscription plans
                   </SideBarMenuItem>
                 </SideBarMenuContent>

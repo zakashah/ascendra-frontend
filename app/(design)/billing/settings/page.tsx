@@ -2,6 +2,7 @@
 
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { Button } from '@/components/custom/input/button';
 import { Input } from '@/components/custom/input/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
@@ -60,8 +61,14 @@ export default function BillingSettingsPage() {
                       </div>
                       <p className="text-muted-foreground mt-1 ml-8 text-xs">
                         Turn on individual subscriptions for users. Typically
-                        used if you are a <Anchor href="#">B2C business.</Anchor>
+                        used if you are a{' '}
+                        <Anchor href="#">B2C business.</Anchor>
                       </p>
+                      <div className="mt-2 ml-8">
+                        <Button variant="secondary" size="xs">
+                          Create plan
+                        </Button>
+                      </div>
                     </div>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
@@ -77,6 +84,11 @@ export default function BillingSettingsPage() {
                         Typically used if you are a{' '}
                         <Anchor href="#">B2C business.</Anchor>
                       </p>
+                      <div className="mt-2 ml-8">
+                        <Button variant="secondary" size="xs">
+                          Create plan
+                        </Button>
+                      </div>
                     </div>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
@@ -103,7 +115,11 @@ export default function BillingSettingsPage() {
                       />
                       Clerk Billing costs just 0.7% per transaction.
                     </div>
-                    <Anchor href="#" className="flex items-center gap-1">
+                    <Anchor
+                      variant="muted"
+                      href="#"
+                      className="flex items-center gap-1"
+                    >
                       Read Billing Guide
                       <LuArrowRight />
                     </Anchor>

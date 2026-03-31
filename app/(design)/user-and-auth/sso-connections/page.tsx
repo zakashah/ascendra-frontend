@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/button/button';
+import { Button } from '@/components/custom/input/button';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
@@ -49,6 +49,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown, LuGitBranch, LuSearch } from 'react-icons/lu';
 import { GitBranch } from 'lucide-react';
+import Link from 'next/link';
 
 export default function SSOConnectionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -129,23 +130,28 @@ export default function SSOConnectionsPage() {
                   <TableBody>
                     <TableRow>
                       <TableCell>
-                        <div className="flex items-center gap-2">
-                          <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
-                            <Image
-                              src="/images/fb-logo.svg"
-                              alt="Facebook"
-                              className="size-6"
-                              width={6}
-                              height={6}
-                            />
-                          </div>
-                          <div>
-                            <div className="">Facebook</div>
-                            <div className="text-xs text-nowrap">
-                              Social provider
+                        <Link
+                          href="#"
+                          className="focus-visible:outline-primary flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
+                              <Image
+                                src="/images/fb-logo.svg"
+                                alt="Facebook"
+                                className="size-6"
+                                width={6}
+                                height={6}
+                              />
+                            </div>
+                            <div>
+                              <div className="">Facebook</div>
+                              <div className="text-xs text-nowrap">
+                                Social provider
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
@@ -161,23 +167,28 @@ export default function SSOConnectionsPage() {
                     </TableRow>
                     <TableRow>
                       <TableCell>
-                        <div className="flex items-center gap-2">
-                          <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
-                            <Image
-                              src="/images/google-logo.svg"
-                              alt="Facebook"
-                              className="size-4"
-                              width={4}
-                              height={4}
-                            />
-                          </div>
-                          <div>
-                            <div className="">Google</div>
-                            <div className="text-xs text-nowrap">
-                              Social provider
+                        <Link
+                          href="#"
+                          className="focus-visible:outline-primary flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="flex aspect-square size-10 items-center justify-center rounded-md ring-1 ring-black/12 ring-inset dark:ring-white/8">
+                              <Image
+                                src="/images/google-logo.svg"
+                                alt="Facebook"
+                                className="size-4"
+                                width={4}
+                                height={4}
+                              />
+                            </div>
+                            <div>
+                              <div className="">Google</div>
+                              <div className="text-xs text-nowrap">
+                                Social provider
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </TableCell>
                       <TableCell>
                         <SimpleBadge
@@ -245,10 +256,7 @@ export default function SSOConnectionsPage() {
                         >
                           Account Linking Only
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="orange"
-                          className="font-normal"
-                        >
+                        <SimpleBadge variant="orange" className="font-normal">
                           Shared Credentials
                         </SimpleBadge>
                       </TableCell>
@@ -280,10 +288,7 @@ export default function SSOConnectionsPage() {
                         >
                           Account Linking Only
                         </SimpleBadge>
-                        <SimpleBadge
-                          variant="orange"
-                          className="font-normal"
-                        >
+                        <SimpleBadge variant="orange" className="font-normal">
                           Shared Credentials
                         </SimpleBadge>
                       </TableCell>
