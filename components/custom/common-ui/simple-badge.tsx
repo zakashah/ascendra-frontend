@@ -28,6 +28,8 @@ const badgeVariants = cva(
 
         /* Blue */
         blue: 'text-[#236dd7] dark:text-[#307ff6] bg-gradient-to-t from-black/[.02]  bg-[#236dd7]/4 ring-[#236dd7]/16 dark:bg-[#236dd7]/24',
+        blueDashed:
+          ' border-[#236dd7]/56 text-[#236dd7] dark:text-[#307ff6] dark:border-[#236dd7]/40 border border-dashed ring-0',
       },
     },
     defaultVariants: {

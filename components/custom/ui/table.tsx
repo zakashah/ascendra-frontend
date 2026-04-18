@@ -107,7 +107,7 @@ function TableHeaderRow({ className, ...props }: React.ComponentProps<'tr'>) {
   return (
     <tr
       data-slot="table-header-row"
-      className={cn('text-secondary-foreground text-left text-xs', className)}
+      className={cn('text-muted-foreground text-left text-xs', className)}
       {...props}
     />
   );

@@ -19,6 +19,13 @@ import { Anchor } from '@/components/custom/nav/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import Image from 'next/image';
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
+import {
   LuArrowRight,
   LuBookOpen,
   LuCopy,
@@ -114,30 +121,45 @@ export default function SessionsPage() {
                 </MainSectionHeader>
                 <MainSectionPanel>
                   <MainSectionPanelItem>
-                    <SimpleAlert variant="secondary" className="mb-6">
+                    <div className="space-y-6">
+                      <SimpleAlert variant="secondary" className="mb-6">
+                        <div>
+                          You should be aware of{' '}
+                          <Anchor href="#">browser limitations</Anchor> that may
+                          cause users to be signed out before the configured
+                          maximum lifetime, even when this feature is disabled.
+                        </div>
+                      </SimpleAlert>
                       <div>
-                        You should be aware of{' '}
-                        <Anchor href="#">browser limitations</Anchor> that may
-                        cause users to be signed out before the configured
-                        maximum lifetime, even when this feature is disabled.
+                        <div className="flex items-center gap-2">
+                          <Switch checked={true} disabled />
+                          <span className="font-medium">Maximum lifetime</span>
+                          <ProBadge>Pro</ProBadge>
+                        </div>
+                        <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                          Set the maximum lifetime duration for a session
+                        </p>
+                        <div className="mt-6 ml-8 flex w-fit items-center gap-2">
+                          <Input className="w-[200px]" value={7} />
+                          <Select>
+                            <SelectTrigger
+                              className="gap-6"
+                              defaultValue={'day'}
+                            >
+                              <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="minutes">minutes</SelectItem>
+                              <SelectItem value="hours">hours</SelectItem>
+                              <SelectItem value="day">days</SelectItem>
+                              <SelectItem value="year">years</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <p className="text-muted-foreground mt-2 ml-8 text-xs">
+                          Set duration between 5 minutes and 10 years
+                        </p>
                       </div>
-                    </SimpleAlert>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <Switch checked={true} disabled />
-                        <span className="font-medium">Maximum lifetime</span>
-                        <ProBadge>Pro</ProBadge>
-                      </div>
-                      <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
-                        Set the maximum lifetime duration for a session
-                      </p>
-                      <div className="mt-4 ml-8 flex w-fit items-center gap-2">
-                        <Input className="w-35" value={1} />
-                        <div>days</div>
-                      </div>
-                      <p className="text-muted-foreground mt-2 ml-8 text-xs">
-                        Set duration between 5 minutes and 10 years
-                      </p>
                     </div>
                     <div>
                       <div className="mt-6 flex items-center gap-2">
@@ -159,6 +181,7 @@ export default function SessionsPage() {
                     <span className="text-base font-medium">
                       Multi-session handling
                     </span>
+                    <ProBadge>Pro</ProBadge>
                   </div>
                   <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                     Allow users to be signed into more than one account at a
@@ -230,7 +253,7 @@ export default function SessionsPage() {
                       <div>
                         <div className="mb-2 font-medium">Managed Claim</div>
                         <div className="flex flex-col gap-2">
-                          <div className="border-border flex items-center justify-between rounded-md border bg-[#f9f9f9] px-4 py-2 dark:bg-gray-100">
+                          <div className="border-border flex items-center justify-between rounded-md border bg-[#f9f9f9] px-4 py-2 dark:bg-[#111113]">
                             <div className="flex items-center gap-1">
                               <Image
                                 src="/images/sessions/supabase.svg"
@@ -241,13 +264,13 @@ export default function SessionsPage() {
                               />
                               <span>Supabase</span>
                             </div>
-                            <div className="text-xs">
+                            <div className="text-muted-foreground text-xs font-medium">
                               <Anchor variant="muted" href="">
                                 Manage integration
                               </Anchor>
                             </div>
                           </div>
-                          <div className="border-border flex items-center justify-between rounded-md border bg-[#f9f9f9] px-4 py-2 dark:bg-gray-100">
+                          <div className="border-border flex items-center justify-between rounded-md border bg-[#f9f9f9] px-4 py-2 dark:bg-[#111113]">
                             <div className="flex items-center gap-1">
                               <Image
                                 src="/images/sessions/convex.svg"
@@ -258,7 +281,7 @@ export default function SessionsPage() {
                               />
                               <span>Convex</span>
                             </div>
-                            <div className="text-xs">
+                            <div className="text-muted-foreground text-xs font-medium">
                               <Anchor variant="muted" href="">
                                 Manage integration
                               </Anchor>
@@ -276,9 +299,9 @@ export default function SessionsPage() {
                         >
                           <AccordionItem
                             value="1"
-                            className="bg-muted border-border overflow-hidden rounded-md border"
+                            className="overflow-hidden rounded-md bg-[#767684]/4 ring-1 ring-[#767684]/8"
                           >
-                            <AccordionTrigger className="cursor-pointer px-4 py-3 font-medium hover:no-underline">
+                            <AccordionTrigger className="text-muted-foreground hover:text-foreground cursor-pointer px-4 py-3 font-medium hover:no-underline">
                               <div>User</div>
                             </AccordionTrigger>
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
@@ -299,9 +322,9 @@ export default function SessionsPage() {
                           </AccordionItem>
                           <AccordionItem
                             value="2"
-                            className="bg-muted border-border overflow-hidden rounded-md border font-medium"
+                            className="overflow-hidden rounded-md bg-[#767684]/4 ring-1 ring-[#767684]/8"
                           >
-                            <AccordionTrigger className="cursor-pointer px-4 py-3 hover:no-underline">
+                            <AccordionTrigger className="text-muted-foreground hover:text-foreground cursor-pointer px-4 py-3 hover:no-underline">
                               <div>Other</div>
                             </AccordionTrigger>
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
@@ -322,9 +345,9 @@ export default function SessionsPage() {
                           </AccordionItem>
                           <AccordionItem
                             value="3"
-                            className="bg-muted border-border overflow-hidden rounded-md border font-medium"
+                            className="overflow-hidden rounded-md bg-[#767684]/4 ring-1 ring-[#767684]/8"
                           >
-                            <AccordionTrigger className="cursor-pointer px-4 py-3 hover:no-underline">
+                            <AccordionTrigger className="text-muted-foreground hover:text-foreground cursor-pointer px-4 py-3 hover:no-underline">
                               <div>Organization</div>
                             </AccordionTrigger>
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
@@ -345,9 +368,9 @@ export default function SessionsPage() {
                           </AccordionItem>
                           <AccordionItem
                             value="4"
-                            className="bg-muted border-border overflow-hidden rounded-md border font-medium"
+                            className="overflow-hidden rounded-md bg-[#767684]/4 ring-1 ring-[#767684]/8"
                           >
-                            <AccordionTrigger className="cursor-pointer px-4 py-3 hover:no-underline">
+                            <AccordionTrigger className="text-muted-foreground hover:text-foreground cursor-pointer px-4 py-3 hover:no-underline">
                               <div>Default Claims</div>
                             </AccordionTrigger>
                             <AccordionContent className="border-border flex h-full flex-col border-t px-4 py-3">
@@ -387,7 +410,7 @@ export default function SessionsPage() {
                         session tokens for common use cases and third-party
                         compatibility.
                       </div>
-                      <Anchor href="#" className="ml-auto">
+                      <Anchor href="#" variant={'blue'} className="ml-auto">
                         Learn more
                       </Anchor>
                     </SimpleAlert>

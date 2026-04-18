@@ -44,11 +44,11 @@ export default function LegalPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-medium">
-                          Maximum attempt limit
+                          Terms of Service URL
                         </span>
                       </div>
                       <p className="text-muted-foreground mt-0.5 text-xs">
-                        Send the user a one-time verification code via SMS
+                        The URL to your terms of service.
                       </p>
                       <div className="mt-2">
                         <Input
@@ -62,12 +62,10 @@ export default function LegalPage() {
                   <MainSectionPanelItem>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-medium">
-                          Maximum attempt limit
-                        </span>
+                        <span className="font-medium">Private Policy URL</span>
                       </div>
                       <p className="text-muted-foreground mt-0.5 text-xs">
-                        Send the user a one-time verification code via SMS
+                        The URL to your privacy policy.
                       </p>
                       <div className="mt-2">
                         <Input

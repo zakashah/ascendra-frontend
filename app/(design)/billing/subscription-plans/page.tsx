@@ -173,32 +173,32 @@ export default function RolesPage() {
                 </PageBarAction>
               </PageBar>
               <div className="mt-1 -mb-2 flex flex-wrap items-center gap-2">
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
-                  <div className="flex cursor-pointer items-center gap-1 px-1.5">
-                    <RxCrossCircled />
-                    Publicly Visible
+                <div className="group flex items-center rounded-full border border-dashed border-[#767684]/48 bg-[#767684]/4 py-0.75 text-xs hover:border-[#767684]/56 hover:bg-[#767684]/8 dark:border-[#767684]/32">
+                  <div className="flex cursor-pointer items-center gap-1 px-1.5 font-medium text-[#5F5F6F] dark:text-[#ADADB7]">
+                    <RxCrossCircled strokeWidth={0.9} />
+                    Seats Enabled
                   </div>
-                  <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
+                  <div className="flex cursor-pointer items-center gap-1 border-l border-[#767684]/16 px-1.5 font-medium text-[#ADADB7] hover:text-[#5F5F6F] dark:text-[#5F5F6F] dark:hover:text-[#ADADB7]">
                     Enter Value
                     <LuChevronDown className="text-muted-foreground" />
                   </div>
                 </div>
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
-                  <div className="flex cursor-pointer items-center gap-1 px-1.5">
-                    <RxCrossCircled />
-                    Annual Amount
+                <div className="group flex items-center rounded-full border border-dashed border-[#767684]/48 bg-[#767684]/4 py-0.75 text-xs hover:border-[#767684]/56 hover:bg-[#767684]/8 dark:border-[#767684]/32">
+                  <div className="flex cursor-pointer items-center gap-1 px-1.5 font-medium text-[#5F5F6F] dark:text-[#ADADB7]">
+                    <RxCrossCircled strokeWidth={0.9} />
+                    Seats Enabled
                   </div>
-                  <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
+                  <div className="flex cursor-pointer items-center gap-1 border-l border-[#767684]/16 px-1.5 font-medium text-[#ADADB7] hover:text-[#5F5F6F] dark:text-[#5F5F6F] dark:hover:text-[#ADADB7]">
                     Enter Value
                     <LuChevronDown className="text-muted-foreground" />
                   </div>
                 </div>
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
-                  <div className="flex cursor-pointer items-center gap-1 px-1.5">
-                    <RxCrossCircled />
-                    Free Trial
+                <div className="group flex items-center rounded-full border border-dashed border-[#767684]/48 bg-[#767684]/4 py-0.75 text-xs hover:border-[#767684]/56 hover:bg-[#767684]/8 dark:border-[#767684]/32">
+                  <div className="flex cursor-pointer items-center gap-1 px-1.5 font-medium text-[#5F5F6F] dark:text-[#ADADB7]">
+                    <RxCrossCircled strokeWidth={0.9} />
+                    Seats Enabled
                   </div>
-                  <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
+                  <div className="flex cursor-pointer items-center gap-1 border-l border-[#767684]/16 px-1.5 font-medium text-[#ADADB7] hover:text-[#5F5F6F] dark:text-[#5F5F6F] dark:hover:text-[#ADADB7]">
                     Enter Value
                     <LuChevronDown className="text-muted-foreground" />
                   </div>
@@ -227,7 +227,7 @@ export default function RolesPage() {
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell>-</TableCell>{' '}
+                      <TableCell>-</TableCell>
                       <TableCell className="font-['Courier_New',monospace]">
                         free_org
                       </TableCell>

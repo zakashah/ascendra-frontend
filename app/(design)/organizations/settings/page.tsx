@@ -57,14 +57,14 @@ export default function OrganizationSettingsPage() {
                       <p className="text-muted-foreground mt-0.5 text-xs">
                         Set the default number of users allowed for new
                         organizations. This can be customized per-organization
-                        in the <Anchor href="#">Dashboard</Anchor> or via
+                        in the <Anchor href="#">Dashboard</Anchor> or via {''}
                         <Anchor href="#">Clerk&apos;s backend API.</Anchor>
                       </p>
                       <RadioGroup defaultValue="" className="gap-0">
                         <div className="mt-6 flex items-center gap-2">
                           <RadioGroupItem value="default" id="r1" />
                           <span className="">Unlimited membership</span>
-                          <NavLinkBadge className="-ml-4">Add-on</NavLinkBadge>
+                          <SimpleBadge variant="blueDashed">Add-on</SimpleBadge>
                         </div>
                         <div className="mt-3 flex items-center gap-2">
                           <RadioGroupItem value="default" id="r1" />
@@ -83,6 +83,7 @@ export default function OrganizationSettingsPage() {
                         <span className="font-medium">
                           Enable verified domains
                         </span>
+                        <SimpleBadge variant="blueDashed">Add-on</SimpleBadge>
                       </div>
                       <p className="text-muted-foreground mt-1 ml-8 text-xs">
                         Members with the &apos;Manage domains&apos; permission
@@ -160,14 +161,14 @@ export default function OrganizationSettingsPage() {
                           <RadioGroupItem value="default" id="r1" />
                           <span className="">Unlimited organizations</span>
                         </div>
-                        <p className="text-muted-foreground mt-1 ml-6 text-xs">
+                        <p className="text-muted-foreground mt-1 ml-7.5 text-xs">
                           Users can create as many organizations as needed.
                         </p>
                         <div className="mt-3 flex items-center gap-2">
                           <RadioGroupItem value="default" id="r1" />
                           <span className="">Custom limit</span>
                         </div>
-                        <p className="text-muted-foreground mt-1 ml-6 text-xs">
+                        <p className="text-muted-foreground mt-1 ml-7.5 text-xs">
                           Set a lower maximum number of organizations a user can
                           create.
                         </p>

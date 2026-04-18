@@ -35,7 +35,7 @@ export default function WaitlistPage() {
                     Sign-ups are disabled, but people can join a waitlist via
                     the
                     <span className="mx-1">
-                      <code>{`<Waitlist />`}</code>
+                      <code className="text-muted-foreground font-['Courier_New',monospace]">{`<Waitlist />`}</code>
                     </span>
                     component.
                   </p>

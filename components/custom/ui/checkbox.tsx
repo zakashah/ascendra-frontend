@@ -52,7 +52,7 @@ function Checkbox({
       <CheckboxPrimitive.Root
         className={cn(
           /* Layout */
-          'relative top-0.5 inline-flex size-3.5 shrink-0 items-center justify-center rounded-[.25rem] transition outline-none',
+          'relative inline-flex size-3.5 shrink-0 items-center justify-center rounded-[.25rem] transition outline-none',
           'text-white',
 
           /* Light unchecked */

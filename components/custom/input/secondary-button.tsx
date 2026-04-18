@@ -6,6 +6,7 @@ export function SecondaryButton({
   className,
   children,
   disabled,
+  onClick,
   ...props
 }: React.ComponentProps<'button'>) {
   return (
@@ -61,6 +62,7 @@ export function SecondaryButton({
       )}
       {...props}
       onClick={(e) => {
+        onClick?.(e);
         e.currentTarget.blur();
       }}
     >

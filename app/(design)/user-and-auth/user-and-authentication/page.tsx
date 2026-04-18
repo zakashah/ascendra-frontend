@@ -24,6 +24,7 @@ import { TabContent } from '@/components/custom/tab/tab-content';
 import { TabList } from '@/components/custom/tab/tab-list';
 import { TabTrigger } from '@/components/custom/tab/tab-trigger';
 import { Tabs } from '@/components/custom/tab/tabs';
+import { Checkbox } from '@/components/custom/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -113,7 +114,7 @@ export default function UserAndAuthenticationPage() {
                       <div>
                         <div className="flex items-center gap-2">
                           <Switch checked={true} />
-                          <span className="text-base font-medium">
+                          <span className="font-medium">
                             Require email address
                           </span>
                         </div>
@@ -122,18 +123,13 @@ export default function UserAndAuthenticationPage() {
                           must maintain one on their account at all times.
                         </p>
                       </div>
-                      <SimpleAlert>
-                        Email is the only enabled sign-up option and is
-                        therefore required.
-                        {/* </span> */}
-                      </SimpleAlert>
                     </MainSectionPanelItemPartGroup>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch />
-                        <span className="text-base font-medium">
+                        <span className="font-medium">
                           Verify at sign-up
                           <SimpleBadge className="ml-1" variant={'blue'}>
                             Recommended
@@ -150,9 +146,7 @@ export default function UserAndAuthenticationPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch />
-                        <span className="text-base font-medium">
-                          Restrict changes
-                        </span>
+                        <span className="font-medium">Restrict changes</span>
                       </div>
                       <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                         Prevent users from changing their email address after
@@ -161,14 +155,14 @@ export default function UserAndAuthenticationPage() {
                     </div>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
-                <MainSectionFooter>
-                  this is footer of main section
-                </MainSectionFooter>
               </MainSection>
               <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
-                    <Switch />
+                    <Switch
+                      onClick={() => setHidden1((prev) => !prev)}
+                      checked={!hidden1}
+                    />
                     <span className="text-base font-medium">
                       Sign-in with email
                     </span>
@@ -177,10 +171,35 @@ export default function UserAndAuthenticationPage() {
                     Allow users to sign in with their email address
                   </p>
                 </MainSectionHeader>
-                <MainSectionFooter>
-                  this is footer of main section
-                </MainSectionFooter>
               </MainSection>
+              <MainSectionPanel collapsed={hidden1}>
+                <MainSectionPanelItem>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <span className="font-medium">
+                        Email verification code
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                      Users can sign-in with an email verification code
+                    </p>
+                  </div>
+                </MainSectionPanelItem>
+                <MainSectionPanelItem>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Switch />
+                      <span className="font-medium">
+                        Email verification link
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                      Users can sign-in with an email verification link
+                    </p>
+                  </div>
+                </MainSectionPanelItem>
+              </MainSectionPanel>
             </MainContent>
           </TabContent>
           <TabContent value="phone">
@@ -246,9 +265,7 @@ export default function UserAndAuthenticationPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch checked={true} />
-                        <span className="text-base font-medium">
-                          Require username
-                        </span>
+                        <span className="font-medium">Require username</span>
                       </div>
                       <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
                         Users must create a username for their account
@@ -259,12 +276,10 @@ export default function UserAndAuthenticationPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch />
-                        <span className="text-base font-medium">
-                          Require username
-                        </span>
+                        <span className="font-medium">Restrict changes</span>
                       </div>
                       <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
-                        Users must create a username for their account
+                        Prevent users from changing their username after sign-up
                       </p>
                     </div>
                   </MainSectionPanelItem>
@@ -287,15 +302,21 @@ export default function UserAndAuthenticationPage() {
             <AsideContent dimmed={hidden}>
               <div className="flex min-w-60 flex-col">
                 <div className="border-border border-b pb-3">
-                  <p className="mb-1 text-xs">Minimum username length</p>
+                  <p className="text-muted-foreground mb-1 text-xs">
+                    Minimum username length
+                  </p>
                   <p>4 characters</p>
                 </div>
                 <div className="border-border border-b pt-4 pb-3">
-                  <p className="mb-1 text-xs">Maximum username length</p>
+                  <p className="text-muted-foreground mb-1 text-xs">
+                    Maximum username length
+                  </p>
                   <p>64 characters</p>
                 </div>
                 <div className="border-border border-b pt-4 pb-3">
-                  <p className="mb-1 text-xs">Allow extended characters</p>
+                  <p className="text-muted-foreground mb-1 text-xs">
+                    Allow extended characters
+                  </p>
                   <p>Off</p>
                 </div>
                 <div className="p-1 pt-4">
@@ -400,7 +421,10 @@ export default function UserAndAuthenticationPage() {
               <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
-                    <Switch />
+                    <Switch
+                      onClick={() => setHidden((prev) => !prev)}
+                      checked={!hidden}
+                    />
                     <label className="text-base font-medium">
                       Sign-in with passkey
                       <ProBadge className="ml-2">Pro</ProBadge>
@@ -449,6 +473,21 @@ export default function UserAndAuthenticationPage() {
                     Users have the ability to set their first and last name
                   </p>
                 </MainSectionHeader>
+                <MainSectionPanel collapsed={hidden}>
+                  <MainSectionPanelItem>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Checkbox />
+                        <span className="font-medium">
+                          Require first and last name
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 ml-5.5 text-xs">
+                        Users must provide both first and last name at sign-up
+                      </p>
+                    </div>
+                  </MainSectionPanelItem>
+                </MainSectionPanel>
               </MainSection>
               <MainSection>
                 <MainSectionHeader>

@@ -352,7 +352,7 @@ export default function RolesPage() {
                       <div className="mt-2">
                         <InputGroup className="w-full">
                           <InputGroupInput placeholder="/onboarding" />
-                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-[#767684]/24 bg-[#767684]/8 dark:border-white/4 dark:bg-black/8">
                             <div className="flex items-center gap-2 pr-2">
                               <span className="font-normal">$DEVHOST</span>
                               <Tooltip>
@@ -381,7 +381,7 @@ export default function RolesPage() {
                       <div className="mt-2">
                         <InputGroup className="w-full">
                           <InputGroupInput placeholder="/dashboard" />
-                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-[#767684]/24 bg-[#767684]/8 dark:border-white/4 dark:bg-black/8">
                             <div className="flex items-center gap-2 pr-2">
                               <span className="font-normal">$DEVHOST</span>
                               <Tooltip>
@@ -408,7 +408,7 @@ export default function RolesPage() {
                       <div className="mt-2">
                         <InputGroup className="w-full">
                           <InputGroupInput placeholder="/home" />
-                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-[#767684]/24 bg-[#767684]/8 dark:border-white/4 dark:bg-black/8">
                             <div className="flex items-center gap-2 pr-2">
                               <span className="font-normal">$DEVHOST</span>
                               <Tooltip>
@@ -471,7 +471,7 @@ export default function RolesPage() {
                       <div className="mt-2">
                         <InputGroup className="w-full">
                           <InputGroupInput placeholder="/blog" />
-                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-[#767684]/24 bg-[#767684]/8 dark:border-white/4 dark:bg-black/8">
                             <div className="flex items-center gap-2 pr-2">
                               <span className="font-normal">$DEVHOST</span>
                               <Tooltip>
@@ -501,7 +501,7 @@ export default function RolesPage() {
                       <div className="mt-2">
                         <InputGroup className="w-full">
                           <InputGroupInput placeholder="/signin" />
-                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+                          <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-[#767684]/24 bg-[#767684]/8 dark:border-white/4 dark:bg-black/8">
                             <div className="flex items-center gap-2 pr-2">
                               <span className="font-normal">$DEVHOST</span>
                               <Tooltip>

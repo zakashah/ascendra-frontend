@@ -35,6 +35,7 @@ import { CopyText } from '@/components/custom/util/copy-text';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import {
   LuNotebookPen,
+  LuPlus,
   LuSearch,
   LuTicketCheck,
   LuTrash2,
@@ -92,7 +93,9 @@ export default function RolesPage() {
                 </PageBarContent>
                 <PageBarAction>
                   <div className="text-[11px]">3/10 used</div>
-                  <Button>+ Create role set</Button>
+                  <Button>
+                    <LuPlus /> Create role set
+                  </Button>
                 </PageBarAction>
               </PageBar>
               <TableWrapper>
@@ -233,8 +236,12 @@ export default function RolesPage() {
                   </Select>
                 </PageBarContent>
                 <PageBarAction>
-                  <div className="text-[11px]">3/10 used</div>
-                  <Button>+ Add role</Button>
+                  <div className="text-[11px]">
+                    3 <span className="text-muted-foreground">/10 used</span>
+                  </div>
+                  <Button>
+                    <LuPlus /> Add role
+                  </Button>
                 </PageBarAction>
               </PageBar>
               <TableWrapper>

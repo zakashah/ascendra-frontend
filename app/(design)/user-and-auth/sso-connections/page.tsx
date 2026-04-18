@@ -146,7 +146,7 @@ export default function SSOConnectionsPage() {
                             </div>
                             <div>
                               <div className="">Facebook</div>
-                              <div className="text-xs text-nowrap">
+                              <div className="text-sm text-nowrap">
                                 Social provider
                               </div>
                             </div>
@@ -183,7 +183,7 @@ export default function SSOConnectionsPage() {
                             </div>
                             <div>
                               <div className="">Google</div>
-                              <div className="text-xs text-nowrap">
+                              <div className="text-sm text-nowrap">
                                 Social provider
                               </div>
                             </div>
@@ -204,7 +204,6 @@ export default function SSOConnectionsPage() {
                     </TableRow>
                   </TableBody>
                 </Table>
-                <TableFoot />
               </TableWrapper>
             </MainContent>
           </TabContent>
@@ -243,7 +242,7 @@ export default function SSOConnectionsPage() {
                           </div>
                           <div>
                             <div className="">Facebook</div>
-                            <div className="text-xs text-nowrap">
+                            <div className="text-sm text-nowrap">
                               Social provider
                             </div>
                           </div>
@@ -275,7 +274,7 @@ export default function SSOConnectionsPage() {
                           </div>
                           <div>
                             <div className="">Google</div>
-                            <div className="text-xs text-nowrap">
+                            <div className="text-sm text-nowrap">
                               Social provider
                             </div>
                           </div>
@@ -295,7 +294,6 @@ export default function SSOConnectionsPage() {
                     </TableRow>
                   </TableBody>
                 </Table>
-                <TableFoot />
               </TableWrapper>
             </MainContent>
           </TabContent>
@@ -324,7 +322,7 @@ export default function SSOConnectionsPage() {
                   <Empty>
                     <EmptyHeader>
                       <EmptyMedia variant="icon">
-                        <LuGitBranch strokeWidth={2.5} />
+                        <LuGitBranch className='text-muted-foreground' strokeWidth={2.5} />
                       </EmptyMedia>
                       <EmptyTitle>No connections added</EmptyTitle>
                       <EmptyDescription>

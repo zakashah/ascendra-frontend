@@ -54,7 +54,7 @@ export default function MFAPage() {
                       <div>
                         <div className="flex items-center gap-2">
                           <Switch />
-                          <span className="text-base font-medium">
+                          <span className="font-medium">
                             SMS verification code
                           </span>
                           <ProBadge>Pro</ProBadge>
@@ -78,7 +78,7 @@ export default function MFAPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Switch />
-                        <span className="text-base font-medium">
+                        <span className="font-medium">
                           Authenticator application
                         </span>
                         <ProBadge>Pro</ProBadge>
@@ -91,10 +91,10 @@ export default function MFAPage() {
                     </div>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem className="bg-muted relative">
-                    <div className="absolute inset-0 -top-px border-t border-dashed border-gray-400/50" />
+                    <div className="absolute inset-0 -top-px border-t border-dashed border-[#767684]/48 dark:border-[#767684]/32" />
                     <div
                       className={cn(
-                        'text-muted-foreground bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed border-gray-400/50 px-1.5 py-0.5 text-[11px] opacity-100',
+                        'text-muted-foreground bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed border-[#767684]/48 px-1.5 py-0.5 text-[11px] opacity-100 dark:border-[#767684]/32',
                         shake &&
                           'animate-nudge border-orange-400 text-orange-500'
                       )}
@@ -126,7 +126,7 @@ export default function MFAPage() {
               <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
-                    <Switch />
+                    <Switch disabled />
                     <span className="text-base font-medium">
                       Require multi-factor authentication
                     </span>
