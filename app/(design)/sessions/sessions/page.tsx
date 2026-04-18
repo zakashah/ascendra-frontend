@@ -117,9 +117,9 @@ export default function SessionsPage() {
                     <SimpleAlert variant="secondary" className="mb-6">
                       <div>
                         You should be aware of{' '}
-                        <Anchor href="#">browser limitations</Anchor> that may cause
-                        users to be signed out before the configured maximum
-                        lifetime, even when this feature is disabled.
+                        <Anchor href="#">browser limitations</Anchor> that may
+                        cause users to be signed out before the configured
+                        maximum lifetime, even when this feature is disabled.
                       </div>
                     </SimpleAlert>
                     <div>
@@ -187,8 +187,9 @@ export default function SessionsPage() {
                         <div className="text-bold mb-2">Name</div>
                         <Input
                           disabled
+                          full
                           placeholder="https://example.com/terms-of-service"
-                          className="bg-transparent opacity-100"
+                          className="w-full! bg-transparent opacity-100"
                         />
                         <MainSection className="mt-6">
                           <MainSectionHeader>
@@ -241,7 +242,9 @@ export default function SessionsPage() {
                               <span>Supabase</span>
                             </div>
                             <div className="text-xs">
-                              <Link href="">Manage integration</Link>
+                              <Anchor variant="muted" href="">
+                                Manage integration
+                              </Anchor>
                             </div>
                           </div>
                           <div className="border-border flex items-center justify-between rounded-md border bg-[#f9f9f9] px-4 py-2 dark:bg-gray-100">
@@ -256,7 +259,9 @@ export default function SessionsPage() {
                               <span>Convex</span>
                             </div>
                             <div className="text-xs">
-                              <Link href="">Manage integration</Link>
+                              <Anchor variant="muted" href="">
+                                Manage integration
+                              </Anchor>
                             </div>
                           </div>
                         </div>
@@ -267,7 +272,7 @@ export default function SessionsPage() {
                           type="single"
                           collapsible
                           defaultValue="1"
-                          className="max-w-lg space-y-2"
+                          className="space-y-2"
                         >
                           <AccordionItem
                             value="1"
@@ -279,9 +284,15 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {userFields.map((item) => (
-                                  <SimpleBadge variant="blue" key={item}>
-                                    {item}
-                                  </SimpleBadge>
+                                  <Link
+                                    href="#"
+                                    key={item}
+                                    className="focus-visible:outline-primary rounded-sm focus-visible:outline-2"
+                                  >
+                                    <SimpleBadge variant="blue">
+                                      {item}
+                                    </SimpleBadge>
+                                  </Link>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -296,9 +307,15 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {sessionFields.map((item) => (
-                                  <SimpleBadge variant="blue" key={item}>
-                                    {item}
-                                  </SimpleBadge>
+                                  <Link
+                                    href="#"
+                                    key={item}
+                                    className="focus-visible:outline-primary rounded-sm focus-visible:outline-2"
+                                  >
+                                    <SimpleBadge variant="blue">
+                                      {item}
+                                    </SimpleBadge>
+                                  </Link>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -313,9 +330,15 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {orgFields.map((item) => (
-                                  <SimpleBadge variant="blue" key={item}>
-                                    {item}
-                                  </SimpleBadge>
+                                  <Link
+                                    href="#"
+                                    key={item}
+                                    className="focus-visible:outline-primary rounded-sm focus-visible:outline-2"
+                                  >
+                                    <SimpleBadge variant="blue">
+                                      {item}
+                                    </SimpleBadge>
+                                  </Link>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -330,17 +353,26 @@ export default function SessionsPage() {
                             <AccordionContent className="border-border flex h-full flex-col border-t px-4 py-3">
                               <div className="flex flex-wrap gap-2">
                                 {tokenFields.map((item) => (
-                                  <SimpleBadge variant="secondary" key={item}>
-                                    {item}
-                                  </SimpleBadge>
+                                  <Link
+                                    href="#"
+                                    key={item}
+                                    className="focus-visible:outline-primary rounded-sm focus-visible:outline-2"
+                                  >
+                                    <SimpleBadge variant="secondary">
+                                      {item}
+                                    </SimpleBadge>
+                                  </Link>
                                 ))}
                               </div>
                               <div className="mt-2 flex items-center gap-2">
                                 <Checkbox />
-                                <span className="font-medium">
+                                <span className="mt-1 font-medium">
                                   Show default claims example
                                 </span>
-                                <Anchor href="#" className="ml-auto text-xs no-underline!">
+                                <Anchor
+                                  href="#"
+                                  className="ml-auto text-xs no-underline!"
+                                >
                                   Learn more
                                 </Anchor>
                               </div>
@@ -355,7 +387,9 @@ export default function SessionsPage() {
                         session tokens for common use cases and third-party
                         compatibility.
                       </div>
-                      <Anchor href="#" className="ml-auto">Learn more</Anchor>
+                      <Anchor href="#" className="ml-auto">
+                        Learn more
+                      </Anchor>
                     </SimpleAlert>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
@@ -366,7 +400,11 @@ export default function SessionsPage() {
                       Not sure how template syntax works? Learn how it helps you
                       customize your JWTs.
                     </div>
-                    <Anchor href="#" variant="muted" className="flex items-center gap-1">
+                    <Anchor
+                      href="#"
+                      variant="muted"
+                      className="flex items-center gap-1"
+                    >
                       Learn more
                       <LuArrowRight />
                     </Anchor>

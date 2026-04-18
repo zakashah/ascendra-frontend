@@ -78,16 +78,24 @@ export default function AttackProtectionPage() {
                         applies to manual lockouts from the Clerk Dashboard.
                       </p>
                       <RadioGroup defaultValue="" className="gap-0">
-                        <div className="mt-3 flex items-center gap-2">
-                          <RadioGroupItem value="default" id="r1" />
+                        <div className="mt-3 flex items-start gap-1">
+                          <RadioGroupItem
+                            value="default"
+                            id="r1"
+                            className="mt-0.5"
+                          />
                           <span className="">Indefinite lockout</span>
                         </div>
                         <p className="text-muted-foreground mt-0.5 ml-6 text-xs">
                           The user will be locked from their account until
                           manually unlocked from the Clerk Dashboard
                         </p>
-                        <div className="mt-3 flex items-center gap-2">
-                          <RadioGroupItem value="default" id="r1" />
+                        <div className="mt-3 flex items-start gap-1">
+                          <RadioGroupItem
+                            value="default"
+                            id="r1"
+                            className="mt-0.5"
+                          />
                           <span className="">Time limit</span>
                         </div>
                         <div className="mt-2 ml-6 flex w-fit gap-2">
@@ -140,8 +148,12 @@ export default function AttackProtectionPage() {
                   <MainSectionPanelItem>
                     <div>
                       <RadioGroup defaultValue="" className="gap-0">
-                        <div className="mt-3 flex items-center gap-2">
-                          <RadioGroupItem value="default" id="r1" />
+                        <div className="mt-3 flex items-start gap-1">
+                          <RadioGroupItem
+                            value="default"
+                            id="r1"
+                            className="mt-0.5"
+                          />
                           <span className="font-medium">
                             Bulk user enumeration protection
                           </span>
@@ -152,8 +164,12 @@ export default function AttackProtectionPage() {
                           are registered in bulk, but targeted attacks are still
                           feasible.
                         </p>
-                        <div className="mt-3 flex items-center gap-2">
-                          <RadioGroupItem value="default" id="r1" />
+                        <div className="mt-3 flex items-start gap-1">
+                          <RadioGroupItem
+                            value="default"
+                            id="r1"
+                            className="mt-0.5"
+                          />
                           <span className="font-medium">
                             Strict user enumeration protection
                           </span>

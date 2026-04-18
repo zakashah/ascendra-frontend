@@ -1,18 +1,20 @@
-import { Button } from '@/components/custom/input/button';
 import {
   AlertIcon,
   SimpleAlert,
 } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { Button } from '@/components/custom/input/button';
 import { SecondaryButton } from '@/components/custom/input/secondary-button';
+import { Checkbox } from '@/components/custom/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
 import { Anchor, InfoIcon } from 'lucide-react';
 import React from 'react';
 
-const ComponentsShowcasePage = () => {
+const page = () => {
   return (
-    <div className="mt-6 ml-6 flex w-full flex-col gap-10">
-      <div className="flex flex-wrap items-end gap-6">
-        <div className="mt-10 flex items-end gap-4">
+    <div>
+      <div className="flex flex-wrap items-end gap-10">
+        <div className="flex items-end gap-4">
           <Button variant={'primary'} size={'lg'}>
             Button
           </Button>
@@ -24,7 +26,7 @@ const ComponentsShowcasePage = () => {
             Button
           </Button>
         </div>
-        <div className="mt-10 flex items-end gap-4">
+        <div className="flex items-end gap-4">
           <Button variant={'secondary'} size={'lg'}>
             Button
           </Button>
@@ -82,8 +84,22 @@ const ComponentsShowcasePage = () => {
           </SimpleAlert>
         </div>
       </div>
+      <div className="mt-15 flex flex-wrap items-end gap-10">
+        <div className="flex items-end gap-4">
+          <RadioGroup>
+            <RadioGroupItem value="1" />
+            <RadioGroupItem value="2" />
+            <RadioGroupItem value="3" />
+          </RadioGroup>
+        </div>
+      </div>
+      <div className="mt-15 flex flex-wrap items-end gap-10">
+        <div className="flex items-end gap-4">
+          <Checkbox disabled />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ComponentsShowcasePage;
+export default page;

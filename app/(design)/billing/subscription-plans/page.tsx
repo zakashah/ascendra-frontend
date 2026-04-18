@@ -114,21 +114,21 @@ export default function RolesPage() {
                       <div className="flex items-center justify-between overflow-hidden px-3 py-1">
                         <div className="flex items-center gap-2">
                           <Checkbox disabled checked />
-                          <div>Plan</div>
+                          <div className="mt-1">Plan</div>
                         </div>
                         <LuLock className="text-muted-foreground size-2.5 stroke-3" />
                       </div>
                       <div className="flex items-center justify-between overflow-hidden px-3 py-1">
                         <div className="flex items-center gap-2">
                           <Checkbox />
-                          <div>Trial</div>
+                          <div className="mt-1">Trial</div>
                         </div>
                         <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
                       </div>
                       <div className="flex items-center justify-between overflow-hidden px-3 py-1">
                         <div className="flex items-center gap-2">
                           <Checkbox />
-                          <div>Monthly</div>
+                          <div className="mt-1">Monthly</div>
                         </div>
                         <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
                       </div>
@@ -139,13 +139,13 @@ export default function RolesPage() {
                       <div className="flex items-center justify-between overflow-hidden px-3 py-1">
                         <div className="flex items-center gap-2">
                           <Checkbox />
-                          <div>Plan Key</div>
+                          <div className="mt-1">Plan Key</div>
                         </div>
                       </div>
                       <div className="flex items-center justify-between overflow-hidden px-3 py-1">
                         <div className="flex items-center gap-2">
                           <Checkbox />
-                          <div>Annually</div>
+                          <div className="mt-1">Annually</div>
                         </div>
                       </div>
                     </DropdownMenuContent>

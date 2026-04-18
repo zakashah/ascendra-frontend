@@ -109,7 +109,7 @@ export default function SSOConnectionsPage() {
           </TabList>
           <TabContent value="all">
             <MainContent>
-              <PageBar>
+              <PageBar className="-mb-2">
                 <PageBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />

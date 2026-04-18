@@ -16,17 +16,17 @@ import { Anchor } from '@/components/custom/nav/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import { LuBookOpen } from 'react-icons/lu';
 
-export default function LegalPage() {
+export default function IntegrationsPage() {
   return (
     <>
       <PageHeader>
-        <PageTitle>Legal</PageTitle>
+        <PageTitle>Integrations</PageTitle>
       </PageHeader>
       <PageMain>
         <PageWrapper>
           <PageContent>
             <MainContent>
-              <MainSection>
+              {/* <MainSection>
                 <MainSectionHeader>
                   <div className="flex items-center gap-2">
                     <Switch />
@@ -79,7 +79,7 @@ export default function LegalPage() {
                     </div>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
-              </MainSection>
+              </MainSection> */}
             </MainContent>
           </PageContent>
         </PageWrapper>

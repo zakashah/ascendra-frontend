@@ -45,7 +45,7 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         'py-[3px]',
-        'group relative inline-flex items-center justify-center px-[3px]',
+        'group relative inline-flex items-center justify-center px-1',
         'min-w-fit overflow-hidden rounded-[0.25rem]',
         /* Base Colors */
         'text-foreground font-medium',

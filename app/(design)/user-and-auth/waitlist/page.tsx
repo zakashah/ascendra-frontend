@@ -13,7 +13,7 @@ import { Anchor } from '@/components/custom/nav/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import { LuBookOpen } from 'react-icons/lu';
 
-export default function WailistPage() {
+export default function WaitlistPage() {
   return (
     <>
       <PageHeader>
@@ -43,7 +43,7 @@ export default function WailistPage() {
                 <MainSectionFooter>
                   <LuBookOpen className="mr-2 text-sm" />
                   Learn more about setting up a
-                  <Anchor  href="#" className="mx-0.5">
+                  <Anchor href="#" className="mx-0.5">
                     Waitlist
                   </Anchor>
                 </MainSectionFooter>

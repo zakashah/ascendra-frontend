@@ -26,6 +26,13 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
 import { CopyText } from '@/components/custom/util/copy-text';
 import {
   Tooltip,
@@ -91,6 +98,7 @@ export default function RolesPage() {
                         <div className="relative w-full">
                           <Input
                             disabled
+                            full
                             placeholder="https://proper-ringtail-20.accounts.dev/sign-in"
                           />
                           <CopyText
@@ -115,6 +123,7 @@ export default function RolesPage() {
                         <div className="relative w-full">
                           <Input
                             disabled
+                            full
                             placeholder="https://proper-ringtail-20.accounts.dev/sign-up"
                           />
                           <CopyText
@@ -141,6 +150,7 @@ export default function RolesPage() {
                         <div className="relative w-full">
                           <Input
                             disabled
+                            full
                             placeholder="https://proper-ringtail-20.accounts.dev/unauthorized-sign-in"
                           />
                           <CopyText
@@ -177,6 +187,7 @@ export default function RolesPage() {
                         <div className="relative w-full">
                           <Input
                             disabled
+                            full
                             placeholder="https://proper-ringtail-20.accounts.dev/user"
                           />
                           <CopyText
@@ -224,6 +235,7 @@ export default function RolesPage() {
                         <div className="relative w-full">
                           <Input
                             disabled
+                            full
                             placeholder="https://proper-ringtail-20.accounts.dev/organization"
                           />
                           <CopyText
@@ -248,6 +260,7 @@ export default function RolesPage() {
                         <div className="relative w-full">
                           <Input
                             disabled
+                            full
                             placeholder="https://proper-ringtail-20.accounts.dev/create-organization"
                           />
                           <CopyText
@@ -510,7 +523,95 @@ export default function RolesPage() {
             </MainContent>
           </TabContent>
           <TabContent value="customization">
-            <MainContent>customization</MainContent>
+            <MainContent>
+              <MainSection>
+                <MainSectionHeader>
+                  <div className="flex items-center gap-2">
+                    <span className="text-base font-medium">Colors</span>
+                  </div>
+                  <p className="text-muted-foreground mt-0.5 text-xs">
+                    Set colors for your Account Portal
+                  </p>
+                </MainSectionHeader>
+                <MainSectionPanel>
+                  <MainSectionPanelItem>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">Appearance</span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 text-xs">
+                        Set the appearance mode. Auto will respect the
+                        user&apos;s system settings
+                      </p>
+                      <div className="mt-2">
+                        <Select>
+                          <SelectTrigger className="w-85 justify-between px-2">
+                            <SelectValue placeholder="Light" />
+                          </SelectTrigger>
+                          <SelectContent side="bottom">
+                            {['Light', 'Dark', 'Auto'].map((item, i) => (
+                              <SelectItem key={i} value={item}>
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </MainSectionPanelItem>
+                  <MainSectionPanelItem>
+                    <div className="font-medium">Ligh mode</div>
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">Primary color</span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 text-xs">
+                        Set the primary color to match your branding
+                      </p>
+                      <div className="mt-2">
+                        <Input value="#6C47FF" className="font-normal"></Input>
+                      </div>
+                    </div>
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">Background color</span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 text-xs">
+                        Set page background color
+                      </p>
+                      <div className="mt-2">
+                        <Input value="#FFFFFF" className="font-normal"></Input>
+                      </div>
+                    </div>
+                  </MainSectionPanelItem>
+                  <MainSectionPanelItem>
+                    <div className="font-medium">Dark mode</div>
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">Primary color</span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 text-xs">
+                        Set the primary color to match your branding
+                      </p>
+                      <div className="mt-2">
+                        <Input value="#6C47FF" className="font-normal"></Input>
+                      </div>
+                    </div>
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">Background color</span>
+                      </div>
+                      <p className="text-muted-foreground mt-0.5 text-xs">
+                        Set page background color
+                      </p>
+                      <div className="mt-2">
+                        <Input value="#1F1F23" className="font-normal"></Input>
+                      </div>
+                    </div>
+                  </MainSectionPanelItem>
+                </MainSectionPanel>
+              </MainSection>
+            </MainContent>
           </TabContent>
         </Tabs>
       </PageMain>

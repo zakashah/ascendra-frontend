@@ -49,7 +49,6 @@ export default function JWTTemplatesPage() {
                     <Button variant="ghost">+ Add new template</Button>
                   </div>
                 </MainSectionHeader>
-
                 <Separator />
                 <TableWrapper>
                   <Table scrollable>

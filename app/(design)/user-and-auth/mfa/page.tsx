@@ -45,8 +45,7 @@ export default function MFAPage() {
                   </div>
                   <p className="text-muted-foreground mt-0.5 text-xs">
                     Select which multi-factor strategies a user can use to
-                    verify their identity.{' '}
-                    <Anchor href="#">Learn more</Anchor>
+                    verify their identity. <Anchor href="#">Learn more</Anchor>
                   </p>
                 </MainSectionHeader>
                 <MainSectionPanel>
@@ -65,9 +64,13 @@ export default function MFAPage() {
                         </p>
                       </div>
                       <SimpleAlert variant="secondary" className="ml-8">
-                        You cannot enable this feature because it requires phone
-                        numbers to be enabled.{' '}
-                        <Anchor href="#">Enable phone numbers.</Anchor>
+                        <div>
+                          You cannot enable this feature because it requires
+                          phone numbers to be enabled.{' '}
+                          <Anchor href="#" className="text-wrap">
+                            Enable phone numbers.
+                          </Anchor>
+                        </div>
                       </SimpleAlert>
                     </MainSectionPanelItemPartGroup>
                   </MainSectionPanelItem>
@@ -133,10 +136,9 @@ export default function MFAPage() {
                     after sign-in and sign-up.
                   </p>
                   <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
-                    Refer to the{' '}
-                    <Anchor href="#">setup MFA guide</Anchor> to ensure
-                    your Clerk SDKs meet the minimum required versions, before
-                    enabling this feature.
+                    Refer to the <Anchor href="#">setup MFA guide</Anchor> to
+                    ensure your Clerk SDKs meet the minimum required versions,
+                    before enabling this feature.
                   </p>
                 </MainSectionHeader>
                 <MainSectionFooter>
