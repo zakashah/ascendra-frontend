@@ -4,18 +4,17 @@ import { ReactNode } from 'react';
 
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { StatusDot } from '@/components/custom/common-ui/status-dot';
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
 import { MainContainer } from '@/components/custom/layout/main-container';
 import { PageLayout } from '@/components/custom/layout/page-layout';
 import { SectionMain } from '@/components/custom/layout/section-main';
-import SideBarOverlay from '@/components/custom/layout/side-bar-overlay';
+import SideBarOverlay from '@/components/custom/side-bar/side-bar-overlay';
 import { MenuHeader } from '@/components/custom/menu-header/menu-header';
 import { MenuHeaderActions } from '@/components/custom/menu-header/menu-header-actions';
 import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
 import { MenuHeaderLink } from '@/components/custom/menu-header/menu-header-link';
 import { MenuHeaderLinks } from '@/components/custom/menu-header/menu-header-links';
 import { MenuHeaderSlash } from '@/components/custom/menu-header/menu-header-slash';
-import { NameAvatar } from '@/components/custom/name-avatar';
+import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
 import { Nav } from '@/components/custom/nav/nav';
 import { NavLink } from '@/components/custom/nav/nav-link';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
@@ -31,7 +30,7 @@ import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu
 import { SideBarMenuSet } from '@/components/custom/side-bar/side-bar-menu-set';
 import { SideBarMenuSetTitle } from '@/components/custom/side-bar/side-bar-menu-set-title';
 import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
-import { ThemeToggle } from '@/components/custom/theme-toggle';
+import { ThemeToggle } from '@/components/custom/util/theme-toggle';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { BiNotification } from 'react-icons/bi';
 import { FaCode } from 'react-icons/fa';
@@ -47,6 +46,7 @@ import { SiMonkeytie } from 'react-icons/si';
 import { TbSettingsCheck } from 'react-icons/tb';
 import { TfiMenuAlt } from 'react-icons/tfi';
 import { VscSymbolStructure } from 'react-icons/vsc';
+import { Button } from '@/components/custom/ui/button';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -79,10 +79,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <LuCircleArrowUp />
             Upgrades
           </SimpleBadge>
-          <SecondaryButton className="h-6 w-full text-xs">
+          <Button variant="secondary" size="sm" className="h-6">
             Invite
-          </SecondaryButton>
-          {/* <SurfaceButton variant={'invite'}>Invite</SurfaceButton> */}
+          </Button>
           <ThemeToggle />
           <NameAvatar name="burhan shah" />
         </MenuHeaderActions>

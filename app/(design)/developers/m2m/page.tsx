@@ -10,14 +10,14 @@ import { TabTrigger } from '@/components/custom/tab/tab-trigger';
 import { Tabs } from '@/components/custom/tab/tabs';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
-import { Input } from '@/components/custom/input/input';
+import { Input } from '@/components/custom/ui/input';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
 import { PageBarContent } from '@/components/custom/layout/page-bar-content';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import {
   Empty,
   EmptyDescription,
@@ -61,7 +61,7 @@ import {
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
 import { InfoIcon } from 'lucide-react';
-import { Button } from '@/components/custom/input/button';
+import { Button } from '@/components/custom/ui/button';
 
 export default function M2MPage() {
   return (

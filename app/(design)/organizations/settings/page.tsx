@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from '@/components/custom/input/button';
+import { Button } from '@/components/custom/ui/button';
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Input } from '@/components/custom/input/input';
+import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
@@ -14,7 +14,7 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
 import {
   Select,

@@ -6,7 +6,7 @@ import {
   SimpleAlert,
 } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
+import { Button } from '@/components/custom/ui/button';
 import { AsideContent } from '@/components/custom/layout/aside-content';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
@@ -19,7 +19,7 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { TabContent } from '@/components/custom/tab/tab-content';
 import { TabList } from '@/components/custom/tab/tab-list';
 import { TabTrigger } from '@/components/custom/tab/tab-trigger';
@@ -53,10 +53,10 @@ export default function UserAndAuthenticationPage() {
         <PageHeaderAction>
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="group">
-              <SecondaryButton className="w-full">
+              <Button variant="secondary">
                 Preview
                 <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
-              </SecondaryButton>
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               sideOffset={8}
@@ -477,7 +477,9 @@ export default function UserAndAuthenticationPage() {
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
                     <MainSectionPanelItemPartGroup className="w-fit">
-                      <SecondaryButton>Apply to existing users</SecondaryButton>
+                      <Button variant="secondary">
+                        Apply to existing users
+                      </Button>
                     </MainSectionPanelItemPartGroup>
                   </MainSectionPanelItem>
                 </MainSectionPanel>

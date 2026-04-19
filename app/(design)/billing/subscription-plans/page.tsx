@@ -1,6 +1,6 @@
 'use client';
 
-import { Input } from '@/components/custom/input/input';
+import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -51,7 +51,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
-import { Button } from '@/components/custom/input/button';
+import { Button } from '@/components/custom/ui/button';
 import {
   Select,
   SelectContent,
@@ -60,7 +60,6 @@ import {
   SelectValue,
 } from '@/components/custom/ui/select';
 import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { Checkbox } from '@/components/custom/ui/checkbox';
 import { RiDraggable } from 'react-icons/ri';
@@ -249,11 +248,11 @@ export default function RolesPage() {
                   </InputGroup>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild className="group">
-                      <SecondaryButton>
+                      <Button variant="secondary">
                         <LuSettings />
                         <span>Columns</span>
                         <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
-                      </SecondaryButton>
+                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       sideOffset={8}

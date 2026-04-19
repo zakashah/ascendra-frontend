@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu } from 'lucide-react';
-import { SurfaceButton } from '../surface-button';
+import { Button } from '../ui/button';
 
 export default function SideBarToggle() {
   const toggleSidebar = () => {
@@ -13,10 +13,13 @@ export default function SideBarToggle() {
   };
 
   return (
-    <div data-slot="side-bar-toggle" className="flex items-center gap-4 lg:hidden">
-      <SurfaceButton variant={'square'} onClick={toggleSidebar}>
+    <div
+      data-slot="side-bar-toggle"
+      className="flex items-center gap-4 lg:hidden"
+    >
+      <Button variant="secondary" size="icon" onClick={toggleSidebar}>
         <Menu className="text-muted-foreground size-3.5" />
-      </SurfaceButton>
+      </Button>
       <span
         className="text-muted-foreground cursor-pointer font-semibold"
         onClick={() => toggleSidebar}

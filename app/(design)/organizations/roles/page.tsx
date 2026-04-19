@@ -1,6 +1,6 @@
 'use client';
 
-import { Input } from '@/components/custom/input/input';
+import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -44,7 +44,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
-import { Button } from '@/components/custom/input/button';
+import { Button } from '@/components/custom/ui/button';
 import {
   Select,
   SelectContent,

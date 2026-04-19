@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/custom/input/button';
+import { Button } from '@/components/custom/ui/button';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';

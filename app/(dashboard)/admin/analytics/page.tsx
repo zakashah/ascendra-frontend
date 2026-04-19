@@ -1,6 +1,5 @@
 'use client';
 
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
@@ -8,12 +7,13 @@ import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { Tabs } from '@/components/custom/tab/tabs';
 import { TabContent } from '@/components/custom/tab/tab-content';
 import { TabList } from '@/components/custom/tab/tab-list';
 import { TabTrigger } from '@/components/custom/tab/tab-trigger';
 import { LuChevronDown } from 'react-icons/lu';
+import { Button } from '@/components/custom/ui/button';
 
 export default function OverviewPage() {
   return (
@@ -30,10 +30,10 @@ export default function OverviewPage() {
           </PageSubTitle>
         </PageHeaderGroup>
         <PageHeaderAction>
-          <SecondaryButton className="w-full">
+          <Button variant="secondary">
             Preview
             <LuChevronDown className="text-muted-foreground" />
-          </SecondaryButton>
+          </Button>
         </PageHeaderAction>
       </PageHeader>
       <PageMain>

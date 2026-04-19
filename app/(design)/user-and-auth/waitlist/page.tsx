@@ -9,7 +9,7 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import { LuBookOpen } from 'react-icons/lu';
 

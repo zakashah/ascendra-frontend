@@ -2,7 +2,7 @@
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
-import { Input } from '@/components/custom/input/input';
+import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
@@ -15,7 +15,7 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { Switch } from '@/components/custom/ui/switch';
 import Image from 'next/image';
 import {
@@ -37,7 +37,7 @@ import { Checkbox } from '@/components/custom/ui/checkbox';
 import { MdCode } from 'react-icons/md';
 import { CopyText } from '@/components/custom/util/copy-text';
 import { sleep } from '@/lib/utils';
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
+import { Button } from '@/components/custom/ui/button';
 
 const userFields = [
   'user.id',
@@ -220,10 +220,10 @@ export default function SessionsPage() {
                             </MainSectionPanelItem>
                           </MainSectionPanel>
                           <div className="ml-auto px-4 pt-4 pb-2">
-                            <SecondaryButton className="ml-auto">
+                            <Button variant="secondary" className="ml-auto">
                               Preview user
                               <LuEye />
-                            </SecondaryButton>
+                            </Button>
                           </div>
                         </MainSection>
                       </div>

@@ -12,8 +12,8 @@ import {
   DialogFooter,
   DialogClose,
 } from '@/components/custom/ui/dialog';
-import { Button } from '@/components/custom/input/button';
-import { Input } from '@/components/custom/input/input';
+import { Button } from '@/components/custom/ui/button';
+import { Input } from '@/components/custom/ui/input';
 import { Label } from '@/components/ui/label';
 import { LuPlus, LuTrash2 } from 'react-icons/lu';
 
@@ -81,7 +81,12 @@ export function CreateParentSheet({ children }: { children: React.ReactNode }) {
               </div>
               <div className="flex w-full flex-col gap-1.5">
                 <Label htmlFor="email">Email Address</Label>
-                <Input full id="email" type="email" placeholder="e.g. ahmed@example.com" />
+                <Input
+                  full
+                  id="email"
+                  type="email"
+                  placeholder="e.g. ahmed@example.com"
+                />
               </div>
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="phone">Phone Number</Label>

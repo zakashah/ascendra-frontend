@@ -5,7 +5,7 @@ import { ReactNode, useState } from 'react';
 import { StatusDot } from '@/components/custom/common-ui/status-dot';
 import { MainContainer } from '@/components/custom/layout/main-container';
 import { PageLayout } from '@/components/custom/layout/page-layout';
-import SideBarOverlay from '@/components/custom/layout/side-bar-overlay';
+import SideBarOverlay from '@/components/custom/side-bar/side-bar-overlay';
 import { MenuHeader } from '@/components/custom/menu-header/menu-header';
 import { MenuHeaderActions } from '@/components/custom/menu-header/menu-header-actions';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
@@ -13,7 +13,7 @@ import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-c
 import { MenuHeaderLink } from '@/components/custom/menu-header/menu-header-link';
 import { MenuHeaderLinks } from '@/components/custom/menu-header/menu-header-links';
 import { MenuHeaderSlash } from '@/components/custom/menu-header/menu-header-slash';
-import { NameAvatar } from '@/components/custom/name-avatar';
+import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
 import { Nav } from '@/components/custom/nav/nav';
 import { NavLink } from '@/components/custom/nav/nav-link';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
@@ -26,8 +26,7 @@ import { SideBarMenuHeader } from '@/components/custom/side-bar/side-bar-menu-he
 import { SideBarMenuSet } from '@/components/custom/side-bar/side-bar-menu-set';
 import { SideBarMenuSetTitle } from '@/components/custom/side-bar/side-bar-menu-set-title';
 import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
-import { SurfaceButton } from '@/components/custom/surface-button';
-import { ThemeToggle } from '@/components/custom/theme-toggle';
+import { ThemeToggle } from '@/components/custom/util/theme-toggle';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { LuCircleArrowUp } from 'react-icons/lu';
 import { SideBarMenuContent } from '@/components/custom/side-bar/side-bar-menu-content';
@@ -47,6 +46,7 @@ import { TbSettingsCheck } from 'react-icons/tb';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
 import { SectionMain } from '@/components/custom/layout/section-main';
+import { Button } from '@/components/custom/ui/button';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -79,7 +79,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <LuCircleArrowUp className="mr-1" />
             Upgrades
           </SimpleBadge>
-          <SurfaceButton variant={'invite'}>Invite</SurfaceButton>
+          <Button variant="secondary" size="sm" className="h-6">
+            Invite
+          </Button>
           <ThemeToggle />
           <NameAvatar name="burhan shah" />
         </MenuHeaderActions>

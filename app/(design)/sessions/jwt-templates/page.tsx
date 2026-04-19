@@ -30,7 +30,7 @@ import { CellActionButton } from '@/components/custom/common-ui/cell-action-butt
 import { LuEye, LuTrash2 } from 'react-icons/lu';
 import { Separator } from '@/components/ui/separator';
 import { CopyText } from '@/components/custom/util/copy-text';
-import { Button } from '@/components/custom/input/button';
+import { Button } from '@/components/custom/ui/button';
 
 export default function JWTTemplatesPage() {
   return (

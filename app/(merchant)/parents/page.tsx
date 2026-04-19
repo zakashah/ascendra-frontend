@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { Button } from '@/components/custom/input/button';
-import { CreateParentSheet } from '@/components/custom/sheet/create-parent-sheet';
+import { Button } from '@/components/custom/ui/button';
+import { CreateParentSheet } from './create-parent-sheet';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
@@ -15,7 +15,7 @@ import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { NameAvatar } from '@/components/custom/name-avatar';
+import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,

@@ -1,8 +1,8 @@
 'use client';
 
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Button } from '@/components/custom/input/button';
-import { Input } from '@/components/custom/input/input';
+import { Button } from '@/components/custom/ui/button';
+import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
@@ -16,7 +16,7 @@ import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { TabContent } from '@/components/custom/tab/tab-content';
 import { TabList } from '@/components/custom/tab/tab-list';
 import { TabTrigger } from '@/components/custom/tab/tab-trigger';

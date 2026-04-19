@@ -2,8 +2,8 @@
 
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Button } from '@/components/custom/input/button';
-import { Input } from '@/components/custom/input/input';
+import { Button } from '@/components/custom/ui/button';
+import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
@@ -18,7 +18,7 @@ import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
-import { Anchor } from '@/components/custom/nav/anchor';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
 import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';

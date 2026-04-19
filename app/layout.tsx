@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { ScrollToTop } from '@/components/custom/scroll-to-top';
+import { ScrollToTop } from '@/components/custom/util/scroll-to-top';
 
 /* const inter = Inter({ subsets: ['latin'], variable: '--font-sans' }); */
 

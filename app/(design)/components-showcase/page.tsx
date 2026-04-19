@@ -3,8 +3,7 @@ import {
   SimpleAlert,
 } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Button } from '@/components/custom/input/button';
-import { SecondaryButton } from '@/components/custom/input/secondary-button';
+import { Button } from '@/components/custom/ui/button';
 import { Checkbox } from '@/components/custom/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
 import { Anchor, InfoIcon } from 'lucide-react';
