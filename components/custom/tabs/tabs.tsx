@@ -1,13 +1,12 @@
-import { cn } from '@/lib/utils';
+'use client';
+
 import { TabsContext } from '@/providers/tabs-context';
 import { useState } from 'react';
 
 export function Tabs({
   defaultValue,
-  className,
   children,
-  ...props
-}: React.ComponentProps<'div'> & { defaultValue: string }) {
+}: { defaultValue: string; children: React.ReactNode }) {
   const [active, setActive] = useState(defaultValue);
 
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-export default function SideBarOverlay() {
+export function SideBarOverlay() {
   const closeSidebar = () => {
     const root = document.getElementById('app-layout');
     if (!root) return;
@@ -9,7 +9,7 @@ export default function SideBarOverlay() {
 
   return (
     <div
-      data-slot="sidebar-overlay"
+      data-slot="side-bar-overlay"
       id="sidebar-overlay"
       onClick={closeSidebar}
       className="pointer-events-none fixed inset-0 z-140 bg-black/40 opacity-0 transition-opacity duration-300 group-data-[sidebar=open]:pointer-events-auto group-data-[sidebar=open]:opacity-100 lg:hidden"

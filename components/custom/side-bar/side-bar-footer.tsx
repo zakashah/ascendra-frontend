@@ -11,9 +11,9 @@ export function SideBarFooter({
   className,
   children,
   ...props
-}: React.ComponentProps<'header'>) {
+}: React.ComponentProps<'footer'>) {
   return (
-    <header data-slot="side-bar-footer" className={cn('p-0.5 pr-1.5', className)} {...props}>
+    <footer data-slot="side-bar-footer" className={cn('p-0.5 pr-1.5', className)} {...props}>
       <button
         type="button"
         className="group bg-background focus-visible:outline-primary hover:bg-muted/75 flex w-full cursor-pointer items-center gap-2 rounded-[0.375rem] px-2 py-1.5 text-left focus-visible:outline-2"
@@ -34,6 +34,6 @@ export function SideBarFooter({
         </div>
         <LucideChevronsUpDown className="text-muted-foreground h-3.5 w-3.5 shrink-0 transition-transform" />
       </button>
-    </header>
+    </footer>
   );
 }

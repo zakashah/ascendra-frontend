@@ -10,7 +10,6 @@ type IconType = React.ComponentType<{
 export function HeaderChevron({
   icon: Icon = LucideChevronsUpDown,
   className,
-  children,
   ...props
 }: React.ComponentProps<'button'> & { icon?: IconType }) {
   return (

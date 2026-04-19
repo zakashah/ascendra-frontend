@@ -7,7 +7,7 @@ export function PageBar({
 }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="content-action-bar"
+      data-slot="page-bar"
       className={cn(
         'flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center',
         className

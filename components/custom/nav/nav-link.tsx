@@ -1,38 +1,32 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 
 type NavLinkProps = {
   href: string;
   children: React.ReactNode;
-  badge?: string;
   exact?: boolean;
 };
 
 export function NavLink({
   href,
   children,
-  badge,
   exact = false,
 }: NavLinkProps) {
-  const pathname = usePathname();
-
-  //   const isActive = exact ? pathname === href : pathname.startsWith(href);
   const isActive = exact;
 
   return (
     <Link
       data-slot="nav-link"
       href={href}
-      className={clsx(
+      className={cn(
         'focus-visible:outline-primary hover:text-foreground inline-flex h-6 items-center rounded-[0.375rem] px-2 transition-colors focus-visible:outline-2',
         isActive ? 'text-foreground' : 'text-muted-foreground'
       )}
     >
       <span
-        className={clsx(
+        className={cn(
           'relative',
           isActive &&
             "after:absolute after:-bottom-3.5 after:left-0 after:h-px after:w-full after:bg-black after:content-[''] dark:after:bg-white"

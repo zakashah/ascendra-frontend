@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { MainContainer } from '@/components/custom/layout/main-container';
 import { PageLayout } from '@/components/custom/layout/page-layout';
-import SideBarOverlay from '@/components/custom/side-bar/side-bar-overlay';
+import { SideBarOverlay } from '@/components/custom/side-bar/side-bar-overlay';
 import { Header } from '@/components/custom/header/header';
 import { HeaderActions } from '@/components/custom/header/header-actions';
 import { HeaderChevron } from '@/components/custom/header/header-chevron';
@@ -26,7 +26,7 @@ import { SideBarMenuItem } from '@/components/custom/side-bar/side-bar-menu-item
 import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
 import { SideBarMenuSet } from '@/components/custom/side-bar/side-bar-menu-set';
 import { SideBarMenuSetTitle } from '@/components/custom/side-bar/side-bar-menu-set-title';
-import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
+import { SideBarToggle } from '@/components/custom/side-bar/side-bar-toggle';
 import { ThemeToggle } from '@/components/custom/util/theme-toggle';
 import { ContentArea } from '@/components/custom/layout/content-area';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';

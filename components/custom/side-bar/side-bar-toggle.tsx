@@ -3,7 +3,7 @@
 import { Menu } from 'lucide-react';
 import { Button } from '../ui/button';
 
-export default function SideBarToggle() {
+export function SideBarToggle() {
   const toggleSidebar = () => {
     const root = document.getElementById('app-layout');
     if (!root) return;

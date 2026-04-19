@@ -1,6 +1,7 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { useTabs } from '@/providers/tabs-context';
-import clsx from 'clsx';
 import Link from 'next/link';
 import { BubbleBadge } from '../common-ui/bubble-badge';
 
@@ -29,7 +30,7 @@ export function TabTrigger({
       <Link
         href={'#'}
         inert={disabled}
-        className={clsx(
+        className={cn(
           'focus-visible:outline-primary hover:text-foreground inline-flex h-6 items-center rounded-[0.375rem] px-2 text-nowrap transition-colors focus-visible:outline-2',
           isActive ? 'text-foreground cursor-default' : 'text-muted-foreground',
           disabled ? 'pointer-events-none cursor-not-allowed opacity-50' : '',
@@ -41,7 +42,7 @@ export function TabTrigger({
         }}
       >
         <span
-          className={clsx(
+          className={cn(
             'relative',
             isActive &&
               "after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-black after:content-[''] dark:after:bg-white"
