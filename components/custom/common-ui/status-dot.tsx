@@ -14,7 +14,8 @@ const statusDotVariants = cva(
         rose: "bg-rose-500 shadow-rose-500/25",
         amber: "bg-amber-500 shadow-amber-500/25",
         red: "bg-red-500 shadow-red-500/25",
-        primary: "bg-primary shadow-primary/25"
+        primary: "bg-primary shadow-primary/25",
+        gray: "bg-gray-400 shadow-gray-400/25"
       }
     },
     defaultVariants: {
@@ -27,7 +28,7 @@ export function StatusDot({
   className,
   variant,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement> &
+}: React.ComponentProps<'span'> &
   VariantProps<typeof statusDotVariants>) {
   return (
     <span

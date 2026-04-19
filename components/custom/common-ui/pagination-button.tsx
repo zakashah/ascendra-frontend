@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { LucideChevronsUpDown } from 'lucide-react';
-import { MdOutlineMoreHoriz } from 'react-icons/md';
 
 export function PaginationButton({
   className,

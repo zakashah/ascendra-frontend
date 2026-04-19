@@ -31,6 +31,9 @@ const badgeVariants = cva(
 
         /* Red / Destructive */
         red: 'text-[#e52121] dark:text-[#ff5c5c] bg-gradient-to-t from-black/[.02] bg-[#e52121]/4 ring-[#e52121]/16 dark:bg-[#e52121]/24',
+
+        /* Amber / Caution */
+        amber: 'text-[#b45309] dark:text-[#f59e0b] bg-gradient-to-t from-black/[.02] bg-[#b45309]/4 ring-[#b45309]/16 dark:bg-[#b45309]/24',
       },
     },
     defaultVariants: {

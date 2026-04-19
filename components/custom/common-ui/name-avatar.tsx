@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const AVATAR_COLORS = [
   '#F97316', // orange
@@ -13,28 +14,34 @@ const AVATAR_COLORS = [
   '#EAB308', // yellow
 ];
 
+type NameAvatarProps = React.ComponentProps<typeof Link> & {
+  name: string;
+  size?: number;
+};
+
 export function NameAvatar({
   name,
   size = 28,
-}: {
-  name: string;
-  size?: number;
-}) {
+  href = '#',
+  className,
+  ...props
+}: NameAvatarProps) {
   const initials = getInitials(name);
   const backgroundColor = getAvatarColor(name);
 
   return (
-    <Link data-slot="name-avatar"
-      href="#"
-      className="rounded-full focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+    <Link
+      data-slot="name-avatar"
+      href={href}
+      className={cn(
+        'rounded-full focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2',
+        className
+      )}
+      {...props}
     >
       <div
-        style={{
-          backgroundColor,
-          width: size,
-          height: size,
-        }}
-        className="flex items-center justify-center rounded-full text-white font-normal  select-none"
+        style={{ backgroundColor, width: size, height: size }}
+        className="flex items-center justify-center rounded-full text-white font-normal select-none"
       >
         <span style={{ fontSize: size * 0.4 }}>{initials}</span>
       </div>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { LuInfo } from 'react-icons/lu';
 import { InfoIcon } from 'lucide-react';
 
 type IconType = React.ComponentType<{
@@ -20,6 +19,12 @@ const alertVariants = cva(
           'bg-[#236dd7]/4 text-[#236dd7] ring-[#236dd7]/12 dark:bg-[#236dd7]/12 dark:ring-[#236dd7]/24',
         secondary:
           'bg-[#767684]/4 text-[#5f5f6f] dark:text-[#adadb7] ring-[#767684]/12 dark:bg-[#767684]/12 dark:ring-[#767684]/24',
+        destructive:
+          'bg-[#e52121]/4 text-[#e52121] ring-[#e52121]/12 dark:bg-[#e52121]/12 dark:ring-[#e52121]/24',
+        success:
+          'bg-[#15892b]/4 text-[#15892b] ring-[#15892b]/12 dark:text-[#31c854] dark:bg-[#15892b]/12 dark:ring-[#15892b]/24',
+        warning:
+          'bg-[#c3540f]/4 text-[#fd7224] ring-[#c3540f]/12 dark:bg-[#c3540f]/12 dark:ring-[#c3540f]/24',
       },
     },
     defaultVariants: {
@@ -40,6 +45,9 @@ const alertIconVariants = cva(
       variant: {
         default: 'text-[#236dd7]',
         secondary: 'text-[#5f5f6f] dark:text-[#adadb7]',
+        destructive: 'text-[#e52121]',
+        success: 'text-[#15892b] dark:text-[#31c854]',
+        warning: 'text-[#fd7224]',
       },
     },
     defaultVariants: {
