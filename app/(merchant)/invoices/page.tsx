@@ -60,6 +60,8 @@ import {
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
+import { PageWrapper } from '@/components/custom/layout/page-wrapper';
+import { PageContent } from '@/components/custom/layout/page-content';
 
 type Status = 'paid' | 'pending' | 'overdue';
 
@@ -202,7 +204,9 @@ export default function InvoicesPage() {
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Invoices</PageTitle>
-          <PageSubTitle>Manage, download, and print your invoices.</PageSubTitle>
+          <PageSubTitle>
+            Manage, download, and print your invoices.
+          </PageSubTitle>
         </PageHeaderGroup>
         <PageHeaderAction>
           <Button>
@@ -211,242 +215,248 @@ export default function InvoicesPage() {
         </PageHeaderAction>
       </PageHeader>
       <PageMain>
-        <MainContent>
-          <PageBar>
-            <PageBarContent>
-              <InputGroup className="max-w-xs">
-                <InputGroupInput
-                  placeholder="Search by ID or parent name..."
-                  className="w-65"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <InputGroupAddon>
-                  <LuSearch className="text-foreground size-3.5" />
-                </InputGroupAddon>
-              </InputGroup>
-              {/* Columns toggle */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild className="group">
-                  <Button variant="secondary">
-                    <LuSettings />
-                    <span>Columns</span>
-                    <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="w-54 px-0 py-1"
-                  sideOffset={8}
-                  align="start"
-                  onCloseAutoFocus={(e) => e.preventDefault()}
-                >
-                  <div className="text-muted-foreground px-3 py-1 text-xs">
-                    Active columns
-                  </div>
-                  <div className="flex items-center justify-between overflow-hidden px-3 py-1">
-                    <div className="flex items-center gap-2">
-                      <Checkbox disabled checked />
-                      <div className="mt-1">Invoice ID</div>
-                    </div>
-                    <LuLock className="text-muted-foreground size-2.5 stroke-3" />
-                  </div>
-                  {TOGGLEABLE_COLUMNS.map(({ key, label }) => (
-                    <div
-                      key={key}
-                      className="flex items-center justify-between overflow-hidden px-3 py-1"
+        <PageWrapper>
+          <PageContent>
+            <MainContent>
+              <PageBar>
+                <PageBarContent>
+                  <InputGroup className="max-w-xs">
+                    <InputGroupInput
+                      placeholder="Search by ID or parent name..."
+                      className="w-65"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {/* Columns toggle */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild className="group">
+                      <Button variant="secondary">
+                        <LuSettings />
+                        <span>Columns</span>
+                        <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="w-54 px-0 py-1"
+                      sideOffset={8}
+                      align="start"
+                      onCloseAutoFocus={(e) => e.preventDefault()}
                     >
-                      <div className="flex items-center gap-2">
-                        <Checkbox
-                          checked={columns[key]}
-                          onCheckedChange={() => toggleColumn(key)}
-                        />
-                        <div className="mt-1">{label}</div>
+                      <div className="text-muted-foreground px-3 py-1 text-xs">
+                        Active columns
                       </div>
-                      <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
-                    </div>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-              {/* Filter */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild className="group">
-                  <Button variant="secondary" size="icon">
-                    <LuFilter />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  sideOffset={8}
-                  className="w-44"
-                  align="start"
-                  onCloseAutoFocus={(e) => e.preventDefault()}
-                >
-                  {STATUS_OPTIONS.map(({ label, value }) => (
-                    <DropdownMenuItem
-                      key={value}
-                      onSelect={() => setStatusFilter(value)}
+                      <div className="flex items-center justify-between overflow-hidden px-3 py-1">
+                        <div className="flex items-center gap-2">
+                          <Checkbox disabled checked />
+                          <div className="mt-1">Invoice ID</div>
+                        </div>
+                        <LuLock className="text-muted-foreground size-2.5 stroke-3" />
+                      </div>
+                      {TOGGLEABLE_COLUMNS.map(({ key, label }) => (
+                        <div
+                          key={key}
+                          className="flex items-center justify-between overflow-hidden px-3 py-1"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Checkbox
+                              checked={columns[key]}
+                              onCheckedChange={() => toggleColumn(key)}
+                            />
+                            <div className="mt-1">{label}</div>
+                          </div>
+                          <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
+                        </div>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  {/* Filter */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild className="group">
+                      <Button variant="secondary" size="icon">
+                        <LuFilter />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      sideOffset={8}
+                      className="w-44"
+                      align="start"
+                      onCloseAutoFocus={(e) => e.preventDefault()}
                     >
-                      {label}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </PageBarContent>
-          </PageBar>
+                      {STATUS_OPTIONS.map(({ label, value }) => (
+                        <DropdownMenuItem
+                          key={value}
+                          onSelect={() => setStatusFilter(value)}
+                        >
+                          {label}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </PageBarContent>
+              </PageBar>
 
-          {/* Active filter pills */}
-          {hasActiveFilters && (
-            <div className="-mb-2 flex flex-wrap items-center gap-2">
-              {statusFilter && (
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
+              {/* Active filter pills */}
+              {hasActiveFilters && (
+                <div className="-mb-2 flex flex-wrap items-center gap-2">
+                  {statusFilter && (
+                    <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
+                      <button
+                        type="button"
+                        className="flex cursor-pointer items-center gap-1 px-1.5"
+                        onClick={() => setStatusFilter(null)}
+                      >
+                        <RxCrossCircled />
+                        Status
+                      </button>
+                      <div className="flex items-center gap-1 border-l px-1.5">
+                        {STATUS_BADGE[statusFilter].label}
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <button
+                              type="button"
+                              className="flex cursor-pointer items-center"
+                            >
+                              <LuChevronDown className="text-muted-foreground" />
+                            </button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent
+                            sideOffset={8}
+                            className="w-44"
+                            onCloseAutoFocus={(e) => e.preventDefault()}
+                          >
+                            {STATUS_OPTIONS.map(({ label, value }) => (
+                              <DropdownMenuItem
+                                key={value}
+                                onSelect={() => setStatusFilter(value)}
+                              >
+                                {label}
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    </div>
+                  )}
                   <button
                     type="button"
-                    className="flex cursor-pointer items-center gap-1 px-1.5"
+                    className="text-muted-foreground cursor-pointer text-xs"
                     onClick={() => setStatusFilter(null)}
                   >
-                    <RxCrossCircled />
-                    Status
+                    Clear filters
                   </button>
-                  <div className="flex items-center gap-1 border-l px-1.5">
-                    {STATUS_BADGE[statusFilter].label}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button
-                          type="button"
-                          className="flex cursor-pointer items-center"
-                        >
-                          <LuChevronDown className="text-muted-foreground" />
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        sideOffset={8}
-                        className="w-44"
-                        onCloseAutoFocus={(e) => e.preventDefault()}
-                      >
-                        {STATUS_OPTIONS.map(({ label, value }) => (
-                          <DropdownMenuItem
-                            key={value}
-                            onSelect={() => setStatusFilter(value)}
-                          >
-                            {label}
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
                 </div>
               )}
-              <button
-                type="button"
-                className="text-muted-foreground cursor-pointer text-xs"
-                onClick={() => setStatusFilter(null)}
-              >
-                Clear filters
-              </button>
-            </div>
-          )}
 
-          <TableWrapper>
-            <Table scrollable>
-              <TableHeader>
-                <TableHeaderRow>
-                  <TableHead>Invoice ID</TableHead>
-                  {columns.parent && <TableHead>Parent</TableHead>}
-                  {columns.student && <TableHead>Student</TableHead>}
-                  {columns.amount && <TableHead>Amount</TableHead>}
-                  {columns.date && <TableHead>Due Date</TableHead>}
-                  {columns.status && <TableHead>Status</TableHead>}
-                  <TableHead></TableHead>
-                </TableHeaderRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((inv) => (
-                  <TableRow key={inv.id} className="group/row">
-                    <TableCell>
-                      <div className="font-medium text-foreground">{inv.invoiceNumber}</div>
-                      <div className="text-muted-foreground text-xs mt-0.5">
-                        {inv.date}
-                      </div>
-                    </TableCell>
-                    {columns.parent && (
-                      <TableCell className="text-foreground">
-                        {inv.parentName}
-                      </TableCell>
-                    )}
-                    {columns.student && (
-                      <TableCell className="text-muted-foreground">
-                        {inv.studentName}
-                      </TableCell>
-                    )}
-                    {columns.amount && (
-                      <TableCell className="font-medium">
-                        {formatCurrency(inv.amount)}
-                      </TableCell>
-                    )}
-                    {columns.date && (
-                      <TableCell className="text-muted-foreground">
-                        {inv.dueDate}
-                      </TableCell>
-                    )}
-                    {columns.status && (
-                      <TableCell>
-                        <SimpleBadge
-                          variant={STATUS_BADGE[inv.status].variant}
-                          className="font-normal"
-                        >
-                          {STATUS_BADGE[inv.status].label}
-                        </SimpleBadge>
-                      </TableCell>
-                    )}
-                    <TableCell className="w-8">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <CellActionButton />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                          sideOffset={8}
-                          align="end"
-                          className='w-full'
-                          onCloseAutoFocus={(e) => e.preventDefault()}
-                        >
-                          <DropdownMenuItem>
-                            <LuEye />
-                            View details
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <LuDownload />
-                            Download PDF
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <LuPrinter />
-                            Print invoice
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            {filtered.length === 0 && (
-              <EmptyBody>
-                <Empty>
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <LuReceipt strokeWidth={2.5} />
-                    </EmptyMedia>
-                    <EmptyTitle>No invoices found</EmptyTitle>
-                    <EmptyDescription>
-                      {search || statusFilter
-                        ? 'Try adjusting your search or filters.'
-                        : 'Get started by creating your first invoice.'}
-                    </EmptyDescription>
-                  </EmptyHeader>
-                </Empty>
-              </EmptyBody>
-            )}
-            <TableFoot />
-          </TableWrapper>
-        </MainContent>
+              <TableWrapper>
+                <Table scrollable>
+                  <TableHeader>
+                    <TableHeaderRow>
+                      <TableHead>Invoice ID</TableHead>
+                      {columns.parent && <TableHead>Parent</TableHead>}
+                      {columns.student && <TableHead>Student</TableHead>}
+                      {columns.amount && <TableHead>Amount</TableHead>}
+                      {columns.date && <TableHead>Due Date</TableHead>}
+                      {columns.status && <TableHead>Status</TableHead>}
+                      <TableHead></TableHead>
+                    </TableHeaderRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filtered.map((inv) => (
+                      <TableRow key={inv.id} className="group/row">
+                        <TableCell>
+                          <div className="text-foreground font-medium">
+                            {inv.invoiceNumber}
+                          </div>
+                          <div className="text-muted-foreground mt-0.5 text-xs">
+                            {inv.date}
+                          </div>
+                        </TableCell>
+                        {columns.parent && (
+                          <TableCell className="text-foreground">
+                            {inv.parentName}
+                          </TableCell>
+                        )}
+                        {columns.student && (
+                          <TableCell className="text-muted-foreground">
+                            {inv.studentName}
+                          </TableCell>
+                        )}
+                        {columns.amount && (
+                          <TableCell className="font-medium">
+                            {formatCurrency(inv.amount)}
+                          </TableCell>
+                        )}
+                        {columns.date && (
+                          <TableCell className="text-muted-foreground">
+                            {inv.dueDate}
+                          </TableCell>
+                        )}
+                        {columns.status && (
+                          <TableCell>
+                            <SimpleBadge
+                              variant={STATUS_BADGE[inv.status].variant}
+                              className="font-normal"
+                            >
+                              {STATUS_BADGE[inv.status].label}
+                            </SimpleBadge>
+                          </TableCell>
+                        )}
+                        <TableCell className="w-8">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <CellActionButton />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                              sideOffset={8}
+                              align="end"
+                              className="w-full"
+                              onCloseAutoFocus={(e) => e.preventDefault()}
+                            >
+                              <DropdownMenuItem>
+                                <LuEye />
+                                View details
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <LuDownload />
+                                Download PDF
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <LuPrinter />
+                                Print invoice
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                {filtered.length === 0 && (
+                  <EmptyBody>
+                    <Empty>
+                      <EmptyHeader>
+                        <EmptyMedia variant="icon">
+                          <LuReceipt strokeWidth={2.5} />
+                        </EmptyMedia>
+                        <EmptyTitle>No invoices found</EmptyTitle>
+                        <EmptyDescription>
+                          {search || statusFilter
+                            ? 'Try adjusting your search or filters.'
+                            : 'Get started by creating your first invoice.'}
+                        </EmptyDescription>
+                      </EmptyHeader>
+                    </Empty>
+                  </EmptyBody>
+                )}
+                <TableFoot />
+              </TableWrapper>
+            </MainContent>
+          </PageContent>
+        </PageWrapper>
       </PageMain>
     </>
   );
