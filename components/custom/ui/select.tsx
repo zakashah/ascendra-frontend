@@ -45,7 +45,7 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         'py-[3px]',
-        'group relative inline-flex items-center justify-center px-1',
+        'group relative inline-flex items-center px-1',
         'min-w-fit overflow-hidden rounded-[0.25rem]',
         /* Base Colors */
         'text-foreground font-medium',
@@ -75,10 +75,12 @@ function SelectTrigger({
       )}
       {...props}
     >
-      <span className="px-[5px]">{children}</span>
-      <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4" />
-      </SelectPrimitive.Icon>
+      <div className="flex w-full items-center justify-between">
+        <span className="px-[5px]">{children}</span>
+        <SelectPrimitive.Icon asChild>
+          <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4" />
+        </SelectPrimitive.Icon>
+      </div>
     </SelectPrimitive.Trigger>
   );
 }
