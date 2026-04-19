@@ -14,16 +14,16 @@ import { MainSectionFooter } from '@/components/custom/layout/main-section-foote
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { MainSectionPanelItemPartGroup } from '@/components/custom/layout/main-section-panel-item-part-group';
+import { MainSectionPanelItemGroup } from '@/components/custom/layout/main-section-panel-item-group';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { Anchor } from '@/components/custom/common-ui/anchor';
-import { TabContent } from '@/components/custom/tab/tab-content';
-import { TabList } from '@/components/custom/tab/tab-list';
-import { TabTrigger } from '@/components/custom/tab/tab-trigger';
-import { Tabs } from '@/components/custom/tab/tabs';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -109,7 +109,7 @@ export default function UserAndAuthenticationPage() {
                 </MainSectionHeader>
                 <MainSectionPanel collapsed={hidden}>
                   <MainSectionPanelItem>
-                    <MainSectionPanelItemPartGroup>
+                    <MainSectionPanelItemGroup>
                       <div>
                         <div className="flex items-center gap-2">
                           <Switch checked={true} />
@@ -127,7 +127,7 @@ export default function UserAndAuthenticationPage() {
                         therefore required.
                         {/* </span> */}
                       </SimpleAlert>
-                    </MainSectionPanelItemPartGroup>
+                    </MainSectionPanelItemGroup>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
                     <div>
@@ -464,7 +464,7 @@ export default function UserAndAuthenticationPage() {
                 </MainSectionHeader>
                 <MainSectionPanel>
                   <MainSectionPanelItem>
-                    <MainSectionPanelItemPartGroup>
+                    <MainSectionPanelItemGroup>
                       <div>
                         <div className="flex items-center gap-2">
                           <Switch checked={true} />
@@ -473,14 +473,14 @@ export default function UserAndAuthenticationPage() {
                           </label>
                         </div>
                       </div>
-                    </MainSectionPanelItemPartGroup>
+                    </MainSectionPanelItemGroup>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
-                    <MainSectionPanelItemPartGroup className="w-fit">
+                    <MainSectionPanelItemGroup className="w-fit">
                       <Button variant="secondary">
                         Apply to existing users
                       </Button>
-                    </MainSectionPanelItemPartGroup>
+                    </MainSectionPanelItemGroup>
                   </MainSectionPanelItem>
                 </MainSectionPanel>
               </MainSection>

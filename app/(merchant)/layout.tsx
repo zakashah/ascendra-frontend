@@ -6,11 +6,11 @@ import { usePathname } from 'next/navigation';
 import { MainContainer } from '@/components/custom/layout/main-container';
 import { PageLayout } from '@/components/custom/layout/page-layout';
 import SideBarOverlay from '@/components/custom/side-bar/side-bar-overlay';
-import { MenuHeader } from '@/components/custom/menu-header/menu-header';
-import { MenuHeaderActions } from '@/components/custom/menu-header/menu-header-actions';
-import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
-import { MenuHeaderLink } from '@/components/custom/menu-header/menu-header-link';
-import { MenuHeaderLinks } from '@/components/custom/menu-header/menu-header-links';
+import { Header } from '@/components/custom/header/header';
+import { HeaderActions } from '@/components/custom/header/header-actions';
+import { HeaderChevron } from '@/components/custom/header/header-chevron';
+import { HeaderLink } from '@/components/custom/header/header-link';
+import { HeaderLinks } from '@/components/custom/header/header-links';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
 import { Nav } from '@/components/custom/nav/nav';
@@ -28,7 +28,7 @@ import { SideBarMenuSet } from '@/components/custom/side-bar/side-bar-menu-set';
 import { SideBarMenuSetTitle } from '@/components/custom/side-bar/side-bar-menu-set-title';
 import SideBarToggle from '@/components/custom/side-bar/side-bar-toggle';
 import { ThemeToggle } from '@/components/custom/util/theme-toggle';
-import { SectionMain } from '@/components/custom/layout/section-main';
+import { ContentArea } from '@/components/custom/layout/content-area';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { LuUsers, LuFileText, LuSettings, LuLayoutDashboard } from 'react-icons/lu';
 
@@ -39,22 +39,22 @@ export default function MerchantLayout({ children }: { children: ReactNode }) {
   return (
     <PageLayout>
       <SideBarOverlay />
-      <MenuHeader>
-        <MenuHeaderLinks>
-          <MenuHeaderLink href="#">
+      <Header>
+        <HeaderLinks>
+          <HeaderLink href="#">
             <Avatar size="sm" className="shrink-0">
               <AvatarImage src="/images/home.png" className="rounded-sm" />
             </Avatar>
             <span className="truncate">Greenfield Academy</span>
             <SimpleBadge variant="secondary">Merchant</SimpleBadge>
-          </MenuHeaderLink>
-          <MenuHeaderChevron />
-        </MenuHeaderLinks>
-        <MenuHeaderActions>
+          </HeaderLink>
+          <HeaderChevron />
+        </HeaderLinks>
+        <HeaderActions>
           <ThemeToggle />
           <NameAvatar name="School Admin" />
-        </MenuHeaderActions>
-      </MenuHeader>
+        </HeaderActions>
+      </Header>
       <Nav>
         <NavLink href="/dashboard">Overview</NavLink>
         <NavLink href="/parents">Parents</NavLink>
@@ -99,7 +99,7 @@ export default function MerchantLayout({ children }: { children: ReactNode }) {
           <SideBarFooter />
         </SideBar>
         )}
-        <SectionMain>{children}</SectionMain>
+        <ContentArea>{children}</ContentArea>
       </MainContainer>
     </PageLayout>
   );

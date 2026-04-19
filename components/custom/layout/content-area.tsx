@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
 
-export function SectionMain({
+export function ContentArea({
   className,
   children,
   ...props
 }: React.ComponentProps<'section'>) {
   return (
-    <section data-slot="section-main" className={cn('flex-1', className)} {...props}>
+    <section data-slot="content-area" className={cn('flex-1', className)} {...props}>
       {children}
     </section>
   );

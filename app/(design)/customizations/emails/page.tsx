@@ -4,10 +4,10 @@ import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { TabContent } from '@/components/custom/tab/tab-content';
-import { TabList } from '@/components/custom/tab/tab-list';
-import { TabTrigger } from '@/components/custom/tab/tab-trigger';
-import { Tabs } from '@/components/custom/tab/tabs';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { Input } from '@/components/custom/ui/input';
@@ -55,7 +55,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
-import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import {
   InputGroup,
   InputGroupAddon,
@@ -63,7 +63,7 @@ import {
 } from '@/components/custom/ui/input-group';
 import { InfoIcon } from 'lucide-react';
 import { Button } from '@/components/custom/ui/button';
-import { MainSectionPanelItemPartGroup } from '@/components/custom/layout/main-section-panel-item-part-group';
+import { MainSectionPanelItemGroup } from '@/components/custom/layout/main-section-panel-item-group';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
 import Image from 'next/image';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';

@@ -26,13 +26,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
-import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { LuEye, LuSearch, LuSettings, LuTrash2 } from 'react-icons/lu';
 import { Separator } from '@/components/ui/separator';
 import { CopyText } from '@/components/custom/util/copy-text';
 import { Button } from '@/components/custom/ui/button';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import {
@@ -55,9 +55,9 @@ export default function FeaturesPage() {
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Features</PageTitle>
-          <PageSubTitle>
+          <PageSubtitle>
             Grant access to your privileged content and data using features.
-          </PageSubTitle>
+          </PageSubtitle>
         </PageHeaderGroup>
       </PageHeader>
       <PageMain>
@@ -96,7 +96,7 @@ export default function FeaturesPage() {
                         <TableCell className="w-0">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <CellActionButton />
+                              <RowActionButton />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               sideOffset={8}
@@ -125,7 +125,7 @@ export default function FeaturesPage() {
                         <TableCell className="w-0">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <CellActionButton />
+                              <RowActionButton />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               sideOffset={8}

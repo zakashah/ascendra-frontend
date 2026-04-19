@@ -8,11 +8,11 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarContent } from '@/components/custom/layout/page-bar-content';
-import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import {
   DropdownMenu,
@@ -204,9 +204,9 @@ export default function InvoicesPage() {
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Invoices</PageTitle>
-          <PageSubTitle>
+          <PageSubtitle>
             Manage, download, and print your invoices.
-          </PageSubTitle>
+          </PageSubtitle>
         </PageHeaderGroup>
         <PageHeaderAction>
           <Button>
@@ -408,7 +408,7 @@ export default function InvoicesPage() {
                         <TableCell className="w-8">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <CellActionButton />
+                              <RowActionButton />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               sideOffset={8}

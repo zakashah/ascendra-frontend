@@ -13,14 +13,14 @@ import { PageBarAction } from '@/components/custom/layout/page-bar-action';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
+import { HeaderChevron } from '@/components/custom/header/header-chevron';
 import { Anchor } from '@/components/custom/common-ui/anchor';
-import { TabContent } from '@/components/custom/tab/tab-content';
-import { TabList } from '@/components/custom/tab/tab-list';
-import { TabTrigger } from '@/components/custom/tab/tab-trigger';
-import { Tabs } from '@/components/custom/tab/tabs';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
 import {
   InputGroup,
   InputGroupAddon,
@@ -57,12 +57,12 @@ export default function RolesPage() {
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Account Portal</PageTitle>
-          <PageSubTitle>
+          <PageSubtitle>
             Clerk&apos;s Account Portal is the fastest way to add authentication
             and user management to your application. We provide a fully managed
             and hosted solution that lives on your domain.{' '}
             <Anchor>Learn more</Anchor>
-          </PageSubTitle>
+          </PageSubtitle>
         </PageHeaderGroup>
         <PageBarAction>
           <Button>
@@ -109,7 +109,7 @@ export default function RolesPage() {
                             }
                           />
                         </div>
-                        <MenuHeaderChevron
+                        <HeaderChevron
                           className="h-8 w-8"
                           icon={LuExternalLink}
                         />
@@ -134,7 +134,7 @@ export default function RolesPage() {
                             }
                           />
                         </div>
-                        <MenuHeaderChevron
+                        <HeaderChevron
                           className="h-8 w-8"
                           icon={LuExternalLink}
                         />
@@ -161,7 +161,7 @@ export default function RolesPage() {
                             }
                           />
                         </div>
-                        <MenuHeaderChevron
+                        <HeaderChevron
                           className="h-8 w-8"
                           icon={LuExternalLink}
                         />
@@ -198,7 +198,7 @@ export default function RolesPage() {
                             }
                           />
                         </div>
-                        <MenuHeaderChevron
+                        <HeaderChevron
                           className="h-8 w-8"
                           icon={LuExternalLink}
                         />
@@ -246,7 +246,7 @@ export default function RolesPage() {
                             }
                           />
                         </div>
-                        <MenuHeaderChevron
+                        <HeaderChevron
                           className="h-8 w-8"
                           icon={LuExternalLink}
                         />
@@ -271,7 +271,7 @@ export default function RolesPage() {
                             }
                           />
                         </div>
-                        <MenuHeaderChevron
+                        <HeaderChevron
                           className="h-8 w-8"
                           icon={LuExternalLink}
                         />

@@ -6,13 +6,13 @@ import { StatusDot } from '@/components/custom/common-ui/status-dot';
 import { MainContainer } from '@/components/custom/layout/main-container';
 import { PageLayout } from '@/components/custom/layout/page-layout';
 import SideBarOverlay from '@/components/custom/side-bar/side-bar-overlay';
-import { MenuHeader } from '@/components/custom/menu-header/menu-header';
-import { MenuHeaderActions } from '@/components/custom/menu-header/menu-header-actions';
+import { Header } from '@/components/custom/header/header';
+import { HeaderActions } from '@/components/custom/header/header-actions';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { MenuHeaderChevron } from '@/components/custom/menu-header/menu-header-chevron';
-import { MenuHeaderLink } from '@/components/custom/menu-header/menu-header-link';
-import { MenuHeaderLinks } from '@/components/custom/menu-header/menu-header-links';
-import { MenuHeaderSlash } from '@/components/custom/menu-header/menu-header-slash';
+import { HeaderChevron } from '@/components/custom/header/header-chevron';
+import { HeaderLink } from '@/components/custom/header/header-link';
+import { HeaderLinks } from '@/components/custom/header/header-links';
+import { HeaderSlash } from '@/components/custom/header/header-slash';
 import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
 import { Nav } from '@/components/custom/nav/nav';
 import { NavLink } from '@/components/custom/nav/nav-link';
@@ -45,36 +45,36 @@ import { BiNotification } from 'react-icons/bi';
 import { TbSettingsCheck } from 'react-icons/tb';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { SideBarMenuItemGroup } from '@/components/custom/side-bar/side-bar-menu-item-group';
-import { SectionMain } from '@/components/custom/layout/section-main';
+import { ContentArea } from '@/components/custom/layout/content-area';
 import { Button } from '@/components/custom/ui/button';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <PageLayout>
       <SideBarOverlay />
-      <MenuHeader>
-        <MenuHeaderLinks>
-          <MenuHeaderLink href="#">
+      <Header>
+        <HeaderLinks>
+          <HeaderLink href="#">
             <Avatar size="sm" className="shrink-0">
               <AvatarImage src="/images/home.png" className="rounded-sm" />
             </Avatar>
             <span className="truncate">Personal Workspace</span>
             <SimpleBadge variant="secondary">Hobby</SimpleBadge>
-          </MenuHeaderLink>
-          <MenuHeaderChevron />
-          <MenuHeaderSlash />
-          <MenuHeaderLink href="#">
+          </HeaderLink>
+          <HeaderChevron />
+          <HeaderSlash />
+          <HeaderLink href="#">
             <span className="truncate">Front Row</span>
-          </MenuHeaderLink>
-          <MenuHeaderChevron />
-          <MenuHeaderSlash />
-          <MenuHeaderLink href="#">
+          </HeaderLink>
+          <HeaderChevron />
+          <HeaderSlash />
+          <HeaderLink href="#">
             <StatusDot />
             <span className="truncate">Development</span>
-          </MenuHeaderLink>
-          <MenuHeaderChevron />
-        </MenuHeaderLinks>
-        <MenuHeaderActions>
+          </HeaderLink>
+          <HeaderChevron />
+        </HeaderLinks>
+        <HeaderActions>
           <SimpleBadge>
             <LuCircleArrowUp className="mr-1" />
             Upgrades
@@ -84,8 +84,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </Button>
           <ThemeToggle />
           <NameAvatar name="burhan shah" />
-        </MenuHeaderActions>
-      </MenuHeader>
+        </HeaderActions>
+      </Header>
       <Nav>
         <NavLink href="#">Overview</NavLink>
         <NavLink href="#">Users</NavLink>
@@ -279,7 +279,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </SideBarMain>
           <SideBarFooter />
         </SideBar>
-        <SectionMain>{children}</SectionMain>
+        <ContentArea>{children}</ContentArea>
       </MainContainer>
     </PageLayout>
   );

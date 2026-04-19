@@ -7,7 +7,7 @@ type IconType = React.ComponentType<{
   strokeWidth?: number;
 }>;
 
-export function MenuHeaderChevron({
+export function HeaderChevron({
   icon: Icon = LucideChevronsUpDown,
   className,
   children,
@@ -16,7 +16,7 @@ export function MenuHeaderChevron({
   return (
     <button
       type="button"
-      data-slot="menu-header-chevron"
+      data-slot="header-chevron"
       className={cn(
         'hover:bg-background focus-visible:outline-primary flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent transition-colors hover:border focus-visible:outline-2 focus-visible:-outline-offset-2',
         className

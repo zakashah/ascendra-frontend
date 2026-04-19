@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { LucideChevronsUpDown } from 'lucide-react';
 import { MdOutlineMoreHoriz } from 'react-icons/md';
 
-export function CellActionButton({
+export function RowActionButton({
   opaque = false,
   className,
   children,
@@ -12,7 +11,7 @@ export function CellActionButton({
   return (
     <button
       type="button"
-      data-slot="cell-action-button"
+      data-slot="row-action-button"
       className={cn(
         'focus-visible:outline-primary flex h-6 w-6 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2',
         'hover:bg-background hover:border',

@@ -26,7 +26,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
-import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { LuEye, LuTrash2 } from 'react-icons/lu';
 import { Separator } from '@/components/ui/separator';
 import { CopyText } from '@/components/custom/util/copy-text';
@@ -74,7 +74,7 @@ export default function JWTTemplatesPage() {
                         <TableCell>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <CellActionButton />
+                              <RowActionButton />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               sideOffset={8}
@@ -106,7 +106,7 @@ export default function JWTTemplatesPage() {
                         <TableCell>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <CellActionButton />
+                              <RowActionButton />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               sideOffset={8}

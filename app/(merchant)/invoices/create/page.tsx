@@ -9,7 +9,7 @@ import { PageHeaderAction } from '@/components/custom/layout/page-header-action'
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { Input } from '@/components/custom/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -71,9 +71,9 @@ export default function CreateInvoicePage() {
             </Button>
             <div>
               <PageTitle>Create New Invoice</PageTitle>
-              <PageSubTitle>
+              <PageSubtitle>
                 Fill out the details below to generate a new invoice.
-              </PageSubTitle>
+              </PageSubtitle>
             </div>
           </div>
         </PageHeaderGroup>

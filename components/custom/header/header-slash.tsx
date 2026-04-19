@@ -2,13 +2,13 @@ import * as React from 'react';
 import { LuSlash } from 'react-icons/lu';
 import { cn } from '@/lib/utils';
 
-export function MenuHeaderSlash({
+export function HeaderSlash({
   className,
   ...props
 }: React.ComponentProps<typeof LuSlash>) {
   return (
-    <LuSlash 
-      data-slot="menu-header-slash"
+    <LuSlash
+      data-slot="header-slash"
       className={cn(
         'size-3 shrink-0 -rotate-12 text-gray-300 dark:text-gray-500',
         className

@@ -6,10 +6,10 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { TabContent } from '@/components/custom/tab/tab-content';
-import { TabList } from '@/components/custom/tab/tab-list';
-import { TabTrigger } from '@/components/custom/tab/tab-trigger';
-import { Tabs } from '@/components/custom/tab/tabs';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';

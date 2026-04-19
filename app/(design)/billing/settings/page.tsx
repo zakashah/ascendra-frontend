@@ -15,7 +15,7 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { Anchor } from '@/components/custom/common-ui/anchor';
@@ -31,9 +31,9 @@ export default function BillingSettingsPage() {
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Billing settings</PageTitle>
-          <PageSubTitle>
+          <PageSubtitle>
             Configure the behavior of Billing on your Clerk application.
-          </PageSubTitle>
+          </PageSubtitle>
         </PageHeaderGroup>
       </PageHeader>
       <PageMain>

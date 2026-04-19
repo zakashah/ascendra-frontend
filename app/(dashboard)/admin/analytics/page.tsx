@@ -5,13 +5,13 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
-import { PageSubTitle } from '@/components/custom/layout/page-sub-title';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
 import { Anchor } from '@/components/custom/common-ui/anchor';
-import { Tabs } from '@/components/custom/tab/tabs';
-import { TabContent } from '@/components/custom/tab/tab-content';
-import { TabList } from '@/components/custom/tab/tab-list';
-import { TabTrigger } from '@/components/custom/tab/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { LuChevronDown } from 'react-icons/lu';
 import { Button } from '@/components/custom/ui/button';
 
@@ -22,12 +22,12 @@ export default function OverviewPage() {
         {/* <PageTitle>Account Portal</PageTitle> */}
         <PageHeaderGroup>
           <PageTitle>Account Portal</PageTitle>
-          <PageSubTitle>
+          <PageSubtitle>
             Clerks Account Portal is the fastest way to add authentication and
             user management to your application. We provide a fully managed and
             hosted solution that lives on your domain.{' '}
             <Anchor href="#">Learn more</Anchor>
-          </PageSubTitle>
+          </PageSubtitle>
         </PageHeaderGroup>
         <PageHeaderAction>
           <Button variant="secondary">

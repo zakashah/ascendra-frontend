@@ -8,7 +8,7 @@ import { MainSectionFooter } from '@/components/custom/layout/main-section-foote
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { MainSectionPanelItemPartGroup } from '@/components/custom/layout/main-section-panel-item-part-group';
+import { MainSectionPanelItemGroup } from '@/components/custom/layout/main-section-panel-item-group';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -50,7 +50,7 @@ export default function MFAPage() {
                 </MainSectionHeader>
                 <MainSectionPanel>
                   <MainSectionPanelItem>
-                    <MainSectionPanelItemPartGroup>
+                    <MainSectionPanelItemGroup>
                       <div>
                         <div className="flex items-center gap-2">
                           <Switch />
@@ -72,7 +72,7 @@ export default function MFAPage() {
                           </Anchor>
                         </div>
                       </SimpleAlert>
-                    </MainSectionPanelItemPartGroup>
+                    </MainSectionPanelItemGroup>
                   </MainSectionPanelItem>
                   <MainSectionPanelItem>
                     <div>

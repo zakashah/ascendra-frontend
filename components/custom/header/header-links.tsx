@@ -1,13 +1,12 @@
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-export function MenuHeaderLinks({
+export function HeaderLinks({
   className,
   children,
   ...props
 }: React.ComponentProps<'div'>) {
   return (
-    <div data-slot="menu-header-links"
+    <div data-slot="header-links"
       className={cn(
         'no-scrollbar flex flex-1 items-center overflow-x-auto',
         className

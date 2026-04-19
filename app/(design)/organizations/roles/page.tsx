@@ -5,12 +5,12 @@ import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { TabContent } from '@/components/custom/tab/tab-content';
-import { TabList } from '@/components/custom/tab/tab-list';
-import { TabTrigger } from '@/components/custom/tab/tab-trigger';
-import { Tabs } from '@/components/custom/tab/tabs';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
 
-import { CellActionButton } from '@/components/custom/common-ui/cell-action-button';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
@@ -127,7 +127,7 @@ export default function RolesPage() {
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild className="group">
-                            <CellActionButton />
+                            <RowActionButton />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
                             sideOffset={8}
@@ -179,7 +179,7 @@ export default function RolesPage() {
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <CellActionButton />
+                            <RowActionButton />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
                             sideOffset={8}
@@ -274,7 +274,7 @@ export default function RolesPage() {
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <CellActionButton />
+                            <RowActionButton />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
                             sideOffset={8}
@@ -321,7 +321,7 @@ export default function RolesPage() {
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <CellActionButton />
+                            <RowActionButton />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
                             sideOffset={8}
@@ -365,7 +365,7 @@ export default function RolesPage() {
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild className="group">
-                            <CellActionButton />
+                            <RowActionButton />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
                             sideOffset={8}
