@@ -2,26 +2,23 @@
 
 import { useState } from 'react';
 import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetClose,
-} from '@/components/custom/ui/sheet';
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogBody,
+  DialogFooter,
+  DialogClose,
+} from '@/components/custom/ui/dialog';
 import { Button } from '@/components/custom/input/button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/custom/input/input';
 import { Label } from '@/components/ui/label';
 import { LuPlus, LuTrash2 } from 'react-icons/lu';
 
-export function CreateParentSheet({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function CreateParentSheet({ children }: { children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [students, setStudents] = useState([{ id: 1 }]);
 
@@ -35,40 +32,60 @@ export function CreateParentSheet({
     }
   };
 
+  const handleOpenChange = (next: boolean) => {
+    setOpen(next);
+    if (!next) setTimeout(() => setStep(1), 150);
+  };
+
   return (
-    <Sheet
-      onOpenChange={(open) => {
-        if (!open) setTimeout(() => setStep(1), 300);
-      }}
-    >
-      <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="flex w-full flex-col sm:max-w-[480px]">
-        <SheetHeader>
-          <SheetTitle>Add parent</SheetTitle>
-          <SheetDescription>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent
+        className="max-w-[480px]"
+        footer={
+          <DialogFooter>
+            {step === 1 ? (
+              <>
+                <DialogClose asChild>
+                  <Button variant="secondary">Cancel</Button>
+                </DialogClose>
+                <Button onClick={() => setStep(2)}>Continue</Button>
+              </>
+            ) : (
+              <>
+                <Button variant="secondary" onClick={() => setStep(1)}>
+                  Back
+                </Button>
+                <DialogClose asChild>
+                  <Button>Create Parent</Button>
+                </DialogClose>
+              </>
+            )}
+          </DialogFooter>
+        }
+      >
+        <DialogHeader>
+          <DialogTitle>Add parent</DialogTitle>
+          <DialogDescription>
             {step === 1
               ? 'Enter the parent details. You can add their students in the next step.'
               : 'Add students associated with this parent. You can add multiple students.'}
-          </SheetDescription>
-        </SheetHeader>
-        <SheetBody>
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
           {step === 1 ? (
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-4">
+              <div className="flex w-full flex-col gap-1.5">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="e.g. Ahmed Raza" />
+                <Input full id="name" placeholder="e.g. Ahmed Raza" />
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex w-full flex-col gap-1.5">
                 <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="e.g. ahmed@example.com"
-                />
+                <Input full id="email" type="email" placeholder="e.g. ahmed@example.com" />
               </div>
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" placeholder="e.g. +92 300 1234567" />
+                <Input full id="phone" placeholder="e.g. +92 300 1234567" />
               </div>
             </div>
           ) : (
@@ -92,16 +109,16 @@ export function CreateParentSheet({
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <Label>Student Name</Label>
-                    <Input placeholder="e.g. Ali Raza" />
+                    <Input full placeholder="e.g. Ali Raza" />
                   </div>
                   <div className="flex gap-3">
                     <div className="flex flex-1 flex-col gap-1.5">
                       <Label>Grade / Class</Label>
-                      <Input placeholder="e.g. Grade 5" />
+                      <Input full placeholder="e.g. Grade 5" />
                     </div>
                     <div className="flex flex-1 flex-col gap-1.5">
                       <Label>Roll Number</Label>
-                      <Input placeholder="e.g. 104" />
+                      <Input full placeholder="e.g. 104" />
                     </div>
                   </div>
                 </div>
@@ -116,27 +133,8 @@ export function CreateParentSheet({
               </Button>
             </div>
           )}
-        </SheetBody>
-        <SheetFooter>
-          {step === 1 ? (
-            <>
-              <SheetClose asChild>
-                <Button variant="secondary">Cancel</Button>
-              </SheetClose>
-              <Button onClick={() => setStep(2)}>Continue</Button>
-            </>
-          ) : (
-            <>
-              <Button variant="secondary" onClick={() => setStep(1)}>
-                Back
-              </Button>
-              <SheetClose asChild>
-                <Button>Create Parent</Button>
-              </SheetClose>
-            </>
-          )}
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
+        </DialogBody>
+      </DialogContent>
+    </Dialog>
   );
 }
