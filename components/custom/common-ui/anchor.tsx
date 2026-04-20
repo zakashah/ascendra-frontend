@@ -6,8 +6,8 @@ const variants = cva(
   {
     variants: {
       variant: {
-        primary: 'text-primary dark:text-[#846BFF]',
-        blue: 'text-[#236dd7] hover:text-[#1c5bb6] dark:text-[#3180F5] dark:hover:text-[#236dd7]',
+        primary: 'text-primary dark:text-[var(--color-purple-600)]',
+        blue: 'text-info hover:text-[var(--color-blue-800)] dark:text-info dark:hover:text-info',
         muted: 'text-muted-foreground hover:text-muted-foreground/90',
       },
     },

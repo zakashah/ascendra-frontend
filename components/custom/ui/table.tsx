@@ -120,7 +120,7 @@ function TableBody({ className, ...props }: React.ComponentProps<'tbody'>) {
       className={cn(
         'relative isolate',
         'before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg',
-        'before:ring-1 before:ring-[#191C21]/4 dark:before:ring-black/20',
+        'before:ring-1 before:ring-[var(--color-umbra)]/4 dark:before:ring-black/20',
         'before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]',
         'dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)',
         '[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b',
@@ -138,7 +138,7 @@ function EmptyBody({ className, ...props }: React.ComponentProps<'div'>) {
       className={cn(
         'relative isolate',
         'before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg',
-        'before:ring-1 before:ring-[#191C21]/4 dark:before:ring-black/20',
+        'before:ring-1 before:ring-[var(--color-umbra)]/4 dark:before:ring-black/20',
         'before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]',
         'dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)',
         '[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b',
@@ -167,7 +167,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
     <tr
       data-slot="table-row"
       className={cn(
-        'group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4',
+        'group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-[var(--color-gray-700)]/4',
         className
       )}
       {...props}

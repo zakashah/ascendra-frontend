@@ -25,7 +25,7 @@ export function AsideContent({
         >
           <div
             className={cn(
-              'bg-background mx-1 rounded-lg ring-1 ring-[#191C21]/4 lg:m-0 lg:ring-0 dark:ring-black/20',
+              'bg-background mx-1 rounded-lg ring-1 ring-[var(--color-umbra)]/4 lg:m-0 lg:ring-0 dark:ring-black/20',
               'shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] lg:shadow-none',
               'dark:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]'
             )}

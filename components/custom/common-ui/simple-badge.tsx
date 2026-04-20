@@ -10,31 +10,33 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        /* Primary/Purple - keeping your existing default logic but adjusting font */
+        /* Primary/Purple */
         default:
-          'text-primary  bg-gradient-to-t from-black/[.02] bg-primary/4 ring-primary/16 dark:bg-primary/24',
+          'text-primary bg-gradient-to-t from-black/[.02] bg-primary/4 ring-primary/16 dark:bg-primary/24',
 
-        /* Gray (New Secondary) */
+        /* Gray */
         secondary:
-          'text-[#5f5f6f] dark:text-[#adadb7]  bg-gradient-to-t from-black/[.02] bg-[#767684]/4 ring-[#767684]/16 dark:bg-[#767684]/24',
+          'text-muted-foreground bg-gradient-to-t from-black/[.02] bg-[var(--color-gray-700)]/4 ring-[var(--color-gray-700)]/16 dark:bg-[var(--color-gray-700)]/24',
 
         /* Orange */
         orange:
-          'text-[#fd7224] bg-gradient-to-t from-black/[.02] bg-[#c3540f]/4 ring-[#c3540f]/16 dark:bg-[#c3540f]/24',
+          'text-warning bg-gradient-to-t from-black/[.02] bg-[var(--color-orange-700)]/4 ring-[var(--color-orange-700)]/16 dark:bg-[var(--color-orange-700)]/24',
 
         /* Green */
         green:
-          'text-[#15892b] dark:text-[#31c854]  bg-gradient-to-t from-black/[.02] bg-[#15892b]/4 ring-[#15892b]/16 dark:bg-[#15892b]/16',
+          'text-positive bg-gradient-to-t from-black/[.02] bg-[var(--color-green-700)]/4 ring-[var(--color-green-700)]/16 dark:bg-[var(--color-green-700)]/16',
 
         /* Blue */
-        blue: 'text-[#236dd7] dark:text-[#307ff6] bg-gradient-to-t from-black/[.02]  bg-[#236dd7]/4 ring-[#236dd7]/16 dark:bg-[#236dd7]/24',
+        blue:
+          'text-info bg-gradient-to-t from-black/[.02] bg-info/4 ring-info/16 dark:bg-info/24',
 
         /* Red / Destructive */
-        red: 'text-[#e52121] dark:text-[#ff5c5c] bg-gradient-to-t from-black/[.02] bg-[#e52121]/4 ring-[#e52121]/16 dark:bg-[#e52121]/24',
+        red:
+          'text-negative dark:text-[var(--color-red-450)] bg-gradient-to-t from-black/[.02] bg-[var(--color-red-700)]/4 ring-[var(--color-red-700)]/16 dark:bg-[var(--color-red-700)]/24',
 
         /* Amber / Caution */
         amber:
-          'text-[#b45309] dark:text-[#f59e0b] bg-gradient-to-t from-black/[.02] bg-[#b45309]/4 ring-[#b45309]/16 dark:bg-[#b45309]/24',
+          'text-[var(--color-amber-700)] dark:text-[var(--color-amber-400)] bg-gradient-to-t from-black/[.02] bg-[var(--color-amber-700)]/4 ring-[var(--color-amber-700)]/16 dark:bg-[var(--color-amber-700)]/24',
       },
     },
     defaultVariants: {

@@ -115,6 +115,7 @@
   --color-gray-700:  #767684;
   --color-gray-800:  #5f5f6f;
   --color-gray-900:  #4c4c5c;
+  --color-gray-950:  #525260;
   --color-gray-1000: #3d3d4a;
   --color-gray-1100: #33333e;
   --color-gray-1200: #2b2b34;
@@ -131,7 +132,9 @@
   --color-purple-400:  #a698ff;
   --color-purple-500:  #9280ff;
   --color-purple-600:  #846bff;
+  --color-purple-650:  #775cff;
   --color-purple-700:  #6c47ff; /* ← brand */
+  --color-purple-750:  #6038ff;
   --color-purple-800:  #5f15fe;
   --color-purple-900:  #4d06d1;
   --color-purple-1000: #3707a6;
@@ -151,6 +154,7 @@
   --color-red-50:   #fef8f8;
   --color-red-100:  #fedddd;
   --color-red-200:  #fec4c4;
+  --color-red-450:  #ff5c5c;
   --color-red-500:  #f86969;
   --color-red-600:  #f73d3d;
   --color-red-700:  #e02e2e; /* ← brand red */
@@ -159,6 +163,7 @@
   --color-red-1000: #921414;
   --color-red-1100: #7a1313;
   --color-red-1400: #3d0101;
+  --color-red-1500: #240B0A;
   --color-red:      #e02e2e; /* alias for red-700 */
 
   /* Orange — warning */
@@ -181,6 +186,11 @@
   --color-blue-1200: #0b1c49;
   --color-blue-1300: #0c1637;
   --color-blue:      #236dd7; /* alias for blue-700 */
+
+  /* Amber — caution */
+  --color-amber-400: #f59e0b;
+  --color-amber-700: #b45309;
+  --color-amber:     #b45309; /* alias for amber-700 */
 
   /* Base */
   --color-white: #fff;

@@ -27,8 +27,8 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'transition',
 
         // BASE RING
-        'ring-1 ring-[#191c21]/12',
-        'dark:ring-[#3d3d4a]/88 dark:ring-inset',
+        'ring-1 ring-[var(--color-umbra)]/12',
+        'dark:ring-[var(--color-gray-1000)]/88 dark:ring-inset',
 
         // BASE SHADOW
         'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
@@ -46,14 +46,14 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'has-[[data-slot=input-group-control]:read-only]:shadow-none',
 
         // HOVER
-        'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[#191c21]/24',
-        'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[#525260]',
+        'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[var(--color-umbra)]/24',
+        'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-[var(--color-gray-950)]',
         'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
         'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.32),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
 
         // FOCUS
         'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-1',
-        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-[#191C21]/12',
+        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-[var(--color-umbra)]/12',
         'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-black/88',
         'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
         'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
@@ -220,7 +220,7 @@ const InputGroupInput = React.forwardRef<
         className={cn(
           'h-8 w-full flex-1 bg-transparent px-3 py-1 text-sm',
           'border-0 ring-0 outline-none',
-          'placeholder:text-[#ADADB7] dark:placeholder:text-[#767684]',
+          'placeholder:text-[var(--color-gray-500)] dark:placeholder:text-[var(--color-gray-700)]',
           className
         )}
         {...props}
@@ -280,7 +280,7 @@ const InputGroupTextarea = React.forwardRef<
         className={cn(
           'w-full flex-1 resize-none bg-transparent px-3 py-2 text-sm',
           'border-0 ring-0 outline-none',
-          'placeholder:text-gray-400',
+          'placeholder:text-[var(--color-gray-500)]',
           className
         )}
         {...props}
