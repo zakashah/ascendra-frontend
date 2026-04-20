@@ -26,12 +26,12 @@ function Checkbox({
 
         /* ::before — bottom-darken gradient */
         'before:pointer-events-none before:absolute before:inset-0 before:size-full before:rounded-[inherit]',
-        'before:bg-gradient-to-b before:to-black/[.02]',
+        'before:bg-linear-to-b before:to-black/2',
         'before:transition-opacity',
 
         /* ::after — top-lighten gloss (20% light, 6% dark — reduced to avoid shimmer on 14px) */
         'after:pointer-events-none after:absolute after:inset-0 after:size-full after:rounded-[inherit]',
-        'after:bg-gradient-to-b after:from-white/20 dark:after:from-white/[.06]',
+        'after:bg-linear-to-b after:from-white/20 dark:after:from-white/6',
         'after:transition-opacity',
 
         /* Unchecked hover — bg shifts, ring tightens, gradients fade */
@@ -45,42 +45,42 @@ function Checkbox({
         'dark:hover:shadow-[0_-1px_1px_rgba(255,255,255,0.2),0_0_0_1px_rgba(61,61,74,0.88),0_0_0_2px_rgba(0,0,0,0.2)]',
 
         /* Checked — ! overrides hover bg/shadow */
-        'data-[state=checked]:!bg-[#6c47ff]',
+        'data-[state=checked]:bg-[#6c47ff]!',
         'data-[state=checked]:before:hidden',
-        'data-[state=checked]:!shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6c47ff]',
+        'data-[state=checked]:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6c47ff]!',
 
         /* Dark checked */
-        'dark:data-[state=checked]:!bg-[#6c47ff]',
-        'dark:data-[state=checked]:!shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]',
+        'dark:data-[state=checked]:bg-[#6c47ff]!',
+        'dark:data-[state=checked]:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Checked hover — ring darkens */
-        'data-[state=checked]:hover:!shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6038ff]',
+        'data-[state=checked]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6038ff]!',
 
         /* Dark checked hover — upward highlight dims .32 → .20 */
-        'dark:data-[state=checked]:hover:!shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]',
+        'dark:data-[state=checked]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Indeterminate — same visual treatment as checked */
-        'data-[state=indeterminate]:!bg-[#6c47ff]',
+        'data-[state=indeterminate]:bg-[#6c47ff]!',
         'data-[state=indeterminate]:before:hidden',
-        'data-[state=indeterminate]:!shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6c47ff]',
+        'data-[state=indeterminate]:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6c47ff]!',
 
         /* Dark indeterminate */
-        'dark:data-[state=indeterminate]:!bg-[#6c47ff]',
-        'dark:data-[state=indeterminate]:!shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]',
+        'dark:data-[state=indeterminate]:bg-[#6c47ff]!',
+        'dark:data-[state=indeterminate]:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Indeterminate hover */
-        'data-[state=indeterminate]:hover:!shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6038ff]',
+        'data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6038ff]!',
 
         /* Dark indeterminate hover */
-        'dark:data-[state=indeterminate]:hover:!shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]',
+        'dark:data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Invalid */
-        'aria-[invalid=true]:!bg-[#fedddd]',
-        'aria-[invalid=true]:!shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]',
-        'dark:aria-[invalid=true]:!bg-[#7a1313]',
-        'dark:aria-[invalid=true]:!shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]',
-        'aria-[invalid=true]:hover:!bg-[#fec4c4]',
-        'dark:aria-[invalid=true]:hover:!bg-[#921414]',
+        'aria-invalid:bg-[#fedddd]!',
+        'aria-invalid:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]!',
+        'dark:aria-invalid:bg-[#7a1313]!',
+        'dark:aria-invalid:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]!',
+        'aria-invalid:hover:bg-[#fec4c4]!',
+        'dark:aria-invalid:hover:bg-[#921414]!',
 
         /* Disabled */
         'disabled:cursor-not-allowed disabled:opacity-40',

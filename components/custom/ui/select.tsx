@@ -44,7 +44,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        'py-[3px]',
+        'py-0.75',
         'group relative inline-flex items-center px-1',
         'min-w-fit overflow-hidden rounded-[0.25rem]',
         /* Base Colors */
@@ -76,7 +76,7 @@ function SelectTrigger({
       {...props}
     >
       <div className="flex w-full items-center justify-between">
-        <span className="px-[5px]">{children}</span>
+        <span className="px-1.25">{children}</span>
         <SelectPrimitive.Icon asChild>
           <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4" />
         </SelectPrimitive.Icon>
@@ -100,7 +100,7 @@ function SelectContent({
         position={position}
         align={align}
         className={cn(
-          `bg-secondary isolate flex max-w-[calc(100vw-theme(spacing.4)*2)] origin-[--trigger-anchor-point] flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 [transition:transform_spring(0.12s),opacity_0.12s] data-[entering]:scale-95 data-[entering]:opacity-0 data-[exiting]:scale-95 data-[exiting]:opacity-0 data-[exiting]:[transition:transform_spring(100ms),opacity_100ms] dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/[.08] [:where(&)]:dark:ring-[#111113]/[.32]`,
+          `bg-secondary isolate flex max-w-[calc(100vw-(--spacing(4))*2)] origin-[--trigger-anchor-point] flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 [transition:transform_spring(0.12s),opacity_0.12s] data-entering:scale-95 data-entering:opacity-0 data-exiting:scale-95 data-exiting:opacity-0 data-exiting:[transition:transform_spring(100ms),opacity_100ms] dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/8 [:where(&)]:dark:ring-[#111113]/32`,
           position === 'popper' &&
             'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
           className
@@ -111,7 +111,7 @@ function SelectContent({
 
         <SelectPrimitive.Viewport
           data-position={position}
-          className="group/content rounded-inherit flex-1 scroll-py-2 overflow-auto overscroll-contain p-1 data-[position=popper]:h-[var(--radix-select-trigger-height)] data-[position=popper]:w-full data-[position=popper]:min-w-[var(--radix-select-trigger-width)]"
+          className="group/content rounded-inherit flex-1 scroll-py-2 overflow-auto overscroll-contain p-1 data-[position=popper]:h-(--radix-select-trigger-height) data-[position=popper]:w-full data-[position=popper]:min-w-(--radix-select-trigger-width)"
         >
           {children}
         </SelectPrimitive.Viewport>

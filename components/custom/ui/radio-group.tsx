@@ -4,34 +4,6 @@ import * as React from 'react';
 import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
-/*
- * Ceramic radio — faithfully ported from Clerk's implementation.
- *
- * Structure mirrors Clerk's group/radio + peer/radio pattern:
- *   <div class="group/radio">        ← hover source
- *     <RadioGroupPrimitive.Item>     ← visual + interactive (data-state="checked")
- *       <Indicator>
- *         <dot />
- *       </Indicator>
- *     </RadioGroupPrimitive.Item>
- *   </div>
- *
- * Clerk uses peer-checked/radio: — we use data-[state=checked]: (Radix equivalent)
- * Clerk uses group-hover/radio:  — we use group-hover/radio: (same, wrapper has group/radio)
- *
- * Hex → ceramic palette:
- *   ceramic-white        #fff
- *   ceramic-gray-100     #f6f6f7   light hover bg
- *   ceramic-gray-900     #4c4c5c   dark base bg
- *   ceramic-gray-1100    #33333e   dark hover bg  ← goes darker on hover in dark mode
- *   ceramic-purple-700   #6c47ff   brand / light checked bg / dark checked bg
- *   ceramic-purple-600   #846bff   dark checked ring
- *   #191C21                        light ring base color (Clerk's near-black)
- *   #7166F8                        light checked ring
- *   #5F5F6F                        dark unchecked ring (ceramic-gray-800)
- *   #3D3D4A                        dark hover ring (ceramic-gray-1000)
- */
-
 function RadioGroup({
   className,
   ...props
@@ -68,16 +40,16 @@ function RadioGroupItem({
           /* Dark base */
           'dark:bg-[#4c4c5c]',
           'dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.12),0_4px_4px_-2px_rgba(0,0,0,0.36)]',
-          'dark:ring-[#5F5F6F]/[.92]',
+          'dark:ring-[#5F5F6F]/92',
 
           /* ::before — bottom-darken gradient (visible unchecked, hidden checked) */
           'before:absolute before:inset-0 before:size-full before:rounded-[inherit]',
-          'before:bg-gradient-to-b before:to-black/[.02]',
+          'before:bg-linear-to-b before:to-black/2',
           'before:transition-opacity',
 
           /* ::after — top-lighten gloss (hidden unchecked, block checked) */
           'after:absolute after:inset-0 after:hidden after:size-full after:rounded-[inherit]',
-          'after:bg-gradient-to-b after:from-white/20',
+          'after:bg-linear-to-b after:from-white/20',
           'after:transition-opacity',
 
           /* Light hover */
@@ -89,7 +61,7 @@ function RadioGroupItem({
           /* Dark hover — goes darker (gray-1100) */
           'dark:group-hover/radio:bg-[#33333e]',
           'dark:group-hover/radio:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]',
-          'dark:group-hover/radio:ring-[#3D3D4A]/[.88]',
+          'dark:group-hover/radio:ring-[#3D3D4A]/88',
 
           /* Checked */
           'data-[state=checked]:before:hidden data-[state=checked]:after:block',
@@ -106,7 +78,7 @@ function RadioGroupItem({
           'group-hover/radio:data-[state=checked]:after:opacity-0',
 
           /* Focus ring */
-          'focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[2px] focus-visible:outline-[#6c47ff]/50 focus-visible:transition-none',
+          'focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#6c47ff]/50 focus-visible:transition-none',
 
           /* Disabled */
           'data-disabled:cursor-not-allowed data-disabled:opacity-40',
@@ -117,7 +89,7 @@ function RadioGroupItem({
       >
         <RadioGroupPrimitive.Indicator className="relative z-10 flex h-full w-full items-center justify-center">
           <div
-            className="absolute size-[0.3125rem] rounded-full bg-white"
+            className="absolute size-1.25 rounded-full bg-white"
             style={{
               top: '50%',
               left: '50%',
