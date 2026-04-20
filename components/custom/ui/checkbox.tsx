@@ -21,7 +21,7 @@ function Checkbox({
         'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_rgba(25,28,33,.2),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
 
         /* Dark unchecked */
-        'dark:bg-[var(--color-gray-900)]',
+        'dark:bg-gray-900',
         'dark:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#525260,0_0_0_2px_rgba(0,0,0,0.16)]',
 
         /* ::before — bottom-darken gradient */
@@ -35,13 +35,13 @@ function Checkbox({
         'after:transition-opacity',
 
         /* Unchecked hover — bg shifts, ring tightens, gradients fade */
-        'hover:bg-[var(--color-gray-100)]',
+        'hover:bg-gray-100',
         'hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_rgba(25,28,33,.28),0_4px_4px_-2px_rgba(0,0,0,0.07)]',
         'hover:before:opacity-0',
         'hover:after:opacity-0',
 
         /* Dark unchecked hover */
-        'dark:hover:bg-[var(--color-gray-1100)]',
+        'dark:hover:bg-(--color-gray-1100)',
         'dark:hover:shadow-[0_-1px_1px_rgba(255,255,255,0.2),0_0_0_1px_rgba(61,61,74,0.88),0_0_0_2px_rgba(0,0,0,0.2)]',
 
         /* Checked — ! overrides hover bg/shadow */
@@ -75,12 +75,12 @@ function Checkbox({
         'dark:data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Invalid */
-        'aria-invalid:bg-[var(--color-red-100)]!',
+        'aria-invalid:bg-red-100!',
         'aria-invalid:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]!',
-        'dark:aria-invalid:bg-[var(--color-red-1100)]!',
+        'dark:aria-invalid:bg-(--color-red-1100)!',
         'dark:aria-invalid:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]!',
-        'aria-invalid:hover:bg-[var(--color-red-200)]!',
-        'dark:aria-invalid:hover:bg-[var(--color-red-1000)]!',
+        'aria-invalid:hover:bg-red-200!',
+        'dark:aria-invalid:hover:bg-(--color-red-1000)!',
 
         /* Disabled */
         'disabled:cursor-not-allowed disabled:opacity-40',
