@@ -134,7 +134,7 @@ function TableBody({ className, ...props }: React.ComponentProps<'tbody'>) {
 function EmptyBody({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="table-body"
+      data-slot="table-empty-body"
       className={cn(
         'relative isolate',
         'before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg',
@@ -211,6 +211,7 @@ function TableCaption({
 function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
   return (
     <footer
+      data-slot="table-foot"
       className={cn(
         'text-muted-foreground flex flex-col text-xs sm:flex-row sm:items-center sm:justify-between',
         className

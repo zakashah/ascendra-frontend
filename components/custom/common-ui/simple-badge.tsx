@@ -33,7 +33,8 @@ const badgeVariants = cva(
         red: 'text-[#e52121] dark:text-[#ff5c5c] bg-gradient-to-t from-black/[.02] bg-[#e52121]/4 ring-[#e52121]/16 dark:bg-[#e52121]/24',
 
         /* Amber / Caution */
-        amber: 'text-[#b45309] dark:text-[#f59e0b] bg-gradient-to-t from-black/[.02] bg-[#b45309]/4 ring-[#b45309]/16 dark:bg-[#b45309]/24',
+        amber:
+          'text-[#b45309] dark:text-[#f59e0b] bg-gradient-to-t from-black/[.02] bg-[#b45309]/4 ring-[#b45309]/16 dark:bg-[#b45309]/24',
       },
     },
     defaultVariants: {
@@ -59,9 +60,8 @@ export function SimpleBadge({
       className={cn(badgeVariants({ variant }), className)}
       {...props}
     >
-      {/* Using px-0.5 inside the wrapper to mimic the Clerk 
-          gap and alignment for badges with icons or text.
-      */}
+      {/* Using px-0.5 inside the wrapper to mimic the Clerk gap and alignment for badges with icons or text.
+       */}
       <span className="flex items-center gap-1 px-0.5">{children}</span>
     </Comp>
   );

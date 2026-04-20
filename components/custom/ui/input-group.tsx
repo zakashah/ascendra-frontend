@@ -3,8 +3,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/custom/ui/button';
 
 // ─── InputGroup ────────────────────────────────────────────────────────────────
 // All the ring/shadow/hover/focus styles from your Input wrapper live here now
@@ -115,6 +114,7 @@ function InputGroupAddon({
 function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
+      data-slot="input-group-text"
       className={cn(
         "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
@@ -153,6 +153,7 @@ function InputGroupButton({
   return (
     <Button
       type={type}
+      data-slot="input-group-button"
       data-size={size}
       variant={variant}
       className={cn(inputGroupButtonVariants({ size }), className)}

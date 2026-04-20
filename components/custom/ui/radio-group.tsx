@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
 /*
@@ -38,6 +38,7 @@ function RadioGroup({
 }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return (
     <RadioGroupPrimitive.Root
+      data-slot="radio-group"
       className={cn('grid gap-3', className)}
       {...props}
     />
@@ -46,17 +47,21 @@ function RadioGroup({
 
 function RadioGroupItem({
   className,
+  wrapperClassName,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
+}: React.ComponentProps<typeof RadioGroupPrimitive.Item> & {
+  wrapperClassName?: string;
+}) {
   return (
-    <div className="group/radio flex items-center">
+    <div className={cn('group/radio flex items-center', wrapperClassName)}>
       <RadioGroupPrimitive.Item
+        data-slot="radio-group-item"
         className={cn(
           /* Layout */
           'relative top-0.5 mr-2 inline-block size-3.5 shrink-0 rounded-full transition outline-none',
 
           /* Light base */
-          'bg-white text-white',
+          'bg-white',
           'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
           'ring-1 ring-[#191C21]/20',
 
@@ -103,6 +108,9 @@ function RadioGroupItem({
           /* Focus ring */
           'focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[2px] focus-visible:outline-[#6c47ff]/50 focus-visible:transition-none',
 
+          /* Disabled */
+          'data-disabled:cursor-not-allowed data-disabled:opacity-40',
+
           className
         )}
         {...props}
@@ -114,7 +122,6 @@ function RadioGroupItem({
               top: '50%',
               left: '50%',
               transform: 'translateX(-50%) translateY(-50%)',
-              opacity: 1,
             }}
             aria-hidden="true"
           />

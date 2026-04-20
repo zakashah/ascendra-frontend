@@ -93,9 +93,8 @@ export function AlertIcon({
 }: AlertIconProps) {
   return (
     <span className={cn(alertIconVariants({ variant }), className)} {...props}>
-      {/* This will wrap whatever icon you pass (Lucide, SVG, etc.) 
-        and apply the absolute centering logic.
-      */}
+      {/* This will wrap whatever icon you pass (Lucide, SVG, etc.) and apply the absolute centering logic.
+       */}
       {children}
     </span>
   );
