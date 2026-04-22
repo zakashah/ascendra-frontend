@@ -13,7 +13,7 @@ function Checkbox({
       data-slot="checkbox"
       className={cn(
         /* Layout */
-        'relative top-0.5 inline-flex size-3.5 shrink-0 items-center justify-center rounded-[.25rem] transition outline-none',
+        'relative top-0.5 inline-flex size-3.5 shrink-0 items-center justify-center rounded-[.25rem] transition',
         'text-white',
 
         /* Light unchecked */
@@ -86,7 +86,7 @@ function Checkbox({
         'disabled:cursor-not-allowed disabled:opacity-40',
 
         /* Focus */
-        'focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-primary/50 focus-visible:transition-none',
+        'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
 
         className
       )}

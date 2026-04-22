@@ -30,7 +30,7 @@ function RadioGroupItem({
         data-slot="radio-group-item"
         className={cn(
           /* Layout */
-          'relative top-0.5 mr-2 inline-block size-3.5 shrink-0 rounded-full transition outline-none',
+          'relative top-0.5 mr-2 inline-block size-3.5 shrink-0 rounded-full transition',
 
           /* Light base */
           'bg-white',
@@ -78,7 +78,7 @@ function RadioGroupItem({
           'group-hover/radio:data-[state=checked]:after:opacity-0',
 
           /* Focus ring */
-          'focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-primary/50 focus-visible:transition-none',
+          'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
 
           /* Disabled */
           'data-disabled:cursor-not-allowed data-disabled:opacity-40',

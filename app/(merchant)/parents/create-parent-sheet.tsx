@@ -42,7 +42,7 @@ export function CreateParentSheet({ children }: { children: React.ReactNode }) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className="max-w-[480px]"
-        footer={
+        /* footer={
           <DialogFooter>
             {step === 1 ? (
               <>
@@ -62,7 +62,7 @@ export function CreateParentSheet({ children }: { children: React.ReactNode }) {
               </>
             )}
           </DialogFooter>
-        }
+        } */
       >
         <DialogHeader>
           <DialogTitle>Add parent</DialogTitle>

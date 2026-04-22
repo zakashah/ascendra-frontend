@@ -251,6 +251,7 @@ const InputGroupTextarea = React.forwardRef<
   ) => {
     const [focused, setFocused] = React.useState(false);
     const [hovered, setHovered] = React.useState(false);
+    const [focusVisible, setFocusVisible] = React.useState(false);
 
     return (
       <textarea
@@ -259,6 +260,7 @@ const InputGroupTextarea = React.forwardRef<
         data-focused={focused || undefined}
         data-hovered={hovered || undefined}
         data-disabled={disabled || undefined}
+        data-focus-visible={focusVisible || undefined}
         disabled={disabled}
         readOnly={readOnly}
         onFocus={(e) => {
@@ -267,8 +269,13 @@ const InputGroupTextarea = React.forwardRef<
         }}
         onBlur={(e) => {
           setFocused(false);
+          setFocusVisible(false);
           onBlur?.(e);
         }}
+        onKeyUp={(e) => {
+          if (e.key === 'Tab') setFocusVisible(true);
+        }}
+        onMouseDown={() => setFocusVisible(false)}
         onMouseEnter={(e) => {
           setHovered(true);
           onMouseEnter?.(e);

@@ -24,7 +24,6 @@ const meta = registry['dialog'];
 export function DialogDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import {
   Dialog, DialogTrigger, DialogContent, DialogHeader,
@@ -73,7 +72,9 @@ export function DialogDocContent() {
           >
             <DialogHeader>
               <DialogTitle>Confirm Action</DialogTitle>
-              <DialogDescription>Are you sure you want to proceed?</DialogDescription>
+              <DialogDescription>
+                Are you sure you want to proceed?
+              </DialogDescription>
             </DialogHeader>
             <DialogBody>
               <p className="text-muted-foreground">
@@ -88,8 +89,12 @@ export function DialogDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Destructive Action</h3>
-          <p className="text-xs text-muted-foreground">Use a destructive button in the actions for irreversible operations.</p>
+          <h3 className="text-foreground text-sm font-medium">
+            Destructive Action
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Use a destructive button in the actions for irreversible operations.
+          </p>
           <ComponentPreview
             code={`<Dialog>
   <DialogTrigger asChild>
@@ -136,7 +141,8 @@ export function DialogDocContent() {
                 <DialogHeader>
                   <DialogTitle>Delete Parent</DialogTitle>
                   <DialogDescription>
-                    This will permanently delete Ahmed Khan and all associated students.
+                    This will permanently delete Ahmed Khan and all associated
+                    students.
                   </DialogDescription>
                 </DialogHeader>
                 <DialogBody>
@@ -150,9 +156,16 @@ export function DialogDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">With Inner Footer</h3>
-          <p className="text-xs text-muted-foreground">
-            Use <code className="rounded bg-muted px-1 font-mono text-xs">DialogFooter</code> inside the card for optional content like a checkbox row. It renders with a top separator above it.
+          <h3 className="text-foreground text-sm font-medium">
+            With Inner Footer
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Use{' '}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              DialogFooter
+            </code>{' '}
+            inside the card for optional content like a checkbox row. It renders
+            with a top separator above it.
           </p>
           <ComponentPreview
             code={`<Dialog>
@@ -208,14 +221,17 @@ export function DialogDocContent() {
                 </DialogHeader>
                 <DialogBody>
                   <p className="text-muted-foreground">
-                    Premium features are free to enable on development instances for
-                    developing and testing purposes.
+                    Premium features are free to enable on development instances
+                    for developing and testing purposes.
                   </p>
                 </DialogBody>
                 <DialogFooter>
                   <div className="flex items-center gap-2">
                     <Checkbox id="dont-show" />
-                    <label htmlFor="dont-show" className="text-sm text-muted-foreground cursor-pointer">
+                    <label
+                      htmlFor="dont-show"
+                      className="text-muted-foreground cursor-pointer text-sm"
+                    >
                       Do not show this message again
                     </label>
                   </div>
@@ -226,8 +242,11 @@ export function DialogDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Header Only</h3>
-          <p className="text-xs text-muted-foreground">Header + actions with no body — the bottom border and rounding come from the header itself.</p>
+          <h3 className="text-foreground text-sm font-medium">Header Only</h3>
+          <p className="text-muted-foreground text-xs">
+            Header + actions with no body — the bottom border and rounding come
+            from the header itself.
+          </p>
           <ComponentPreview
             code={`<Dialog>
   <DialogTrigger asChild>
@@ -266,7 +285,9 @@ export function DialogDocContent() {
               >
                 <DialogHeader>
                   <DialogTitle>Session Expired</DialogTitle>
-                  <DialogDescription>Please sign in again to continue.</DialogDescription>
+                  <DialogDescription>
+                    Please sign in again to continue.
+                  </DialogDescription>
                 </DialogHeader>
               </DialogContent>
             </Dialog>

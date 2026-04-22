@@ -42,6 +42,7 @@ import {
   LuFolderLock,
   LuInfo,
 } from 'react-icons/lu';
+import { UnsavedChangesBar } from '@/components/custom/common-ui/unsaved-changes-bar';
 
 export default function UserAndAuthenticationPage() {
   const [hidden, setHidden] = useState(true);
@@ -487,6 +488,7 @@ export default function UserAndAuthenticationPage() {
             </MainContent>
           </TabContent>
         </Tabs>
+        <UnsavedChangesBar show={true} onSave={() => {}} onReset={() => {}} />
       </PageMain>
     </>
   );
