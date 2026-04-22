@@ -16,7 +16,8 @@ function SheetOverlay({
       data-slot="sheet-overlay"
       className={cn(
         'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0',
-        'fixed inset-0 z-200 bg-black/40 duration-150 supports-backdrop-filter:backdrop-blur-sm',
+        /* 2. Transparent overlay: Changed bg-black/40 to bg-transparent and removed blur */
+        'fixed inset-0 z-200 bg-transparent duration-150',
         className
       )}
       {...props}
@@ -24,11 +25,9 @@ function SheetOverlay({
   );
 }
 
-/* ── Root ─────────────────────────────────────────────────────────────────── */
+/* ... Root, Trigger, Close remain the same ... */
 
-function Sheet({
-  ...props
-}: React.ComponentProps<typeof SheetPrimitive.Root>) {
+function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
 }
 
@@ -62,21 +61,30 @@ function SheetContent({
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          /* positioning */
-          'fixed z-1000 flex flex-col outline-none bg-white dark:bg-(--color-gray-1500)',
-          /* enter / exit animations */
-          'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 duration-200 ease-out',
-          /* slide directions */
-          side === 'right' &&
-            'inset-y-0 right-0 h-full w-full max-w-md border-l border-border data-closed:slide-out-to-right data-open:slide-in-from-right',
-          side === 'left' &&
-            'inset-y-0 left-0 h-full w-full max-w-md border-r border-border data-closed:slide-out-to-left data-open:slide-in-from-left',
-          side === 'top' &&
-            'inset-x-0 top-0 h-auto border-b border-border data-closed:slide-out-to-top data-open:slide-in-from-top',
-          side === 'bottom' &&
-            'inset-x-0 bottom-0 h-auto border-t border-border data-closed:slide-out-to-bottom data-open:slide-in-from-bottom',
-          /* shadow */
-          'shadow-xl',
+          /* Base positioning and shape */
+          'fixed z-1000 flex flex-col overflow-hidden rounded-xl bg-white outline-none dark:bg-(--color-gray-1500)',
+          /* Animation settings */
+          'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 duration-300 ease-in-out',
+
+          /* Floating logic: Side-specific offsets and animations */
+          side === 'right' && [
+            'border-border top-3 right-3 bottom-3 w-full max-w-md border',
+            'data-closed:slide-out-to-right data-open:slide-in-from-right',
+          ],
+          side === 'left' && [
+            'border-border top-3 bottom-3 left-3 w-full max-w-md border',
+            'data-closed:slide-out-to-left data-open:slide-in-from-left',
+          ],
+          side === 'top' && [
+            'border-border top-3 right-3 left-3 h-auto border',
+            'data-closed:slide-out-to-top data-open:slide-in-from-top',
+          ],
+          side === 'bottom' && [
+            'border-border right-3 bottom-3 left-3 h-auto border',
+            'data-closed:slide-out-to-bottom data-open:slide-in-from-bottom',
+          ],
+          'shadow-[0_32px_72px_-12px_rgba(25,28,33,0.2),0_16px_32px_-6px_theme(--color-black/0.2)] dark:shadow-[0_32px_72px_-12px_theme(--color-black/0.4),0_16px_32px_-6px_theme(--color-black/0.4)]',
+
           className
         )}
         {...props}
@@ -84,16 +92,7 @@ function SheetContent({
         {children}
 
         {showCloseButton && (
-          <SheetPrimitive.Close
-            data-slot="sheet-close-button"
-            className={cn(
-              'absolute top-4 right-4 rounded-md p-1',
-              'text-muted-foreground transition-colors',
-              'hover:bg-accent hover:text-foreground',
-              'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2',
-              'disabled:pointer-events-none'
-            )}
-          >
+          <SheetPrimitive.Close className="text-muted-foreground hover:bg-accent hover:text-foreground absolute top-4 right-4 rounded-md p-1 transition-colors">
             <X className="size-4" />
             <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
@@ -103,16 +102,26 @@ function SheetContent({
   );
 }
 
-/* ── Header ───────────────────────────────────────────────────────────────── */
+/* ... Header, Title, Description, Body, Footer remain the same ... */
 
 function SheetHeader({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="sheet-header"
       className={cn(
-        'border-border flex flex-col gap-1 border-b px-6 py-5',
+        'flex flex-col gap-1 bg-gray-50 px-6 py-5 dark:bg-(--color-gray-1500)',
         className
       )}
+      {...props}
+    />
+  );
+}
+
+function SheetSubHeader({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="sheet-sub-header"
+      className={cn('px-6', className)}
       {...props}
     />
   );
@@ -125,7 +134,7 @@ function SheetTitle({
   return (
     <SheetPrimitive.Title
       data-slot="sheet-title"
-      className={cn('text-foreground text-base font-semibold', className)}
+      className={cn('text-foreground text-sm font-medium', className)}
       {...props}
     />
   );
@@ -138,32 +147,38 @@ function SheetDescription({
   return (
     <SheetPrimitive.Description
       data-slot="sheet-description"
-      className={cn('text-muted-foreground text-sm', className)}
+      className={cn('text-muted-foreground text-xs', className)}
       {...props}
     />
   );
 }
-
-/* ── Body ─────────────────────────────────────────────────────────────────── */
 
 function SheetBody({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="sheet-body"
-      className={cn('flex-1 overflow-y-auto px-6 py-5', className)}
+      className={cn('flex-1 overflow-y-auto px-6', className)}
       {...props}
     />
   );
 }
 
-/* ── Footer ───────────────────────────────────────────────────────────────── */
+function SheetSubFooter({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="sheet-sub-footer"
+      className={cn('px-6', className)}
+      {...props}
+    />
+  );
+}
 
 function SheetFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="sheet-footer"
       className={cn(
-        'border-border/50 bg-gray-50/50 dark:bg-black/10 flex items-center justify-end gap-3 border-t px-6 py-4',
+        'border-border flex items-center justify-end gap-3 border-t px-6 py-4',
         className
       )}
       {...props}
@@ -177,8 +192,10 @@ export {
   SheetClose,
   SheetContent,
   SheetHeader,
+  SheetSubHeader,
   SheetTitle,
   SheetDescription,
   SheetBody,
   SheetFooter,
+  SheetSubFooter,
 };

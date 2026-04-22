@@ -13,6 +13,8 @@ import {
   SheetBody,
   SheetFooter,
   SheetClose,
+  SheetSubHeader,
+  SheetSubFooter,
 } from '@/components/custom/ui/sheet';
 import { Button } from '@/components/custom/ui/button';
 import { registry } from '@/lib/showcase/registry';
@@ -22,7 +24,6 @@ const meta = registry['sheet'];
 export function SheetDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import {
   Sheet, SheetTrigger, SheetContent, SheetHeader,
@@ -57,11 +58,17 @@ export function SheetDocContent() {
           <SheetContent>
             <SheetHeader>
               <SheetTitle>Add Parent</SheetTitle>
-              <SheetDescription>Fill in the details to create a new parent record.</SheetDescription>
+              <SheetDescription>
+                Fill in the details to create a new parent record.
+              </SheetDescription>
             </SheetHeader>
+            <SheetSubHeader>this is sub header</SheetSubHeader>
             <SheetBody>
-              <p className="text-sm text-muted-foreground">Form fields go here.</p>
+              <p className="text-muted-foreground text-sm">
+                Form fields go here.
+              </p>
             </SheetBody>
+            <SheetSubFooter>this is sub footer</SheetSubFooter>
             <SheetFooter>
               <SheetClose asChild>
                 <Button variant="secondary">Cancel</Button>
@@ -76,8 +83,10 @@ export function SheetDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Sides</h3>
-          <p className="text-xs text-muted-foreground">The sheet can open from any edge of the screen.</p>
+          <h3 className="text-foreground text-sm font-medium">Sides</h3>
+          <p className="text-muted-foreground text-xs">
+            The sheet can open from any edge of the screen.
+          </p>
           <ComponentPreview
             code={`<Sheet>
   <SheetTrigger asChild>
@@ -114,8 +123,14 @@ export function SheetDocContent() {
                 <Button variant="secondary">Right (default)</Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <SheetHeader><SheetTitle>Right Sheet</SheetTitle></SheetHeader>
-                <SheetBody><p className="text-sm text-muted-foreground">Slides in from the right.</p></SheetBody>
+                <SheetHeader>
+                  <SheetTitle>Right Sheet</SheetTitle>
+                </SheetHeader>
+                <SheetBody>
+                  <p className="text-muted-foreground text-sm">
+                    Slides in from the right.
+                  </p>
+                </SheetBody>
               </SheetContent>
             </Sheet>
             <Sheet>
@@ -123,8 +138,14 @@ export function SheetDocContent() {
                 <Button variant="secondary">Left</Button>
               </SheetTrigger>
               <SheetContent side="left">
-                <SheetHeader><SheetTitle>Left Sheet</SheetTitle></SheetHeader>
-                <SheetBody><p className="text-sm text-muted-foreground">Slides in from the left.</p></SheetBody>
+                <SheetHeader>
+                  <SheetTitle>Left Sheet</SheetTitle>
+                </SheetHeader>
+                <SheetBody>
+                  <p className="text-muted-foreground text-sm">
+                    Slides in from the left.
+                  </p>
+                </SheetBody>
               </SheetContent>
             </Sheet>
             <Sheet>
@@ -132,8 +153,14 @@ export function SheetDocContent() {
                 <Button variant="secondary">Bottom</Button>
               </SheetTrigger>
               <SheetContent side="bottom">
-                <SheetHeader><SheetTitle>Bottom Sheet</SheetTitle></SheetHeader>
-                <SheetBody><p className="text-sm text-muted-foreground">Slides up from the bottom.</p></SheetBody>
+                <SheetHeader>
+                  <SheetTitle>Bottom Sheet</SheetTitle>
+                </SheetHeader>
+                <SheetBody>
+                  <p className="text-muted-foreground text-sm">
+                    Slides up from the bottom.
+                  </p>
+                </SheetBody>
               </SheetContent>
             </Sheet>
           </ComponentPreview>
