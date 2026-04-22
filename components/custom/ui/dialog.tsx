@@ -15,7 +15,7 @@ function DialogOverlay({
       data-slot="dialog-overlay"
       className={cn(
         'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0',
-        'fixed inset-0 z-200 bg-black/40 duration-150 supports-backdrop-filter:backdrop-blur-sm',
+        'fixed inset-0 z-200 bg-black/40 duration-300 supports-backdrop-filter:backdrop-blur-sm',
         className
       )}
       {...props}
@@ -60,12 +60,12 @@ function DialogContent({
         data-slot="dialog-content"
         className={cn(
           /* positioning */
-          'fixed top-1/2 left-1/2 z-1000 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 p-0 outline-none',
+          'fixed top-18 left-1/2 z-1000 w-full max-w-sm -translate-x-1/2 p-0 outline-none',
           /* enter / exit */
           'data-open:animate-in data-closed:animate-out',
           'data-closed:fade-out-0 data-open:fade-in-0',
           'data-closed:zoom-out-95 data-open:zoom-in-95',
-          'duration-150',
+          'duration-300',
           /* outer shell — overflow-hidden clips the inner card's top & side ring */
           'overflow-hidden rounded-xl',
           'bg-gray-50 dark:bg-(--color-gray-1500)',
