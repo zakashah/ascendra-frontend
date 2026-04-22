@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Anchor } from '@/components/custom/common-ui/anchor';
@@ -13,14 +12,11 @@ export function AnchorDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<Anchor href="#">View invoice</Anchor>`}>
+      <ComponentPreview code={`import { Anchor } from "@/components/custom/common-ui/anchor";
+
+<Anchor href="#">View invoice</Anchor>`}>
         <Anchor href="#">View invoice</Anchor>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { Anchor } from "@/components/custom/common-ui/anchor"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

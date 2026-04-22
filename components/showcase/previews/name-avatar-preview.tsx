@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
@@ -13,14 +12,11 @@ export function NameAvatarDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<NameAvatar name="Ahmed Khan" href="#" />`}>
+      <ComponentPreview code={`import { NameAvatar } from "@/components/custom/common-ui/name-avatar";
+
+<NameAvatar name="Ahmed Khan" href="#" />`}>
         <NameAvatar name="Ahmed Khan" href="#" />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { NameAvatar } from "@/components/custom/common-ui/name-avatar"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { PageHeader } from '@/components/custom/layout/page-header';
@@ -21,7 +20,9 @@ export function PageHeaderDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<PageHeader>
+        code={`import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction } from "@/components/custom/layout/page-header";
+
+<PageHeader>
   <PageHeaderGroup>
     <PageTitle>Parents</PageTitle>
   </PageHeaderGroup>
@@ -35,11 +36,6 @@ export function PageHeaderDocContent() {
           </PageHeader>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction } from "@/components/custom/layout/page-header"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
@@ -13,14 +12,11 @@ export function RowActionButtonDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<RowActionButton opaque />`}>
+      <ComponentPreview code={`import { RowActionButton } from "@/components/custom/common-ui/row-action-button";
+
+<RowActionButton opaque />`}>
         <RowActionButton opaque />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { RowActionButton } from "@/components/custom/common-ui/row-action-button"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

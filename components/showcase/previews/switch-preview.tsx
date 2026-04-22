@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Switch } from '@/components/custom/ui/switch';
@@ -13,14 +12,11 @@ export function SwitchDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<Switch defaultChecked />`}>
+      <ComponentPreview code={`import { Switch } from "@/components/custom/ui/switch";
+
+<Switch defaultChecked />`}>
         <Switch defaultChecked />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { Switch } from "@/components/custom/ui/switch"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

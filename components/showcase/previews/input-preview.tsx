@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Input } from '@/components/custom/ui/input';
@@ -13,14 +12,11 @@ export function InputDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<Input placeholder="Enter your email" />`}>
+      <ComponentPreview code={`import { Input } from "@/components/custom/ui/input";
+
+<Input placeholder="Enter your email" />`}>
         <Input placeholder="Enter your email" />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { Input } from "@/components/custom/ui/input"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

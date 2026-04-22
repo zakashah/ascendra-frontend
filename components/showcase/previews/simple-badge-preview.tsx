@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
@@ -16,16 +15,12 @@ export function SimpleBadgeDocContent() {
 
       {/* Hero preview */}
       <ComponentPreview
-        code={`<SimpleBadge>Active</SimpleBadge>`}
+        code={`import { SimpleBadge } from "@/components/custom/common-ui/simple-badge";
+
+<SimpleBadge>Active</SimpleBadge>`}
       >
         <SimpleBadge>Active</SimpleBadge>
       </ComponentPreview>
-
-      {/* Import */}
-      <CodeBlock
-        label="Import"
-        code={`import { SimpleBadge } from "@/components/custom/common-ui/simple-badge"`}
-      />
 
       {/* Examples */}
       <div className="space-y-8">

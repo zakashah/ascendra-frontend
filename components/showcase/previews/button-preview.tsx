@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Button } from '@/components/custom/ui/button';
@@ -16,16 +15,12 @@ export function ButtonDocContent() {
 
       {/* Hero preview */}
       <ComponentPreview
-        code={`<Button>Continue</Button>`}
+        code={`import { Button } from "@/components/custom/ui/button";
+
+<Button>Continue</Button>`}
       >
         <Button>Continue</Button>
       </ComponentPreview>
-
-      {/* Import */}
-      <CodeBlock
-        label="Import"
-        code={`import { Button } from "@/components/custom/ui/button"`}
-      />
 
       {/* Examples */}
       <div className="space-y-8">

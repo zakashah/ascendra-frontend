@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -23,7 +22,12 @@ export function EmptyDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<Empty>
+        code={`import {
+  Empty, EmptyHeader, EmptyTitle, EmptyDescription,
+  EmptyContent, EmptyMedia,
+} from "@/components/custom/ui/empty";
+
+<Empty>
   <EmptyHeader>
     <EmptyTitle>No invoices found</EmptyTitle>
     <EmptyDescription>Create your first invoice to get started.</EmptyDescription>
@@ -39,14 +43,6 @@ export function EmptyDocContent() {
           </Empty>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  Empty, EmptyHeader, EmptyTitle, EmptyDescription,
-  EmptyContent, EmptyMedia,
-} from "@/components/custom/ui/empty"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

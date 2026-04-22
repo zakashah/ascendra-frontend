@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -26,7 +25,12 @@ export function TableDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<TableWrapper>
+        code={`import {
+  Table, TableWrapper, TableHeader, TableHeaderRow, TableBody,
+  TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody,
+} from "@/components/custom/ui/table";
+
+<TableWrapper>
   <Table>
     <TableHeader>
       <TableHeaderRow>
@@ -66,14 +70,6 @@ export function TableDocContent() {
           </TableWrapper>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  Table, TableWrapper, TableHeader, TableHeaderRow, TableBody,
-  TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody,
-} from "@/components/custom/ui/table"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

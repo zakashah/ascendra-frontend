@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { StatusDot } from '@/components/custom/common-ui/status-dot';
@@ -13,14 +12,11 @@ export function StatusDotDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<StatusDot variant="emerald" />`}>
+      <ComponentPreview code={`import { StatusDot } from "@/components/custom/common-ui/status-dot";
+
+<StatusDot variant="emerald" />`}>
         <StatusDot variant="emerald" />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { StatusDot } from "@/components/custom/common-ui/status-dot"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

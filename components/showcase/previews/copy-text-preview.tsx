@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { CopyText } from '@/components/custom/util/copy-text';
@@ -13,14 +12,11 @@ export function CopyTextDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<CopyText value="INV-00124">INV-00124</CopyText>`}>
+      <ComponentPreview code={`import { CopyText } from "@/components/custom/util/copy-text";
+
+<CopyText value="INV-00124">INV-00124</CopyText>`}>
         <CopyText value="INV-00124">INV-00124</CopyText>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { CopyText } from "@/components/custom/util/copy-text"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

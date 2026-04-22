@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Tabs } from '@/components/custom/tabs/tabs';
@@ -18,7 +17,9 @@ export function TabsDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<Tabs defaultValue="overview">
+        code={`import { Tabs, TabList, TabTrigger, TabContent } from "@/components/custom/tabs/tabs";
+
+<Tabs defaultValue="overview">
   <TabList>
     <TabTrigger value="overview">Overview</TabTrigger>
     <TabTrigger value="students">Students</TabTrigger>
@@ -36,11 +37,6 @@ export function TabsDocContent() {
           </Tabs>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { Tabs, TabList, TabTrigger, TabContent } from "@/components/custom/tabs/tabs"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

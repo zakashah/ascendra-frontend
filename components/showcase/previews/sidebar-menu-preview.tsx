@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { SideBarMenu } from '@/components/custom/side-bar/side-bar-menu';
@@ -21,7 +20,12 @@ export function SidebarMenuDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<SideBarMenu basePath="/merchant">
+        code={`import {
+  SideBarMenu, SideBarMenuHeader, SideBarMenuContent,
+  SideBarMenuItem, SideBarMenuSet, SideBarMenuSetTitle,
+} from "@/components/custom/side-bar/side-bar-menu";
+
+<SideBarMenu basePath="/merchant">
   <SideBarMenuHeader icon={LuUsers}>Parents</SideBarMenuHeader>
   <SideBarMenuContent>
     <SideBarMenuItem path="/merchant/parents">All Parents</SideBarMenuItem>
@@ -39,14 +43,6 @@ export function SidebarMenuDocContent() {
           </SideBarMenu>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  SideBarMenu, SideBarMenuHeader, SideBarMenuContent,
-  SideBarMenuItem, SideBarMenuSet, SideBarMenuSetTitle,
-} from "@/components/custom/side-bar/side-bar-menu"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

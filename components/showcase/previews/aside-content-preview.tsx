@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { AsideContent } from '@/components/custom/layout/aside-content';
@@ -15,7 +14,9 @@ export function AsideContentDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<AsideContent>
+        code={`import { AsideContent } from "@/components/custom/layout/aside-content";
+
+<AsideContent>
   <p className="text-sm text-foreground font-medium">Invoice Summary</p>
   <p className="text-xs text-muted-foreground">Total: PKR 45,000</p>
 </AsideContent>`}
@@ -27,11 +28,6 @@ export function AsideContentDocContent() {
           </AsideContent>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { AsideContent } from "@/components/custom/layout/aside-content"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

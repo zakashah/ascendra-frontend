@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
@@ -14,14 +13,11 @@ export function SimpleAlertDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>`}>
+      <ComponentPreview code={`import { SimpleAlert } from "@/components/custom/common-ui/simple-alert";
+
+<SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>`}>
         <SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { SimpleAlert } from "@/components/custom/common-ui/simple-alert"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

@@ -94,16 +94,27 @@ export default async function MainSectionBlocksPage() {
     <div className="flex flex-col gap-10">
       <div>
         <h1 className="text-lg font-semibold">Main Section</h1>
-        <p className="text-sm text-muted-foreground mt-1 max-w-lg">
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">MainSection</code> is the
-          settings card unit. It always needs{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">MainSectionHeader</code> and
-          usually a{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">MainSectionPanel</code>. Add{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">MainSectionFooter</code> for
-          contextual notes. Each{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">MainSectionPanelItem</code> draws
-          a top border divider (except the first).
+        <p className="text-muted-foreground mt-1 max-w-lg text-sm">
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            MainSection
+          </code>{' '}
+          is the settings card unit. It always needs{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            MainSectionHeader
+          </code>{' '}
+          and usually a{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            MainSectionPanel
+          </code>
+          . Add{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            MainSectionFooter
+          </code>{' '}
+          for contextual notes. Each{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            MainSectionPanelItem
+          </code>{' '}
+          draws a top border divider (except the first).
         </p>
       </div>
 
@@ -124,13 +135,19 @@ export default async function MainSectionBlocksPage() {
             <MainSectionPanelItem>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">Enable late fees</span>
-                <span className="text-xs text-muted-foreground">Toggle setting</span>
+                <span className="text-muted-foreground text-xs">
+                  Toggle setting
+                </span>
               </div>
             </MainSectionPanelItem>
             <MainSectionPanelItem>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Send payment reminders</span>
-                <span className="text-xs text-muted-foreground">Toggle setting</span>
+                <span className="text-sm font-medium">
+                  Send payment reminders
+                </span>
+                <span className="text-muted-foreground text-xs">
+                  Toggle setting
+                </span>
               </div>
             </MainSectionPanelItem>
           </MainSectionPanel>
@@ -154,12 +171,17 @@ export default async function MainSectionBlocksPage() {
             <MainSectionPanelItem>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">Live mode</span>
-                <span className="text-xs text-muted-foreground">Toggle setting</span>
+                <span className="text-muted-foreground text-xs">
+                  Toggle setting
+                </span>
               </div>
             </MainSectionPanelItem>
           </MainSectionPanel>
           <MainSectionFooter>
-            <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+            <InfoIcon
+              className="mt-0.5 mr-2 size-3 shrink-0"
+              strokeWidth={2.5}
+            />
             Transaction fees are 0.7% per payment processed.
           </MainSectionFooter>
         </MainSection>
@@ -182,7 +204,9 @@ export default async function MainSectionBlocksPage() {
             <MainSectionPanelItem>
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-medium">Delete merchant account</div>
+                  <div className="text-sm font-medium">
+                    Delete merchant account
+                  </div>
                   <p className="text-muted-foreground mt-0.5 text-xs">
                     Permanently delete this account and all associated data.
                   </p>

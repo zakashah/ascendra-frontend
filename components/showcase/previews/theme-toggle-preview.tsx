@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { ThemeToggle } from '@/components/custom/util/theme-toggle';
@@ -13,14 +12,11 @@ export function ThemeToggleDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<ThemeToggle />`}>
+      <ComponentPreview code={`import { ThemeToggle } from "@/components/custom/util/theme-toggle";
+
+<ThemeToggle />`}>
         <ThemeToggle />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { ThemeToggle } from "@/components/custom/util/theme-toggle"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
@@ -13,14 +12,11 @@ export function ProBadgeDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<ProBadge>Pro</ProBadge>`}>
+      <ComponentPreview code={`import { ProBadge } from "@/components/custom/common-ui/pro-badge";
+
+<ProBadge>Pro</ProBadge>`}>
         <ProBadge>Pro</ProBadge>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { ProBadge } from "@/components/custom/common-ui/pro-badge"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

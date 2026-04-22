@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -28,7 +27,13 @@ export function DropdownMenuDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<DropdownMenu>
+        code={`import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+  DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel,
+  DropdownMenuCheckboxItem, DropdownMenuShortcut,
+} from "@/components/custom/ui/dropdown-menu";
+
+<DropdownMenu>
   <DropdownMenuTrigger asChild>
     <Button variant="secondary">Open Menu</Button>
   </DropdownMenuTrigger>
@@ -52,15 +57,6 @@ export function DropdownMenuDocContent() {
           </DropdownMenuContent>
         </DropdownMenu>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
-  DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel,
-  DropdownMenuCheckboxItem, DropdownMenuShortcut,
-} from "@/components/custom/ui/dropdown-menu"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { PaginationButton } from '@/components/custom/common-ui/pagination-button';
@@ -15,7 +14,9 @@ export function PaginationButtonDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<PaginationButton>
+        code={`import { PaginationButton } from "@/components/custom/common-ui/pagination-button";
+
+<PaginationButton>
   <LuChevronLeft />
 </PaginationButton>`}
       >
@@ -23,11 +24,6 @@ export function PaginationButtonDocContent() {
           <LuChevronLeft />
         </PaginationButton>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { PaginationButton } from "@/components/custom/common-ui/pagination-button"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

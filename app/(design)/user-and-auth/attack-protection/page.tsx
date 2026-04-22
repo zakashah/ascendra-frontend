@@ -2,7 +2,6 @@
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
-import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
@@ -27,6 +26,7 @@ import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
 import { InfoIcon } from 'lucide-react';
 import { LuArrowRight, LuInfo } from 'react-icons/lu';
+import { Input } from '@/components/custom/ui/input';
 
 export default function AttackProtectionPage() {
   return (

@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -25,7 +24,12 @@ export function SheetDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<Sheet>
+        code={`import {
+  Sheet, SheetTrigger, SheetContent, SheetHeader,
+  SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose,
+} from "@/components/custom/ui/sheet";
+
+<Sheet>
   <SheetTrigger asChild>
     <Button>Open Sheet</Button>
   </SheetTrigger>
@@ -67,14 +71,6 @@ export function SheetDocContent() {
           </SheetContent>
         </Sheet>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  Sheet, SheetTrigger, SheetContent, SheetHeader,
-  SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose,
-} from "@/components/custom/ui/sheet"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

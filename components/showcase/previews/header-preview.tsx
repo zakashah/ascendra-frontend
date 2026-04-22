@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Header } from '@/components/custom/header/header';
@@ -20,7 +19,9 @@ export function HeaderDocContent() {
 
       <ComponentPreview
         minHeight={80}
-        code={`<Header>
+        code={`import { Header, HeaderLink, HeaderSlash, HeaderChevron, HeaderActions, HeaderLinks } from "@/components/custom/header/header";
+
+<Header>
   <HeaderLinks>
     <HeaderLink href="#">Dashboard</HeaderLink>
   </HeaderLinks>
@@ -34,11 +35,6 @@ export function HeaderDocContent() {
           </Header>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { Header, HeaderLink, HeaderSlash, HeaderChevron, HeaderActions, HeaderLinks } from "@/components/custom/header/header"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

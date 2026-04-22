@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -23,7 +22,12 @@ export function SelectDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<Select>
+        code={`import {
+  Select, SelectTrigger, SelectContent, SelectItem,
+  SelectGroup, SelectLabel, SelectValue, SelectSeparator,
+} from "@/components/custom/ui/select";
+
+<Select>
   <SelectTrigger>
     <SelectValue placeholder="Select status" />
   </SelectTrigger>
@@ -45,14 +49,6 @@ export function SelectDocContent() {
           </SelectContent>
         </Select>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  Select, SelectTrigger, SelectContent, SelectItem,
-  SelectGroup, SelectLabel, SelectValue, SelectSeparator,
-} from "@/components/custom/ui/select"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

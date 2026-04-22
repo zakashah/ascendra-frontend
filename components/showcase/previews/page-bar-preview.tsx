@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { PageBar } from '@/components/custom/layout/page-bar';
@@ -24,7 +23,9 @@ export function PageBarDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<PageBar>
+        code={`import { PageBar, PageBarContent, PageBarAction } from "@/components/custom/layout/page-bar";
+
+<PageBar>
   <PageBarContent>
     <InputGroup>
       <InputGroupAddon align="inline-start">
@@ -62,11 +63,6 @@ export function PageBarDocContent() {
           </PageBar>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { PageBar, PageBarContent, PageBarAction } from "@/components/custom/layout/page-bar"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -25,7 +24,12 @@ export function DialogDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<Dialog>
+        code={`import {
+  Dialog, DialogTrigger, DialogContent, DialogHeader,
+  DialogTitle, DialogDescription, DialogBody, DialogFooter, DialogClose,
+} from "@/components/custom/ui/dialog";
+
+<Dialog>
   <DialogTrigger asChild>
     <Button>Open Dialog</Button>
   </DialogTrigger>
@@ -71,14 +75,6 @@ export function DialogDocContent() {
           </DialogContent>
         </Dialog>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  Dialog, DialogTrigger, DialogContent, DialogHeader,
-  DialogTitle, DialogDescription, DialogBody, DialogFooter, DialogClose,
-} from "@/components/custom/ui/dialog"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

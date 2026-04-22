@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { NavLink } from '@/components/custom/nav/nav-link';
@@ -15,17 +14,14 @@ export function NavLinkDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<NavLink href="/parents" exact>Parents</NavLink>`}
+        code={`import { NavLink, NavLinkBadge } from "@/components/custom/nav/nav-link";
+
+<NavLink href="/parents" exact>Parents</NavLink>`}
       >
         <div className="border-b pb-1">
           <NavLink href="#" exact>Parents</NavLink>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { NavLink, NavLinkBadge } from "@/components/custom/nav/nav-link"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

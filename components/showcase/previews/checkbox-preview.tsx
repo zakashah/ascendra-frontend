@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { Checkbox } from '@/components/custom/ui/checkbox';
@@ -13,14 +12,11 @@ export function CheckboxDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<Checkbox />`}>
+      <ComponentPreview code={`import { Checkbox } from "@/components/custom/ui/checkbox";
+
+<Checkbox />`}>
         <Checkbox />
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { Checkbox } from "@/components/custom/ui/checkbox"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

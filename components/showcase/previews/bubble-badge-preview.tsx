@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { BubbleBadge } from '@/components/custom/common-ui/bubble-badge';
@@ -13,14 +12,11 @@ export function BubbleBadgeDocContent() {
   return (
     <div className="space-y-10">
 
-      <ComponentPreview code={`<BubbleBadge color="blue">12</BubbleBadge>`}>
+      <ComponentPreview code={`import { BubbleBadge } from "@/components/custom/common-ui/bubble-badge";
+
+<BubbleBadge color="blue">12</BubbleBadge>`}>
         <BubbleBadge color="blue">12</BubbleBadge>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { BubbleBadge } from "@/components/custom/common-ui/bubble-badge"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

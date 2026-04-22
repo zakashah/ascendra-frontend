@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import {
@@ -22,7 +21,12 @@ export function InputGroupDocContent() {
     <div className="space-y-10">
 
       <ComponentPreview
-        code={`<InputGroup>
+        code={`import {
+  InputGroup, InputGroupAddon, InputGroupButton,
+  InputGroupText, InputGroupInput, InputGroupTextarea,
+} from "@/components/custom/ui/input-group";
+
+<InputGroup>
   <InputGroupAddon align="inline-start">
     <LuSearch className="size-4" />
   </InputGroupAddon>
@@ -38,14 +42,6 @@ export function InputGroupDocContent() {
           </InputGroup>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import {
-  InputGroup, InputGroupAddon, InputGroupButton,
-  InputGroupText, InputGroupInput, InputGroupTextarea,
-} from "@/components/custom/ui/input-group"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>

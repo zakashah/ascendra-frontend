@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentPreview } from '../component-preview';
-import { CodeBlock } from '../code-block';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { MainSection } from '@/components/custom/layout/main-section';
@@ -20,7 +19,9 @@ export function MainSectionDocContent() {
 
       <ComponentPreview
         align="start"
-        code={`<MainSection>
+        code={`import { MainSection, MainSectionHeader, MainSectionFooter, MainSectionPanel, MainSectionPanelItem } from "@/components/custom/layout/main-section";
+
+<MainSection>
   <MainSectionHeader>
     <h3 className="text-sm font-medium text-foreground">Profile</h3>
   </MainSectionHeader>
@@ -34,11 +35,6 @@ export function MainSectionDocContent() {
           </MainSection>
         </div>
       </ComponentPreview>
-
-      <CodeBlock
-        label="Import"
-        code={`import { MainSection, MainSectionHeader, MainSectionFooter, MainSectionPanel, MainSectionPanelItem } from "@/components/custom/layout/main-section"`}
-      />
 
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>
