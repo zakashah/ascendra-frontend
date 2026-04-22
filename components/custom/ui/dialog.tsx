@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
-import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 /* ── Overlay ──────────────────────────────────────────────────────────────── */
@@ -49,12 +48,10 @@ function DialogClose({
 function DialogContent({
   className,
   children,
-  footer,
-  showCloseButton = true,
+  actions,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  footer?: React.ReactNode;
-  showCloseButton?: boolean;
+  actions?: React.ReactNode;
 }) {
   return (
     <DialogPrimitive.Portal>
@@ -63,13 +60,13 @@ function DialogContent({
         data-slot="dialog-content"
         className={cn(
           /* positioning */
-          'fixed top-1/2 left-1/2 z-1000 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 outline-none',
+          'fixed top-1/2 left-1/2 z-1000 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 p-0 outline-none',
           /* enter / exit */
           'data-open:animate-in data-closed:animate-out',
           'data-closed:fade-out-0 data-open:fade-in-0',
           'data-closed:zoom-out-95 data-open:zoom-in-95',
           'duration-150',
-          /* outer shell — gray background, visible behind inner card's rounded bottom */
+          /* outer shell — overflow-hidden clips the inner card's top & side ring */
           'overflow-hidden rounded-xl',
           'bg-gray-50 dark:bg-(--color-gray-1500)',
           'ring-1 ring-black/8 dark:ring-black/[0.56]',
@@ -79,35 +76,29 @@ function DialogContent({
         )}
         {...props}
       >
-        {/* inner white card — rounded corners visible against outer gray */}
+        {/*
+          Inner card — flush with outer on all sides.
+          The outer's overflow-hidden clips the ring on top & sides,
+          so only the bottom border + rounded-b corners are visible,
+          giving the "body is raised" effect.
+        */}
         <div
           data-slot="dialog-inner"
           className={cn(
-            'overflow-hidden rounded-xl',
+            'overflow-hidden rounded-b-xl',
             'bg-white dark:bg-(--color-gray-1400)',
+            'ring-1 ring-black/8 dark:ring-white/8',
             'shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_2px_rgba(0,0,0,0.06)]'
           )}
         >
           {children}
         </div>
 
-        {/* footer sits outside inner card in the gray outer shell */}
-        {footer}
-
-        {showCloseButton && (
-          <DialogPrimitive.Close
-            data-slot="dialog-close-button"
-            className={cn(
-              'absolute top-3.5 right-3.5 rounded-md p-0.5',
-              'text-muted-foreground transition-colors',
-              'hover:bg-accent hover:text-foreground',
-              'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2',
-              'disabled:pointer-events-none'
-            )}
-          >
-            <X className="size-4" />
-            <span className="sr-only">Close</span>
-          </DialogPrimitive.Close>
+        {/* buttons live outside the raised card, flat in the gray shell */}
+        {actions && (
+          <div data-slot="dialog-actions-wrapper" className="p-4">
+            {actions}
+          </div>
         )}
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>
@@ -121,7 +112,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="dialog-header"
       className={cn(
-        'border-border flex flex-col gap-0.5 border-b px-5 py-5',
+        'border-border flex flex-col gap-0.5 border-b px-5 py-4',
         className
       )}
       {...props}
@@ -136,7 +127,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn('text-foreground text-base font-medium', className)}
+      className={cn('text-foreground text-base font-semibold', className)}
       {...props}
     />
   );
@@ -161,20 +152,35 @@ function DialogBody({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="dialog-body"
-      className={cn('px-5 py-4', className)}
+      className={cn('p-5 text-sm', className)}
       {...props}
     />
   );
 }
 
-/* ── Footer ───────────────────────────────────────────────────────────────── */
+/* ── Footer — optional inner section with top separator (e.g. checkbox row) ─ */
 
 function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="dialog-footer"
       className={cn(
-        'grid auto-cols-fr grid-flow-col items-stretch gap-3 p-4',
+        'border-border flex items-center gap-2 border-t p-5 text-sm',
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+/* ── Actions — button grid, passed via the `actions` prop on DialogContent ── */
+
+function DialogActions({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="dialog-actions"
+      className={cn(
+        'grid auto-cols-fr grid-flow-col gap-3',
         '[&_button]:justify-center',
         className
       )}
@@ -193,4 +199,5 @@ export {
   DialogDescription,
   DialogBody,
   DialogFooter,
+  DialogActions,
 };

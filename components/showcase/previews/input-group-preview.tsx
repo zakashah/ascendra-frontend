@@ -12,14 +12,13 @@ import {
   InputGroupTextarea,
 } from '@/components/custom/ui/input-group';
 import { registry } from '@/lib/showcase/registry';
-import { LuSearch, LuCopy } from 'react-icons/lu';
+import { LuSearch, LuCopy, LuGlobe, LuLink } from 'react-icons/lu';
 
 const meta = registry['input-group'];
 
 export function InputGroupDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import {
   InputGroup, InputGroupAddon, InputGroupButton,
@@ -47,8 +46,10 @@ export function InputGroupDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Icon Prefix</h3>
-          <p className="text-xs text-muted-foreground">Inline-start addon for icon or text prefix.</p>
+          <h3 className="text-foreground text-sm font-medium">Icon Prefix</h3>
+          <p className="text-muted-foreground text-xs">
+            Inline-start addon for icon or text prefix.
+          </p>
           <ComponentPreview
             align="start"
             code={`<InputGroup>
@@ -70,8 +71,14 @@ export function InputGroupDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Text Prefix</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">InputGroupText</code> inside the addon for a text label.</p>
+          <h3 className="text-foreground text-sm font-medium">Text Prefix</h3>
+          <p className="text-muted-foreground text-xs">
+            Use{' '}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              InputGroupText
+            </code>{' '}
+            inside the addon for a text label.
+          </p>
           <ComponentPreview
             align="start"
             code={`<InputGroup>
@@ -93,8 +100,69 @@ export function InputGroupDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Button Suffix</h3>
-          <p className="text-xs text-muted-foreground">Inline-end addon with a ghost action button.</p>
+          <h3 className="text-foreground text-sm font-medium">
+            Icon + Text Prefix
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Combine an icon and a text label in the same inline-start addon.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <LuGlobe className="size-4" />
+    <InputGroupText>https://</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput placeholder="example.com" />
+</InputGroup>`}
+          >
+            <div className="w-64">
+              <InputGroup>
+                <InputGroupAddon align="inline-start">
+                  <LuGlobe className="size-4" />
+                  <InputGroupText>https://</InputGroupText>
+                </InputGroupAddon>
+                <InputGroupInput placeholder="example.com" />
+              </InputGroup>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-foreground text-sm font-medium">Domain Prefix</h3>
+          <p className="text-muted-foreground text-xs">
+            A muted, bordered inline-start addon showing a fixed host — useful
+            for path or slug inputs (e.g. the Clerk Paths page pattern).
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<InputGroup className="w-full">
+  <InputGroupInput placeholder="e.g. /unauthorized-sign-in" />
+  <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+    <div className="flex items-center gap-2 pr-2">
+      <span className="font-normal">$DEVHOST</span>
+    </div>
+  </InputGroupAddon>
+</InputGroup>`}
+          >
+            <div className="w-72">
+              <InputGroup className="w-full">
+                <InputGroupInput placeholder="e.g. /unauthorized-sign-in" />
+                <InputGroupAddon className="rounded-tl-sm rounded-bl-sm border-r border-gray-200 bg-gray-100">
+                  <div className="flex items-center gap-2 pr-2">
+                    <span className="font-normal">$DEVHOST</span>
+                  </div>
+                </InputGroupAddon>
+              </InputGroup>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-foreground text-sm font-medium">Button Suffix</h3>
+          <p className="text-muted-foreground text-xs">
+            Inline-end addon with a ghost action button.
+          </p>
           <ComponentPreview
             align="start"
             code={`<InputGroup>
@@ -120,8 +188,54 @@ export function InputGroupDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Block Label (Top)</h3>
-          <p className="text-xs text-muted-foreground">Block-start addon places a label above the input inside the group border.</p>
+          <h3 className="text-foreground text-sm font-medium">
+            Text Prefix + Copy Button
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Pair a{' '}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              InputGroupText
+            </code>{' '}
+            prefix on the left with a copy action button on the right.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <InputGroupText>PKR</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput defaultValue="12,500.00" readOnly />
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton>
+      <LuCopy className="size-3.5" />
+    </InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>`}
+          >
+            <div className="w-64">
+              <InputGroup>
+                <InputGroupAddon align="inline-start">
+                  <InputGroupText>PKR</InputGroupText>
+                </InputGroupAddon>
+                <InputGroupInput defaultValue="12,500.00" readOnly />
+                <InputGroupAddon align="inline-end">
+                  <InputGroupButton>
+                    <LuCopy className="size-3.5" />
+                  </InputGroupButton>
+                </InputGroupAddon>
+              </InputGroup>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-foreground text-sm font-medium">
+            Block Label (Top)
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Block-start addon places a label above the input inside the group
+            border.
+          </p>
           <ComponentPreview
             align="start"
             code={`<InputGroup>
@@ -139,8 +253,14 @@ export function InputGroupDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Textarea</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">InputGroupTextarea</code> for multiline input with the same group styling.</p>
+          <h3 className="text-foreground text-sm font-medium">Textarea</h3>
+          <p className="text-muted-foreground text-xs">
+            Use{' '}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              InputGroupTextarea
+            </code>{' '}
+            for multiline input with the same group styling.
+          </p>
           <ComponentPreview
             align="start"
             code={`<InputGroup>
