@@ -83,7 +83,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             Invite
           </Button>
           <ThemeToggle />
-          <NameAvatar name="burhan shah" />
+          <NameAvatar href="#" name="burhan shah" />
         </HeaderActions>
       </Header>
       <Nav>
