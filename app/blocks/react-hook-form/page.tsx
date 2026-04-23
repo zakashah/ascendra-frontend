@@ -1,13 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { GlobeIcon, InfoIcon, PhoneIcon } from 'lucide-react';
 import { LuChevronDown, LuDownload, LuFileText, LuUserX } from 'react-icons/lu';
+import { type DateRange } from 'react-day-picker';
 
 import { Button } from '@/components/custom/ui/button';
 import { Checkbox } from '@/components/custom/ui/checkbox';
+import {
+  Dialog,
+  DialogActions,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/custom/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,6 +62,8 @@ import { MainSectionFooter } from '@/components/custom/layout/main-section-foote
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
+import { DatePicker } from '@/components/custom/ui/date-picker';
+import { DateRangePicker } from '@/components/custom/ui/date-range-picker';
 
 // ── Schema ──────────────────────────────────────────────────────────────────
 
@@ -56,6 +71,7 @@ const THEMES = ['light', 'dark', 'system'] as const;
 const VISIBILITY = ['public', 'team', 'private'] as const;
 
 const schema = z.object({
+  // Personal Info
   fullName: z
     .string()
     .min(2, 'Name must be at least 2 characters')
@@ -74,14 +90,24 @@ const schema = z.object({
       message: 'URL must start with http:// or https://',
     }),
   bio: z.string().max(160, 'Bio cannot exceed 160 characters').optional(),
+  dateOfBirth: z.date().optional(),
+
+  // Account Preferences
   timezone: z.string().min(1, 'Please select a timezone'),
   language: z.string().min(1, 'Please select a language'),
   theme: z.enum(THEMES),
   emailNotifications: z.boolean(),
+  reportRange: z
+    .object({ from: z.date(), to: z.date().optional() })
+    .optional(),
+
+  // Notifications
   notifyMarketing: z.boolean(),
   notifySecurity: z.boolean(),
   notifyProductUpdates: z.boolean(),
   notifyWeeklyDigest: z.boolean(),
+
+  // Visibility
   visibility: z.enum(VISIBILITY),
 });
 
@@ -93,10 +119,15 @@ const defaultValues: FormData = {
   phone: '+92 300 1234567',
   website: 'https://alexjohnson.dev',
   bio: 'Product designer and developer based in Karachi.',
+  dateOfBirth: new Date('1990-05-15'),
   timezone: 'Asia/Karachi',
   language: 'en',
   theme: 'system',
   emailNotifications: true,
+  reportRange: {
+    from: new Date('2025-01-01'),
+    to: new Date('2025-12-31'),
+  },
   notifyMarketing: false,
   notifySecurity: true,
   notifyProductUpdates: true,
@@ -107,6 +138,8 @@ const defaultValues: FormData = {
 // ── Page ────────────────────────────────────────────────────────────────────
 
 export default function ReactHookFormPage() {
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
   const {
     register,
     control,
@@ -117,6 +150,7 @@ export default function ReactHookFormPage() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues,
+    mode: 'onTouched',
   });
 
   const bio = watch('bio');
@@ -242,7 +276,7 @@ export default function ReactHookFormPage() {
                 </Field>
               </MainSectionPanelItem>
 
-              {/* Website — InputGroup with text prefix */}
+              {/* Website — InputGroup with icon prefix */}
               <MainSectionPanelItem>
                 <Field>
                   <FieldLabel htmlFor="website">Website</FieldLabel>
@@ -284,6 +318,30 @@ export default function ReactHookFormPage() {
                     Maximum 160 characters. Shown on your public profile.
                   </FieldDescription>
                   <FieldError errors={[errors.bio]} />
+                </Field>
+              </MainSectionPanelItem>
+
+              {/* Date of Birth — single DatePicker */}
+              <MainSectionPanelItem>
+                <Field>
+                  <FieldLabel>Date of Birth</FieldLabel>
+                  <Controller
+                    name="dateOfBirth"
+                    control={control}
+                    render={({ field }) => (
+                      <DatePicker
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Select your date of birth"
+                        fromYear={1940}
+                        toYear={new Date().getFullYear() - 13}
+                      />
+                    )}
+                  />
+                  <FieldDescription>
+                    Used to verify your age. Not shown publicly.
+                  </FieldDescription>
+                  <FieldError errors={[errors.dateOfBirth]} />
                 </Field>
               </MainSectionPanelItem>
             </MainSectionPanel>
@@ -369,7 +427,7 @@ export default function ReactHookFormPage() {
                 </Field>
               </MainSectionPanelItem>
 
-              {/* Theme — RadioGroup (inline) */}
+              {/* Theme — RadioGroup (inline 3-column) */}
               <MainSectionPanelItem>
                 <FieldSet>
                   <FieldLegend variant="label">Theme Preference</FieldLegend>
@@ -400,7 +458,7 @@ export default function ReactHookFormPage() {
                 </FieldSet>
               </MainSectionPanelItem>
 
-              {/* Profile Visibility — RadioGroup (with descriptions) */}
+              {/* Profile Visibility — RadioGroup with descriptions */}
               <MainSectionPanelItem>
                 <FieldSet>
                   <FieldLegend variant="label">Profile Visibility</FieldLegend>
@@ -468,6 +526,28 @@ export default function ReactHookFormPage() {
                     </Field>
                   )}
                 />
+              </MainSectionPanelItem>
+
+              {/* Report Period — DateRangePicker */}
+              <MainSectionPanelItem>
+                <Field>
+                  <FieldLabel>Report Period</FieldLabel>
+                  <Controller
+                    name="reportRange"
+                    control={control}
+                    render={({ field }) => (
+                      <DateRangePicker
+                        value={field.value as { from: Date; to?: Date } | undefined}
+                        onChange={field.onChange}
+                        placeholder="Select report period"
+                        numberOfMonths={2}
+                      />
+                    )}
+                  />
+                  <FieldDescription>
+                    Date range for your activity reports and exports.
+                  </FieldDescription>
+                </Field>
               </MainSectionPanelItem>
             </MainSectionPanel>
             <MainSectionFooter>
@@ -575,24 +655,9 @@ export default function ReactHookFormPage() {
               </MainSectionPanelItem>
             </MainSectionPanel>
           </MainSection>
-
-          {/* Form actions */}
-          <div className="flex justify-end gap-2.5">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => reset()}
-              disabled={!isDirty}
-            >
-              Reset
-            </Button>
-            <Button type="submit" disabled={!isDirty}>
-              Save Changes
-            </Button>
-          </div>
         </form>
 
-        {/* ── Danger Zone (outside form) ──────────────────────────────── */}
+        {/* ── Danger Zone (outside form, no RHF binding needed) ─────────── */}
         <MainSection danger>
           <MainSectionHeader>
             <div className="text-base font-medium">Danger Zone</div>
@@ -610,9 +675,49 @@ export default function ReactHookFormPage() {
                     This action cannot be undone.
                   </p>
                 </div>
-                <Button variant="destructive" size="sm">
-                  Delete Account
-                </Button>
+                <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="destructive" size="sm">
+                      Delete Account
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    actions={
+                      <DialogActions>
+                        <DialogClose asChild>
+                          <Button variant="secondary">Cancel</Button>
+                        </DialogClose>
+                        <Button
+                          variant="destructive"
+                          onClick={() => {
+                            console.log('Account deleted');
+                            setDeleteOpen(false);
+                          }}
+                        >
+                          Delete Account
+                        </Button>
+                      </DialogActions>
+                    }
+                  >
+                    <DialogHeader>
+                      <DialogTitle>Delete account?</DialogTitle>
+                      <DialogDescription>
+                        This will permanently delete your account and remove all
+                        associated data including invoices, clients, and settings.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogBody>
+                      <p className="text-muted-foreground text-sm">
+                        This action{' '}
+                        <span className="text-foreground font-medium">
+                          cannot be undone
+                        </span>
+                        . Please make sure you have exported any data you need
+                        before proceeding.
+                      </p>
+                    </DialogBody>
+                  </DialogContent>
+                </Dialog>
               </div>
             </MainSectionPanelItem>
           </MainSectionPanel>

@@ -58,11 +58,17 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
         'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
 
-        // FOCUS VISIBLE SHADOW
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline',
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-2',
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-primary',
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only)]:outline-offset-1',
+        // INVALID
+        'has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-700',
+        'dark:has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-600',
+        'has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]',
+        'dark:has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]',
+
+        // FOCUS VISIBLE SHADOW — suppressed when field has an error
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline',
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline-2',
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline-primary',
+        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline-offset-1',
         className
       )}
       {...props}
