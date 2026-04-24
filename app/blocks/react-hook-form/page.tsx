@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -137,6 +137,14 @@ const defaultValues: FormData = {
 
 export default function ReactHookFormPage() {
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (saving) {
+      const t = setTimeout(() => setSaving(false), 3000);
+      return () => clearTimeout(t);
+    }
+  }, [saving]);
 
   const {
     register,
@@ -144,7 +152,7 @@ export default function ReactHookFormPage() {
     handleSubmit,
     reset,
     watch,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues,
@@ -154,9 +162,11 @@ export default function ReactHookFormPage() {
   const bio = watch('bio');
 
   function onSubmit(data: FormData) {
+    setSaving(true);
+    setTimeout(() => setSaving(false), 3000);
     console.log('Profile saved:', data);
-    reset(data);
-  }
+    // reset(data);
+  }  
 
   return (
     <>
@@ -733,9 +743,9 @@ export default function ReactHookFormPage() {
 
       {/* Floating unsaved changes indicator */}
       <UnsavedChangesBar
-        show={isDirty}
-        onSave={handleSubmit(onSubmit)}
+        isDirty={isDirty}
         onReset={() => reset()}
+        isSaving={saving}
       />
     </>
   );
