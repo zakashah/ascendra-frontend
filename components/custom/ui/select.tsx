@@ -68,7 +68,7 @@ function SelectTrigger({
         'dark:hover:bg-secondary',
         'disabled:cursor-not-allowed disabled:opacity-40',
         /* Focus */
-        'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
+        'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
         size === 'sm' && 'h-5',
         size === 'default' && 'h-8',
         className

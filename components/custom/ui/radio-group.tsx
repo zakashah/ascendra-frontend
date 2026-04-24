@@ -30,7 +30,7 @@ function RadioGroupItem({
         data-slot="radio-group-item"
         className={cn(
           /* Layout */
-          'relative top-0.5 mr-2 inline-block size-3.5 shrink-0 rounded-full transition',
+          'relative top-0.5 inline-block size-3.5 shrink-0 rounded-full transition',
 
           /* Light base */
           'bg-white',

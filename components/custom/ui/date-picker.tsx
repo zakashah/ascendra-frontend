@@ -37,17 +37,17 @@ function DatePicker({
           data-slot="date-picker-trigger"
           className={cn(
             'flex h-8 w-full items-center gap-2 rounded-[.375rem] bg-white px-3 text-left text-sm transition',
-            'ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset dark:bg-secondary',
+            'dark:bg-secondary ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset',
             'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
             'dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]',
             'hover:ring-(--color-umbra)/24',
-            'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline',
+            'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
             'disabled:cursor-not-allowed disabled:opacity-40',
             !value && 'text-gray-500 dark:text-gray-700',
             className
           )}
         >
-          <LuCalendar className="size-4 shrink-0 text-muted-foreground" />
+          <LuCalendar className="text-muted-foreground size-4 shrink-0" />
           {value ? format(value, 'PPP') : placeholder}
         </button>
       </PopoverPrimitive.Trigger>
@@ -56,7 +56,7 @@ function DatePicker({
           align="start"
           sideOffset={6}
           className={cn(
-            'z-50 rounded-xl overflow-hidden',
+            'z-50 overflow-hidden rounded-xl',
             'bg-white dark:bg-(--color-gray-1400)',
             'ring-1 ring-black/8 dark:ring-white/8',
             'shadow-[0_16px_36px_-6px_rgba(25,28,33,0.16),0_6px_16px_-2px_rgba(25,28,33,0.08)]',

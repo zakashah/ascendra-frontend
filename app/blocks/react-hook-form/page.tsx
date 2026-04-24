@@ -97,9 +97,7 @@ const schema = z.object({
   language: z.string().min(1, 'Please select a language'),
   theme: z.enum(THEMES),
   emailNotifications: z.boolean(),
-  reportRange: z
-    .object({ from: z.date(), to: z.date().optional() })
-    .optional(),
+  reportRange: z.object({ from: z.date(), to: z.date().optional() }).optional(),
 
   // Notifications
   notifyMarketing: z.boolean(),
@@ -441,7 +439,11 @@ export default function ReactHookFormPage() {
                         className="grid-cols-3"
                       >
                         {THEMES.map((opt) => (
-                          <Field key={opt} orientation="horizontal">
+                          <Field
+                            key={opt}
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <RadioGroupItem value={opt} id={`theme-${opt}`} />
                             <FieldLabel
                               htmlFor={`theme-${opt}`}
@@ -537,7 +539,9 @@ export default function ReactHookFormPage() {
                     control={control}
                     render={({ field }) => (
                       <DateRangePicker
-                        value={field.value as { from: Date; to?: Date } | undefined}
+                        value={
+                          field.value as { from: Date; to?: Date } | undefined
+                        }
                         onChange={field.onChange}
                         placeholder="Select report period"
                         numberOfMonths={2}
@@ -703,7 +707,8 @@ export default function ReactHookFormPage() {
                       <DialogTitle>Delete account?</DialogTitle>
                       <DialogDescription>
                         This will permanently delete your account and remove all
-                        associated data including invoices, clients, and settings.
+                        associated data including invoices, clients, and
+                        settings.
                       </DialogDescription>
                     </DialogHeader>
                     <DialogBody>
