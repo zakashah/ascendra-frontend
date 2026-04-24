@@ -47,7 +47,7 @@ function CalendarDropdown({
       <SelectTrigger size="sm" className="h-7 min-w-0" aria-label={ariaLabel}>
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className="z-60">
+      <SelectContent className="z-60 max-h-52">
         {options?.map(({ value: val, label, disabled: optDisabled }) => (
           <SelectItem key={val} value={val.toString()} disabled={optDisabled}>
             {label}

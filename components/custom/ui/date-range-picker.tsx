@@ -17,7 +17,6 @@ interface DateRangePickerProps {
   className?: string;
   fromYear?: number;
   toYear?: number;
-  numberOfMonths?: number;
   captionLayout?: CalendarProps['captionLayout'];
 }
 
@@ -29,16 +28,37 @@ function DateRangePicker({
   className,
   fromYear,
   toYear,
-  numberOfMonths = 2,
   captionLayout,
 }: DateRangePickerProps) {
   const [open, setOpen] = React.useState(false);
+
+  const startMonth =
+    fromYear !== undefined ? new Date(fromYear, 0) : undefined;
+  const endMonth = toYear !== undefined ? new Date(toYear, 11) : undefined;
+
+  const [leftMonth, setLeftMonth] = React.useState<Date>(
+    () => value?.from ?? new Date()
+  );
+  const [rightMonth, setRightMonth] = React.useState<Date>(() => {
+    if (value?.to) return value.to;
+    const base = value?.from ?? new Date();
+    return new Date(base.getFullYear(), base.getMonth() + 1, 1);
+  });
 
   const label = React.useMemo(() => {
     if (!value?.from) return null;
     if (!value.to) return format(value.from, 'MMM d, yyyy');
     return `${format(value.from, 'MMM d, yyyy')} – ${format(value.to, 'MMM d, yyyy')}`;
   }, [value]);
+
+  const sharedCalendarProps = {
+    mode: 'range' as const,
+    selected: value,
+    onSelect: onChange,
+    startMonth,
+    endMonth,
+    captionLayout,
+  };
 
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
@@ -80,17 +100,20 @@ function DateRangePicker({
             'duration-200'
           )}
         >
-          <Calendar
-            mode="range"
-            selected={value}
-            onSelect={onChange}
-            defaultMonth={value?.from}
-            numberOfMonths={numberOfMonths}
-            startMonth={fromYear !== undefined ? new Date(fromYear, 0) : undefined}
-            endMonth={toYear !== undefined ? new Date(toYear, 11) : undefined}
-            captionLayout={captionLayout}
-            autoFocus
-          />
+          <div className="flex">
+            <Calendar
+              {...sharedCalendarProps}
+              month={leftMonth}
+              onMonthChange={setLeftMonth}
+              autoFocus
+            />
+            <div className="w-px self-stretch bg-border" />
+            <Calendar
+              {...sharedCalendarProps}
+              month={rightMonth}
+              onMonthChange={setRightMonth}
+            />
+          </div>
         </PopoverPrimitive.Content>
       </PopoverPrimitive.Portal>
     </PopoverPrimitive.Root>
