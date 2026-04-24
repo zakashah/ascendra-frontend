@@ -76,8 +76,8 @@ function DatePicker({
               setOpen(false);
             }}
             defaultMonth={value}
-            fromYear={fromYear}
-            toYear={toYear}
+            startMonth={fromYear !== undefined ? new Date(fromYear, 0) : undefined}
+            endMonth={toYear !== undefined ? new Date(toYear, 11) : undefined}
             initialFocus
           />
         </PopoverPrimitive.Content>

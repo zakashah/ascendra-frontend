@@ -4,7 +4,7 @@ import * as React from 'react';
 import { DayPicker } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/custom/ui/button';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { LuChevronLeft, LuChevronRight, LuChevronDown } from 'react-icons/lu';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -12,17 +12,30 @@ function Calendar({
   className,
   classNames,
   showOutsideDays = true,
+  captionLayout,
+  startMonth,
+  endMonth,
   ...props
 }: CalendarProps) {
+  const resolvedCaptionLayout =
+    captionLayout ?? (startMonth || endMonth ? 'dropdown' : 'label');
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      captionLayout={resolvedCaptionLayout}
+      startMonth={startMonth}
+      endMonth={endMonth}
       className={cn('p-3', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row gap-4',
         month: 'flex flex-col gap-4',
         month_caption: 'flex justify-center pt-1 relative items-center w-full',
-        caption_label: 'text-sm font-medium',
+        caption_label: 'text-sm font-medium flex items-center gap-0.5',
+        dropdowns: 'flex items-center gap-1',
+        dropdown_root:
+          'relative flex items-center rounded px-1.5 py-0.5 hover:bg-accent cursor-pointer transition-colors',
+        dropdown: 'absolute inset-0 opacity-0 cursor-pointer w-full',
         nav: 'absolute top-3 left-0 right-0 h-7 flex items-center justify-between px-1',
         button_previous: cn(
           buttonVariants({ variant: 'secondary', size: 'icon' }),
@@ -58,12 +71,13 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        Chevron: ({ orientation }) =>
-          orientation === 'left' ? (
-            <LuChevronLeft className="size-4" />
-          ) : (
-            <LuChevronRight className="size-4" />
-          ),
+        Chevron: ({ orientation }) => {
+          if (orientation === 'left')
+            return <LuChevronLeft className="size-4" />;
+          if (orientation === 'right')
+            return <LuChevronRight className="size-4" />;
+          return <LuChevronDown className="size-3" />;
+        },
       }}
       {...props}
     />
