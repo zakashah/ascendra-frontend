@@ -391,51 +391,6 @@ export default function ReactHookFormPage() {
                           <SelectItem value="Asia/Tokyo">
                             Asia/Tokyo (JST +09:00)
                           </SelectItem>
-                          <SelectItem value="Asia/Dubai">
-                            Asia/Dubai (GST +04:00)
-                          </SelectItem>
-                          <SelectItem value="Europe/London">
-                            Europe/London (GMT +00:00)
-                          </SelectItem>
-                          <SelectItem value="America/New_York">
-                            America/New York (EST −05:00)
-                          </SelectItem>
-                          <SelectItem value="America/Los_Angeles">
-                            America/Los Angeles (PST −08:00)
-                          </SelectItem>
-                          <SelectItem value="Asia/Tokyo">
-                            Asia/Tokyo (JST +09:00)
-                          </SelectItem>
-                          <SelectItem value="Asia/Dubai">
-                            Asia/Dubai (GST +04:00)
-                          </SelectItem>
-                          <SelectItem value="Europe/London">
-                            Europe/London (GMT +00:00)
-                          </SelectItem>
-                          <SelectItem value="America/New_York">
-                            America/New York (EST −05:00)
-                          </SelectItem>
-                          <SelectItem value="America/Los_Angeles">
-                            America/Los Angeles (PST −08:00)
-                          </SelectItem>
-                          <SelectItem value="Asia/Tokyo">
-                            Asia/Tokyo (JST +09:00)
-                          </SelectItem>
-                          <SelectItem value="Asia/Dubai">
-                            Asia/Dubai (GST +04:00)
-                          </SelectItem>
-                          <SelectItem value="Europe/London">
-                            Europe/London (GMT +00:00)
-                          </SelectItem>
-                          <SelectItem value="America/New_York">
-                            America/New York (EST −05:00)
-                          </SelectItem>
-                          <SelectItem value="America/Los_Angeles">
-                            America/Los Angeles (PST −08:00)
-                          </SelectItem>
-                          <SelectItem value="Asia/Tokyo">
-                            Asia/Tokyo (JST +09:00)
-                          </SelectItem>
                         </SelectContent>
                       </Select>
                     )}
