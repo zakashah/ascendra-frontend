@@ -4,9 +4,59 @@ import * as React from 'react';
 import { DayPicker } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/custom/ui/button';
-import { LuChevronLeft, LuChevronRight, LuChevronDown } from 'react-icons/lu';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
+type CalendarDropdownProps = Omit<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  'children'
+> & {
+  options?: { value: number; label: string; disabled: boolean }[];
+  components?: unknown;
+  classNames?: unknown;
+};
+
+function CalendarDropdown({
+  value,
+  onChange,
+  options,
+  'aria-label': ariaLabel,
+  disabled,
+  // consumed by react-day-picker but not used in custom render
+  components: _components,
+  classNames: _classNames,
+}: CalendarDropdownProps) {
+  return (
+    <Select
+      value={value?.toString()}
+      onValueChange={(str) => {
+        onChange?.({
+          target: { value: str },
+        } as React.ChangeEvent<HTMLSelectElement>);
+      }}
+      disabled={disabled}
+    >
+      <SelectTrigger size="sm" className="h-7 min-w-0" aria-label={ariaLabel}>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent className="z-60">
+        {options?.map(({ value: val, label, disabled: optDisabled }) => (
+          <SelectItem key={val} value={val.toString()} disabled={optDisabled}>
+            {label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
 
 function Calendar({
   className,
@@ -31,11 +81,8 @@ function Calendar({
         months: 'flex flex-col sm:flex-row gap-4',
         month: 'flex flex-col gap-4',
         month_caption: 'flex justify-center pt-1 relative items-center w-full',
-        caption_label: 'text-sm font-medium flex items-center gap-0.5',
-        dropdowns: 'flex items-center gap-1',
-        dropdown_root:
-          'relative flex items-center rounded px-1.5 py-0.5 hover:bg-accent cursor-pointer transition-colors',
-        dropdown: 'absolute inset-0 opacity-0 cursor-pointer w-full',
+        caption_label: 'text-sm font-medium',
+        dropdowns: 'flex items-center gap-1.5',
         nav: 'absolute top-3 left-0 right-0 h-7 flex items-center justify-between px-1',
         button_previous: cn(
           buttonVariants({ variant: 'secondary', size: 'icon' }),
@@ -71,13 +118,13 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        Chevron: ({ orientation }) => {
-          if (orientation === 'left')
-            return <LuChevronLeft className="size-4" />;
-          if (orientation === 'right')
-            return <LuChevronRight className="size-4" />;
-          return <LuChevronDown className="size-3" />;
-        },
+        Chevron: ({ orientation }) =>
+          orientation === 'left' ? (
+            <LuChevronLeft className="size-4" />
+          ) : (
+            <LuChevronRight className="size-4" />
+          ),
+        Dropdown: CalendarDropdown,
       }}
       {...props}
     />

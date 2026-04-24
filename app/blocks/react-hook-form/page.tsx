@@ -545,6 +545,8 @@ export default function ReactHookFormPage() {
                         onChange={field.onChange}
                         placeholder="Select report period"
                         numberOfMonths={2}
+                        fromYear={2000}
+                        toYear={new Date().getFullYear() + 1}
                       />
                     )}
                   />

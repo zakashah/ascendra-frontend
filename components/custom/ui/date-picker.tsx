@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Popover as PopoverPrimitive } from 'radix-ui';
 import { format } from 'date-fns';
+import { type CalendarProps } from '@/components/ui/calendar';
 import { LuCalendar } from 'react-icons/lu';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
@@ -15,6 +16,7 @@ interface DatePickerProps {
   className?: string;
   fromYear?: number;
   toYear?: number;
+  captionLayout?: CalendarProps['captionLayout'];
 }
 
 function DatePicker({
@@ -25,6 +27,7 @@ function DatePicker({
   className,
   fromYear,
   toYear,
+  captionLayout,
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
 
@@ -78,7 +81,8 @@ function DatePicker({
             defaultMonth={value}
             startMonth={fromYear !== undefined ? new Date(fromYear, 0) : undefined}
             endMonth={toYear !== undefined ? new Date(toYear, 11) : undefined}
-            initialFocus
+            captionLayout={captionLayout}
+            autoFocus
           />
         </PopoverPrimitive.Content>
       </PopoverPrimitive.Portal>
