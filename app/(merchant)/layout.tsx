@@ -52,7 +52,7 @@ export default function MerchantLayout({ children }: { children: ReactNode }) {
         </HeaderLinks>
         <HeaderActions>
           <ThemeToggle />
-          <NameAvatar name="School Admin" />
+          <NameAvatar href="#" name="School Admin" />
         </HeaderActions>
       </Header>
       <Nav>

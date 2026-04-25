@@ -11,10 +11,11 @@ const meta = registry['name-avatar'];
 export function NameAvatarDocContent() {
   return (
     <div className="space-y-10">
+      <ComponentPreview
+        code={`import { NameAvatar } from "@/components/custom/common-ui/name-avatar";
 
-      <ComponentPreview code={`import { NameAvatar } from "@/components/custom/common-ui/name-avatar";
-
-<NameAvatar name="Ahmed Khan" href="#" />`}>
+<NameAvatar name="Ahmed Khan" href="#" />`}
+      >
         <NameAvatar name="Ahmed Khan" href="#" />
       </ComponentPreview>
 
@@ -22,8 +23,11 @@ export function NameAvatarDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Auto Colors</h3>
-          <p className="text-xs text-muted-foreground">Each name gets a deterministic background color derived from a hash of the name string.</p>
+          <h3 className="text-foreground text-sm font-medium">Auto Colors</h3>
+          <p className="text-muted-foreground text-xs">
+            Each name gets a deterministic background color derived from a hash
+            of the name string.
+          </p>
           <ComponentPreview
             code={`<NameAvatar name="Ahmed Khan" href="#" />
 <NameAvatar name="Sara Ali" href="#" />
@@ -40,8 +44,14 @@ export function NameAvatarDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Sizes</h3>
-          <p className="text-xs text-muted-foreground">Control diameter in pixels via the <code className="rounded bg-muted px-1 font-mono text-xs">size</code> prop. Font scales proportionally.</p>
+          <h3 className="text-foreground text-sm font-medium">Sizes</h3>
+          <p className="text-muted-foreground text-xs">
+            Control diameter in pixels via the{' '}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              size
+            </code>{' '}
+            prop. Font scales proportionally.
+          </p>
           <ComponentPreview
             code={`<NameAvatar name="Ahmed Khan" size={20} />
 <NameAvatar name="Ahmed Khan" size={28} />
@@ -56,11 +66,15 @@ export function NameAvatarDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Single-word Name</h3>
-          <p className="text-xs text-muted-foreground">Single-word names use the first two characters as initials.</p>
+          <h3 className="text-foreground text-sm font-medium">
+            Single-word Name
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Single-word names use the first two characters as initials.
+          </p>
           <ComponentPreview
-            code={`<NameAvatar name="Administrator" />
-<NameAvatar name="Support" />`}
+            code={`<NameAvatar name="Administrator" href="#" />
+<NameAvatar name="Support" href="#" />`}
           >
             <NameAvatar name="Administrator" href="#" />
             <NameAvatar name="Support" href="#" />

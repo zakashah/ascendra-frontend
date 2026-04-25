@@ -1,23 +1,20 @@
 'use client';
 
-import { useSort } from '@/hooks/use-sort';
-import { type ColumnDef } from '@/lib/table';
+import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { SortIcon } from '@/components/custom/common-ui/sort-icon';
 import { MainContent } from '@/components/custom/layout/main-content';
+import { PageBar } from '@/components/custom/layout/page-bar';
+import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { TabContent } from '@/components/custom/tabs/tab-content';
 import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
-import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { Button } from '@/components/custom/ui/button';
 import { Checkbox } from '@/components/custom/ui/checkbox';
 import {
@@ -33,19 +30,19 @@ import {
 } from '@/components/custom/ui/input-group';
 import {
   Table,
-  TableBody,
-  TableCell,
   TableFoot,
   TableHead,
   TableHeader,
   TableHeaderRow,
-  TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { useSort } from '@/hooks/use-sort';
+import { type ColumnDef } from '@/lib/table';
 import {
   LuChevronDown,
   LuFilter,
+  LuGitBranch,
   LuLock,
   LuSearch,
   LuSettings,
@@ -53,6 +50,14 @@ import {
 import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
 
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/custom/ui/empty';
+import { EmptyBody } from '@/components/custom/ui/table';
 // --- Types ---
 
 type InvoiceStatus = 'paid' | 'pending' | 'overdue';
@@ -357,7 +362,7 @@ export default function TableUsagePage() {
                       ))}
                     </TableHeaderRow>
                   </TableHeader>
-                  <TableBody>
+                  {/* <TableBody>
                     {sortedInvoices.map((invoice) => (
                       <TableRow key={invoice.id}>
                         <TableCell>
@@ -390,8 +395,21 @@ export default function TableUsagePage() {
                         <TableCell>{formatDate(invoice.issuedDate)}</TableCell>
                       </TableRow>
                     ))}
-                  </TableBody>
+                  </TableBody> */}
                 </Table>
+                <EmptyBody>
+                  <Empty>
+                    <EmptyHeader>
+                      <EmptyMedia variant="icon">
+                        <LuGitBranch strokeWidth={2.5} />
+                      </EmptyMedia>
+                      <EmptyTitle>No connections added</EmptyTitle>
+                      <EmptyDescription>
+                        Get started by adding a new connection.
+                      </EmptyDescription>
+                    </EmptyHeader>
+                  </Empty>
+                </EmptyBody>
                 <TableFoot />
               </TableWrapper>
             </MainContent>
