@@ -18,19 +18,18 @@ import {
   useComboboxAnchor,
 } from '@/components/custom/ui/combobox';
 import {
-  InputGroup,
   InputGroupAddon,
   InputGroupText,
 } from '@/components/custom/ui/input-group';
-import {
-  BuildingIcon,
-  SearchIcon,
-  UserIcon,
-} from 'lucide-react';
+import { BuildingIcon, SearchIcon, UserIcon } from 'lucide-react';
 
 /* ─── Data ─────────────────────────────────────────────────────────────────── */
 
-const fruits = [
+type Fruit = { value: string; label: string };
+type User = { value: string; label: string; role: string };
+type Org = { value: string; label: string; type: string };
+
+const fruits: Fruit[] = [
   { value: 'apple', label: 'Apple' },
   { value: 'banana', label: 'Banana' },
   { value: 'cherry', label: 'Cherry' },
@@ -40,27 +39,39 @@ const fruits = [
   { value: 'grape', label: 'Grape' },
 ];
 
-const grouped = {
-  fruits: [
-    { value: 'apple', label: 'Apple' },
-    { value: 'banana', label: 'Banana' },
-    { value: 'cherry', label: 'Cherry' },
-  ],
-  vegetables: [
-    { value: 'carrot', label: 'Carrot' },
-    { value: 'broccoli', label: 'Broccoli' },
-    { value: 'spinach', label: 'Spinach' },
-  ],
-};
+// Base UI Group shape requires { value, items }
+const groupedItems = [
+  {
+    value: 'fruits',
+    label: 'Fruits',
+    items: [
+      { value: 'apple', label: 'Apple' },
+      { value: 'banana', label: 'Banana' },
+      { value: 'cherry', label: 'Cherry' },
+    ],
+  },
+  {
+    value: 'vegetables',
+    label: 'Vegetables',
+    items: [
+      { value: 'carrot', label: 'Carrot' },
+      { value: 'broccoli', label: 'Broccoli' },
+      { value: 'spinach', label: 'Spinach' },
+    ],
+  },
+];
 
-const users = [
+type GroupedItem = (typeof groupedItems)[number];
+type FoodItem = GroupedItem['items'][number];
+
+const users: User[] = [
   { value: 'alice', label: 'Alice Johnson', role: 'Admin' },
   { value: 'bob', label: 'Bob Smith', role: 'Editor' },
   { value: 'charlie', label: 'Charlie Lee', role: 'Viewer' },
   { value: 'diana', label: 'Diana Park', role: 'Editor' },
 ];
 
-const orgs = [
+const orgs: Org[] = [
   { value: 'acme', label: 'Acme Corp', type: 'Company' },
   { value: 'globex', label: 'Globex', type: 'Company' },
   { value: 'initech', label: 'Initech', type: 'Startup' },
@@ -90,47 +101,20 @@ function Section({
   );
 }
 
-function FruitItems() {
-  return (
-    <>
-      {fruits.map((f) => (
-        <ComboboxItem key={f.value} value={f.value}>
-          {f.label}
-        </ComboboxItem>
-      ))}
-    </>
-  );
-}
-
 /* ─── Page ──────────────────────────────────────────────────────────────────── */
 
 export default function ComboboxShowcase() {
-  /* Basic */
   const [basic, setBasic] = useState<string | null>(null);
-
-  /* Multiple */
   const [multi, setMulti] = useState<string[]>([]);
-
-  /* Chips */
   const [chips, setChips] = useState<string[]>([]);
   const chipsAnchor = useComboboxAnchor();
-
-  /* showClear */
   const [withClear, setWithClear] = useState<string | null>(null);
-
-  /* Grouped */
   const [grouped2, setGrouped2] = useState<string | null>(null);
-
-  /* ComboboxItem custom */
   const [customItem, setCustomItem] = useState<string | null>(null);
   const [orgItem, setOrgItem] = useState<string | null>(null);
-
-  /* Invalid */
   const [invalidVal, setInvalidVal] = useState<string | null>(null);
   const [invalidChips, setInvalidChips] = useState<string[]>([]);
   const invalidChipsAnchor = useComboboxAnchor();
-
-  /* Input Group integration */
   const [inputGroup, setInputGroup] = useState<string | null>(null);
 
   return (
@@ -138,20 +122,24 @@ export default function ComboboxShowcase() {
       <div>
         <h1 className="text-lg font-semibold">Combobox</h1>
         <p className="text-muted-foreground mt-1 text-sm">
-          Searchable select built on Base UI. Supports single, multiple,
-          chips, groups, validation states, and Input Group composition.
+          Searchable select built on Base UI. Supports single, multiple, chips,
+          groups, validation states, and Input Group composition.
         </p>
       </div>
 
       {/* ── Basic ─────────────────────────────────────────────────────────── */}
       <Section title="Basic" description="Single value, filterable.">
-        <Combobox value={basic} onValueChange={setBasic}>
+        <Combobox value={basic} onValueChange={setBasic} items={fruits}>
           <ComboboxInput placeholder="Select a fruit…" className="w-52" />
           <ComboboxContent>
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -163,13 +151,22 @@ export default function ComboboxShowcase() {
         title="Multiple"
         description="Multi-select with checkmarks. Selected value shown in input."
       >
-        <Combobox value={multi} onValueChange={setMulti} multiple>
+        <Combobox
+          value={multi}
+          onValueChange={setMulti}
+          multiple
+          items={fruits}
+        >
           <ComboboxInput placeholder="Select fruits…" className="w-52" />
           <ComboboxContent>
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -181,10 +178,15 @@ export default function ComboboxShowcase() {
         title="ComboboxChips"
         description="Multi-select with removable chip tags inline in the input."
       >
-        <Combobox value={chips} onValueChange={setChips} multiple>
+        <Combobox
+          value={chips}
+          onValueChange={setChips}
+          multiple
+          items={fruits}
+        >
           <ComboboxChips ref={chipsAnchor} className="w-80">
             {chips.map((v) => (
-              <ComboboxChip key={v} value={v}>
+              <ComboboxChip key={v}>
                 {fruits.find((f) => f.value === v)?.label ?? v}
               </ComboboxChip>
             ))}
@@ -194,7 +196,11 @@ export default function ComboboxShowcase() {
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -206,7 +212,7 @@ export default function ComboboxShowcase() {
         title="showClear"
         description="Clear button appears when a value is selected."
       >
-        <Combobox value={withClear} onValueChange={setWithClear}>
+        <Combobox value={withClear} onValueChange={setWithClear} items={fruits}>
           <ComboboxInput
             placeholder="Select a fruit…"
             showClear
@@ -216,7 +222,11 @@ export default function ComboboxShowcase() {
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -228,29 +238,29 @@ export default function ComboboxShowcase() {
         title="ComboboxGroup + ComboboxSeparator"
         description="Options organised under labelled groups with a visual separator."
       >
-        <Combobox value={grouped2} onValueChange={setGrouped2}>
+        <Combobox
+          value={grouped2}
+          onValueChange={setGrouped2}
+          items={groupedItems}
+        >
           <ComboboxInput placeholder="Select a food…" className="w-52" />
           <ComboboxContent>
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <ComboboxGroup>
-                  <ComboboxLabel>Fruits</ComboboxLabel>
-                  {grouped.fruits.map((f) => (
-                    <ComboboxItem key={f.value} value={f.value}>
-                      {f.label}
-                    </ComboboxItem>
-                  ))}
-                </ComboboxGroup>
-                <ComboboxSeparator />
-                <ComboboxGroup>
-                  <ComboboxLabel>Vegetables</ComboboxLabel>
-                  {grouped.vegetables.map((v) => (
-                    <ComboboxItem key={v.value} value={v.value}>
-                      {v.label}
-                    </ComboboxItem>
-                  ))}
-                </ComboboxGroup>
+                {(group: GroupedItem, groupIndex: number) => (
+                  <ComboboxGroup key={group.value}>
+                    <ComboboxLabel>{group.label}</ComboboxLabel>
+                    {group.items.map((item: FoodItem) => (
+                      <ComboboxItem key={item.value} value={item.value}>
+                        {item.label}
+                      </ComboboxItem>
+                    ))}
+                    {groupIndex < groupedItems.length - 1 && (
+                      <ComboboxSeparator />
+                    )}
+                  </ComboboxGroup>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -263,13 +273,17 @@ export default function ComboboxShowcase() {
         description="Items with leading icons and secondary text."
       >
         {/* Users */}
-        <Combobox value={customItem} onValueChange={setCustomItem}>
+        <Combobox
+          value={customItem}
+          onValueChange={setCustomItem}
+          items={users}
+        >
           <ComboboxInput placeholder="Assign to…" className="w-56" />
           <ComboboxContent>
             <ComboboxList>
               <ComboboxEmpty>No users found.</ComboboxEmpty>
               <ComboboxCollection>
-                {users.map((u) => (
+                {(u: User) => (
                   <ComboboxItem key={u.value} value={u.value}>
                     <span className="flex items-center gap-2">
                       <UserIcon className="text-muted-foreground size-3.5" />
@@ -279,20 +293,20 @@ export default function ComboboxShowcase() {
                       </span>
                     </span>
                   </ComboboxItem>
-                ))}
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
         </Combobox>
 
         {/* Orgs */}
-        <Combobox value={orgItem} onValueChange={setOrgItem}>
+        <Combobox value={orgItem} onValueChange={setOrgItem} items={orgs}>
           <ComboboxInput placeholder="Select organisation…" className="w-56" />
           <ComboboxContent>
             <ComboboxList>
               <ComboboxEmpty>No organisations.</ComboboxEmpty>
               <ComboboxCollection>
-                {orgs.map((o) => (
+                {(o: Org) => (
                   <ComboboxItem key={o.value} value={o.value}>
                     <span className="flex items-center gap-2">
                       <BuildingIcon className="text-muted-foreground size-3.5" />
@@ -302,7 +316,7 @@ export default function ComboboxShowcase() {
                       </span>
                     </span>
                   </ComboboxItem>
-                ))}
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -314,8 +328,11 @@ export default function ComboboxShowcase() {
         title="aria-invalid"
         description="Error state on ComboboxInput and ComboboxChips."
       >
-        {/* Input invalid */}
-        <Combobox value={invalidVal} onValueChange={setInvalidVal}>
+        <Combobox
+          value={invalidVal}
+          onValueChange={setInvalidVal}
+          items={fruits}
+        >
           <ComboboxInput
             placeholder="Select a fruit…"
             className="w-52"
@@ -325,21 +342,25 @@ export default function ComboboxShowcase() {
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
         </Combobox>
 
-        {/* Chips invalid */}
-        <Combobox value={invalidChips} onValueChange={setInvalidChips} multiple>
-          <ComboboxChips
-            ref={invalidChipsAnchor}
-            className="w-72"
-            aria-invalid
-          >
+        <Combobox
+          value={invalidChips}
+          onValueChange={setInvalidChips}
+          multiple
+          items={fruits}
+        >
+          <ComboboxChips ref={invalidChipsAnchor} className="w-72" aria-invalid>
             {invalidChips.map((v) => (
-              <ComboboxChip key={v} value={v}>
+              <ComboboxChip key={v}>
                 {fruits.find((f) => f.value === v)?.label ?? v}
               </ComboboxChip>
             ))}
@@ -349,7 +370,11 @@ export default function ComboboxShowcase() {
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -358,8 +383,9 @@ export default function ComboboxShowcase() {
 
       {/* ── Disabled ──────────────────────────────────────────────────────── */}
       <Section title="Disabled" description="Fully non-interactive.">
-        <Combobox disabled>
+        <Combobox disabled items={fruits}>
           <ComboboxInput
+          value={'hello'}
             placeholder="Select a fruit…"
             className="w-52"
             disabled
@@ -367,7 +393,11 @@ export default function ComboboxShowcase() {
           <ComboboxContent>
             <ComboboxList>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
@@ -379,7 +409,11 @@ export default function ComboboxShowcase() {
         title="Input Group"
         description="ComboboxInput composed with a leading InputGroupAddon icon."
       >
-        <Combobox value={inputGroup} onValueChange={setInputGroup}>
+        <Combobox
+          value={inputGroup}
+          onValueChange={setInputGroup}
+          items={fruits}
+        >
           <ComboboxInput placeholder="Search fruits…" className="w-64">
             <InputGroupAddon align="inline-start">
               <InputGroupText>
@@ -391,7 +425,11 @@ export default function ComboboxShowcase() {
             <ComboboxList>
               <ComboboxEmpty>No results.</ComboboxEmpty>
               <ComboboxCollection>
-                <FruitItems />
+                {(item: Fruit) => (
+                  <ComboboxItem key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
               </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
