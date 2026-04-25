@@ -30,10 +30,13 @@ import {
 } from '@/components/custom/ui/input-group';
 import {
   Table,
+  TableBody,
+  TableCell,
   TableFoot,
   TableHead,
   TableHeader,
   TableHeaderRow,
+  TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
@@ -58,6 +61,9 @@ import {
   EmptyTitle,
 } from '@/components/custom/ui/empty';
 import { EmptyBody } from '@/components/custom/ui/table';
+import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
+import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 // --- Types ---
 
 type InvoiceStatus = 'paid' | 'pending' | 'overdue';
@@ -362,7 +368,7 @@ export default function TableUsagePage() {
                       ))}
                     </TableHeaderRow>
                   </TableHeader>
-                  {/* <TableBody>
+                  <TableBody>
                     {sortedInvoices.map((invoice) => (
                       <TableRow key={invoice.id}>
                         <TableCell>
@@ -395,21 +401,10 @@ export default function TableUsagePage() {
                         <TableCell>{formatDate(invoice.issuedDate)}</TableCell>
                       </TableRow>
                     ))}
-                  </TableBody> */}
+                  </TableBody>
                 </Table>
-                <EmptyBody>
-                  <Empty>
-                    <EmptyHeader>
-                      <EmptyMedia variant="icon">
-                        <LuGitBranch strokeWidth={2.5} />
-                      </EmptyMedia>
-                      <EmptyTitle>No connections added</EmptyTitle>
-                      <EmptyDescription>
-                        Get started by adding a new connection.
-                      </EmptyDescription>
-                    </EmptyHeader>
-                  </Empty>
-                </EmptyBody>
+                {/* <TableLoadingBody /> */}
+                {/* <TableEmptyBody /> */}
                 <TableFoot />
               </TableWrapper>
             </MainContent>
