@@ -1,6 +1,64 @@
 'use client';
 
+import { useMemo, useState } from 'react';
+import { MainContent } from '@/components/custom/layout/main-content';
+import { PageHeader } from '@/components/custom/layout/page-header';
+import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
+import { PageMain } from '@/components/custom/layout/page-main';
+import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
+import { PageTitle } from '@/components/custom/layout/page-title';
+import { PageBar } from '@/components/custom/layout/page-bar';
+import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { PageBarContent } from '@/components/custom/layout/page-bar-content';
+import { TabContent } from '@/components/custom/tabs/tab-content';
+import { TabList } from '@/components/custom/tabs/tab-list';
+import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
+import { Tabs } from '@/components/custom/tabs/tabs';
+import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { Button } from '@/components/custom/ui/button';
+import { Checkbox } from '@/components/custom/ui/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/custom/ui/dropdown-menu';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@/components/custom/ui/input-group';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFoot,
+  TableHead,
+  TableHeader,
+  TableHeaderRow,
+  TableRow,
+  TableWrapper,
+} from '@/components/custom/ui/table';
+import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import {
+  LuArrowDown,
+  LuArrowUp,
+  LuArrowUpDown,
+  LuChevronDown,
+  LuFilter,
+  LuLock,
+  LuSearch,
+  LuSettings,
+} from 'react-icons/lu';
+import { RiDraggable } from 'react-icons/ri';
+import { RxCrossCircled } from 'react-icons/rx';
+
+// --- Types ---
+
 type InvoiceStatus = 'paid' | 'pending' | 'overdue';
+type SortKey = 'id' | 'clientName' | 'amount' | 'dueDate' | 'status' | 'issuedDate';
+type SortDirection = 'asc' | 'desc';
 
 interface Invoice {
   id: string;
@@ -12,6 +70,13 @@ interface Invoice {
   status: InvoiceStatus;
   issuedDate: string;
 }
+
+interface SortConfig {
+  key: SortKey;
+  direction: SortDirection;
+}
+
+// --- Data ---
 
 const invoices: Invoice[] = [
   {
@@ -88,6 +153,8 @@ const statusLabel: Record<InvoiceStatus, string> = {
   overdue: 'Overdue',
 };
 
+// --- Helpers ---
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -100,73 +167,48 @@ function formatAmount(amount: number) {
   return `PKR ${amount.toLocaleString()}`;
 }
 
-import { Input } from '@/components/custom/ui/input';
-import { MainContent } from '@/components/custom/layout/main-content';
-import { PageHeader } from '@/components/custom/layout/page-header';
-import { PageMain } from '@/components/custom/layout/page-main';
-import { PageTitle } from '@/components/custom/layout/page-title';
-import { TabContent } from '@/components/custom/tabs/tab-content';
-import { TabList } from '@/components/custom/tabs/tab-list';
-import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
-import { Tabs } from '@/components/custom/tabs/tabs';
+function sortInvoices(data: Invoice[], config: SortConfig | null): Invoice[] {
+  if (!config) return data;
+  return [...data].sort((a, b) => {
+    const { key, direction } = config;
+    let aVal: string | number = a[key] as string | number;
+    let bVal: string | number = b[key] as string | number;
+    if (key === 'dueDate' || key === 'issuedDate') {
+      aVal = new Date(a[key]).getTime();
+      bVal = new Date(b[key]).getTime();
+    }
+    if (aVal < bVal) return direction === 'asc' ? -1 : 1;
+    if (aVal > bVal) return direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+}
 
-import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
-import { RxCrossCircled } from 'react-icons/rx';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/custom/ui/dropdown-menu';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFoot,
-  TableHead,
-  TableHeader,
-  TableHeaderRow,
-  TableRow,
-  TableWrapper,
-} from '@/components/custom/ui/table';
-import { CopyText } from '@/components/custom/util/copy-text';
-import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import {
-  LuChevronDown,
-  LuCode,
-  LuEye,
-  LuFilter,
-  LuLock,
-  LuNotebookPen,
-  LuSearch,
-  LuSettings,
-  LuTicketCheck,
-  LuTrash2,
-} from 'react-icons/lu';
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/custom/ui/input-group';
-import { Button } from '@/components/custom/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/custom/ui/select';
-import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
-import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
-import { Checkbox } from '@/components/custom/ui/checkbox';
-import { RiDraggable } from 'react-icons/ri';
-import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
+// --- Component ---
+
+function SortIcon({ column, sortConfig }: { column: SortKey; sortConfig: SortConfig | null }) {
+  if (sortConfig?.key !== column)
+    return <LuArrowUpDown className="text-muted-foreground size-3 shrink-0" />;
+  if (sortConfig.direction === 'asc')
+    return <LuArrowUp className="size-3 shrink-0" />;
+  return <LuArrowDown className="size-3 shrink-0" />;
+}
 
 export default function TableUsagePage() {
+  const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
+
+  function handleSort(key: SortKey) {
+    setSortConfig((prev) => {
+      if (prev?.key !== key) return { key, direction: 'asc' };
+      if (prev.direction === 'asc') return { key, direction: 'desc' };
+      return null;
+    });
+  }
+
+  const sortedInvoices = useMemo(
+    () => sortInvoices(invoices, sortConfig),
+    [sortConfig],
+  );
+
   return (
     <>
       <PageHeader>
@@ -290,10 +332,6 @@ export default function TableUsagePage() {
                       <DropdownMenuItem>False</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  {/* <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
-                    Enter Value
-                    <LuChevronDown className="text-muted-foreground" />
-                  </div> */}
                 </div>
                 <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
                   <div className="flex cursor-pointer items-center gap-1 px-1.5">
@@ -323,27 +361,79 @@ export default function TableUsagePage() {
                 <Table scrollable>
                   <TableHeader>
                     <TableHeaderRow>
-                      <TableHead>Invoice</TableHead>
-                      <TableHead>Client</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>Due Date</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Issued</TableHead>
+                      <TableHead
+                        className="cursor-pointer select-none"
+                        onClick={() => handleSort('id')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Invoice
+                          <SortIcon sortConfig={sortConfig} column="id" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        className="cursor-pointer select-none"
+                        onClick={() => handleSort('clientName')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Client
+                          <SortIcon sortConfig={sortConfig} column="clientName" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        className="cursor-pointer select-none"
+                        onClick={() => handleSort('amount')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Amount
+                          <SortIcon sortConfig={sortConfig} column="amount" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        className="cursor-pointer select-none"
+                        onClick={() => handleSort('dueDate')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Due Date
+                          <SortIcon sortConfig={sortConfig} column="dueDate" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        className="cursor-pointer select-none"
+                        onClick={() => handleSort('status')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Status
+                          <SortIcon sortConfig={sortConfig} column="status" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        className="cursor-pointer select-none"
+                        onClick={() => handleSort('issuedDate')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Issued
+                          <SortIcon sortConfig={sortConfig} column="issuedDate" />
+                        </div>
+                      </TableHead>
                     </TableHeaderRow>
                   </TableHeader>
                   <TableBody>
-                    {invoices.map((invoice) => (
+                    {sortedInvoices.map((invoice) => (
                       <TableRow key={invoice.id}>
                         <TableCell>
                           <div>
                             <div className="font-medium">{invoice.id}</div>
-                            <div className="text-muted-foreground text-xs">{invoice.description}</div>
+                            <div className="text-muted-foreground text-xs">
+                              {invoice.description}
+                            </div>
                           </div>
                         </TableCell>
                         <TableCell>
                           <div>
                             <div className="font-medium">{invoice.clientName}</div>
-                            <div className="text-muted-foreground text-xs">{invoice.clientEmail}</div>
+                            <div className="text-muted-foreground text-xs">
+                              {invoice.clientEmail}
+                            </div>
                           </div>
                         </TableCell>
                         <TableCell>{formatAmount(invoice.amount)}</TableCell>
