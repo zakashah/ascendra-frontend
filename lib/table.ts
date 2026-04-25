@@ -4,7 +4,7 @@ export type SortDirection = 'asc' | 'desc';
 export interface ColumnDef<T> {
   key: keyof T;
   label: string;
-  type: ColumnType;
+  type?: ColumnType;
   sortable?: boolean;
 }
 

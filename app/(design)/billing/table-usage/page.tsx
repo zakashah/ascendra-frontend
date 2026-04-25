@@ -162,18 +162,22 @@ function formatAmount(amount: number) {
 // --- Columns ---
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
-  { key: 'id',         label: 'Invoice #', type: 'string' },
-  { key: 'clientName', label: 'Client',    type: 'string' },
-  { key: 'amount',     label: 'Amount',    type: 'number' },
-  { key: 'dueDate',    label: 'Due Date',  type: 'date'   },
-  { key: 'status',     label: 'Status',    type: 'string', sortable: false },
-  { key: 'issuedDate', label: 'Issued',    type: 'date'   },
+  { key: 'id', label: 'Invoice #' },
+  { key: 'clientName', label: 'Client' },
+  { key: 'amount', label: 'Amount', type: 'number' },
+  { key: 'dueDate', label: 'Due Date', type: 'date' },
+  { key: 'status', label: 'Status', sortable: false },
+  { key: 'issuedDate', label: 'Issued', type: 'date' },
 ];
 
 // --- Component ---
 
 export default function TableUsagePage() {
-  const { sortConfig, handleSort, sortedData: sortedInvoices } = useSort(invoices, INVOICE_COLUMNS);
+  const {
+    sortConfig,
+    handleSort,
+    sortedData: sortedInvoices,
+  } = useSort(invoices, INVOICE_COLUMNS);
 
   return (
     <>
@@ -330,12 +334,24 @@ export default function TableUsagePage() {
                       {INVOICE_COLUMNS.map((col) => (
                         <TableHead
                           key={String(col.key)}
-                          className={col.sortable !== false ? 'cursor-pointer select-none' : undefined}
-                          onClick={col.sortable !== false ? () => handleSort(col.key) : undefined}
+                          className={
+                            col.sortable !== false
+                              ? 'cursor-pointer select-none'
+                              : undefined
+                          }
+                          onClick={
+                            col.sortable !== false
+                              ? () => handleSort(col.key)
+                              : undefined
+                          }
                         >
                           <div className="flex items-center gap-1.5">
                             {col.label}
-                            <SortIcon sortConfig={sortConfig} column={col.key} sortable={col.sortable} />
+                            <SortIcon
+                              sortConfig={sortConfig}
+                              column={col.key}
+                              sortable={col.sortable}
+                            />
                           </div>
                         </TableHead>
                       ))}
@@ -354,7 +370,9 @@ export default function TableUsagePage() {
                         </TableCell>
                         <TableCell>
                           <div>
-                            <div className="font-medium">{invoice.clientName}</div>
+                            <div className="font-medium">
+                              {invoice.clientName}
+                            </div>
                             <div className="text-muted-foreground text-xs">
                               {invoice.clientEmail}
                             </div>
@@ -363,7 +381,9 @@ export default function TableUsagePage() {
                         <TableCell>{formatAmount(invoice.amount)}</TableCell>
                         <TableCell>{formatDate(invoice.dueDate)}</TableCell>
                         <TableCell>
-                          <SimpleBadge variant={statusBadgeVariant[invoice.status]}>
+                          <SimpleBadge
+                            variant={statusBadgeVariant[invoice.status]}
+                          >
                             {statusLabel[invoice.status]}
                           </SimpleBadge>
                         </TableCell>
