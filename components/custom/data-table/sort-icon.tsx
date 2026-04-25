@@ -7,7 +7,11 @@ interface SortIconProps<T> {
   sortable?: boolean;
 }
 
-export function SortIcon<T>({ column, sortConfig, sortable = true }: SortIconProps<T>) {
+export function SortIcon<T>({
+  column,
+  sortConfig,
+  sortable = true,
+}: SortIconProps<T>) {
   if (!sortable) return null;
   if (sortConfig?.key !== column)
     return <LuArrowUpDown className="text-muted-foreground size-3 shrink-0" />;

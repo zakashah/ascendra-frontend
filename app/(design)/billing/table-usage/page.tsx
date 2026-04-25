@@ -1,7 +1,7 @@
 'use client';
 
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
-import { SortIcon } from '@/components/custom/common-ui/sort-icon';
+import { SortIcon } from '@/components/custom/data-table/sort-icon';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
