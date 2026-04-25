@@ -5,6 +5,7 @@ export interface ColumnDef<T> {
   key: keyof T;
   label: string;
   type: ColumnType;
+  sortable?: boolean;
 }
 
 export interface SortConfig<T> {

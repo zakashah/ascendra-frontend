@@ -1,7 +1,7 @@
 'use client';
 
 import { useSort } from '@/hooks/use-sort';
-import { defineColumns } from '@/lib/table';
+import { type ColumnDef } from '@/lib/table';
 import { SortIcon } from '@/components/custom/common-ui/sort-icon';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
@@ -161,15 +161,14 @@ function formatAmount(amount: number) {
 
 // --- Columns ---
 
-const INVOICE_COLUMNS = defineColumns(
-  invoices[0],
-  ['id', 'clientName', 'amount', 'dueDate', 'status', 'issuedDate'],
-  {
-    id:         { label: 'Invoice #' },
-    clientName: { label: 'Client'    },
-    issuedDate: { label: 'Issued'    },
-  },
-);
+const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
+  { key: 'id',         label: 'Invoice #', type: 'string' },
+  { key: 'clientName', label: 'Client',    type: 'string' },
+  { key: 'amount',     label: 'Amount',    type: 'number' },
+  { key: 'dueDate',    label: 'Due Date',  type: 'date'   },
+  { key: 'status',     label: 'Status',    type: 'string', sortable: false },
+  { key: 'issuedDate', label: 'Issued',    type: 'date'   },
+];
 
 // --- Component ---
 
@@ -328,24 +327,18 @@ export default function TableUsagePage() {
                 <Table scrollable>
                   <TableHeader>
                     <TableHeaderRow>
-                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('id')}>
-                        <div className="flex items-center gap-1.5">Invoice # <SortIcon sortConfig={sortConfig} column="id" /></div>
-                      </TableHead>
-                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('clientName')}>
-                        <div className="flex items-center gap-1.5">Client <SortIcon sortConfig={sortConfig} column="clientName" /></div>
-                      </TableHead>
-                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('amount')}>
-                        <div className="flex items-center gap-1.5">Amount <SortIcon sortConfig={sortConfig} column="amount" /></div>
-                      </TableHead>
-                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('dueDate')}>
-                        <div className="flex items-center gap-1.5">Due Date <SortIcon sortConfig={sortConfig} column="dueDate" /></div>
-                      </TableHead>
-                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('status')}>
-                        <div className="flex items-center gap-1.5">Status <SortIcon sortConfig={sortConfig} column="status" /></div>
-                      </TableHead>
-                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('issuedDate')}>
-                        <div className="flex items-center gap-1.5">Issued <SortIcon sortConfig={sortConfig} column="issuedDate" /></div>
-                      </TableHead>
+                      {INVOICE_COLUMNS.map((col) => (
+                        <TableHead
+                          key={String(col.key)}
+                          className={col.sortable !== false ? 'cursor-pointer select-none' : undefined}
+                          onClick={col.sortable !== false ? () => handleSort(col.key) : undefined}
+                        >
+                          <div className="flex items-center gap-1.5">
+                            {col.label}
+                            <SortIcon sortConfig={sortConfig} column={col.key} sortable={col.sortable} />
+                          </div>
+                        </TableHead>
+                      ))}
                     </TableHeaderRow>
                   </TableHeader>
                   <TableBody>
