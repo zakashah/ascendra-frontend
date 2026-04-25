@@ -1,6 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useSort } from '@/hooks/use-sort';
+import { defineColumns } from '@/lib/table';
+import { SortIcon } from '@/components/custom/common-ui/sort-icon';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
@@ -42,9 +44,6 @@ import {
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import {
-  LuArrowDown,
-  LuArrowUp,
-  LuArrowUpDown,
   LuChevronDown,
   LuFilter,
   LuLock,
@@ -57,8 +56,6 @@ import { RxCrossCircled } from 'react-icons/rx';
 // --- Types ---
 
 type InvoiceStatus = 'paid' | 'pending' | 'overdue';
-type SortDirection = 'asc' | 'desc';
-type ColumnType = 'string' | 'number' | 'date';
 
 interface Invoice {
   id: string;
@@ -69,17 +66,6 @@ interface Invoice {
   dueDate: string;
   status: InvoiceStatus;
   issuedDate: string;
-}
-
-interface ColumnDef<T> {
-  key: keyof T;
-  label: string;
-  type: ColumnType;
-}
-
-interface SortConfig {
-  key: keyof Invoice;
-  direction: SortDirection;
 }
 
 // --- Data ---
@@ -173,95 +159,22 @@ function formatAmount(amount: number) {
   return `PKR ${amount.toLocaleString()}`;
 }
 
-// --- Column inference utilities ---
-
-const DATE_SUFFIX_RE = /(Date|At|On|Time)$/;
-
-function camelToTitle(key: string): string {
-  return key
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, (s) => s.toUpperCase())
-    .trim();
-}
-
-function inferColumnType(key: string, val: unknown): ColumnType {
-  if (val instanceof Date) return 'date';
-  if (typeof val === 'number') return 'number';
-  if (DATE_SUFFIX_RE.test(key)) return 'date';
-  return 'string';
-}
-
-function defineColumns<T extends object>(
-  sample: T,
-  keys: (keyof T)[],
-  overrides?: { [K in keyof T]?: Partial<ColumnDef<T>> },
-): ColumnDef<T>[] {
-  return keys.map((key) => ({
-    key,
-    label: camelToTitle(String(key)),
-    type: inferColumnType(String(key), sample[key]),
-    ...overrides?.[key],
-  }));
-}
-
-// --- Sort ---
-
-function sortValue(val: unknown, type: ColumnType): string | number {
-  if (type === 'date') return new Date(val as string).getTime();
-  if (type === 'number') return val as number;
-  return String(val);
-}
-
-function sortInvoices(
-  data: Invoice[],
-  config: SortConfig | null,
-  columns: ColumnDef<Invoice>[],
-): Invoice[] {
-  if (!config) return data;
-  const colType = columns.find((c) => c.key === config.key)?.type ?? 'string';
-  return [...data].sort((a, b) => {
-    const aVal = sortValue(a[config.key], colType);
-    const bVal = sortValue(b[config.key], colType);
-    if (aVal < bVal) return config.direction === 'asc' ? -1 : 1;
-    if (aVal > bVal) return config.direction === 'asc' ? 1 : -1;
-    return 0;
-  });
-}
+// --- Columns ---
 
 const INVOICE_COLUMNS = defineColumns(
   invoices[0],
   ['id', 'clientName', 'amount', 'dueDate', 'status', 'issuedDate'],
   {
-    id: { label: 'Invoice #' },
-    clientName: { label: 'Client' },
+    id:         { label: 'Invoice #' },
+    clientName: { label: 'Client'    },
+    issuedDate: { label: 'Issued'    },
   },
 );
 
 // --- Component ---
 
-function SortIcon({ column, sortConfig }: { column: keyof Invoice; sortConfig: SortConfig | null }) {
-  if (sortConfig?.key !== column)
-    return <LuArrowUpDown className="text-muted-foreground size-3 shrink-0" />;
-  if (sortConfig.direction === 'asc')
-    return <LuArrowUp className="size-3 shrink-0" />;
-  return <LuArrowDown className="size-3 shrink-0" />;
-}
-
 export default function TableUsagePage() {
-  const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
-
-  function handleSort(key: keyof Invoice) {
-    setSortConfig((prev) => {
-      if (prev?.key !== key) return { key, direction: 'asc' };
-      if (prev.direction === 'asc') return { key, direction: 'desc' };
-      return null;
-    });
-  }
-
-  const sortedInvoices = useMemo(
-    () => sortInvoices(invoices, sortConfig, INVOICE_COLUMNS),
-    [sortConfig],
-  );
+  const { sortConfig, handleSort, sortedData: sortedInvoices } = useSort(invoices, INVOICE_COLUMNS);
 
   return (
     <>
@@ -415,18 +328,24 @@ export default function TableUsagePage() {
                 <Table scrollable>
                   <TableHeader>
                     <TableHeaderRow>
-                      {INVOICE_COLUMNS.map((col) => (
-                        <TableHead
-                          key={String(col.key)}
-                          className="cursor-pointer select-none"
-                          onClick={() => handleSort(col.key)}
-                        >
-                          <div className="flex items-center gap-1.5">
-                            {col.label}
-                            <SortIcon sortConfig={sortConfig} column={col.key} />
-                          </div>
-                        </TableHead>
-                      ))}
+                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('id')}>
+                        <div className="flex items-center gap-1.5">Invoice # <SortIcon sortConfig={sortConfig} column="id" /></div>
+                      </TableHead>
+                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('clientName')}>
+                        <div className="flex items-center gap-1.5">Client <SortIcon sortConfig={sortConfig} column="clientName" /></div>
+                      </TableHead>
+                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('amount')}>
+                        <div className="flex items-center gap-1.5">Amount <SortIcon sortConfig={sortConfig} column="amount" /></div>
+                      </TableHead>
+                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('dueDate')}>
+                        <div className="flex items-center gap-1.5">Due Date <SortIcon sortConfig={sortConfig} column="dueDate" /></div>
+                      </TableHead>
+                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('status')}>
+                        <div className="flex items-center gap-1.5">Status <SortIcon sortConfig={sortConfig} column="status" /></div>
+                      </TableHead>
+                      <TableHead className="cursor-pointer select-none" onClick={() => handleSort('issuedDate')}>
+                        <div className="flex items-center gap-1.5">Issued <SortIcon sortConfig={sortConfig} column="issuedDate" /></div>
+                      </TableHead>
                     </TableHeaderRow>
                   </TableHeader>
                   <TableBody>
