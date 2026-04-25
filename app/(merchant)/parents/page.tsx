@@ -357,7 +357,7 @@ export default function ParentsPage() {
                   <TableRow key={parent.id} className="group/row">
                     <TableCell>
                       <div className="flex items-center gap-2.5">
-                        <NameAvatar name={parent.name} />
+                        <NameAvatar href="#" name={parent.name} />
                         <div>
                           <div className="font-medium">{parent.name}</div>
                           <div className="text-muted-foreground text-xs">

@@ -1,5 +1,105 @@
 'use client';
 
+type InvoiceStatus = 'paid' | 'pending' | 'overdue';
+
+interface Invoice {
+  id: string;
+  description: string;
+  clientName: string;
+  clientEmail: string;
+  amount: number;
+  dueDate: string;
+  status: InvoiceStatus;
+  issuedDate: string;
+}
+
+const invoices: Invoice[] = [
+  {
+    id: 'INV-001',
+    description: 'Monthly school fees',
+    clientName: 'Ahmad Raza',
+    clientEmail: 'ahmad.raza@email.com',
+    amount: 15000,
+    dueDate: '2026-05-15',
+    status: 'paid',
+    issuedDate: '2026-04-01',
+  },
+  {
+    id: 'INV-002',
+    description: 'Annual registration fee',
+    clientName: 'Sara Khan',
+    clientEmail: 'sara.khan@email.com',
+    amount: 8500,
+    dueDate: '2026-05-20',
+    status: 'pending',
+    issuedDate: '2026-04-05',
+  },
+  {
+    id: 'INV-003',
+    description: 'Lab & activity charges',
+    clientName: 'Bilal Malik',
+    clientEmail: 'bilal.malik@email.com',
+    amount: 3200,
+    dueDate: '2026-04-10',
+    status: 'overdue',
+    issuedDate: '2026-03-20',
+  },
+  {
+    id: 'INV-004',
+    description: 'Monthly school fees',
+    clientName: 'Hina Siddiqui',
+    clientEmail: 'hina.s@email.com',
+    amount: 15000,
+    dueDate: '2026-05-15',
+    status: 'pending',
+    issuedDate: '2026-04-01',
+  },
+  {
+    id: 'INV-005',
+    description: 'Transport charges',
+    clientName: 'Usman Tariq',
+    clientEmail: 'usman.t@email.com',
+    amount: 4500,
+    dueDate: '2026-04-30',
+    status: 'paid',
+    issuedDate: '2026-04-01',
+  },
+  {
+    id: 'INV-006',
+    description: 'Exam & materials fee',
+    clientName: 'Ayesha Noor',
+    clientEmail: 'ayesha.n@email.com',
+    amount: 2800,
+    dueDate: '2026-04-05',
+    status: 'overdue',
+    issuedDate: '2026-03-15',
+  },
+];
+
+const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
+  paid: 'green',
+  pending: 'amber',
+  overdue: 'red',
+};
+
+const statusLabel: Record<InvoiceStatus, string> = {
+  paid: 'Paid',
+  pending: 'Pending',
+  overdue: 'Overdue',
+};
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+function formatAmount(amount: number) {
+  return `PKR ${amount.toLocaleString()}`;
+}
+
 import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
@@ -66,26 +166,21 @@ import { Checkbox } from '@/components/custom/ui/checkbox';
 import { RiDraggable } from 'react-icons/ri';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 
-export default function RolesPage() {
+export default function TableUsagePage() {
   return (
     <>
       <PageHeader>
         <PageHeaderGroup>
-          <PageTitle>Subscription plans</PageTitle>
-          <PageSubtitle>
-            Create subscription plans for your customers.
-          </PageSubtitle>
+          <PageTitle>Table usage</PageTitle>
+          <PageSubtitle>To explain the complete table usage plan</PageSubtitle>
         </PageHeaderGroup>
       </PageHeader>
       <PageMain>
-        <Tabs defaultValue="organization-plans">
+        <Tabs defaultValue="table-usage">
           <TabList>
-            <TabTrigger value="organization-plans">
-              Organization Plans
-            </TabTrigger>
-            <TabTrigger value="user-plans">User Plans</TabTrigger>
+            <TabTrigger value="table-usage">Table usage</TabTrigger>
           </TabList>
-          <TabContent value="organization-plans">
+          <TabContent value="table-usage">
             <MainContent>
               <PageBar>
                 <PageBarContent>
@@ -170,7 +265,7 @@ export default function RolesPage() {
                   </DropdownMenu>
                 </PageBarContent>
                 <PageBarAction>
-                  <Button>+ Create plan</Button>
+                  <Button>+ Add item</Button>
                 </PageBarAction>
               </PageBar>
               <div className="mt-1 -mb-2 flex flex-wrap items-center gap-2">
@@ -228,103 +323,42 @@ export default function RolesPage() {
                 <Table scrollable>
                   <TableHeader>
                     <TableHeaderRow>
-                      <TableHead>Plan</TableHead>
-                      <TableHead>Annually</TableHead>
-                      <TableHead>Plan Key</TableHead>
+                      <TableHead>Invoice</TableHead>
+                      <TableHead>Client</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead>Due Date</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Issued</TableHead>
                     </TableHeaderRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell>
-                        <div>
-                          <div className="font-medium">Free</div>
-                          <div className="text-muted-foreground text-xs">
-                            Always free
+                    {invoices.map((invoice) => (
+                      <TableRow key={invoice.id}>
+                        <TableCell>
+                          <div>
+                            <div className="font-medium">{invoice.id}</div>
+                            <div className="text-muted-foreground text-xs">{invoice.description}</div>
                           </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>-</TableCell>
-                      <TableCell className="font-['Courier_New',monospace]">
-                        free_org
-                      </TableCell>
-                    </TableRow>
+                        </TableCell>
+                        <TableCell>
+                          <div>
+                            <div className="font-medium">{invoice.clientName}</div>
+                            <div className="text-muted-foreground text-xs">{invoice.clientEmail}</div>
+                          </div>
+                        </TableCell>
+                        <TableCell>{formatAmount(invoice.amount)}</TableCell>
+                        <TableCell>{formatDate(invoice.dueDate)}</TableCell>
+                        <TableCell>
+                          <SimpleBadge variant={statusBadgeVariant[invoice.status]}>
+                            {statusLabel[invoice.status]}
+                          </SimpleBadge>
+                        </TableCell>
+                        <TableCell>{formatDate(invoice.issuedDate)}</TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
                 <TableFoot />
-              </TableWrapper>
-            </MainContent>
-          </TabContent>
-          <TabContent value="user-plans">
-            <MainContent>
-              <PageBar>
-                <PageBarContent>
-                  <InputGroup className="max-w-xs">
-                    <InputGroupInput placeholder="Search..." className="w-65" />
-                    <InputGroupAddon>
-                      <LuSearch className="text-foreground size-3.5" />
-                    </InputGroupAddon>
-                  </InputGroup>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild className="group">
-                      <Button variant="secondary">
-                        <LuSettings />
-                        <span>Columns</span>
-                        <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      sideOffset={8}
-                      className="w-64"
-                      align="end"
-                      onCloseAutoFocus={(e) => e.preventDefault()}
-                    >
-                      <DropdownMenuItem>
-                        <LuEye /> Preview Sign Up
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <LuEye />
-                        Preview Sign In
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <LuCode /> Sample User Object
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <Button variant="secondary" size="icon">
-                    <LuFilter />
-                  </Button>
-                </PageBarContent>
-                <PageBarAction>
-                  <Button>+ Create plan</Button>
-                </PageBarAction>
-              </PageBar>
-              <TableWrapper>
-                <Table scrollable>
-                  <TableHeader>
-                    <TableHeaderRow>
-                      <TableHead>Plan</TableHead>
-                      <TableHead>Annually</TableHead>
-                      <TableHead>Plan Key</TableHead>
-                      <TableHead></TableHead>
-                    </TableHeaderRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>
-                        <div>
-                          <div className="font-medium">Free</div>
-                          <div className="text-muted-foreground text-xs">
-                            Always free
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>-</TableCell>{' '}
-                      <TableCell className="font-['Courier_New',monospace]">
-                        free_org
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
               </TableWrapper>
             </MainContent>
           </TabContent>

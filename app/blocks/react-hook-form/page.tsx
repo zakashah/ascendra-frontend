@@ -64,6 +64,7 @@ import { MainSectionPanel } from '@/components/custom/layout/main-section-panel'
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
 import { DatePicker } from '@/components/custom/ui/date-picker';
 import { DateRangePicker } from '@/components/custom/ui/date-range-picker';
+import { sleep } from '@/lib/utils';
 
 // ── Schema ──────────────────────────────────────────────────────────────────
 
@@ -155,11 +156,11 @@ export default function ReactHookFormPage() {
   const bio = watch('bio');
 
   function onSubmit(data: FormData) {
-    setSaving(true);
-    setTimeout(() => setSaving(false), 3000);
     console.log('Profile saved:', data);
-    // reset(data);
+    reset(data);
   }
+
+  const submitForm = handleSubmit(onSubmit);
 
   return (
     <>
@@ -738,7 +739,19 @@ export default function ReactHookFormPage() {
       <UnsavedChangesBar
         isDirty={isDirty}
         onReset={() => reset()}
+        onSave={async () => {
+          console.log('in onSave');
+          submitForm();
+          await sleep(6000);
+          return false;
+          /* setSaving(true);
+          await sleep(6000);
+          setSaving(false);
+          return false; */
+          return false;
+        }}
         isSaving={saving}
+        isValid={isValid}
       />
     </>
   );

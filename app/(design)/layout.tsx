@@ -171,6 +171,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/billing/subscription-plans">
                     Subscription plans
                   </SideBarMenuItem>
+                  <SideBarMenuItem path="/billing/table-usage">
+                    Table usage
+                  </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
               <SideBarMenuItemGroup>
@@ -234,6 +237,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
+            </SideBarMenuSet>
+            <SideBarMenuSet>
+              <SideBarMenuSetTitle>Input</SideBarMenuSetTitle>
+              <SideBarMenuItemGroup>
+                <SideBarMenuItem
+                  alternate="stand-alone"
+                  path="/input/combobox"
+                >
+                  Combobox
+                </SideBarMenuItem>
+              </SideBarMenuItemGroup>
             </SideBarMenuSet>
             <SideBarMenuSet>
               <SideBarMenuSetTitle>Instance</SideBarMenuSetTitle>

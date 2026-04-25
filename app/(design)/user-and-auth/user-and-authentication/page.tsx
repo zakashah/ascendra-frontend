@@ -1,12 +1,10 @@
 'use client';
 
+import { Anchor } from '@/components/custom/common-ui/anchor';
+import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
-import {
-  AlertIcon,
-  SimpleAlert,
-} from '@/components/custom/common-ui/simple-alert';
+import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Button } from '@/components/custom/ui/button';
 import { AsideContent } from '@/components/custom/layout/aside-content';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
@@ -19,30 +17,21 @@ import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { Anchor } from '@/components/custom/common-ui/anchor';
 import { TabContent } from '@/components/custom/tabs/tab-content';
 import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
+import { Button } from '@/components/custom/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
 import { Switch } from '@/components/custom/ui/switch';
-import { cn } from '@/lib/utils';
 import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
-import {
-  LuChevronDown,
-  LuCode,
-  LuEye,
-  LuFolderLock,
-  LuInfo,
-} from 'react-icons/lu';
-import { UnsavedChangesBar } from '@/components/custom/common-ui/unsaved-changes-bar';
+import { LuChevronDown, LuCode, LuEye, LuFolderLock } from 'react-icons/lu';
 
 export default function UserAndAuthenticationPage() {
   const [hidden, setHidden] = useState(true);
@@ -56,7 +45,7 @@ export default function UserAndAuthenticationPage() {
             <DropdownMenuTrigger asChild className="group">
               <Button variant="secondary">
                 Preview
-                <LuChevronDown className="text-muted-foreground font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                <DropDownChevron />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -488,7 +477,6 @@ export default function UserAndAuthenticationPage() {
             </MainContent>
           </TabContent>
         </Tabs>
-        <UnsavedChangesBar show={true} onSave={() => {}} onReset={() => {}} />
       </PageMain>
     </>
   );

@@ -50,6 +50,7 @@ import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown, LuGitBranch, LuSearch } from 'react-icons/lu';
 import { GitBranch } from 'lucide-react';
 import Link from 'next/link';
+import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 
 export default function SSOConnectionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -70,7 +71,7 @@ export default function SSOConnectionsPage() {
             <DropdownMenuTrigger asChild className="group">
               <Button>
                 Add connection
-                <LuChevronDown className="font-bold transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                <DropDownChevron variant="primary" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
