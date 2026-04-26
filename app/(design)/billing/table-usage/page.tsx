@@ -1,6 +1,9 @@
 'use client';
 
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
+import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
 import { SortIcon } from '@/components/custom/data-table/sort-icon';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageBar } from '@/components/custom/layout/page-bar';
@@ -40,120 +43,31 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { useInvoiceList } from '@/hooks/use-invoices';
 import { useSort } from '@/hooks/use-sort';
 import { type ColumnDef } from '@/lib/table';
+import { type Invoice, type InvoiceStatus } from '@/types/invoice';
 import {
   LuChevronDown,
   LuFilter,
-  LuGitBranch,
   LuLock,
   LuSearch,
   LuSettings,
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
-
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/components/custom/ui/empty';
-import { EmptyBody } from '@/components/custom/ui/table';
-import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
-import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-// --- Types ---
-
-type InvoiceStatus = 'paid' | 'pending' | 'overdue';
-
-interface Invoice {
-  id: string;
-  description: string;
-  clientName: string;
-  clientEmail: string;
-  amount: number;
-  dueDate: string;
-  status: InvoiceStatus;
-  issuedDate: string;
-}
-
-// --- Data ---
-
-const invoices: Invoice[] = [
-  {
-    id: 'INV-001',
-    description: 'Monthly school fees',
-    clientName: 'Ahmad Raza',
-    clientEmail: 'ahmad.raza@email.com',
-    amount: 15000,
-    dueDate: '2026-05-15',
-    status: 'paid',
-    issuedDate: '2026-04-01',
-  },
-  {
-    id: 'INV-002',
-    description: 'Annual registration fee',
-    clientName: 'Sara Khan',
-    clientEmail: 'sara.khan@email.com',
-    amount: 8500,
-    dueDate: '2026-05-20',
-    status: 'pending',
-    issuedDate: '2026-04-05',
-  },
-  {
-    id: 'INV-003',
-    description: 'Lab & activity charges',
-    clientName: 'Bilal Malik',
-    clientEmail: 'bilal.malik@email.com',
-    amount: 3200,
-    dueDate: '2026-04-10',
-    status: 'overdue',
-    issuedDate: '2026-03-20',
-  },
-  {
-    id: 'INV-004',
-    description: 'Monthly school fees',
-    clientName: 'Hina Siddiqui',
-    clientEmail: 'hina.s@email.com',
-    amount: 15000,
-    dueDate: '2026-05-15',
-    status: 'pending',
-    issuedDate: '2026-04-01',
-  },
-  {
-    id: 'INV-005',
-    description: 'Transport charges',
-    clientName: 'Usman Tariq',
-    clientEmail: 'usman.t@email.com',
-    amount: 4500,
-    dueDate: '2026-04-30',
-    status: 'paid',
-    issuedDate: '2026-04-01',
-  },
-  {
-    id: 'INV-006',
-    description: 'Exam & materials fee',
-    clientName: 'Ayesha Noor',
-    clientEmail: 'ayesha.n@email.com',
-    amount: 2800,
-    dueDate: '2026-04-05',
-    status: 'overdue',
-    issuedDate: '2026-03-15',
-  },
-];
-
 const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
   paid: 'green',
   pending: 'amber',
   overdue: 'red',
+  cancelled: 'red',
 };
 
 const statusLabel: Record<InvoiceStatus, string> = {
   paid: 'Paid',
   pending: 'Pending',
   overdue: 'Overdue',
+  cancelled: 'Cancelled',
 };
 
 // --- Helpers ---
@@ -173,17 +87,20 @@ function formatAmount(amount: number) {
 // --- Columns ---
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
-  { key: 'id', label: 'Invoice #' },
+  { key: 'invoiceNumber', label: 'Invoice #' },
   { key: 'clientName', label: 'Client' },
   { key: 'amount', label: 'Amount', type: 'number' },
   { key: 'dueDate', label: 'Due Date', type: 'date' },
   { key: 'status', label: 'Status', sortable: false },
-  { key: 'issuedDate', label: 'Issued', type: 'date' },
+  { key: 'issuedAt', label: 'Issued', type: 'date' },
 ];
 
 // --- Component ---
 
 export default function TableUsagePage() {
+  const { data, isLoading } = useInvoiceList();
+  const invoices = data?.data ?? [];
+
   const {
     sortConfig,
     handleSort,
@@ -368,43 +285,38 @@ export default function TableUsagePage() {
                       ))}
                     </TableHeaderRow>
                   </TableHeader>
-                  <TableBody>
-                    {sortedInvoices.map((invoice) => (
-                      <TableRow key={invoice.id}>
-                        <TableCell>
-                          <div>
-                            <div className="font-medium">{invoice.id}</div>
-                            <div className="text-muted-foreground text-xs">
-                              {invoice.description}
+                  {!isLoading && sortedInvoices.length > 0 && (
+                    <TableBody>
+                      {sortedInvoices.map((invoice) => (
+                        <TableRow key={invoice.id}>
+                          <TableCell>
+                            <div>
+                              <div className="font-medium">{invoice.invoiceNumber}</div>
+                              <div className="text-muted-foreground text-xs">
+                                {invoice.title}
+                              </div>
                             </div>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div>
-                            <div className="font-medium">
-                              {invoice.clientName}
-                            </div>
-                            <div className="text-muted-foreground text-xs">
-                              {invoice.clientEmail}
-                            </div>
-                          </div>
-                        </TableCell>
-                        <TableCell>{formatAmount(invoice.amount)}</TableCell>
-                        <TableCell>{formatDate(invoice.dueDate)}</TableCell>
-                        <TableCell>
-                          <SimpleBadge
-                            variant={statusBadgeVariant[invoice.status]}
-                          >
-                            {statusLabel[invoice.status]}
-                          </SimpleBadge>
-                        </TableCell>
-                        <TableCell>{formatDate(invoice.issuedDate)}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
+                          </TableCell>
+                          <TableCell>
+                            <div className="font-medium">{invoice.clientName}</div>
+                          </TableCell>
+                          <TableCell>{formatAmount(invoice.amount)}</TableCell>
+                          <TableCell>{formatDate(invoice.dueDate)}</TableCell>
+                          <TableCell>
+                            <SimpleBadge
+                              variant={statusBadgeVariant[invoice.status]}
+                            >
+                              {statusLabel[invoice.status]}
+                            </SimpleBadge>
+                          </TableCell>
+                          <TableCell>{formatDate(invoice.issuedAt)}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  )}
                 </Table>
-                {/* <TableLoadingBody /> */}
-                {/* <TableEmptyBody /> */}
+                {isLoading && <TableLoadingBody />}
+                {!isLoading && sortedInvoices.length === 0 && <TableEmptyBody />}
                 <TableFoot />
               </TableWrapper>
             </MainContent>

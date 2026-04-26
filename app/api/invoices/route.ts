@@ -4,7 +4,7 @@ import * as store from '@/lib/mock/invoice-store';
 import { type InvoiceListParams, type InvoiceStatus } from '@/types/invoice';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const mockDelay = () => delay(150 + Math.random() * 150);
+const mockDelay = () => delay(1500 + Math.random() * 1500);
 
 // GET /api/invoices?page=&limit=&search=&status=
 export async function GET(req: NextRequest) {
