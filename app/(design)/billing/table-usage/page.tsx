@@ -264,7 +264,7 @@ export default function TableUsagePage() {
                           key={String(col.key)}
                           className={
                             col.sortable !== false
-                              ? 'cursor-pointer select-none'
+                              ? 'group/sort cursor-pointer select-none'
                               : undefined
                           }
                           onClick={
@@ -291,14 +291,18 @@ export default function TableUsagePage() {
                         <TableRow key={invoice.id}>
                           <TableCell>
                             <div>
-                              <div className="font-medium">{invoice.invoiceNumber}</div>
+                              <div className="font-medium">
+                                {invoice.invoiceNumber}
+                              </div>
                               <div className="text-muted-foreground text-xs">
                                 {invoice.title}
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>
-                            <div className="font-medium">{invoice.clientName}</div>
+                            <div className="font-medium">
+                              {invoice.clientName}
+                            </div>
                           </TableCell>
                           <TableCell>{formatAmount(invoice.amount)}</TableCell>
                           <TableCell>{formatDate(invoice.dueDate)}</TableCell>
@@ -316,7 +320,9 @@ export default function TableUsagePage() {
                   )}
                 </Table>
                 {isLoading && <TableLoadingBody />}
-                {!isLoading && sortedInvoices.length === 0 && <TableEmptyBody />}
+                {!isLoading && sortedInvoices.length === 0 && (
+                  <TableEmptyBody />
+                )}
                 <TableFoot />
               </TableWrapper>
             </MainContent>

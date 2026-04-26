@@ -10,7 +10,7 @@ export function useSort<T>(data: T[], columns: ColumnDef<T>[]) {
     setSortConfig((prev) => {
       if (prev?.key !== key) return { key, direction: 'asc' };
       if (prev.direction === 'asc') return { key, direction: 'desc' };
-      return null;
+      return { key, direction: 'asc' };
     });
   }
 
