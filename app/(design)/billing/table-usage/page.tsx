@@ -32,6 +32,7 @@ import {
 import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
 import {
@@ -58,6 +59,7 @@ import {
   LuArrowDown,
   LuArrowUp,
   LuArrowUpDown,
+  LuEraser,
   LuFilter,
   LuLock,
   LuSearch,
@@ -117,6 +119,8 @@ export default function TableUsagePage() {
   const [columns, setColumns] = useState(() => INVOICE_COLUMNS);
   const dragKeyRef = useRef<string | null>(null);
   const [dragOverKey, setDragOverKey] = useState<string | null>(null);
+  const [searchHovered, setSearchHovered] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
 
   function toggleColumnActive(key: string) {
     setColumns((prev) =>
@@ -192,15 +196,34 @@ export default function TableUsagePage() {
             <MainContent>
               <PageBar>
                 <PageBarContent>
-                  <InputGroup className="max-w-xs">
+                  <InputGroup
+                    className="max-w-xs"
+                    onMouseEnter={() => setSearchHovered(true)}
+                    onMouseLeave={() => setSearchHovered(false)}
+                  >
+                    <InputGroupAddon>
+                      <LuSearch className="text-foreground size-3.5" />
+                    </InputGroupAddon>
                     <InputGroupInput
                       placeholder="Search..."
                       className="w-65"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
+                      onFocus={() => setSearchFocused(true)}
+                      onBlur={() => setSearchFocused(false)}
                     />
-                    <InputGroupAddon>
-                      <LuSearch className="text-foreground size-3.5" />
+                    <InputGroupAddon
+                      align="inline-end"
+                      className={cn(
+                        'transition-opacity',
+                        searchTerm && searchHovered && !searchFocused
+                          ? 'opacity-100'
+                          : 'pointer-events-none opacity-0'
+                      )}
+                    >
+                      <InputGroupButton onClick={() => setSearchTerm('')}>
+                        <LuEraser className="size-3.5" />
+                      </InputGroupButton>
                     </InputGroupAddon>
                   </InputGroup>
                   <DropdownMenu modal={false}>
