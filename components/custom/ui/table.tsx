@@ -12,6 +12,7 @@ import {
 
 import { PaginationButton } from '@/components/custom/common-ui/pagination-button';
 import { Separator } from '@/components/ui/separator';
+import { type PaginationState } from '@/hooks/use-pagination';
 import { cn } from '@/lib/utils';
 import {
   LuChevronFirst,
@@ -208,7 +209,21 @@ function TableCaption({
   );
 }
 
-function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
+function TableFoot({
+  className,
+  pagination,
+  ...props
+}: React.ComponentProps<'footer'> & { pagination?: PaginationState }) {
+  const atFirst = !pagination || pagination.currentPage === 1;
+  const atLast = !pagination || pagination.currentPage === pagination.totalPages;
+
+  const rangeStart = pagination ? pagination.startIndex + 1 : 1;
+  const rangeEnd = pagination ? pagination.endIndex : 1;
+  const total = pagination ? pagination.totalItems : 1;
+  const pageLabel = pagination
+    ? `${pagination.currentPage}/${pagination.totalPages}`
+    : '1/1';
+
   return (
     <footer
       data-slot="table-foot"
@@ -221,9 +236,9 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
       <div className="mx-1 px-5 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-1">
-            <span>1-1</span>
+            <span>{rangeStart}–{rangeEnd}</span>
             <span>of</span>
-            <span>1</span>
+            <span>{total}</span>
           </div>
           <div className="flex items-center">
             <Separator
@@ -232,13 +247,16 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
             />
             <span className="sm:hidden">Show</span>
             <span className="hidden sm:block">Results per page</span>
-            <Select>
+            <Select
+              value={pagination ? String(pagination.pageSize) : '10'}
+              onValueChange={(v) => pagination?.setPageSize(Number(v))}
+            >
               <SelectTrigger className="ml-2" size="sm">
-                <SelectValue placeholder="10" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent side="bottom">
-                {['10', '15', '20', '100'].map((item, i) => (
-                  <SelectItem key={i} value={item} className="">
+                {['5', '10', '15', '20', '100'].map((item) => (
+                  <SelectItem key={item} value={item}>
                     {item}
                   </SelectItem>
                 ))}
@@ -250,21 +268,37 @@ function TableFoot({ className, ...props }: React.ComponentProps<'footer'>) {
       <div className="border-border mx-1 border-t px-5 py-3 sm:border-0 sm:py-4">
         <div className="flex items-center justify-between gap-3 sm:justify-normal">
           <div className="flex items-center gap-2">
-            <PaginationButton className="border-0 bg-transparent">
+            <PaginationButton
+              className="border-0 bg-transparent disabled:opacity-40"
+              disabled={atFirst}
+              onClick={pagination?.goFirst}
+            >
               <LuChevronFirst />
             </PaginationButton>
-            <PaginationButton>
+            <PaginationButton
+              disabled={atFirst}
+              className="disabled:opacity-40"
+              onClick={pagination?.goPrev}
+            >
               <LuChevronLeft />
             </PaginationButton>
           </div>
           <div className="flex items-center">
-            <span className="font-medium">1/1</span>
+            <span className="font-medium">{pageLabel}</span>
           </div>
           <div className="flex items-center gap-2">
-            <PaginationButton>
+            <PaginationButton
+              disabled={atLast}
+              className="disabled:opacity-40"
+              onClick={pagination?.goNext}
+            >
               <LuChevronRight />
             </PaginationButton>
-            <PaginationButton className="border-0 bg-transparent">
+            <PaginationButton
+              className="border-0 bg-transparent disabled:opacity-40"
+              disabled={atLast}
+              onClick={pagination?.goLast}
+            >
               <LuChevronLast />
             </PaginationButton>
           </div>

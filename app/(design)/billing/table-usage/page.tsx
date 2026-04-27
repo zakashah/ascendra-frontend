@@ -45,6 +45,7 @@ import {
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { useInvoiceList } from '@/hooks/use-invoices';
+import { usePagination } from '@/hooks/use-pagination';
 import { useSearch } from '@/hooks/use-search';
 import { useSort } from '@/hooks/use-sort';
 import { type ColumnDef } from '@/lib/table';
@@ -111,6 +112,9 @@ export default function TableUsagePage() {
     handleSort,
     sortedData: sortedInvoices,
   } = useSort(filteredInvoices, INVOICE_COLUMNS);
+
+  const { paginatedData: pagedInvoices, ...pagination } =
+    usePagination(sortedInvoices);
 
   return (
     <>
@@ -295,9 +299,9 @@ export default function TableUsagePage() {
                       ))}
                     </TableHeaderRow>
                   </TableHeader>
-                  {!isLoading && sortedInvoices.length > 0 && (
+                  {!isLoading && pagedInvoices.length > 0 && (
                     <TableBody>
-                      {sortedInvoices.map((invoice) => (
+                      {pagedInvoices.map((invoice) => (
                         <TableRow key={invoice.id}>
                           <TableCell>
                             <div>
@@ -339,7 +343,7 @@ export default function TableUsagePage() {
                 {!isLoading && sortedInvoices.length === 0 && (
                   <TableEmptyBody />
                 )}
-                <TableFoot />
+                <TableFoot pagination={pagination} />
               </TableWrapper>
             </MainContent>
           </TabContent>
