@@ -6,6 +6,12 @@ export interface ColumnDef<T> {
   label: string;
   type?: ColumnType;
   sortable?: boolean;
+  /** Column is always visible; checkbox is disabled. Implies active. */
+  freeze?: boolean;
+  /** Column position cannot be changed; shows lock icon instead of drag handle. */
+  locked?: boolean;
+  /** Whether the column is currently visible. Defaults to true. */
+  active?: boolean;
 }
 
 export interface SortConfig<T> {

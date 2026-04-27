@@ -90,12 +90,12 @@ function formatAmount(amount: number) {
 // --- Columns ---
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
-  { key: 'invoiceNumber', label: 'Invoice #' },
+  { key: 'invoiceNumber', label: 'Invoice #', freeze: true },
   { key: 'clientName', label: 'Client' },
   { key: 'amount', label: 'Amount', type: 'number' },
   { key: 'dueDate', label: 'Due Date', type: 'date' },
-  { key: 'status', label: 'Status', sortable: false },
-  { key: 'issuedAt', label: 'Issued', type: 'date' },
+  { key: 'status', label: 'Status', sortable: false, locked: true },
+  { key: 'issuedAt', label: 'Issued', type: 'date', active: false },
 ];
 
 // --- Component ---
@@ -161,43 +161,41 @@ export default function TableUsagePage() {
                       <div className="text-muted-foreground px-3 py-1 text-xs">
                         Active columns
                       </div>
-                      <div className="flex items-center justify-between overflow-hidden px-3 py-1">
-                        <div className="flex items-center gap-2">
-                          <Checkbox disabled checked />
-                          <div className="mt-1">Plan</div>
+                      {INVOICE_COLUMNS.filter((col) => col.active !== false).map((col) => (
+                        <div
+                          key={String(col.key)}
+                          className="flex items-center justify-between overflow-hidden px-3 py-1"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Checkbox disabled={col.freeze} checked />
+                            <div className="mt-1">{col.label}</div>
+                          </div>
+                          {col.locked || col.freeze ? (
+                            <LuLock className="text-muted-foreground size-2.5 stroke-3" />
+                          ) : (
+                            <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
+                          )}
                         </div>
-                        <LuLock className="text-muted-foreground size-2.5 stroke-3" />
-                      </div>
-                      <div className="flex items-center justify-between overflow-hidden px-3 py-1">
-                        <div className="flex items-center gap-2">
-                          <Checkbox />
-                          <div className="mt-1">Trial</div>
-                        </div>
-                        <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
-                      </div>
-                      <div className="flex items-center justify-between overflow-hidden px-3 py-1">
-                        <div className="flex items-center gap-2">
-                          <Checkbox />
-                          <div className="mt-1">Monthly</div>
-                        </div>
-                        <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
-                      </div>
-                      <DropdownMenuSeparator />
-                      <div className="text-muted-foreground px-3 py-1 text-xs">
-                        Available columns
-                      </div>
-                      <div className="flex items-center justify-between overflow-hidden px-3 py-1">
-                        <div className="flex items-center gap-2">
-                          <Checkbox />
-                          <div className="mt-1">Plan Key</div>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between overflow-hidden px-3 py-1">
-                        <div className="flex items-center gap-2">
-                          <Checkbox />
-                          <div className="mt-1">Annually</div>
-                        </div>
-                      </div>
+                      ))}
+                      {INVOICE_COLUMNS.some((col) => col.active === false) && (
+                        <>
+                          <DropdownMenuSeparator />
+                          <div className="text-muted-foreground px-3 py-1 text-xs">
+                            Available columns
+                          </div>
+                          {INVOICE_COLUMNS.filter((col) => col.active === false).map((col) => (
+                            <div
+                              key={String(col.key)}
+                              className="flex items-center justify-between overflow-hidden px-3 py-1"
+                            >
+                              <div className="flex items-center gap-2">
+                                <Checkbox />
+                                <div className="mt-1">{col.label}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
                     </DropdownMenuContent>
                   </DropdownMenu>
                   <DropdownMenu>
