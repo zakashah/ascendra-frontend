@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { Highlight } from '@/components/custom/data-table/highlight';
@@ -101,17 +102,46 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 // --- Component ---
 
 export default function TableUsagePage() {
+  const [columns, setColumns] = useState(() => INVOICE_COLUMNS);
+  const dragKeyRef = useRef<string | null>(null);
+  const [dragOverKey, setDragOverKey] = useState<string | null>(null);
+
+  function toggleColumnActive(key: string) {
+    setColumns((prev) =>
+      prev.map((col) =>
+        String(col.key) === key
+          ? { ...col, active: col.active === false ? true : false }
+          : col
+      )
+    );
+  }
+
+  function reorderColumns(fromKey: string, toKey: string) {
+    setColumns((prev) => {
+      const result = [...prev];
+      const fromIdx = result.findIndex((c) => String(c.key) === fromKey);
+      const toIdx = result.findIndex((c) => String(c.key) === toKey);
+      if (fromIdx === -1 || toIdx === -1 || fromIdx === toIdx) return prev;
+      const [moved] = result.splice(fromIdx, 1);
+      result.splice(toIdx, 0, moved);
+      return result;
+    });
+  }
+
   const { data, isLoading } = useInvoiceList();
   const invoices = data?.data ?? [];
 
-  const { searchTerm, setSearchTerm, filteredData: filteredInvoices } =
-    useSearch(invoices, INVOICE_COLUMNS);
+  const {
+    searchTerm,
+    setSearchTerm,
+    filteredData: filteredInvoices,
+  } = useSearch(invoices, columns);
 
   const {
     sortConfig,
     handleSort,
     sortedData: sortedInvoices,
-  } = useSort(filteredInvoices, INVOICE_COLUMNS);
+  } = useSort(filteredInvoices, columns);
 
   const { paginatedData: pagedInvoices, ...pagination } =
     usePagination(sortedInvoices);
@@ -144,7 +174,7 @@ export default function TableUsagePage() {
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                  <DropdownMenu>
+                  <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild className="group">
                       <Button variant="secondary">
                         <LuSettings />
@@ -161,39 +191,84 @@ export default function TableUsagePage() {
                       <div className="text-muted-foreground px-3 py-1 text-xs">
                         Active columns
                       </div>
-                      {INVOICE_COLUMNS.filter((col) => col.active !== false).map((col) => (
-                        <div
-                          key={String(col.key)}
-                          className="flex items-center justify-between overflow-hidden px-3 py-1"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Checkbox disabled={col.freeze} checked />
-                            <div className="mt-1">{col.label}</div>
-                          </div>
-                          {col.locked || col.freeze ? (
-                            <LuLock className="text-muted-foreground size-2.5 stroke-3" />
-                          ) : (
-                            <RiDraggable className="text-muted-foreground -mr-0.5 cursor-pointer" />
-                          )}
-                        </div>
-                      ))}
-                      {INVOICE_COLUMNS.some((col) => col.active === false) && (
+                      {columns
+                        .filter((col) => col.active !== false)
+                        .map((col) => {
+                          const canDrag = !col.locked && !col.freeze;
+                          const isDropTarget =
+                            canDrag && dragOverKey === String(col.key);
+                          return (
+                            <div
+                              key={String(col.key)}
+                              draggable={canDrag}
+                              onDragStart={(e) => {
+                                dragKeyRef.current = String(col.key);
+                                e.dataTransfer.effectAllowed = 'move';
+                              }}
+                              onDragOver={(e) => {
+                                if (!canDrag || !dragKeyRef.current) return;
+                                e.preventDefault();
+                                e.dataTransfer.dropEffect = 'move';
+                                setDragOverKey(String(col.key));
+                              }}
+                              onDrop={(e) => {
+                                e.preventDefault();
+                                if (dragKeyRef.current && canDrag) {
+                                  reorderColumns(
+                                    dragKeyRef.current,
+                                    String(col.key)
+                                  );
+                                }
+                                setDragOverKey(null);
+                              }}
+                              onDragEnd={() => {
+                                dragKeyRef.current = null;
+                                setDragOverKey(null);
+                              }}
+                              className={`animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150 ${isDropTarget ? 'border-primary border-t-2' : ''}`}
+                            >
+                              <div className="flex items-center gap-2">
+                                <Checkbox
+                                  disabled={col.freeze}
+                                  checked
+                                  onCheckedChange={() =>
+                                    toggleColumnActive(String(col.key))
+                                  }
+                                />
+                                <div className="mt-1">{col.label}</div>
+                              </div>
+                              {col.locked || col.freeze ? (
+                                <LuLock className="text-muted-foreground size-2.5 stroke-3" />
+                              ) : (
+                                <RiDraggable className="text-muted-foreground -mr-0.5 cursor-grab active:cursor-grabbing" />
+                              )}
+                            </div>
+                          );
+                        })}
+                      {columns.some((col) => col.active === false) && (
                         <>
                           <DropdownMenuSeparator />
                           <div className="text-muted-foreground px-3 py-1 text-xs">
                             Available columns
                           </div>
-                          {INVOICE_COLUMNS.filter((col) => col.active === false).map((col) => (
-                            <div
-                              key={String(col.key)}
-                              className="flex items-center justify-between overflow-hidden px-3 py-1"
-                            >
-                              <div className="flex items-center gap-2">
-                                <Checkbox />
-                                <div className="mt-1">{col.label}</div>
+                          {columns
+                            .filter((col) => col.active === false)
+                            .map((col) => (
+                              <div
+                                key={String(col.key)}
+                                className="animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150"
+                              >
+                                <div className="flex items-center gap-2">
+                                  <Checkbox
+                                    checked={false}
+                                    onCheckedChange={() =>
+                                      toggleColumnActive(String(col.key))
+                                    }
+                                  />
+                                  <div className="mt-1">{col.label}</div>
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            ))}
                         </>
                       )}
                     </DropdownMenuContent>
@@ -270,67 +345,112 @@ export default function TableUsagePage() {
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
-                    <TableHeaderRow>
-                      {INVOICE_COLUMNS.map((col) => (
-                        <TableHead
-                          key={String(col.key)}
-                          className={
-                            col.sortable !== false
-                              ? 'group/sort cursor-pointer select-none'
-                              : undefined
-                          }
-                          onClick={
-                            col.sortable !== false
-                              ? () => handleSort(col.key)
-                              : undefined
-                          }
-                        >
-                          <div className="flex items-center gap-1.5">
-                            {col.label}
-                            <SortIcon
-                              sortConfig={sortConfig}
-                              column={col.key}
-                              sortable={col.sortable}
-                            />
-                          </div>
-                        </TableHead>
-                      ))}
+                    <TableHeaderRow columns={columns}>
+                      <TableHead
+                        colKey="invoiceNumber"
+                        className="group/sort cursor-pointer select-none"
+                        onClick={() => handleSort('invoiceNumber')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Invoice #
+                          <SortIcon sortConfig={sortConfig} column="invoiceNumber" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        colKey="clientName"
+                        className="group/sort cursor-pointer select-none"
+                        onClick={() => handleSort('clientName')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Client
+                          <SortIcon sortConfig={sortConfig} column="clientName" />
+                        </div>
+                      </TableHead>
+                      <TableHead colKey="status">Status</TableHead>
+                      <TableHead
+                        colKey="amount"
+                        className="group/sort cursor-pointer select-none"
+                        onClick={() => handleSort('amount')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Amount
+                          <SortIcon sortConfig={sortConfig} column="amount" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        colKey="dueDate"
+                        className="group/sort cursor-pointer select-none"
+                        onClick={() => handleSort('dueDate')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Due Date
+                          <SortIcon sortConfig={sortConfig} column="dueDate" />
+                        </div>
+                      </TableHead>
+                      <TableHead
+                        colKey="issuedAt"
+                        className="group/sort cursor-pointer select-none"
+                        onClick={() => handleSort('issuedAt')}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Issued
+                          <SortIcon sortConfig={sortConfig} column="issuedAt" />
+                        </div>
+                      </TableHead>
                     </TableHeaderRow>
                   </TableHeader>
                   {!isLoading && pagedInvoices.length > 0 && (
                     <TableBody>
                       {pagedInvoices.map((invoice) => (
-                        <TableRow key={invoice.id}>
-                          <TableCell>
+                        <TableRow key={invoice.id} columns={columns}>
+                          <TableCell colKey="invoiceNumber">
                             <div>
                               <div className="font-medium">
-                                <Highlight text={invoice.invoiceNumber} query={searchTerm} />
+                                <Highlight
+                                  text={invoice.invoiceNumber}
+                                  query={searchTerm}
+                                />
                               </div>
                               <div className="text-muted-foreground text-xs">
-                                <Highlight text={invoice.title} query={searchTerm} />
+                                <Highlight
+                                  text={invoice.title}
+                                  query={searchTerm}
+                                />
                               </div>
                             </div>
                           </TableCell>
-                          <TableCell>
+                          <TableCell colKey="clientName">
                             <div className="font-medium">
-                              <Highlight text={invoice.clientName} query={searchTerm} />
+                              <Highlight
+                                text={invoice.clientName}
+                                query={searchTerm}
+                              />
                             </div>
                           </TableCell>
-                          <TableCell>
-                            <Highlight text={formatAmount(invoice.amount)} query={searchTerm} />
-                          </TableCell>
-                          <TableCell>
-                            <Highlight text={formatDate(invoice.dueDate)} query={searchTerm} />
-                          </TableCell>
-                          <TableCell>
+                          <TableCell colKey="status">
                             <SimpleBadge
                               variant={statusBadgeVariant[invoice.status]}
                             >
                               {statusLabel[invoice.status]}
                             </SimpleBadge>
                           </TableCell>
-                          <TableCell>
-                            <Highlight text={formatDate(invoice.issuedAt)} query={searchTerm} />
+                          <TableCell colKey="amount">
+                            <Highlight
+                              text={formatAmount(invoice.amount)}
+                              query={searchTerm}
+                            />
+                          </TableCell>
+                          <TableCell colKey="dueDate">
+                            <Highlight
+                              text={formatDate(invoice.dueDate)}
+                              query={searchTerm}
+                            />
+                          </TableCell>
+                          <TableCell colKey="issuedAt">
+                            <Highlight
+                              text={formatDate(invoice.issuedAt)}
+                              query={searchTerm}
+                            />
                           </TableCell>
                         </TableRow>
                       ))}

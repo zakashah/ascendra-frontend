@@ -21,6 +21,27 @@ import {
   LuChevronRight,
 } from 'react-icons/lu';
 
+export type ColVisibility = { key: PropertyKey; active?: boolean };
+
+function filterChildrenByColumns(
+  columns: ColVisibility[],
+  children: React.ReactNode,
+): React.ReactElement[] {
+  const activeKeys = columns
+    .filter((col) => col.active !== false)
+    .map((col) => String(col.key));
+  const childMap = new Map<string, React.ReactElement>();
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child)) {
+      const colKey = (child.props as { colKey?: string }).colKey;
+      if (colKey) childMap.set(colKey, child);
+    }
+  });
+  return activeKeys
+    .map((key) => childMap.get(key))
+    .filter((c): c is React.ReactElement => c !== undefined);
+}
+
 const TableScrollContext = React.createContext({
   scrolled: false,
   vscroll: false,
@@ -104,13 +125,21 @@ function TableHeader({
   );
 }
 
-function TableHeaderRow({ className, ...props }: React.ComponentProps<'tr'>) {
+function TableHeaderRow({
+  columns,
+  className,
+  children,
+  ...props
+}: React.ComponentProps<'tr'> & { columns?: ColVisibility[] }) {
+  const content = columns ? filterChildrenByColumns(columns, children) : children;
   return (
     <tr
       data-slot="table-header-row"
       className={cn('text-secondary-foreground text-left text-xs', className)}
       {...props}
-    />
+    >
+      {content}
+    </tr>
   );
 }
 
@@ -163,7 +192,13 @@ function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>) {
   );
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
+function TableRow({
+  columns,
+  className,
+  children,
+  ...props
+}: React.ComponentProps<'tr'> & { columns?: ColVisibility[] }) {
+  const content = columns ? filterChildrenByColumns(columns, children) : children;
   return (
     <tr
       data-slot="table-row"
@@ -172,11 +207,17 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
         className
       )}
       {...props}
-    />
+    >
+      {content}
+    </tr>
   );
 }
 
-function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
+function TableHead({
+  colKey: _,
+  className,
+  ...props
+}: React.ComponentProps<'th'> & { colKey?: string }) {
   return (
     <th
       data-slot="table-head"
@@ -186,7 +227,11 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
   );
 }
 
-function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
+function TableCell({
+  colKey: _,
+  className,
+  ...props
+}: React.ComponentProps<'td'> & { colKey?: string }) {
   return (
     <td
       data-slot="table-cell"
