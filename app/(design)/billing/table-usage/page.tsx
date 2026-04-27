@@ -2,6 +2,7 @@
 
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { Highlight } from '@/components/custom/data-table/highlight';
 import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
 import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
 import { SortIcon } from '@/components/custom/data-table/sort-icon';
@@ -44,6 +45,7 @@ import {
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { useInvoiceList } from '@/hooks/use-invoices';
+import { useSearch } from '@/hooks/use-search';
 import { useSort } from '@/hooks/use-sort';
 import { type ColumnDef } from '@/lib/table';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
@@ -101,11 +103,14 @@ export default function TableUsagePage() {
   const { data, isLoading } = useInvoiceList();
   const invoices = data?.data ?? [];
 
+  const { searchTerm, setSearchTerm, filteredData: filteredInvoices } =
+    useSearch(invoices, INVOICE_COLUMNS);
+
   const {
     sortConfig,
     handleSort,
     sortedData: sortedInvoices,
-  } = useSort(invoices, INVOICE_COLUMNS);
+  } = useSort(filteredInvoices, INVOICE_COLUMNS);
 
   return (
     <>
@@ -125,7 +130,12 @@ export default function TableUsagePage() {
               <PageBar>
                 <PageBarContent>
                   <InputGroup className="max-w-xs">
-                    <InputGroupInput placeholder="Search..." className="w-65" />
+                    <InputGroupInput
+                      placeholder="Search..."
+                      className="w-65"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
@@ -292,20 +302,24 @@ export default function TableUsagePage() {
                           <TableCell>
                             <div>
                               <div className="font-medium">
-                                {invoice.invoiceNumber}
+                                <Highlight text={invoice.invoiceNumber} query={searchTerm} />
                               </div>
                               <div className="text-muted-foreground text-xs">
-                                {invoice.title}
+                                <Highlight text={invoice.title} query={searchTerm} />
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>
                             <div className="font-medium">
-                              {invoice.clientName}
+                              <Highlight text={invoice.clientName} query={searchTerm} />
                             </div>
                           </TableCell>
-                          <TableCell>{formatAmount(invoice.amount)}</TableCell>
-                          <TableCell>{formatDate(invoice.dueDate)}</TableCell>
+                          <TableCell>
+                            <Highlight text={formatAmount(invoice.amount)} query={searchTerm} />
+                          </TableCell>
+                          <TableCell>
+                            <Highlight text={formatDate(invoice.dueDate)} query={searchTerm} />
+                          </TableCell>
                           <TableCell>
                             <SimpleBadge
                               variant={statusBadgeVariant[invoice.status]}
@@ -313,7 +327,9 @@ export default function TableUsagePage() {
                               {statusLabel[invoice.status]}
                             </SimpleBadge>
                           </TableCell>
-                          <TableCell>{formatDate(invoice.issuedAt)}</TableCell>
+                          <TableCell>
+                            <Highlight text={formatDate(invoice.issuedAt)} query={searchTerm} />
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

@@ -44,6 +44,20 @@ export function defineColumns<T extends object>(
   }));
 }
 
+// --- Search normalization ---
+
+export function searchValue(val: unknown, type: ColumnType): string {
+  if (type === 'date') {
+    return new Date(val as string).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  }
+  if (type === 'number') return (val as number).toLocaleString();
+  return String(val ?? '');
+}
+
 // --- Sort ---
 
 function sortValue(val: unknown, type: ColumnType): string | number {
