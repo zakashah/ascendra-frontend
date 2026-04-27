@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import {
   DropdownMenu,
@@ -8,45 +7,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
-import { type ColumnDef } from '@/lib/table';
 import { cn } from '@/lib/utils';
 import { RxCrossCircled } from 'react-icons/rx';
 
-interface DataFilterItemProps<T extends object> {
+interface DataFilterItemProps {
   columnKey: string;
-  columns: ColumnDef<T>[];
-  data: T[];
+  label: string;
+  options: string[];
   value: string | null;
+  displayValue?: (raw: string) => string;
   onChange: (key: string, value: string) => void;
   onRemove: (key: string) => void;
 }
 
-function extractUniqueValues<T extends object>(data: T[], key: string): string[] {
-  const seen = new Set<string>();
-  for (const row of data) {
-    const val = row[key as keyof T];
-    if (val !== null && val !== undefined && val !== '') {
-      seen.add(String(val));
-    }
-  }
-  return Array.from(seen).sort();
-}
-
-export function DataFilterItem<T extends object>({
+export function DataFilterItem({
   columnKey,
-  columns,
-  data,
+  label,
+  options,
   value,
+  displayValue,
   onChange,
   onRemove,
-}: DataFilterItemProps<T>) {
-  const col = columns.find((c) => String(c.key) === columnKey);
-  const label = col?.label ?? columnKey;
-
-  const options = useMemo(
-    () => extractUniqueValues(data, columnKey),
-    [data, columnKey]
-  );
+}: DataFilterItemProps) {
+  const display = (raw: string) => (displayValue ? displayValue(raw) : raw);
 
   return (
     <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
@@ -61,7 +44,7 @@ export function DataFilterItem<T extends object>({
         <DropdownMenuTrigger asChild>
           <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
             <span className={cn(!value && 'text-muted-foreground')}>
-              {value ?? 'Enter Value'}
+              {value ? display(value) : 'Enter Value'}
             </span>
             <DropDownChevron />
           </div>
@@ -76,7 +59,7 @@ export function DataFilterItem<T extends object>({
                 className={cn(value === opt && 'font-medium')}
                 onClick={() => onChange(columnKey, opt)}
               >
-                {opt}
+                {display(opt)}
               </DropdownMenuItem>
             ))
           )}

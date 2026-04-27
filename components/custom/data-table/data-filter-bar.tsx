@@ -1,11 +1,11 @@
-import { type ColumnDef } from '@/lib/table';
 import { type FilterChip } from '@/hooks/use-filter';
+import { type ColumnDef } from '@/lib/table';
 import { DataFilterItem } from './data-filter-item';
 
 interface DataFilterBarProps<T extends object> {
   filters: FilterChip[];
   columns: ColumnDef<T>[];
-  data: T[];
+  getOptionsFor: (key: string) => string[];
   onChange: (key: string, value: string) => void;
   onRemove: (key: string) => void;
   onClearAll?: () => void;
@@ -14,7 +14,7 @@ interface DataFilterBarProps<T extends object> {
 export function DataFilterBar<T extends object>({
   filters,
   columns,
-  data,
+  getOptionsFor,
   onChange,
   onRemove,
   onClearAll,
@@ -23,17 +23,21 @@ export function DataFilterBar<T extends object>({
 
   return (
     <div className="mt-1 -mb-2 flex flex-wrap items-center gap-2">
-      {filters.map((f) => (
-        <DataFilterItem
-          key={f.key}
-          columnKey={f.key}
-          columns={columns}
-          data={data}
-          value={f.value}
-          onChange={onChange}
-          onRemove={onRemove}
-        />
-      ))}
+      {filters.map((f) => {
+        const col = columns.find((c) => String(c.key) === f.key);
+        return (
+          <DataFilterItem
+            key={f.key}
+            columnKey={f.key}
+            label={col?.label ?? f.key}
+            options={getOptionsFor(f.key)}
+            value={f.value}
+            displayValue={col?.displayValue}
+            onChange={onChange}
+            onRemove={onRemove}
+          />
+        );
+      })}
       {onClearAll && (
         <span
           className="text-muted-foreground cursor-pointer text-xs"

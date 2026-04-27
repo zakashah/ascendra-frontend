@@ -12,6 +12,10 @@ export interface ColumnDef<T> {
   locked?: boolean;
   /** Whether the column is currently visible. Defaults to true. */
   active?: boolean;
+  /** Whether the column appears in the filter picker. Defaults to false. */
+  filter?: boolean;
+  /** Converts a raw data string value to its display label in filter chips/options. */
+  displayValue?: (raw: string) => string;
 }
 
 export interface SortConfig<T> {

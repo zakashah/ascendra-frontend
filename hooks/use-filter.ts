@@ -28,6 +28,32 @@ export function useFilter<T>(data: T[]) {
     setFilters([]);
   }
 
+  // For each chip, compute options from `data` filtered by every OTHER active filter.
+  // This gives faceted drill-down: selecting one filter narrows the options of siblings.
+  const optionsMap = useMemo(() => {
+    const result: Record<string, string[]> = {};
+    for (const { key } of filters) {
+      const otherActive = filters.filter((f) => f.key !== key && f.value !== null);
+      const pool =
+        otherActive.length === 0
+          ? data
+          : data.filter((row) =>
+              otherActive.every(
+                ({ key: k, value }) => String(row[k as keyof T]) === value
+              )
+            );
+      const seen = new Set<string>();
+      for (const row of pool) {
+        const val = row[key as keyof T];
+        if (val !== null && val !== undefined && val !== '') {
+          seen.add(String(val));
+        }
+      }
+      result[key] = Array.from(seen).sort();
+    }
+    return result;
+  }, [data, filters]);
+
   const filteredData = useMemo(() => {
     const active = filters.filter((f) => f.value !== null);
     if (active.length === 0) return data;
@@ -36,5 +62,17 @@ export function useFilter<T>(data: T[]) {
     );
   }, [data, filters]);
 
-  return { filters, addFilter, setFilterValue, removeFilter, clearFilters, filteredData };
+  function getOptionsFor(key: string): string[] {
+    return optionsMap[key] ?? [];
+  }
+
+  return {
+    filters,
+    addFilter,
+    setFilterValue,
+    removeFilter,
+    clearFilters,
+    filteredData,
+    getOptionsFor,
+  };
 }

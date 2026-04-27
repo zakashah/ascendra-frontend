@@ -55,6 +55,8 @@ import { type ColumnDef } from '@/lib/table';
 import { cn } from '@/lib/utils';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
 import {
+  LuArrowDown,
+  LuArrowUp,
   LuArrowUpDown,
   LuFilter,
   LuLock,
@@ -62,6 +64,7 @@ import {
   LuSettings,
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
+
 const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
   paid: 'green',
   pending: 'amber',
@@ -94,10 +97,17 @@ function formatAmount(amount: number) {
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   { key: 'invoiceNumber', label: 'Invoice #', freeze: true },
-  { key: 'clientName', label: 'Client' },
+  { key: 'clientName', label: 'Client', filter: true },
   { key: 'amount', label: 'Amount', type: 'number' },
   { key: 'dueDate', label: 'Due Date', type: 'date' },
-  { key: 'status', label: 'Status', sortable: false, locked: true },
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: false,
+    locked: true,
+    filter: true,
+    displayValue: (raw) => statusLabel[raw as InvoiceStatus] ?? raw,
+  },
   { key: 'issuedAt', label: 'Issued', type: 'date', active: false },
 ];
 
@@ -139,12 +149,11 @@ export default function TableUsagePage() {
     setFilterValue,
     removeFilter,
     clearFilters,
+    getOptionsFor,
     filteredData: filteredByColumn,
   } = useFilter(invoices);
 
-  const filterableColumns = columns.filter(
-    (col) => col.type !== 'number' && col.type !== 'date'
-  );
+  const filterableColumns = columns.filter((col) => col.filter === true);
 
   const {
     searchTerm,
@@ -297,9 +306,7 @@ export default function TableUsagePage() {
                     <DropdownMenuTrigger asChild className="group">
                       <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
                         <LuArrowUpDown className="sm:hidden" />
-                        <span className="hidden font-normal sm:inline">
-                          Sort by:
-                        </span>
+                        <span className="hidden font-normal sm:inline">Sort by:</span>
                         <span
                           className={cn(
                             'hidden sm:inline',
@@ -309,8 +316,7 @@ export default function TableUsagePage() {
                           )}
                         >
                           {sortConfig
-                            ? (columns.find((c) => c.key === sortConfig.key)
-                                ?.label ?? String(sortConfig.key))
+                            ? (columns.find((c) => c.key === sortConfig.key)?.label ?? String(sortConfig.key))
                             : 'None'}
                         </span>
                         <DropDownChevron className="hidden sm:block" />
@@ -333,12 +339,17 @@ export default function TableUsagePage() {
                         .map((col) => (
                           <DropdownMenuItem
                             key={String(col.key)}
-                            className={cn(
-                              sortConfig?.key === col.key && 'font-medium'
-                            )}
+                            className={cn(sortConfig?.key === col.key && 'font-medium')}
                             onClick={() => handleSort(col.key)}
                           >
                             {col.label}
+                            {sortConfig?.key === col.key && (
+                              sortConfig.direction === 'asc' ? (
+                                <LuArrowUp className="ml-auto size-3 shrink-0" />
+                              ) : (
+                                <LuArrowDown className="ml-auto size-3 shrink-0" />
+                              )
+                            )}
                           </DropdownMenuItem>
                         ))}
                     </DropdownMenuContent>
@@ -377,7 +388,7 @@ export default function TableUsagePage() {
               <DataFilterBar
                 filters={filters}
                 columns={columns}
-                data={invoices}
+                getOptionsFor={getOptionsFor}
                 onChange={setFilterValue}
                 onRemove={removeFilter}
                 onClearAll={clearFilters}
