@@ -144,22 +144,22 @@ export default function TableUsagePage() {
   const invoices = data?.data ?? [];
 
   const {
+    searchTerm,
+    setSearchTerm,
+    filteredData: searchedInvoices,
+  } = useSearch(invoices, columns);
+
+  const {
     filters,
     addFilter,
     setFilterValue,
     removeFilter,
     clearFilters,
     getOptionsFor,
-    filteredData: filteredByColumn,
-  } = useFilter(invoices);
+    filteredData: filteredInvoices,
+  } = useFilter(searchedInvoices);
 
   const filterableColumns = columns.filter((col) => col.filter === true);
-
-  const {
-    searchTerm,
-    setSearchTerm,
-    filteredData: filteredInvoices,
-  } = useSearch(filteredByColumn, columns);
 
   const {
     sortConfig,
