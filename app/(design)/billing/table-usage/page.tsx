@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { DataFilterBar } from '@/components/custom/data-table/data-filter-bar';
 import { Highlight } from '@/components/custom/data-table/highlight';
 import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
 import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
@@ -45,6 +46,7 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { useFilter } from '@/hooks/use-filter';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { usePagination } from '@/hooks/use-pagination';
 import { useSearch } from '@/hooks/use-search';
@@ -54,14 +56,12 @@ import { cn } from '@/lib/utils';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
 import {
   LuArrowUpDown,
-  LuChevronDown,
   LuFilter,
   LuLock,
   LuSearch,
   LuSettings,
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
-import { RxCrossCircled } from 'react-icons/rx';
 const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
   paid: 'green',
   pending: 'amber',
@@ -134,10 +134,23 @@ export default function TableUsagePage() {
   const invoices = data?.data ?? [];
 
   const {
+    filters,
+    addFilter,
+    setFilterValue,
+    removeFilter,
+    clearFilters,
+    filteredData: filteredByColumn,
+  } = useFilter(invoices);
+
+  const filterableColumns = columns.filter(
+    (col) => col.type !== 'number' && col.type !== 'date'
+  );
+
+  const {
     searchTerm,
     setSearchTerm,
     filteredData: filteredInvoices,
-  } = useSearch(invoices, columns);
+  } = useSearch(filteredByColumn, columns);
 
   const {
     sortConfig,
@@ -338,13 +351,22 @@ export default function TableUsagePage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       sideOffset={8}
-                      className="w-54"
+                      className="w-44"
                       align="start"
                       onCloseAutoFocus={(e) => e.preventDefault()}
                     >
-                      <DropdownMenuItem>Publicly Visible</DropdownMenuItem>
-                      <DropdownMenuItem>Free Trial</DropdownMenuItem>
-                      <DropdownMenuItem>Annual Amount</DropdownMenuItem>
+                      {filterableColumns.map((col) => {
+                        const active = filters.some((f) => f.key === String(col.key));
+                        return (
+                          <DropdownMenuItem
+                            key={String(col.key)}
+                            disabled={active}
+                            onClick={() => addFilter(String(col.key))}
+                          >
+                            {col.label}
+                          </DropdownMenuItem>
+                        );
+                      })}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </PageBarContent>
@@ -352,53 +374,14 @@ export default function TableUsagePage() {
                   <Button>+ Add item</Button>
                 </PageBarAction>
               </PageBar>
-              <div className="mt-1 -mb-2 flex flex-wrap items-center gap-2">
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
-                  <div className="flex cursor-pointer items-center gap-1 px-1.5">
-                    <RxCrossCircled />
-                    Publicly Visible
-                  </div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
-                        Enter Value
-                        <DropDownChevron />
-                      </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      sideOffset={8}
-                      className="w-4!"
-                      align="start"
-                    >
-                      <DropdownMenuItem>True</DropdownMenuItem>
-                      <DropdownMenuItem>False</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
-                  <div className="flex cursor-pointer items-center gap-1 px-1.5">
-                    <RxCrossCircled />
-                    Annual Amount
-                  </div>
-                  <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
-                    Enter Value
-                    <LuChevronDown className="text-muted-foreground" />
-                  </div>
-                </div>
-                <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
-                  <div className="flex cursor-pointer items-center gap-1 px-1.5">
-                    <RxCrossCircled />
-                    Free Trial
-                  </div>
-                  <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
-                    Enter Value
-                    <LuChevronDown className="text-muted-foreground" />
-                  </div>
-                </div>
-                <div className="text-muted-foreground cursor-pointer text-xs">
-                  Clear filters
-                </div>
-              </div>
+              <DataFilterBar
+                filters={filters}
+                columns={columns}
+                data={invoices}
+                onChange={setFilterValue}
+                onRemove={removeFilter}
+                onClearAll={clearFilters}
+              />
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
