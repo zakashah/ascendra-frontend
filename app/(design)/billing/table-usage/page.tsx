@@ -50,8 +50,10 @@ import { usePagination } from '@/hooks/use-pagination';
 import { useSearch } from '@/hooks/use-search';
 import { useSort } from '@/hooks/use-sort';
 import { type ColumnDef } from '@/lib/table';
+import { cn } from '@/lib/utils';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
 import {
+  LuArrowUpDown,
   LuChevronDown,
   LuFilter,
   LuLock,
@@ -140,11 +142,16 @@ export default function TableUsagePage() {
   const {
     sortConfig,
     handleSort,
+    clearSort,
     sortedData: sortedInvoices,
   } = useSort(filteredInvoices, columns);
 
   const { paginatedData: pagedInvoices, ...pagination } =
     usePagination(sortedInvoices);
+
+  function isColSortable(key: string) {
+    return columns.find((c) => String(c.key) === key)?.sortable !== false;
+  }
 
   return (
     <>
@@ -176,10 +183,10 @@ export default function TableUsagePage() {
                   </InputGroup>
                   <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild className="group">
-                      <Button variant="secondary">
+                      <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
                         <LuSettings />
-                        <span>Columns</span>
-                        <DropDownChevron />
+                        <span className="hidden sm:inline">Columns</span>
+                        <DropDownChevron className="hidden sm:block" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -275,6 +282,56 @@ export default function TableUsagePage() {
                   </DropdownMenu>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild className="group">
+                      <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
+                        <LuArrowUpDown className="sm:hidden" />
+                        <span className="hidden font-normal sm:inline">
+                          Sort by:
+                        </span>
+                        <span
+                          className={cn(
+                            'hidden sm:inline',
+                            sortConfig
+                              ? 'font-medium'
+                              : 'text-muted-foreground font-normal'
+                          )}
+                        >
+                          {sortConfig
+                            ? (columns.find((c) => c.key === sortConfig.key)
+                                ?.label ?? String(sortConfig.key))
+                            : 'None'}
+                        </span>
+                        <DropDownChevron className="hidden sm:block" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      sideOffset={8}
+                      align="start"
+                      onCloseAutoFocus={(e) => e.preventDefault()}
+                    >
+                      <DropdownMenuItem
+                        className={cn(!sortConfig && 'font-medium')}
+                        onClick={clearSort}
+                      >
+                        None
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      {columns
+                        .filter((col) => col.sortable !== false)
+                        .map((col) => (
+                          <DropdownMenuItem
+                            key={String(col.key)}
+                            className={cn(
+                              sortConfig?.key === col.key && 'font-medium'
+                            )}
+                            onClick={() => handleSort(col.key)}
+                          >
+                            {col.label}
+                          </DropdownMenuItem>
+                        ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild className="group">
                       <Button variant="secondary" size="icon">
                         <LuFilter />
                       </Button>
@@ -348,53 +405,128 @@ export default function TableUsagePage() {
                     <TableHeaderRow columns={columns}>
                       <TableHead
                         colKey="invoiceNumber"
-                        className="group/sort cursor-pointer select-none"
-                        onClick={() => handleSort('invoiceNumber')}
+                        className={cn(
+                          isColSortable('invoiceNumber') &&
+                            'group/sort cursor-pointer select-none'
+                        )}
+                        onClick={
+                          isColSortable('invoiceNumber')
+                            ? () => handleSort('invoiceNumber')
+                            : undefined
+                        }
                       >
                         <div className="flex items-center gap-1.5">
                           Invoice #
-                          <SortIcon sortConfig={sortConfig} column="invoiceNumber" />
+                          <SortIcon
+                            sortConfig={sortConfig}
+                            column="invoiceNumber"
+                            sortable={isColSortable('invoiceNumber')}
+                          />
                         </div>
                       </TableHead>
                       <TableHead
                         colKey="clientName"
-                        className="group/sort cursor-pointer select-none"
-                        onClick={() => handleSort('clientName')}
+                        className={cn(
+                          isColSortable('clientName') &&
+                            'group/sort cursor-pointer select-none'
+                        )}
+                        onClick={
+                          isColSortable('clientName')
+                            ? () => handleSort('clientName')
+                            : undefined
+                        }
                       >
                         <div className="flex items-center gap-1.5">
                           Client
-                          <SortIcon sortConfig={sortConfig} column="clientName" />
+                          <SortIcon
+                            sortConfig={sortConfig}
+                            column="clientName"
+                            sortable={isColSortable('clientName')}
+                          />
                         </div>
                       </TableHead>
-                      <TableHead colKey="status">Status</TableHead>
+                      <TableHead
+                        colKey="status"
+                        className={cn(
+                          isColSortable('status') &&
+                            'group/sort cursor-pointer select-none'
+                        )}
+                        onClick={
+                          isColSortable('status')
+                            ? () => handleSort('status')
+                            : undefined
+                        }
+                      >
+                        <div className="flex items-center gap-1.5">
+                          Status
+                          <SortIcon
+                            sortConfig={sortConfig}
+                            column="status"
+                            sortable={isColSortable('status')}
+                          />
+                        </div>
+                      </TableHead>
                       <TableHead
                         colKey="amount"
-                        className="group/sort cursor-pointer select-none"
-                        onClick={() => handleSort('amount')}
+                        className={cn(
+                          isColSortable('amount') &&
+                            'group/sort cursor-pointer select-none'
+                        )}
+                        onClick={
+                          isColSortable('amount')
+                            ? () => handleSort('amount')
+                            : undefined
+                        }
                       >
                         <div className="flex items-center gap-1.5">
                           Amount
-                          <SortIcon sortConfig={sortConfig} column="amount" />
+                          <SortIcon
+                            sortConfig={sortConfig}
+                            column="amount"
+                            sortable={isColSortable('amount')}
+                          />
                         </div>
                       </TableHead>
                       <TableHead
                         colKey="dueDate"
-                        className="group/sort cursor-pointer select-none"
-                        onClick={() => handleSort('dueDate')}
+                        className={cn(
+                          isColSortable('dueDate') &&
+                            'group/sort cursor-pointer select-none'
+                        )}
+                        onClick={
+                          isColSortable('dueDate')
+                            ? () => handleSort('dueDate')
+                            : undefined
+                        }
                       >
                         <div className="flex items-center gap-1.5">
                           Due Date
-                          <SortIcon sortConfig={sortConfig} column="dueDate" />
+                          <SortIcon
+                            sortConfig={sortConfig}
+                            column="dueDate"
+                            sortable={isColSortable('dueDate')}
+                          />
                         </div>
                       </TableHead>
                       <TableHead
                         colKey="issuedAt"
-                        className="group/sort cursor-pointer select-none"
-                        onClick={() => handleSort('issuedAt')}
+                        className={cn(
+                          isColSortable('issuedAt') &&
+                            'group/sort cursor-pointer select-none'
+                        )}
+                        onClick={
+                          isColSortable('issuedAt')
+                            ? () => handleSort('issuedAt')
+                            : undefined
+                        }
                       >
                         <div className="flex items-center gap-1.5">
                           Issued
-                          <SortIcon sortConfig={sortConfig} column="issuedAt" />
+                          <SortIcon
+                            sortConfig={sortConfig}
+                            column="issuedAt"
+                            sortable={isColSortable('issuedAt')}
+                          />
                         </div>
                       </TableHead>
                     </TableHeaderRow>
