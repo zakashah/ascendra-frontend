@@ -1,24 +1,10 @@
-import { type FilterChip } from '@/hooks/use-filter';
-import { type ColumnDef } from '@/lib/table';
+import { useDataTableContext } from '@/hooks/use-data-table';
 import { DataFilterItem } from './data-filter-item';
 
-interface DataFilterBarProps<T extends object> {
-  filters: FilterChip[];
-  columns: ColumnDef<T>[];
-  getOptionsFor: (key: string) => string[];
-  onChange: (key: string, value: string) => void;
-  onRemove: (key: string) => void;
-  onClearAll?: () => void;
-}
+export function DataFilterBar() {
+  const { filters, columns, getOptionsFor, setFilterValue, removeFilter, clearFilters } =
+    useDataTableContext();
 
-export function DataFilterBar<T extends object>({
-  filters,
-  columns,
-  getOptionsFor,
-  onChange,
-  onRemove,
-  onClearAll,
-}: DataFilterBarProps<T>) {
   if (filters.length === 0) return null;
 
   return (
@@ -33,19 +19,14 @@ export function DataFilterBar<T extends object>({
             options={getOptionsFor(f.key)}
             value={f.value}
             displayValue={col?.displayValue}
-            onChange={onChange}
-            onRemove={onRemove}
+            onChange={setFilterValue}
+            onRemove={removeFilter}
           />
         );
       })}
-      {onClearAll && (
-        <span
-          className="text-muted-foreground cursor-pointer text-xs"
-          onClick={onClearAll}
-        >
-          Clear filters
-        </span>
-      )}
+      <span className="text-muted-foreground cursor-pointer text-xs" onClick={clearFilters}>
+        Clear filters
+      </span>
     </div>
   );
 }

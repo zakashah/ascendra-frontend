@@ -1,6 +1,5 @@
 'use client';
 
-import { useRef, useState } from 'react';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { DataFilterBar } from '@/components/custom/data-table/data-filter-bar';
@@ -47,11 +46,8 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import { useFilter } from '@/hooks/use-filter';
+import { DataTableProvider, useDataTable } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
-import { usePagination } from '@/hooks/use-pagination';
-import { useSearch } from '@/hooks/use-search';
-import { useSort } from '@/hooks/use-sort';
 import { type ColumnDef } from '@/lib/table';
 import { cn } from '@/lib/utils';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
@@ -59,11 +55,11 @@ import {
   LuArrowDown,
   LuArrowUp,
   LuArrowUpDown,
-  LuEraser,
   LuFilter,
   LuLock,
   LuSearch,
   LuSettings,
+  LuX,
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 import { VscSearchFuzzy } from 'react-icons/vsc';
@@ -113,74 +109,10 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   { key: 'issuedAt', label: 'Issued', type: 'date', active: false },
 ];
 
-// --- Component ---
+// --- Page ---
 
 export default function TableUsagePage() {
-  const [columns, setColumns] = useState(() => INVOICE_COLUMNS);
-  const dragKeyRef = useRef<string | null>(null);
-  const [dragOverKey, setDragOverKey] = useState<string | null>(null);
-  const [searchHovered, setSearchHovered] = useState(false);
-  const [searchFocused, setSearchFocused] = useState(false);
-
-  function toggleColumnActive(key: string) {
-    setColumns((prev) =>
-      prev.map((col) =>
-        String(col.key) === key
-          ? { ...col, active: col.active === false ? true : false }
-          : col
-      )
-    );
-  }
-
-  function reorderColumns(fromKey: string, toKey: string) {
-    setColumns((prev) => {
-      const result = [...prev];
-      const fromIdx = result.findIndex((c) => String(c.key) === fromKey);
-      const toIdx = result.findIndex((c) => String(c.key) === toKey);
-      if (fromIdx === -1 || toIdx === -1 || fromIdx === toIdx) return prev;
-      const [moved] = result.splice(fromIdx, 1);
-      result.splice(toIdx, 0, moved);
-      return result;
-    });
-  }
-
   const { data, isLoading } = useInvoiceList();
-  const invoices = data?.data ?? [];
-
-  const {
-    searchTerm,
-    setSearchTerm,
-    fuzzy,
-    setFuzzy,
-    getRanges,
-    filteredData: searchedInvoices,
-  } = useSearch(invoices, columns);
-
-  const {
-    filters,
-    addFilter,
-    setFilterValue,
-    removeFilter,
-    clearFilters,
-    getOptionsFor,
-    filteredData: filteredInvoices,
-  } = useFilter(searchedInvoices);
-
-  const filterableColumns = columns.filter((col) => col.filter === true);
-
-  const {
-    sortConfig,
-    handleSort,
-    clearSort,
-    sortedData: sortedInvoices,
-  } = useSort(filteredInvoices, columns);
-
-  const { paginatedData: pagedInvoices, ...pagination } =
-    usePagination(sortedInvoices);
-
-  function isColSortable(key: string) {
-    return columns.find((c) => String(c.key) === key)?.sortable !== false;
-  }
 
   return (
     <>
@@ -197,432 +129,423 @@ export default function TableUsagePage() {
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
-              <PageBar>
-                <PageBarContent>
-                  <InputGroup
-                    className="max-w-xs"
-                    onMouseEnter={() => setSearchHovered(true)}
-                    onMouseLeave={() => setSearchHovered(false)}
-                  >
-                    <InputGroupAddon>
-                      <InputGroupButton
-                        className="text-muted-foreground"
-                        onClick={() => setFuzzy(!fuzzy)}
-                        title={
-                          fuzzy
-                            ? 'Fuzzy search active — click for exact'
-                            : 'Exact search — click for fuzzy'
-                        }
-                      >
-                        {fuzzy ? (
-                          <VscSearchFuzzy className="size-3.5 rotate-y-180" />
-                        ) : (
-                          <LuSearch className="size-3.5" />
-                        )}
-                      </InputGroupButton>
-                    </InputGroupAddon>
-                    <InputGroupInput
-                      placeholder="Search..."
-                      className="w-65"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      onFocus={() => setSearchFocused(true)}
-                      onBlur={() => setSearchFocused(false)}
-                    />
-                    <InputGroupAddon
-                      align="inline-end"
-                      className={cn(
-                        'transition-opacity',
-                        searchTerm && searchHovered && !searchFocused
-                          ? 'opacity-100'
-                          : 'pointer-events-none opacity-0'
-                      )}
-                    >
-                      <InputGroupButton onClick={() => setSearchTerm('')}>
-                        <LuEraser className="size-3.5" />
-                      </InputGroupButton>
-                    </InputGroupAddon>
-                  </InputGroup>
-                  <DropdownMenu modal={false}>
-                    <DropdownMenuTrigger asChild className="group">
-                      <Button
-                        variant="secondary"
-                        className="w-8 px-0 sm:w-auto sm:px-3"
-                      >
-                        <LuSettings />
-                        <span className="hidden sm:inline">Columns</span>
-                        <DropDownChevron className="hidden sm:block" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      className="w-54 px-0 py-1"
-                      sideOffset={8}
-                      align="start"
-                      onCloseAutoFocus={(e) => e.preventDefault()}
-                    >
-                      <div className="text-muted-foreground px-3 py-1 text-xs">
-                        Manage columns
-                      </div>
-                      {columns.map((col) => {
-                        const canDrag =
-                          !col.locked && !col.freeze && col.active !== false;
-                        const canDropHere = !col.locked && !col.freeze;
-                        const isDropTarget =
-                          canDropHere && dragOverKey === String(col.key);
-                        return (
-                          <div
-                            key={String(col.key)}
-                            draggable={canDrag}
-                            onDragStart={(e) => {
-                              dragKeyRef.current = String(col.key);
-                              e.dataTransfer.effectAllowed = 'move';
-                            }}
-                            onDragOver={(e) => {
-                              if (!canDropHere || !dragKeyRef.current) return;
-                              e.preventDefault();
-                              e.dataTransfer.dropEffect = 'move';
-                              setDragOverKey(String(col.key));
-                            }}
-                            onDrop={(e) => {
-                              e.preventDefault();
-                              if (dragKeyRef.current && canDropHere) {
-                                reorderColumns(
-                                  dragKeyRef.current,
-                                  String(col.key)
-                                );
-                              }
-                              setDragOverKey(null);
-                            }}
-                            onDragEnd={() => {
-                              dragKeyRef.current = null;
-                              setDragOverKey(null);
-                            }}
-                            className={`animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150 ${isDropTarget ? 'border-primary border-t-2' : ''}`}
-                          >
-                            <div className="flex items-center gap-2">
-                              <Checkbox
-                                disabled={col.freeze}
-                                checked={col.active !== false}
-                                onCheckedChange={() =>
-                                  toggleColumnActive(String(col.key))
-                                }
-                              />
-                              <div className="mt-1">{col.label}</div>
-                            </div>
-                            {col.active !== false &&
-                            (col.locked || col.freeze) ? (
-                              <LuLock className="text-muted-foreground size-2.5 stroke-3" />
-                            ) : col.active !== false ? (
-                              <RiDraggable className="text-muted-foreground -mr-0.5 cursor-grab active:cursor-grabbing" />
-                            ) : null}
-                          </div>
-                        );
-                      })}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild className="group">
-                      <Button
-                        variant="secondary"
-                        className="w-8 px-0 sm:w-auto sm:px-3"
-                      >
-                        <LuArrowUpDown className="sm:hidden" />
-                        <span className="hidden font-normal sm:inline">
-                          Sort by:
-                        </span>
-                        <span
-                          className={cn(
-                            'hidden sm:inline',
-                            sortConfig
-                              ? 'font-medium'
-                              : 'text-muted-foreground font-normal'
-                          )}
-                        >
-                          {sortConfig
-                            ? (columns.find((c) => c.key === sortConfig.key)
-                                ?.label ?? String(sortConfig.key))
-                            : 'None'}
-                        </span>
-                        <DropDownChevron className="hidden sm:block" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      sideOffset={8}
-                      align="start"
-                      onCloseAutoFocus={(e) => e.preventDefault()}
-                    >
-                      <DropdownMenuItem
-                        className={cn(!sortConfig && 'font-medium')}
-                        onClick={clearSort}
-                      >
-                        None
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      {columns
-                        .filter((col) => col.sortable !== false)
-                        .map((col) => (
-                          <DropdownMenuItem
-                            key={String(col.key)}
-                            className={cn(
-                              sortConfig?.key === col.key && 'font-medium'
-                            )}
-                            onClick={() => handleSort(col.key)}
-                          >
-                            {col.label}
-                            {sortConfig?.key === col.key &&
-                              (sortConfig.direction === 'asc' ? (
-                                <LuArrowUp className="ml-auto size-3 shrink-0" />
-                              ) : (
-                                <LuArrowDown className="ml-auto size-3 shrink-0" />
-                              ))}
-                          </DropdownMenuItem>
-                        ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild className="group">
-                      <Button variant="secondary" size="icon">
-                        <LuFilter />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      sideOffset={8}
-                      className="w-44"
-                      align="start"
-                      onCloseAutoFocus={(e) => e.preventDefault()}
-                    >
-                      {filterableColumns.map((col) => {
-                        const active = filters.some(
-                          (f) => f.key === String(col.key)
-                        );
-                        return (
-                          <DropdownMenuItem
-                            key={String(col.key)}
-                            disabled={active}
-                            onClick={() => addFilter(String(col.key))}
-                          >
-                            {col.label}
-                          </DropdownMenuItem>
-                        );
-                      })}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </PageBarContent>
-                <PageBarAction>
-                  <Button>+ Add item</Button>
-                </PageBarAction>
-              </PageBar>
-              <DataFilterBar
-                filters={filters}
-                columns={columns}
-                getOptionsFor={getOptionsFor}
-                onChange={setFilterValue}
-                onRemove={removeFilter}
-                onClearAll={clearFilters}
-              />
-              <TableWrapper>
-                <Table scrollable>
-                  <TableHeader>
-                    <TableHeaderRow columns={columns}>
-                      <TableHead
-                        colKey="invoiceNumber"
-                        className={cn(
-                          isColSortable('invoiceNumber') &&
-                            'group/sort cursor-pointer select-none'
-                        )}
-                        onClick={
-                          isColSortable('invoiceNumber')
-                            ? () => handleSort('invoiceNumber')
-                            : undefined
-                        }
-                      >
-                        <div className="flex items-center gap-1.5">
-                          Invoice #
-                          <SortIcon
-                            sortConfig={sortConfig}
-                            column="invoiceNumber"
-                            sortable={isColSortable('invoiceNumber')}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead
-                        colKey="clientName"
-                        className={cn(
-                          isColSortable('clientName') &&
-                            'group/sort cursor-pointer select-none'
-                        )}
-                        onClick={
-                          isColSortable('clientName')
-                            ? () => handleSort('clientName')
-                            : undefined
-                        }
-                      >
-                        <div className="flex items-center gap-1.5">
-                          Client
-                          <SortIcon
-                            sortConfig={sortConfig}
-                            column="clientName"
-                            sortable={isColSortable('clientName')}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead
-                        colKey="status"
-                        className={cn(
-                          isColSortable('status') &&
-                            'group/sort cursor-pointer select-none'
-                        )}
-                        onClick={
-                          isColSortable('status')
-                            ? () => handleSort('status')
-                            : undefined
-                        }
-                      >
-                        <div className="flex items-center gap-1.5">
-                          Status
-                          <SortIcon
-                            sortConfig={sortConfig}
-                            column="status"
-                            sortable={isColSortable('status')}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead
-                        colKey="amount"
-                        className={cn(
-                          isColSortable('amount') &&
-                            'group/sort cursor-pointer select-none'
-                        )}
-                        onClick={
-                          isColSortable('amount')
-                            ? () => handleSort('amount')
-                            : undefined
-                        }
-                      >
-                        <div className="flex items-center gap-1.5">
-                          Amount
-                          <SortIcon
-                            sortConfig={sortConfig}
-                            column="amount"
-                            sortable={isColSortable('amount')}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead
-                        colKey="dueDate"
-                        className={cn(
-                          isColSortable('dueDate') &&
-                            'group/sort cursor-pointer select-none'
-                        )}
-                        onClick={
-                          isColSortable('dueDate')
-                            ? () => handleSort('dueDate')
-                            : undefined
-                        }
-                      >
-                        <div className="flex items-center gap-1.5">
-                          Due Date
-                          <SortIcon
-                            sortConfig={sortConfig}
-                            column="dueDate"
-                            sortable={isColSortable('dueDate')}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead
-                        colKey="issuedAt"
-                        className={cn(
-                          isColSortable('issuedAt') &&
-                            'group/sort cursor-pointer select-none'
-                        )}
-                        onClick={
-                          isColSortable('issuedAt')
-                            ? () => handleSort('issuedAt')
-                            : undefined
-                        }
-                      >
-                        <div className="flex items-center gap-1.5">
-                          Issued
-                          <SortIcon
-                            sortConfig={sortConfig}
-                            column="issuedAt"
-                            sortable={isColSortable('issuedAt')}
-                          />
-                        </div>
-                      </TableHead>
-                    </TableHeaderRow>
-                  </TableHeader>
-                  {!isLoading && pagedInvoices.length > 0 && (
-                    <TableBody>
-                      {pagedInvoices.map((invoice) => (
-                        <TableRow key={invoice.id} columns={columns}>
-                          <TableCell colKey="invoiceNumber">
-                            <div>
-                              <div className="font-medium">
-                                <Highlight
-                                  text={invoice.invoiceNumber}
-                                  query={searchTerm}
-                                  ranges={getRanges(invoice, 'invoiceNumber')}
-                                />
-                              </div>
-                              <div className="text-muted-foreground text-xs">
-                                <Highlight
-                                  text={invoice.title}
-                                  query={searchTerm}
-                                  ranges={getRanges(invoice, 'title')}
-                                />
-                              </div>
-                            </div>
-                          </TableCell>
-                          <TableCell colKey="clientName">
-                            <div className="font-medium">
-                              <Highlight
-                                text={invoice.clientName}
-                                query={searchTerm}
-                                ranges={getRanges(invoice, 'clientName')}
-                              />
-                            </div>
-                          </TableCell>
-                          <TableCell colKey="status">
-                            <SimpleBadge
-                              variant={statusBadgeVariant[invoice.status]}
-                            >
-                              {statusLabel[invoice.status]}
-                            </SimpleBadge>
-                          </TableCell>
-                          <TableCell colKey="amount">
-                            <Highlight
-                              text={formatAmount(invoice.amount)}
-                              query={searchTerm}
-                            />
-                          </TableCell>
-                          <TableCell colKey="dueDate">
-                            <Highlight
-                              text={formatDate(invoice.dueDate)}
-                              query={searchTerm}
-                            />
-                          </TableCell>
-                          <TableCell colKey="issuedAt">
-                            <Highlight
-                              text={formatDate(invoice.issuedAt)}
-                              query={searchTerm}
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  )}
-                </Table>
-                {isLoading && <TableLoadingBody />}
-                {!isLoading && sortedInvoices.length === 0 && (
-                  <TableEmptyBody />
-                )}
-                <TableFoot pagination={pagination} />
-              </TableWrapper>
+              <DataTableProvider
+                data={data?.data ?? []}
+                columns={INVOICE_COLUMNS}
+              >
+                <InvoiceTable isLoading={isLoading} />
+              </DataTableProvider>
             </MainContent>
           </TabContent>
         </Tabs>
       </PageMain>
+    </>
+  );
+}
+
+// --- Inner content — all semantic components stay in their exact positions ---
+
+function InvoiceTable({ isLoading }: { isLoading: boolean }) {
+  const {
+    columns,
+    pagedData,
+    pagination,
+    searchTerm,
+    setSearchTerm,
+    fuzzy,
+    setFuzzy,
+    getRanges,
+    searchHovered,
+    setSearchHovered,
+    searchFocused,
+    setSearchFocused,
+    sortConfig,
+    handleSort,
+    clearSort,
+    isColSortable,
+    filters,
+    filterableColumns,
+    addFilter,
+    dragKeyRef,
+    dragOverKey,
+    setDragOverKey,
+    toggleColumnActive,
+    reorderColumns,
+  } = useDataTable<Invoice>();
+
+  return (
+    <>
+      <PageBar>
+        <PageBarContent>
+          <InputGroup
+            className="max-w-xs"
+            onMouseEnter={() => setSearchHovered(true)}
+            onMouseLeave={() => setSearchHovered(false)}
+          >
+            <InputGroupAddon>
+              <InputGroupButton
+                className="text-muted-foreground"
+                onClick={() => setFuzzy(!fuzzy)}
+              >
+                {fuzzy ? (
+                  <VscSearchFuzzy className="size-3.5 rotate-y-180" />
+                ) : (
+                  <LuSearch className="size-3.5" />
+                )}
+              </InputGroupButton>
+            </InputGroupAddon>
+            <InputGroupInput
+              placeholder="Search..."
+              className="w-65"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setSearchFocused(false)}
+            />
+            <InputGroupAddon
+              align="inline-end"
+              className={cn(
+                'transition-opacity',
+                searchTerm && searchHovered && !searchFocused
+                  ? 'opacity-100'
+                  : 'pointer-events-none opacity-0'
+              )}
+            >
+              <InputGroupButton onClick={() => setSearchTerm('')}>
+                <LuX className="text-muted-foreground size-3.5" />
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild className="group">
+              <Button
+                variant="secondary"
+                className="w-8 px-0 sm:w-auto sm:px-3"
+              >
+                <LuSettings />
+                <span className="hidden sm:inline">Columns</span>
+                <DropDownChevron className="hidden sm:block" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-54 px-0 py-1"
+              sideOffset={8}
+              align="start"
+              onCloseAutoFocus={(e) => e.preventDefault()}
+            >
+              <div className="text-muted-foreground px-3 py-1 text-xs">
+                Manage columns
+              </div>
+              {columns.map((col) => {
+                const canDrag = !col.freeze && col.active !== false;
+                const canDropHere = !col.freeze;
+                const isDropTarget =
+                  canDropHere && dragOverKey === String(col.key);
+                return (
+                  <div
+                    key={String(col.key)}
+                    draggable={canDrag}
+                    onDragStart={(e) => {
+                      dragKeyRef.current = String(col.key);
+                      e.dataTransfer.effectAllowed = 'move';
+                    }}
+                    onDragOver={(e) => {
+                      if (!canDropHere || !dragKeyRef.current) return;
+                      e.preventDefault();
+                      e.dataTransfer.dropEffect = 'move';
+                      setDragOverKey(String(col.key));
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      if (dragKeyRef.current && canDropHere) {
+                        reorderColumns(dragKeyRef.current, String(col.key));
+                      }
+                      setDragOverKey(null);
+                    }}
+                    onDragEnd={() => {
+                      dragKeyRef.current = null;
+                      setDragOverKey(null);
+                    }}
+                    className={`animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150 ${isDropTarget ? 'border-primary border-t-2' : ''}`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        disabled={col.freeze}
+                        checked={col.active !== false}
+                        onCheckedChange={() =>
+                          toggleColumnActive(String(col.key))
+                        }
+                      />
+                      <div className="mt-1">{col.label}</div>
+                    </div>
+                    {col.active !== false && col.freeze ? (
+                      <LuLock className="text-muted-foreground size-2.5 stroke-3" />
+                    ) : col.active !== false ? (
+                      <RiDraggable className="text-muted-foreground -mr-0.5 cursor-grab active:cursor-grabbing" />
+                    ) : null}
+                  </div>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="group">
+              <Button
+                variant="secondary"
+                className="w-8 px-0 sm:w-auto sm:px-3"
+              >
+                <LuArrowUpDown className="sm:hidden" />
+                <span className="hidden font-normal sm:inline">Sort by:</span>
+                <span
+                  className={cn(
+                    'hidden sm:inline',
+                    sortConfig
+                      ? 'font-medium'
+                      : 'text-muted-foreground font-normal'
+                  )}
+                >
+                  {sortConfig
+                    ? (columns.find((c) => c.key === sortConfig.key)?.label ??
+                      String(sortConfig.key))
+                    : 'None'}
+                </span>
+                <DropDownChevron className="hidden sm:block" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              sideOffset={8}
+              align="start"
+              onCloseAutoFocus={(e) => e.preventDefault()}
+            >
+              <DropdownMenuItem
+                className={cn(!sortConfig && 'font-medium')}
+                onClick={clearSort}
+              >
+                None
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              {columns
+                .filter((col) => col.sortable !== false)
+                .map((col) => (
+                  <DropdownMenuItem
+                    key={String(col.key)}
+                    className={cn(sortConfig?.key === col.key && 'font-medium')}
+                    onClick={() => handleSort(col.key)}
+                  >
+                    {col.label}
+                    {sortConfig?.key === col.key &&
+                      (sortConfig.direction === 'asc' ? (
+                        <LuArrowUp className="ml-auto size-3 shrink-0" />
+                      ) : (
+                        <LuArrowDown className="ml-auto size-3 shrink-0" />
+                      ))}
+                  </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="group">
+              <Button variant="secondary" size="icon">
+                <LuFilter />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              sideOffset={8}
+              className="w-44"
+              align="start"
+              onCloseAutoFocus={(e) => e.preventDefault()}
+            >
+              {filterableColumns.map((col) => {
+                const active = filters.some((f) => f.key === String(col.key));
+                return (
+                  <DropdownMenuItem
+                    key={String(col.key)}
+                    disabled={active}
+                    onClick={() => addFilter(String(col.key))}
+                  >
+                    {col.label}
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </PageBarContent>
+        <PageBarAction>
+          <Button>+ Add item</Button>
+        </PageBarAction>
+      </PageBar>
+      <DataFilterBar />
+      <TableWrapper>
+        <Table scrollable>
+          <TableHeader>
+            <TableHeaderRow columns={columns}>
+              <TableHead
+                colKey="invoiceNumber"
+                className={cn(
+                  isColSortable('invoiceNumber') &&
+                    'group/sort cursor-pointer select-none'
+                )}
+                onClick={
+                  isColSortable('invoiceNumber')
+                    ? () => handleSort('invoiceNumber')
+                    : undefined
+                }
+              >
+                <div className="flex items-center gap-1.5">
+                  Invoice #
+                  <SortIcon column="invoiceNumber" />
+                </div>
+              </TableHead>
+              <TableHead
+                colKey="clientName"
+                className={cn(
+                  isColSortable('clientName') &&
+                    'group/sort cursor-pointer select-none'
+                )}
+                onClick={
+                  isColSortable('clientName')
+                    ? () => handleSort('clientName')
+                    : undefined
+                }
+              >
+                <div className="flex items-center gap-1.5">
+                  Client
+                  <SortIcon column="clientName" />
+                </div>
+              </TableHead>
+              <TableHead
+                colKey="status"
+                className={cn(
+                  isColSortable('status') &&
+                    'group/sort cursor-pointer select-none'
+                )}
+                onClick={
+                  isColSortable('status')
+                    ? () => handleSort('status')
+                    : undefined
+                }
+              >
+                <div className="flex items-center gap-1.5">
+                  Status
+                  <SortIcon column="status" />
+                </div>
+              </TableHead>
+              <TableHead
+                colKey="amount"
+                className={cn(
+                  isColSortable('amount') &&
+                    'group/sort cursor-pointer select-none'
+                )}
+                onClick={
+                  isColSortable('amount')
+                    ? () => handleSort('amount')
+                    : undefined
+                }
+              >
+                <div className="flex items-center gap-1.5">
+                  Amount
+                  <SortIcon column="amount" />
+                </div>
+              </TableHead>
+              <TableHead
+                colKey="dueDate"
+                className={cn(
+                  isColSortable('dueDate') &&
+                    'group/sort cursor-pointer select-none'
+                )}
+                onClick={
+                  isColSortable('dueDate')
+                    ? () => handleSort('dueDate')
+                    : undefined
+                }
+              >
+                <div className="flex items-center gap-1.5">
+                  Due Date
+                  <SortIcon column="dueDate" />
+                </div>
+              </TableHead>
+              <TableHead
+                colKey="issuedAt"
+                className={cn(
+                  isColSortable('issuedAt') &&
+                    'group/sort cursor-pointer select-none'
+                )}
+                onClick={
+                  isColSortable('issuedAt')
+                    ? () => handleSort('issuedAt')
+                    : undefined
+                }
+              >
+                <div className="flex items-center gap-1.5">
+                  Issued
+                  <SortIcon column="issuedAt" />
+                </div>
+              </TableHead>
+            </TableHeaderRow>
+          </TableHeader>
+          {!isLoading && pagedData.length > 0 && (
+            <TableBody>
+              {pagedData.map((invoice) => (
+                <TableRow key={invoice.id} columns={columns}>
+                  <TableCell colKey="invoiceNumber">
+                    <div>
+                      <div className="font-medium">
+                        <Highlight
+                          text={invoice.invoiceNumber}
+                          query={searchTerm}
+                          ranges={getRanges(invoice, 'invoiceNumber')}
+                        />
+                      </div>
+                      <div className="text-muted-foreground text-xs">
+                        <Highlight
+                          text={invoice.title}
+                          query={searchTerm}
+                          ranges={getRanges(invoice, 'title')}
+                        />
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell colKey="clientName">
+                    <div className="font-medium">
+                      <Highlight
+                        text={invoice.clientName}
+                        query={searchTerm}
+                        ranges={getRanges(invoice, 'clientName')}
+                      />
+                    </div>
+                  </TableCell>
+                  <TableCell colKey="status">
+                    <SimpleBadge variant={statusBadgeVariant[invoice.status]}>
+                      {statusLabel[invoice.status]}
+                    </SimpleBadge>
+                  </TableCell>
+                  <TableCell colKey="amount">
+                    <Highlight
+                      text={formatAmount(invoice.amount)}
+                      query={searchTerm}
+                    />
+                  </TableCell>
+                  <TableCell colKey="dueDate">
+                    <Highlight
+                      text={formatDate(invoice.dueDate)}
+                      query={searchTerm}
+                    />
+                  </TableCell>
+                  <TableCell colKey="issuedAt">
+                    <Highlight
+                      text={formatDate(invoice.issuedAt)}
+                      query={searchTerm}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          )}
+        </Table>
+        {isLoading && <TableLoadingBody />}
+        {!isLoading && pagedData.length === 0 && <TableEmptyBody />}
+        <TableFoot pagination={pagination} />
+      </TableWrapper>
     </>
   );
 }
