@@ -1,12 +1,19 @@
 'use client';
 
-import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { DataFilterBar } from '@/components/custom/data-table/data-filter-bar';
+import { DataTableCell } from '@/components/custom/data-table/data-table-cell';
+import { DataTableFoot } from '@/components/custom/data-table/data-table-foot';
+import { DataTableHead } from '@/components/custom/data-table/data-table-head';
+import { DataTableHeaderRow } from '@/components/custom/data-table/data-table-header-row';
+import { DataTableRow } from '@/components/custom/data-table/data-table-row';
 import { Highlight } from '@/components/custom/data-table/highlight';
+import { TableColumnManager } from '@/components/custom/data-table/table-column-manager';
 import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
+import { TableFilterDropdown } from '@/components/custom/data-table/table-filter-dropdown';
 import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
-import { SortIcon } from '@/components/custom/data-table/sort-icon';
+import { TableSearchInput } from '@/components/custom/data-table/table-search-input';
+import { TableSortDropdown } from '@/components/custom/data-table/table-sort-dropdown';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
@@ -21,48 +28,16 @@ import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
 import { Button } from '@/components/custom/ui/button';
-import { Checkbox } from '@/components/custom/ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/custom/ui/dropdown-menu';
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from '@/components/custom/ui/input-group';
 import {
   Table,
   TableBody,
-  TableCell,
-  TableFoot,
-  TableHead,
   TableHeader,
-  TableHeaderRow,
-  TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
-import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { DataTableProvider, useDataTable } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { type ColumnDef } from '@/lib/table';
-import { cn } from '@/lib/utils';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
-import {
-  LuArrowDown,
-  LuArrowUp,
-  LuArrowUpDown,
-  LuFilter,
-  LuLock,
-  LuSearch,
-  LuSettings,
-  LuX,
-} from 'react-icons/lu';
-import { RiDraggable } from 'react-icons/ri';
-import { VscSearchFuzzy } from 'react-icons/vsc';
 
 const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
   paid: 'green',
@@ -132,8 +107,9 @@ export default function TableUsagePage() {
               <DataTableProvider
                 data={data?.data ?? []}
                 columns={INVOICE_COLUMNS}
+                isLoading={isLoading}
               >
-                <InvoiceTable isLoading={isLoading} />
+                <InvoiceTable />
               </DataTableProvider>
             </MainContent>
           </TabContent>
@@ -143,232 +119,19 @@ export default function TableUsagePage() {
   );
 }
 
-// --- Inner content — all semantic components stay in their exact positions ---
+// --- Inner content ---
 
-function InvoiceTable({ isLoading }: { isLoading: boolean }) {
-  const {
-    columns,
-    pagedData,
-    pagination,
-    searchTerm,
-    setSearchTerm,
-    fuzzy,
-    setFuzzy,
-    getRanges,
-    searchHovered,
-    setSearchHovered,
-    searchFocused,
-    setSearchFocused,
-    sortConfig,
-    handleSort,
-    clearSort,
-    isColSortable,
-    filters,
-    filterableColumns,
-    addFilter,
-    dragKeyRef,
-    dragOverKey,
-    setDragOverKey,
-    toggleColumnActive,
-    reorderColumns,
-  } = useDataTable<Invoice>();
+function InvoiceTable() {
+  const { pagedData } = useDataTable<Invoice>();
 
   return (
     <>
       <PageBar>
         <PageBarContent>
-          <InputGroup
-            className="max-w-xs"
-            onMouseEnter={() => setSearchHovered(true)}
-            onMouseLeave={() => setSearchHovered(false)}
-          >
-            <InputGroupAddon>
-              <InputGroupButton
-                className="text-muted-foreground"
-                onClick={() => setFuzzy(!fuzzy)}
-              >
-                {fuzzy ? (
-                  <VscSearchFuzzy className="size-3.5 rotate-y-180" />
-                ) : (
-                  <LuSearch className="size-3.5" />
-                )}
-              </InputGroupButton>
-            </InputGroupAddon>
-            <InputGroupInput
-              placeholder="Search..."
-              className="w-65"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
-            />
-            <InputGroupAddon
-              align="inline-end"
-              className={cn(
-                'transition-opacity',
-                searchTerm && searchHovered && !searchFocused
-                  ? 'opacity-100'
-                  : 'pointer-events-none opacity-0'
-              )}
-            >
-              <InputGroupButton onClick={() => setSearchTerm('')}>
-                <LuX className="text-muted-foreground size-3.5" />
-              </InputGroupButton>
-            </InputGroupAddon>
-          </InputGroup>
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild className="group">
-              <Button
-                variant="secondary"
-                className="w-8 px-0 sm:w-auto sm:px-3"
-              >
-                <LuSettings />
-                <span className="hidden sm:inline">Columns</span>
-                <DropDownChevron className="hidden sm:block" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="w-54 px-0 py-1"
-              sideOffset={8}
-              align="start"
-              onCloseAutoFocus={(e) => e.preventDefault()}
-            >
-              <div className="text-muted-foreground px-3 py-1 text-xs">
-                Manage columns
-              </div>
-              {columns.map((col) => {
-                const canDrag = !col.freeze && col.active !== false;
-                const canDropHere = !col.freeze;
-                const isDropTarget =
-                  canDropHere && dragOverKey === String(col.key);
-                return (
-                  <div
-                    key={String(col.key)}
-                    draggable={canDrag}
-                    onDragStart={(e) => {
-                      dragKeyRef.current = String(col.key);
-                      e.dataTransfer.effectAllowed = 'move';
-                    }}
-                    onDragOver={(e) => {
-                      if (!canDropHere || !dragKeyRef.current) return;
-                      e.preventDefault();
-                      e.dataTransfer.dropEffect = 'move';
-                      setDragOverKey(String(col.key));
-                    }}
-                    onDrop={(e) => {
-                      e.preventDefault();
-                      if (dragKeyRef.current && canDropHere) {
-                        reorderColumns(dragKeyRef.current, String(col.key));
-                      }
-                      setDragOverKey(null);
-                    }}
-                    onDragEnd={() => {
-                      dragKeyRef.current = null;
-                      setDragOverKey(null);
-                    }}
-                    className={`animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150 ${isDropTarget ? 'border-primary border-t-2' : ''}`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        disabled={col.freeze}
-                        checked={col.active !== false}
-                        onCheckedChange={() =>
-                          toggleColumnActive(String(col.key))
-                        }
-                      />
-                      <div className="mt-1">{col.label}</div>
-                    </div>
-                    {col.active !== false && col.freeze ? (
-                      <LuLock className="text-muted-foreground size-2.5 stroke-3" />
-                    ) : col.active !== false ? (
-                      <RiDraggable className="text-muted-foreground -mr-0.5 cursor-grab active:cursor-grabbing" />
-                    ) : null}
-                  </div>
-                );
-              })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className="group">
-              <Button
-                variant="secondary"
-                className="w-8 px-0 sm:w-auto sm:px-3"
-              >
-                <LuArrowUpDown className="sm:hidden" />
-                <span className="hidden font-normal sm:inline">Sort by:</span>
-                <span
-                  className={cn(
-                    'hidden sm:inline',
-                    sortConfig
-                      ? 'font-medium'
-                      : 'text-muted-foreground font-normal'
-                  )}
-                >
-                  {sortConfig
-                    ? (columns.find((c) => c.key === sortConfig.key)?.label ??
-                      String(sortConfig.key))
-                    : 'None'}
-                </span>
-                <DropDownChevron className="hidden sm:block" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              sideOffset={8}
-              align="start"
-              onCloseAutoFocus={(e) => e.preventDefault()}
-            >
-              <DropdownMenuItem
-                className={cn(!sortConfig && 'font-medium')}
-                onClick={clearSort}
-              >
-                None
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              {columns
-                .filter((col) => col.sortable !== false)
-                .map((col) => (
-                  <DropdownMenuItem
-                    key={String(col.key)}
-                    className={cn(sortConfig?.key === col.key && 'font-medium')}
-                    onClick={() => handleSort(col.key)}
-                  >
-                    {col.label}
-                    {sortConfig?.key === col.key &&
-                      (sortConfig.direction === 'asc' ? (
-                        <LuArrowUp className="ml-auto size-3 shrink-0" />
-                      ) : (
-                        <LuArrowDown className="ml-auto size-3 shrink-0" />
-                      ))}
-                  </DropdownMenuItem>
-                ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className="group">
-              <Button variant="secondary" size="icon">
-                <LuFilter />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              sideOffset={8}
-              className="w-44"
-              align="start"
-              onCloseAutoFocus={(e) => e.preventDefault()}
-            >
-              {filterableColumns.map((col) => {
-                const active = filters.some((f) => f.key === String(col.key));
-                return (
-                  <DropdownMenuItem
-                    key={String(col.key)}
-                    disabled={active}
-                    onClick={() => addFilter(String(col.key))}
-                  >
-                    {col.label}
-                  </DropdownMenuItem>
-                );
-              })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <TableSearchInput />
+          <TableColumnManager />
+          <TableSortDropdown />
+          <TableFilterDropdown />
         </PageBarContent>
         <PageBarAction>
           <Button>+ Add item</Button>
@@ -378,173 +141,50 @@ function InvoiceTable({ isLoading }: { isLoading: boolean }) {
       <TableWrapper>
         <Table scrollable>
           <TableHeader>
-            <TableHeaderRow columns={columns}>
-              <TableHead
-                colKey="invoiceNumber"
-                className={cn(
-                  isColSortable('invoiceNumber') &&
-                    'group/sort cursor-pointer select-none'
-                )}
-                onClick={
-                  isColSortable('invoiceNumber')
-                    ? () => handleSort('invoiceNumber')
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-1.5">
-                  Invoice #
-                  <SortIcon column="invoiceNumber" />
-                </div>
-              </TableHead>
-              <TableHead
-                colKey="clientName"
-                className={cn(
-                  isColSortable('clientName') &&
-                    'group/sort cursor-pointer select-none'
-                )}
-                onClick={
-                  isColSortable('clientName')
-                    ? () => handleSort('clientName')
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-1.5">
-                  Client
-                  <SortIcon column="clientName" />
-                </div>
-              </TableHead>
-              <TableHead
-                colKey="status"
-                className={cn(
-                  isColSortable('status') &&
-                    'group/sort cursor-pointer select-none'
-                )}
-                onClick={
-                  isColSortable('status')
-                    ? () => handleSort('status')
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-1.5">
-                  Status
-                  <SortIcon column="status" />
-                </div>
-              </TableHead>
-              <TableHead
-                colKey="amount"
-                className={cn(
-                  isColSortable('amount') &&
-                    'group/sort cursor-pointer select-none'
-                )}
-                onClick={
-                  isColSortable('amount')
-                    ? () => handleSort('amount')
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-1.5">
-                  Amount
-                  <SortIcon column="amount" />
-                </div>
-              </TableHead>
-              <TableHead
-                colKey="dueDate"
-                className={cn(
-                  isColSortable('dueDate') &&
-                    'group/sort cursor-pointer select-none'
-                )}
-                onClick={
-                  isColSortable('dueDate')
-                    ? () => handleSort('dueDate')
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-1.5">
-                  Due Date
-                  <SortIcon column="dueDate" />
-                </div>
-              </TableHead>
-              <TableHead
-                colKey="issuedAt"
-                className={cn(
-                  isColSortable('issuedAt') &&
-                    'group/sort cursor-pointer select-none'
-                )}
-                onClick={
-                  isColSortable('issuedAt')
-                    ? () => handleSort('issuedAt')
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-1.5">
-                  Issued
-                  <SortIcon column="issuedAt" />
-                </div>
-              </TableHead>
-            </TableHeaderRow>
+            <DataTableHeaderRow>
+              <DataTableHead column="invoiceNumber">Invoice #</DataTableHead>
+              <DataTableHead column="clientName">Client</DataTableHead>
+              <DataTableHead column="status">Status</DataTableHead>
+              <DataTableHead column="amount">Amount</DataTableHead>
+              <DataTableHead column="dueDate">Due Date</DataTableHead>
+              <DataTableHead column="issuedAt">Issued</DataTableHead>
+            </DataTableHeaderRow>
           </TableHeader>
-          {!isLoading && pagedData.length > 0 && (
+          {pagedData.length > 0 && (
             <TableBody>
               {pagedData.map((invoice) => (
-                <TableRow key={invoice.id} columns={columns}>
-                  <TableCell colKey="invoiceNumber">
+                <DataTableRow key={invoice.id}>
+                  <DataTableCell column="invoiceNumber">
                     <div>
                       <div className="font-medium">
-                        <Highlight
-                          text={invoice.invoiceNumber}
-                          query={searchTerm}
-                          ranges={getRanges(invoice, 'invoiceNumber')}
-                        />
+                        <Highlight text={invoice.invoiceNumber} item={invoice} itemKey="invoiceNumber" />
                       </div>
                       <div className="text-muted-foreground text-xs">
-                        <Highlight
-                          text={invoice.title}
-                          query={searchTerm}
-                          ranges={getRanges(invoice, 'title')}
-                        />
+                        <Highlight text={invoice.title} item={invoice} itemKey="title" />
                       </div>
                     </div>
-                  </TableCell>
-                  <TableCell colKey="clientName">
+                  </DataTableCell>
+                  <DataTableCell column="clientName">
                     <div className="font-medium">
-                      <Highlight
-                        text={invoice.clientName}
-                        query={searchTerm}
-                        ranges={getRanges(invoice, 'clientName')}
-                      />
+                      <Highlight text={invoice.clientName} item={invoice} itemKey="clientName" />
                     </div>
-                  </TableCell>
-                  <TableCell colKey="status">
+                  </DataTableCell>
+                  <DataTableCell column="status">
                     <SimpleBadge variant={statusBadgeVariant[invoice.status]}>
                       {statusLabel[invoice.status]}
                     </SimpleBadge>
-                  </TableCell>
-                  <TableCell colKey="amount">
-                    <Highlight
-                      text={formatAmount(invoice.amount)}
-                      query={searchTerm}
-                    />
-                  </TableCell>
-                  <TableCell colKey="dueDate">
-                    <Highlight
-                      text={formatDate(invoice.dueDate)}
-                      query={searchTerm}
-                    />
-                  </TableCell>
-                  <TableCell colKey="issuedAt">
-                    <Highlight
-                      text={formatDate(invoice.issuedAt)}
-                      query={searchTerm}
-                    />
-                  </TableCell>
-                </TableRow>
+                  </DataTableCell>
+                  <DataTableCell column="amount">{formatAmount(invoice.amount)}</DataTableCell>
+                  <DataTableCell column="dueDate">{formatDate(invoice.dueDate)}</DataTableCell>
+                  <DataTableCell column="issuedAt">{formatDate(invoice.issuedAt)}</DataTableCell>
+                </DataTableRow>
               ))}
             </TableBody>
           )}
         </Table>
-        {isLoading && <TableLoadingBody />}
-        {!isLoading && pagedData.length === 0 && <TableEmptyBody />}
-        <TableFoot pagination={pagination} />
+        <TableLoadingBody />
+        <TableEmptyBody />
+        <DataTableFoot />
       </TableWrapper>
     </>
   );

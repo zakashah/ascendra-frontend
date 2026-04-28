@@ -213,11 +213,7 @@ function TableRow({
   );
 }
 
-function TableHead({
-  colKey: _,
-  className,
-  ...props
-}: React.ComponentProps<'th'> & { colKey?: string }) {
+function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
   return (
     <th
       data-slot="table-head"
@@ -227,11 +223,7 @@ function TableHead({
   );
 }
 
-function TableCell({
-  colKey: _,
-  className,
-  ...props
-}: React.ComponentProps<'td'> & { colKey?: string }) {
+function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
   return (
     <td
       data-slot="table-cell"

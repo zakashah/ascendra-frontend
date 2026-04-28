@@ -1,18 +1,26 @@
 'use client';
 
+import { useDataTableContext } from '@/hooks/use-data-table';
+
 function escapeRegex(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 interface HighlightProps {
   text: string;
-  query: string;
-  ranges?: [number, number][];
+  item?: unknown;
+  itemKey?: PropertyKey;
 }
 
 const markClass = 'bg-yellow-200/50 text-inherit dark:bg-yellow-400/30';
 
-export function Highlight({ text, query, ranges }: HighlightProps) {
+export function Highlight({ text, item, itemKey }: HighlightProps) {
+  const { searchTerm, getRanges } = useDataTableContext();
+
+  const ranges = item !== undefined && itemKey !== undefined
+    ? getRanges(item, itemKey)
+    : undefined;
+
   if (ranges?.length) {
     const parts: { text: string; highlight: boolean }[] = [];
     let cursor = 0;
@@ -35,7 +43,7 @@ export function Highlight({ text, query, ranges }: HighlightProps) {
     );
   }
 
-  const term = query.trim();
+  const term = searchTerm.trim();
   if (!term) return <>{text}</>;
 
   const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { type FilterChip, useFilter } from './use-filter';
 import { type PaginationState, usePagination } from './use-pagination';
 import { useSearch } from './use-search';
@@ -12,9 +12,7 @@ interface DataTableContextValue {
   columns: ColumnDef<unknown>[];
   toggleColumnActive: (key: string) => void;
   reorderColumns: (fromKey: string, toKey: string) => void;
-  dragKeyRef: { current: string | null };
-  dragOverKey: string | null;
-  setDragOverKey: (key: string | null) => void;
+  isLoading: boolean;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
   fuzzy: boolean;
@@ -45,9 +43,7 @@ export interface DataTableState<T extends object> {
   columns: ColumnDef<T>[];
   toggleColumnActive: (key: string) => void;
   reorderColumns: (fromKey: string, toKey: string) => void;
-  dragKeyRef: { current: string | null };
-  dragOverKey: string | null;
-  setDragOverKey: (key: string | null) => void;
+  isLoading: boolean;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
   fuzzy: boolean;
@@ -78,17 +74,17 @@ const DataTableContext = createContext<DataTableContextValue | null>(null);
 interface DataTableProviderProps<T extends object> {
   data: T[];
   columns: ColumnDef<T>[];
+  isLoading?: boolean;
   children: React.ReactNode;
 }
 
 export function DataTableProvider<T extends object>({
   data,
   columns: initialColumns,
+  isLoading = false,
   children,
 }: DataTableProviderProps<T>) {
   const [columns, setColumns] = useState<ColumnDef<T>[]>(() => initialColumns);
-  const dragKeyRef = useRef<string | null>(null);
-  const [dragOverKey, setDragOverKey] = useState<string | null>(null);
   const [searchHovered, setSearchHovered] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
 
@@ -147,9 +143,7 @@ export function DataTableProvider<T extends object>({
         columns: columns as unknown as ColumnDef<unknown>[],
         toggleColumnActive,
         reorderColumns,
-        dragKeyRef,
-        dragOverKey,
-        setDragOverKey,
+        isLoading,
         searchTerm,
         setSearchTerm,
         fuzzy,
