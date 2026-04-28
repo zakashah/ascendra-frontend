@@ -78,7 +78,7 @@ function SelectTrigger({
       <div className="flex w-full items-center justify-between">
         <span className="px-1.25">{children}</span>
         <SelectPrimitive.Icon asChild>
-          <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4" />
+          <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 transition-transform duration-150 group-data-[state=open]:rotate-180" />
         </SelectPrimitive.Icon>
       </div>
     </SelectPrimitive.Trigger>
@@ -100,7 +100,7 @@ function SelectContent({
         position={position}
         align={align}
         className={cn(
-          `bg-secondary isolate flex max-w-[calc(100vw-(--spacing(4))*2)] origin-[--trigger-anchor-point] flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 [transition:transform_spring(0.12s),opacity_0.12s] data-entering:scale-95 data-entering:opacity-0 data-exiting:scale-95 data-exiting:opacity-0 data-exiting:[transition:transform_spring(100ms),opacity_100ms] dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/8 [:where(&)]:dark:ring-[#111113]/32`,
+          `bg-secondary isolate flex max-w-[calc(100vw-(--spacing(4))*2)] origin-(--radix-select-content-transform-origin) flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 duration-100 dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/8 [:where(&)]:dark:ring-[#111113]/32`,
           position === 'popper' &&
             'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
           className
@@ -145,7 +145,7 @@ function SelectItem({
       data-slot="select-item"
       className={cn(
         /* Layout */
-        'group relative grid cursor-default grid-cols-[1rem_1fr] items-center gap-2 rounded-[0.375rem] px-2 py-1 text-sm outline-none select-none',
+        'group relative grid cursor-default grid-cols-[1fr_1rem] items-center gap-2 rounded-[0.375rem] px-2 py-1 text-sm outline-none select-none',
 
         /* 1. HIGHLIGHT STATE (Hover/Keyboard) */
         'dark:data-highlighted:bg-border data-highlighted:text-foreground data-highlighted:bg-[#f6f6f7] data-highlighted:ring-1 data-highlighted:ring-[#EBEBED] data-highlighted:ring-inset dark:data-highlighted:ring-[#1f1f23]',
@@ -163,13 +163,13 @@ function SelectItem({
       )}
       {...props}
     >
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+
       <span className="flex size-4 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
           <CheckIcon className="size-4" />
         </SelectPrimitive.ItemIndicator>
       </span>
-
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
 }

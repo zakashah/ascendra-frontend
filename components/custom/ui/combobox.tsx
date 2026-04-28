@@ -36,13 +36,13 @@ function ComboboxTrigger({
     <ComboboxPrimitive.Trigger
       data-slot="combobox-trigger"
       className={cn(
-        "focus-visible:ring-primary flex items-center justify-center rounded-sm p-0.5 outline-none hover:bg-black/5 focus-visible:ring-2 dark:hover:bg-white/10 [&_svg:not([class*='size-'])]:size-4",
+        "group focus-visible:ring-primary flex items-center justify-center rounded-sm p-0.5 outline-none hover:bg-black/5 focus-visible:ring-2 dark:hover:bg-white/10 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4" />
+      <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 transition-transform duration-150 group-aria-expanded:rotate-180" />
     </ComboboxPrimitive.Trigger>
   );
 }
@@ -236,7 +236,7 @@ function ComboboxItem({
       data-slot="combobox-item"
       className={cn(
         // Layout — matches SelectItem grid approach
-        'group relative grid cursor-default grid-cols-[1rem_1fr] items-center gap-2',
+        'group relative grid cursor-default grid-cols-[1fr_1rem] items-center gap-2',
         'rounded-[0.375rem] px-2 py-1 text-sm outline-hidden select-none',
         // Highlight state (hover / keyboard)
         'data-highlighted:text-foreground data-highlighted:bg-[#f6f6f7]',
@@ -257,12 +257,12 @@ function ComboboxItem({
       )}
       {...props}
     >
+      {children}
       <span className="flex size-4 items-center justify-center">
         <ComboboxPrimitive.ItemIndicator>
           <CheckIcon className="size-4" />
         </ComboboxPrimitive.ItemIndicator>
       </span>
-      {children}
     </ComboboxPrimitive.Item>
   );
 }
