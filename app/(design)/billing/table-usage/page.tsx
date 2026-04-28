@@ -100,14 +100,13 @@ function formatAmount(amount: number) {
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   { key: 'invoiceNumber', label: 'Invoice #', freeze: true },
-  { key: 'clientName', label: 'Client', filter: true },
+  { key: 'clientName', label: 'Client', filter: true, freeze: true },
   { key: 'amount', label: 'Amount', type: 'number' },
   { key: 'dueDate', label: 'Due Date', type: 'date' },
   {
     key: 'status',
     label: 'Status',
     sortable: false,
-    locked: true,
     filter: true,
     displayValue: (raw) => statusLabel[raw as InvoiceStatus] ?? raw,
   },
@@ -245,7 +244,7 @@ export default function TableUsagePage() {
                     </InputGroupAddon>
                   </InputGroup>
                   <DropdownMenu modal={false}>
-                    <DropdownMenuTrigger  asChild className="group">
+                    <DropdownMenuTrigger asChild className="group">
                       <Button
                         variant="secondary"
                         className="w-8 px-0 sm:w-auto sm:px-3"
@@ -262,88 +261,63 @@ export default function TableUsagePage() {
                       onCloseAutoFocus={(e) => e.preventDefault()}
                     >
                       <div className="text-muted-foreground px-3 py-1 text-xs">
-                        Active columns
+                        Manage columns
                       </div>
-                      {columns
-                        .filter((col) => col.active !== false)
-                        .map((col) => {
-                          const canDrag = !col.locked && !col.freeze;
-                          const isDropTarget =
-                            canDrag && dragOverKey === String(col.key);
-                          return (
-                            <div
-                              key={String(col.key)}
-                              draggable={canDrag}
-                              onDragStart={(e) => {
-                                dragKeyRef.current = String(col.key);
-                                e.dataTransfer.effectAllowed = 'move';
-                              }}
-                              onDragOver={(e) => {
-                                if (!canDrag || !dragKeyRef.current) return;
-                                e.preventDefault();
-                                e.dataTransfer.dropEffect = 'move';
-                                setDragOverKey(String(col.key));
-                              }}
-                              onDrop={(e) => {
-                                e.preventDefault();
-                                if (dragKeyRef.current && canDrag) {
-                                  reorderColumns(
-                                    dragKeyRef.current,
-                                    String(col.key)
-                                  );
+                      {columns.map((col) => {
+                        const canDrag =
+                          !col.locked && !col.freeze && col.active !== false;
+                        const canDropHere = !col.locked && !col.freeze;
+                        const isDropTarget =
+                          canDropHere && dragOverKey === String(col.key);
+                        return (
+                          <div
+                            key={String(col.key)}
+                            draggable={canDrag}
+                            onDragStart={(e) => {
+                              dragKeyRef.current = String(col.key);
+                              e.dataTransfer.effectAllowed = 'move';
+                            }}
+                            onDragOver={(e) => {
+                              if (!canDropHere || !dragKeyRef.current) return;
+                              e.preventDefault();
+                              e.dataTransfer.dropEffect = 'move';
+                              setDragOverKey(String(col.key));
+                            }}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              if (dragKeyRef.current && canDropHere) {
+                                reorderColumns(
+                                  dragKeyRef.current,
+                                  String(col.key)
+                                );
+                              }
+                              setDragOverKey(null);
+                            }}
+                            onDragEnd={() => {
+                              dragKeyRef.current = null;
+                              setDragOverKey(null);
+                            }}
+                            className={`animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150 ${isDropTarget ? 'border-primary border-t-2' : ''}`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <Checkbox
+                                disabled={col.freeze}
+                                checked={col.active !== false}
+                                onCheckedChange={() =>
+                                  toggleColumnActive(String(col.key))
                                 }
-                                setDragOverKey(null);
-                              }}
-                              onDragEnd={() => {
-                                dragKeyRef.current = null;
-                                setDragOverKey(null);
-                              }}
-                              className={`animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150 ${isDropTarget ? 'border-primary border-t-2' : ''}`}
-                            >
-                              <div className="flex items-center gap-2">
-                                <Checkbox
-                                  disabled={col.freeze}
-                                  checked
-                                  onCheckedChange={() =>
-                                    toggleColumnActive(String(col.key))
-                                  }
-                                />
-                                <div className="mt-1">{col.label}</div>
-                              </div>
-                              {col.locked || col.freeze ? (
-                                <LuLock className="text-muted-foreground size-2.5 stroke-3" />
-                              ) : (
-                                <RiDraggable className="text-muted-foreground -mr-0.5 cursor-grab active:cursor-grabbing" />
-                              )}
+                              />
+                              <div className="mt-1">{col.label}</div>
                             </div>
-                          );
-                        })}
-                      {columns.some((col) => col.active === false) && (
-                        <>
-                          <DropdownMenuSeparator />
-                          <div className="text-muted-foreground px-3 py-1 text-xs">
-                            Available columns
+                            {col.active !== false &&
+                            (col.locked || col.freeze) ? (
+                              <LuLock className="text-muted-foreground size-2.5 stroke-3" />
+                            ) : col.active !== false ? (
+                              <RiDraggable className="text-muted-foreground -mr-0.5 cursor-grab active:cursor-grabbing" />
+                            ) : null}
                           </div>
-                          {columns
-                            .filter((col) => col.active === false)
-                            .map((col) => (
-                              <div
-                                key={String(col.key)}
-                                className="animate-in fade-in flex items-center justify-between overflow-hidden px-3 py-1 duration-150"
-                              >
-                                <div className="flex items-center gap-2">
-                                  <Checkbox
-                                    checked={false}
-                                    onCheckedChange={() =>
-                                      toggleColumnActive(String(col.key))
-                                    }
-                                  />
-                                  <div className="mt-1">{col.label}</div>
-                                </div>
-                              </div>
-                            ))}
-                        </>
-                      )}
+                        );
+                      })}
                     </DropdownMenuContent>
                   </DropdownMenu>
                   <DropdownMenu>
