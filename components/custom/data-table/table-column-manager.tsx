@@ -13,7 +13,11 @@ import { useDataTableContext } from '@/hooks/use-data-table';
 import { LuLock, LuSettings } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 
-export function TableColumnManager() {
+interface TableColumnManagerProps {
+  icon?: boolean;
+}
+
+export function TableColumnManager({ icon = false }: TableColumnManagerProps) {
   const { columns, toggleColumnActive, reorderColumns } = useDataTableContext();
   const dragKeyRef = useRef<string | null>(null);
   const [dragOverKey, setDragOverKey] = useState<string | null>(null);
@@ -21,10 +25,14 @@ export function TableColumnManager() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild className="group">
-        <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
+        <Button
+          variant="secondary"
+          size={icon ? 'icon' : 'default'}
+          className={icon ? undefined : 'w-8 px-0 sm:w-auto sm:px-3'}
+        >
           <LuSettings />
-          <span className="hidden sm:inline">Columns</span>
-          <DropDownChevron className="hidden sm:block" />
+          {!icon && <span className="hidden sm:inline">Columns</span>}
+          {!icon && <DropDownChevron className="hidden sm:block" />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

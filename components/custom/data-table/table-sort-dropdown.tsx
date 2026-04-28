@@ -13,26 +13,40 @@ import { useDataTableContext } from '@/hooks/use-data-table';
 import { cn } from '@/lib/utils';
 import { LuArrowDown, LuArrowUp, LuArrowUpDown } from 'react-icons/lu';
 
-export function TableSortDropdown() {
+interface TableSortDropdownProps {
+  icon?: boolean;
+}
+
+export function TableSortDropdown({ icon = false }: TableSortDropdownProps) {
   const { columns, sortConfig, handleSort, clearSort } = useDataTableContext();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="group">
-        <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
-          <LuArrowUpDown className="sm:hidden" />
-          <span className="hidden font-normal sm:inline">Sort by:</span>
-          <span
-            className={cn(
-              'hidden sm:inline',
-              sortConfig ? 'font-medium' : 'text-muted-foreground font-normal'
-            )}
-          >
-            {sortConfig
-              ? (columns.find((c) => c.key === sortConfig.key)?.label ?? String(sortConfig.key))
-              : 'None'}
-          </span>
-          <DropDownChevron className="hidden sm:block" />
+        <Button
+          variant="secondary"
+          size={icon ? 'icon' : 'default'}
+          className={icon ? undefined : 'w-8 px-0 sm:w-auto sm:px-3'}
+        >
+          {icon ? (
+            <LuArrowUpDown />
+          ) : (
+            <>
+              <LuArrowUpDown className="sm:hidden" />
+              <span className="hidden font-normal sm:inline">Sort by:</span>
+              <span
+                className={cn(
+                  'hidden sm:inline',
+                  sortConfig ? 'font-medium' : 'text-muted-foreground font-normal'
+                )}
+              >
+                {sortConfig
+                  ? (columns.find((c) => c.key === sortConfig.key)?.label ?? String(sortConfig.key))
+                  : 'None'}
+              </span>
+              <DropDownChevron className="hidden sm:block" />
+            </>
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

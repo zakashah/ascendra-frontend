@@ -108,8 +108,12 @@ export default function TableUsagePage() {
                   <Table scrollable>
                     <TableHeader>
                       <DataTableHeaderRow>
-                        <DataTableHead column="invoiceNumber">Invoice #</DataTableHead>
-                        <DataTableHead column="clientName">Client</DataTableHead>
+                        <DataTableHead column="invoiceNumber">
+                          Invoice #
+                        </DataTableHead>
+                        <DataTableHead column="clientName">
+                          Client
+                        </DataTableHead>
                         <DataTableHead column="status">Status</DataTableHead>
                         <DataTableHead column="amount">Amount</DataTableHead>
                         <DataTableHead column="dueDate">Due Date</DataTableHead>
@@ -122,26 +126,46 @@ export default function TableUsagePage() {
                           <DataTableCell column="invoiceNumber">
                             <div>
                               <div className="font-medium">
-                                <Highlight text={row.invoiceNumber} item={row} itemKey="invoiceNumber" />
+                                <Highlight
+                                  text={row.invoiceNumber}
+                                  item={row}
+                                  itemKey="invoiceNumber"
+                                />
                               </div>
                               <div className="text-muted-foreground text-xs">
-                                <Highlight text={row.title} item={row} itemKey="title" />
+                                <Highlight
+                                  text={row.title}
+                                  item={row}
+                                  itemKey="title"
+                                />
                               </div>
                             </div>
                           </DataTableCell>
                           <DataTableCell column="clientName">
                             <div className="font-medium">
-                              <Highlight text={row.clientName} item={row} itemKey="clientName" />
+                              <Highlight
+                                text={row.clientName}
+                                item={row}
+                                itemKey="clientName"
+                              />
                             </div>
                           </DataTableCell>
                           <DataTableCell column="status">
-                            <SimpleBadge variant={statusBadgeVariant[row.status]}>
+                            <SimpleBadge
+                              variant={statusBadgeVariant[row.status]}
+                            >
                               {statusLabel[row.status]}
                             </SimpleBadge>
                           </DataTableCell>
-                          <DataTableCell column="amount">{formatAmount(row.amount)}</DataTableCell>
-                          <DataTableCell column="dueDate">{formatDate(row.dueDate)}</DataTableCell>
-                          <DataTableCell column="issuedAt">{formatDate(row.issuedAt)}</DataTableCell>
+                          <DataTableCell column="amount">
+                            {formatAmount(row.amount)}
+                          </DataTableCell>
+                          <DataTableCell column="dueDate">
+                            {formatDate(row.dueDate)}
+                          </DataTableCell>
+                          <DataTableCell column="issuedAt">
+                            {formatDate(row.issuedAt)}
+                          </DataTableCell>
                         </DataTableRow>
                       )}
                     </DataTableBody>
