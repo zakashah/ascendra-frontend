@@ -33,6 +33,7 @@ import { Table, TableHeader, TableWrapper } from '@/components/custom/ui/table';
 import { DataTableProvider } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { type ColumnDef } from '@/lib/table';
+import { formatAmount, formatDate } from '@/lib/format';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
 
 const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
@@ -48,20 +49,6 @@ const statusLabel: Record<InvoiceStatus, string> = {
   overdue: 'Overdue',
   cancelled: 'Cancelled',
 };
-
-// --- Helpers ---
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
-}
-
-function formatAmount(amount: number) {
-  return `PKR ${amount.toLocaleString()}`;
-}
 
 // --- Columns ---
 

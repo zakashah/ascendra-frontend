@@ -62,6 +62,7 @@ import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { PageContent } from '@/components/custom/layout/page-content';
+import { formatAmount } from '@/lib/format';
 
 type Status = 'paid' | 'pending' | 'overdue';
 
@@ -191,13 +192,6 @@ export default function InvoicesPage() {
 
   const hasActiveFilters = statusFilter !== null;
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-PK', {
-      style: 'currency',
-      currency: 'PKR',
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
 
   return (
     <>
@@ -387,7 +381,7 @@ export default function InvoicesPage() {
                         )}
                         {columns.amount && (
                           <TableCell className="font-medium">
-                            {formatCurrency(inv.amount)}
+                            {formatAmount(inv.amount)}
                           </TableCell>
                         )}
                         {columns.date && (
