@@ -25,7 +25,7 @@ export function useSearch<T extends object>(
       includeMatches: true,
       threshold: 0.4,
       ignoreLocation: true,
-      minMatchCharLength: 2,
+      minMatchCharLength: 1,
     });
   }, [data, fuseKeys, fuzzy]);
 

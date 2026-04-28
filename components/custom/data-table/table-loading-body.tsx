@@ -1,8 +1,15 @@
 'use client';
 
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/custom/ui/empty';
+import { EmptyBody } from '@/components/custom/ui/table';
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { LuLoader } from 'react-icons/lu';
-import { TableEmptyBody } from './table-empty-body';
 
 export function TableLoadingBody() {
   const { isLoading } = useDataTableContext();
@@ -10,10 +17,16 @@ export function TableLoadingBody() {
   if (!isLoading) return null;
 
   return (
-    <TableEmptyBody
-      icon={<LuLoader className="animate-spin" strokeWidth={2} />}
-      title="Loading ..."
-      description="Please wait while data is being fetched."
-    />
+    <EmptyBody>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <LuLoader className="animate-spin" strokeWidth={2} />
+          </EmptyMedia>
+          <EmptyTitle>Loading ...</EmptyTitle>
+          <EmptyDescription>Please wait while data is being fetched.</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    </EmptyBody>
   );
 }

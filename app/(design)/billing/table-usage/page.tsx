@@ -2,6 +2,7 @@
 
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { DataFilterBar } from '@/components/custom/data-table/data-filter-bar';
+import { DataTableBody } from '@/components/custom/data-table/data-table-body';
 import { DataTableCell } from '@/components/custom/data-table/data-table-cell';
 import { DataTableFoot } from '@/components/custom/data-table/data-table-foot';
 import { DataTableHead } from '@/components/custom/data-table/data-table-head';
@@ -28,13 +29,8 @@ import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
 import { Button } from '@/components/custom/ui/button';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableWrapper,
-} from '@/components/custom/ui/table';
-import { DataTableProvider, useDataTable } from '@/hooks/use-data-table';
+import { Table, TableHeader, TableWrapper } from '@/components/custom/ui/table';
+import { DataTableProvider } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { type ColumnDef } from '@/lib/table';
 import { type Invoice, type InvoiceStatus } from '@/types/invoice';
@@ -109,83 +105,69 @@ export default function TableUsagePage() {
                 columns={INVOICE_COLUMNS}
                 isLoading={isLoading}
               >
-                <InvoiceTable />
+                <PageBar>
+                  <PageBarContent>
+                    <TableSearchInput />
+                    <TableColumnManager />
+                    <TableSortDropdown />
+                    <TableFilterDropdown />
+                  </PageBarContent>
+                  <PageBarAction>
+                    <Button>+ Add item</Button>
+                  </PageBarAction>
+                </PageBar>
+                <DataFilterBar />
+                <TableWrapper>
+                  <Table scrollable>
+                    <TableHeader>
+                      <DataTableHeaderRow>
+                        <DataTableHead column="invoiceNumber">Invoice #</DataTableHead>
+                        <DataTableHead column="clientName">Client</DataTableHead>
+                        <DataTableHead column="status">Status</DataTableHead>
+                        <DataTableHead column="amount">Amount</DataTableHead>
+                        <DataTableHead column="dueDate">Due Date</DataTableHead>
+                        <DataTableHead column="issuedAt">Issued</DataTableHead>
+                      </DataTableHeaderRow>
+                    </TableHeader>
+                    <DataTableBody>
+                      {(row: Invoice) => (
+                        <DataTableRow key={row.id}>
+                          <DataTableCell column="invoiceNumber">
+                            <div>
+                              <div className="font-medium">
+                                <Highlight text={row.invoiceNumber} item={row} itemKey="invoiceNumber" />
+                              </div>
+                              <div className="text-muted-foreground text-xs">
+                                <Highlight text={row.title} item={row} itemKey="title" />
+                              </div>
+                            </div>
+                          </DataTableCell>
+                          <DataTableCell column="clientName">
+                            <div className="font-medium">
+                              <Highlight text={row.clientName} item={row} itemKey="clientName" />
+                            </div>
+                          </DataTableCell>
+                          <DataTableCell column="status">
+                            <SimpleBadge variant={statusBadgeVariant[row.status]}>
+                              {statusLabel[row.status]}
+                            </SimpleBadge>
+                          </DataTableCell>
+                          <DataTableCell column="amount">{formatAmount(row.amount)}</DataTableCell>
+                          <DataTableCell column="dueDate">{formatDate(row.dueDate)}</DataTableCell>
+                          <DataTableCell column="issuedAt">{formatDate(row.issuedAt)}</DataTableCell>
+                        </DataTableRow>
+                      )}
+                    </DataTableBody>
+                  </Table>
+                  <TableLoadingBody />
+                  <TableEmptyBody />
+                  <DataTableFoot />
+                </TableWrapper>
               </DataTableProvider>
             </MainContent>
           </TabContent>
         </Tabs>
       </PageMain>
-    </>
-  );
-}
-
-// --- Inner content ---
-
-function InvoiceTable() {
-  const { pagedData } = useDataTable<Invoice>();
-
-  return (
-    <>
-      <PageBar>
-        <PageBarContent>
-          <TableSearchInput />
-          <TableColumnManager />
-          <TableSortDropdown />
-          <TableFilterDropdown />
-        </PageBarContent>
-        <PageBarAction>
-          <Button>+ Add item</Button>
-        </PageBarAction>
-      </PageBar>
-      <DataFilterBar />
-      <TableWrapper>
-        <Table scrollable>
-          <TableHeader>
-            <DataTableHeaderRow>
-              <DataTableHead column="invoiceNumber">Invoice #</DataTableHead>
-              <DataTableHead column="clientName">Client</DataTableHead>
-              <DataTableHead column="status">Status</DataTableHead>
-              <DataTableHead column="amount">Amount</DataTableHead>
-              <DataTableHead column="dueDate">Due Date</DataTableHead>
-              <DataTableHead column="issuedAt">Issued</DataTableHead>
-            </DataTableHeaderRow>
-          </TableHeader>
-          {pagedData.length > 0 && (
-            <TableBody>
-              {pagedData.map((invoice) => (
-                <DataTableRow key={invoice.id}>
-                  <DataTableCell column="invoiceNumber">
-                    <div>
-                      <div className="font-medium">
-                        <Highlight text={invoice.invoiceNumber} item={invoice} itemKey="invoiceNumber" />
-                      </div>
-                      <div className="text-muted-foreground text-xs">
-                        <Highlight text={invoice.title} item={invoice} itemKey="title" />
-                      </div>
-                    </div>
-                  </DataTableCell>
-                  <DataTableCell column="clientName">
-                    <div className="font-medium">
-                      <Highlight text={invoice.clientName} item={invoice} itemKey="clientName" />
-                    </div>
-                  </DataTableCell>
-                  <DataTableCell column="status">
-                    <SimpleBadge variant={statusBadgeVariant[invoice.status]}>
-                      {statusLabel[invoice.status]}
-                    </SimpleBadge>
-                  </DataTableCell>
-                  <DataTableCell column="amount">{formatAmount(invoice.amount)}</DataTableCell>
-                  <DataTableCell column="dueDate">{formatDate(invoice.dueDate)}</DataTableCell>
-                  <DataTableCell column="issuedAt">{formatDate(invoice.issuedAt)}</DataTableCell>
-                </DataTableRow>
-              ))}
-            </TableBody>
-          )}
-        </Table>
-        <TableLoadingBody />
-        <TableEmptyBody />
-        <DataTableFoot />
-      </TableWrapper>
     </>
   );
 }
