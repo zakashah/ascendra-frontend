@@ -66,6 +66,7 @@ import {
   LuSettings,
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
+import { VscSearchFuzzy } from 'react-icons/vsc';
 
 const statusBadgeVariant: Record<InvoiceStatus, 'green' | 'amber' | 'red'> = {
   paid: 'green',
@@ -150,6 +151,9 @@ export default function TableUsagePage() {
   const {
     searchTerm,
     setSearchTerm,
+    fuzzy,
+    setFuzzy,
+    getRanges,
     filteredData: searchedInvoices,
   } = useSearch(invoices, columns);
 
@@ -202,7 +206,21 @@ export default function TableUsagePage() {
                     onMouseLeave={() => setSearchHovered(false)}
                   >
                     <InputGroupAddon>
-                      <LuSearch className="text-foreground size-3.5" />
+                      <InputGroupButton
+                        className="text-muted-foreground"
+                        onClick={() => setFuzzy(!fuzzy)}
+                        title={
+                          fuzzy
+                            ? 'Fuzzy search active — click for exact'
+                            : 'Exact search — click for fuzzy'
+                        }
+                      >
+                        {fuzzy ? (
+                          <VscSearchFuzzy className="size-3.5 rotate-y-180" />
+                        ) : (
+                          <LuSearch className="size-3.5" />
+                        )}
+                      </InputGroupButton>
                     </InputGroupAddon>
                     <InputGroupInput
                       placeholder="Search..."
@@ -227,8 +245,11 @@ export default function TableUsagePage() {
                     </InputGroupAddon>
                   </InputGroup>
                   <DropdownMenu modal={false}>
-                    <DropdownMenuTrigger asChild className="group">
-                      <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
+                    <DropdownMenuTrigger  asChild className="group">
+                      <Button
+                        variant="secondary"
+                        className="w-8 px-0 sm:w-auto sm:px-3"
+                      >
                         <LuSettings />
                         <span className="hidden sm:inline">Columns</span>
                         <DropDownChevron className="hidden sm:block" />
@@ -327,9 +348,14 @@ export default function TableUsagePage() {
                   </DropdownMenu>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild className="group">
-                      <Button variant="secondary" className="w-8 px-0 sm:w-auto sm:px-3">
+                      <Button
+                        variant="secondary"
+                        className="w-8 px-0 sm:w-auto sm:px-3"
+                      >
                         <LuArrowUpDown className="sm:hidden" />
-                        <span className="hidden font-normal sm:inline">Sort by:</span>
+                        <span className="hidden font-normal sm:inline">
+                          Sort by:
+                        </span>
                         <span
                           className={cn(
                             'hidden sm:inline',
@@ -339,7 +365,8 @@ export default function TableUsagePage() {
                           )}
                         >
                           {sortConfig
-                            ? (columns.find((c) => c.key === sortConfig.key)?.label ?? String(sortConfig.key))
+                            ? (columns.find((c) => c.key === sortConfig.key)
+                                ?.label ?? String(sortConfig.key))
                             : 'None'}
                         </span>
                         <DropDownChevron className="hidden sm:block" />
@@ -362,17 +389,18 @@ export default function TableUsagePage() {
                         .map((col) => (
                           <DropdownMenuItem
                             key={String(col.key)}
-                            className={cn(sortConfig?.key === col.key && 'font-medium')}
+                            className={cn(
+                              sortConfig?.key === col.key && 'font-medium'
+                            )}
                             onClick={() => handleSort(col.key)}
                           >
                             {col.label}
-                            {sortConfig?.key === col.key && (
-                              sortConfig.direction === 'asc' ? (
+                            {sortConfig?.key === col.key &&
+                              (sortConfig.direction === 'asc' ? (
                                 <LuArrowUp className="ml-auto size-3 shrink-0" />
                               ) : (
                                 <LuArrowDown className="ml-auto size-3 shrink-0" />
-                              )
-                            )}
+                              ))}
                           </DropdownMenuItem>
                         ))}
                     </DropdownMenuContent>
@@ -390,7 +418,9 @@ export default function TableUsagePage() {
                       onCloseAutoFocus={(e) => e.preventDefault()}
                     >
                       {filterableColumns.map((col) => {
-                        const active = filters.some((f) => f.key === String(col.key));
+                        const active = filters.some(
+                          (f) => f.key === String(col.key)
+                        );
                         return (
                           <DropdownMenuItem
                             key={String(col.key)}
@@ -558,12 +588,14 @@ export default function TableUsagePage() {
                                 <Highlight
                                   text={invoice.invoiceNumber}
                                   query={searchTerm}
+                                  ranges={getRanges(invoice, 'invoiceNumber')}
                                 />
                               </div>
                               <div className="text-muted-foreground text-xs">
                                 <Highlight
                                   text={invoice.title}
                                   query={searchTerm}
+                                  ranges={getRanges(invoice, 'title')}
                                 />
                               </div>
                             </div>
@@ -573,6 +605,7 @@ export default function TableUsagePage() {
                               <Highlight
                                 text={invoice.clientName}
                                 query={searchTerm}
+                                ranges={getRanges(invoice, 'clientName')}
                               />
                             </div>
                           </TableCell>
