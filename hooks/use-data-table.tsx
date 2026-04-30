@@ -18,10 +18,6 @@ interface DataTableContextValue {
   fuzzy: boolean;
   setFuzzy: (v: boolean) => void;
   getRanges: (item: unknown, key: PropertyKey) => [number, number][] | undefined;
-  searchHovered: boolean;
-  setSearchHovered: (v: boolean) => void;
-  searchFocused: boolean;
-  setSearchFocused: (v: boolean) => void;
   filters: FilterChip[];
   filterableColumns: ColumnDef<unknown>[];
   addFilter: (key: string) => void;
@@ -49,10 +45,6 @@ export interface DataTableState<T extends object> {
   fuzzy: boolean;
   setFuzzy: (v: boolean) => void;
   getRanges: (item: T, key: keyof T) => [number, number][] | undefined;
-  searchHovered: boolean;
-  setSearchHovered: (v: boolean) => void;
-  searchFocused: boolean;
-  setSearchFocused: (v: boolean) => void;
   filters: FilterChip[];
   filterableColumns: ColumnDef<T>[];
   addFilter: (key: string) => void;
@@ -85,9 +77,6 @@ export function DataTableProvider<T extends object>({
   children,
 }: DataTableProviderProps<T>) {
   const [columns, setColumns] = useState<ColumnDef<T>[]>(() => initialColumns);
-  const [searchHovered, setSearchHovered] = useState(false);
-  const [searchFocused, setSearchFocused] = useState(false);
-
   function toggleColumnActive(key: string) {
     setColumns((prev) =>
       prev.map((col) =>
@@ -149,10 +138,6 @@ export function DataTableProvider<T extends object>({
         fuzzy,
         setFuzzy,
         getRanges: getRanges as unknown as DataTableContextValue['getRanges'],
-        searchHovered,
-        setSearchHovered,
-        searchFocused,
-        setSearchFocused,
         filters,
         filterableColumns: filterableColumns as unknown as ColumnDef<unknown>[],
         addFilter,

@@ -8,20 +8,14 @@ import {
 } from '@/components/custom/ui/input-group';
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
 import { LuSearch, LuX } from 'react-icons/lu';
 import { VscSearchFuzzy } from 'react-icons/vsc';
 
 export function TableSearchInput() {
-  const {
-    searchTerm,
-    setSearchTerm,
-    fuzzy,
-    setFuzzy,
-    searchHovered,
-    setSearchHovered,
-    searchFocused,
-    setSearchFocused,
-  } = useDataTableContext();
+  const { searchTerm, setSearchTerm, fuzzy, setFuzzy } = useDataTableContext();
+  const [searchHovered, setSearchHovered] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
 
   return (
     <InputGroup
