@@ -8,8 +8,8 @@ function escapeRegex(s: string) {
 
 interface HighlightProps {
   text: string;
-  item?: unknown;
-  itemKey?: PropertyKey;
+  item: unknown;
+  itemKey: PropertyKey;
 }
 
 const markClass = 'bg-yellow-200/50 text-inherit dark:bg-yellow-400/30';
@@ -17,9 +17,7 @@ const markClass = 'bg-yellow-200/50 text-inherit dark:bg-yellow-400/30';
 export function Highlight({ text, item, itemKey }: HighlightProps) {
   const { searchTerm, getRanges } = useDataTableContext();
 
-  const ranges = item !== undefined && itemKey !== undefined
-    ? getRanges(item, itemKey)
-    : undefined;
+  const ranges = getRanges(item, itemKey);
 
   if (ranges?.length) {
     const parts: { text: string; highlight: boolean }[] = [];

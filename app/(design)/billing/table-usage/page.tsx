@@ -155,13 +155,25 @@ export default function TableUsagePage() {
                             </SimpleBadge>
                           </DataTableCell>
                           <DataTableCell column="amount">
-                            {formatAmount(row.amount)}
+                            <Highlight
+                              text={formatAmount(row.amount)}
+                              item={row}
+                              itemKey="amount"
+                            />
                           </DataTableCell>
                           <DataTableCell column="dueDate">
-                            {formatDate(row.dueDate)}
+                            <Highlight
+                              text={formatDate(row.dueDate)}
+                              item={row}
+                              itemKey="dueDate"
+                            />
                           </DataTableCell>
                           <DataTableCell column="issuedAt">
-                            {formatDate(row.issuedAt)}
+                            <Highlight
+                              text={formatDate(row.issuedAt)}
+                              item={row}
+                              itemKey="issuedAt"
+                            />
                           </DataTableCell>
                         </DataTableRow>
                       )}
