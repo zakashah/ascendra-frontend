@@ -46,13 +46,13 @@ export function Highlight({ text, item, itemKey }: HighlightProps) {
   const term = searchTerm.trim();
   if (!term) return <>{text}</>;
 
-  const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
+  const regex = new RegExp(`(${escapeRegex(term)})`, 'i');
   const parts = text.split(regex);
 
   return (
     <>
       {parts.map((part, i) =>
-        regex.test(part) ? (
+        i % 2 === 1 ? (
           <mark key={i} className={markClass}>{part}</mark>
         ) : (
           part
