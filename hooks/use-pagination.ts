@@ -22,13 +22,14 @@ export function usePagination<T>(
 ): PaginationState & { paginatedData: T[] } {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSizeState] = useState(defaultPageSize);
-  const [prevLength, setPrevLength] = useState(data.length);
+  const [prevData, setPrevData] = useState(data);
 
   // React-recommended pattern for resetting state when a derived value changes:
   // calling setState during render triggers an immediate re-render and discards
   // the current one, avoiding the effect → setState cascade.
-  if (data.length !== prevLength) {
-    setPrevLength(data.length);
+  // Track reference identity (not length) so same-count dataset swaps also reset.
+  if (data !== prevData) {
+    setPrevData(data);
     setCurrentPage(1);
   }
 

@@ -14,8 +14,9 @@ export function useSearch<T extends object>(
 
   const fuseKeys = useMemo(() => {
     if (keys) return keys.map(String);
+    if (columns?.length) return columns.map((c) => String(c.key));
     if (data.length > 0) return Object.keys(data[0]);
-    return columns?.map((c) => String(c.key)) ?? [];
+    return [];
   }, [keys, columns, data]);
 
   const fuse = useMemo(() => {
@@ -50,7 +51,7 @@ export function useSearch<T extends object>(
 
     const termLower = term.toLowerCase();
     const filtered = data.filter((item) => {
-      const searchKeys = keys ?? (Object.keys(item) as (keyof T)[]);
+      const searchKeys = keys ?? columns?.map((c) => c.key) ?? (Object.keys(item) as (keyof T)[]);
       return searchKeys.some((key) => {
         const type = columns?.find((c) => c.key === key)?.type ?? 'string';
         return searchValue(item[key], type).toLowerCase().includes(termLower);

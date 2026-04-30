@@ -8,12 +8,13 @@ import {
 } from '@/components/custom/ui/input-group';
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { LuSearch, LuX } from 'react-icons/lu';
 import { VscSearchFuzzy } from 'react-icons/vsc';
 
 export function TableSearchInput() {
   const { searchTerm, setSearchTerm, fuzzy, setFuzzy } = useDataTableContext();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [searchHovered, setSearchHovered] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
 
@@ -26,7 +27,7 @@ export function TableSearchInput() {
       <InputGroupAddon>
         <InputGroupButton
           className="text-muted-foreground"
-          onClick={() => setFuzzy(!fuzzy)}
+          onClick={() => { setFuzzy(!fuzzy); inputRef.current?.focus(); }}
         >
           {fuzzy ? (
             <VscSearchFuzzy className="size-3.5 rotate-y-180" />
@@ -36,6 +37,7 @@ export function TableSearchInput() {
         </InputGroupButton>
       </InputGroupAddon>
       <InputGroupInput
+        ref={inputRef}
         placeholder="Search..."
         className="w-65"
         value={searchTerm}
