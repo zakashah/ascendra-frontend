@@ -7,13 +7,14 @@ import { SortIcon } from './sort-icon';
 
 interface DataTableHeadProps {
   column: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 
 export function DataTableHead({ column, children, className }: DataTableHeadProps) {
-  const { isColSortable, handleSort } = useDataTableContext();
+  const { isColSortable, handleSort, columns } = useDataTableContext();
   const sortable = isColSortable(column);
+  const label = children ?? columns.find((c) => String(c.key) === column)?.label;
 
   return (
     <th
@@ -26,7 +27,7 @@ export function DataTableHead({ column, children, className }: DataTableHeadProp
       onClick={sortable ? () => handleSort(column) : undefined}
     >
       <div className="flex items-center gap-1.5">
-        {children}
+        {label}
         <SortIcon column={column} />
       </div>
     </th>

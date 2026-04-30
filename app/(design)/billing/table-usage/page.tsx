@@ -50,8 +50,6 @@ const statusLabel: Record<InvoiceStatus, string> = {
   cancelled: 'Cancelled',
 };
 
-// --- Columns ---
-
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   { key: 'invoiceNumber', label: 'Invoice #', freeze: true },
   { key: 'clientName', label: 'Client', filter: true, freeze: true },
@@ -66,8 +64,6 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   },
   { key: 'issuedAt', label: 'Issued', type: 'date', active: false },
 ];
-
-// --- Page ---
 
 export default function TableUsagePage() {
   const { data, isLoading } = useInvoiceList();
@@ -84,6 +80,7 @@ export default function TableUsagePage() {
         <Tabs defaultValue="table-usage">
           <TabList>
             <TabTrigger value="table-usage">Table usage</TabTrigger>
+            <TabTrigger value="tab">Tab</TabTrigger>
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
@@ -114,10 +111,10 @@ export default function TableUsagePage() {
                         <DataTableHead column="clientName">
                           Client
                         </DataTableHead>
-                        <DataTableHead column="status">Status</DataTableHead>
-                        <DataTableHead column="amount">Amount</DataTableHead>
-                        <DataTableHead column="dueDate">Due Date</DataTableHead>
-                        <DataTableHead column="issuedAt">Issued</DataTableHead>
+                        <DataTableHead column="status" />
+                        <DataTableHead column="amount" />
+                        <DataTableHead column="dueDate" />
+                        <DataTableHead column="issuedAt" />
                       </DataTableHeaderRow>
                     </TableHeader>
                     <DataTableBody>
@@ -176,6 +173,9 @@ export default function TableUsagePage() {
                 </TableWrapper>
               </DataTableProvider>
             </MainContent>
+          </TabContent>
+          <TabContent value="tab">
+            <MainContent>another tab</MainContent>
           </TabContent>
         </Tabs>
       </PageMain>
