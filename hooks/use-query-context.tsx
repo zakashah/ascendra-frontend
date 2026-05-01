@@ -1,12 +1,14 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useRef } from 'react';
 import type { QueryDef, QueryParamValues } from '@/lib/query';
 import { PRESET_QUERIES } from '@/lib/query';
 
 interface QueryContextValue {
   activeQuery: QueryDef;
   setActiveQueryId: (id: string) => void;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
   lastResult: QueryParamValues | null;
   setLastResult: (values: QueryParamValues) => void;
   currentBatch: number;
@@ -25,18 +27,27 @@ interface QueryProviderProps {
 
 export function QueryProvider({ queries = PRESET_QUERIES, children }: QueryProviderProps) {
   const [activeId, setActiveId] = useState(queries[0].id);
+  const [isLoading, setIsLoading] = useState(false);
   const [lastResult, setLastResultState] = useState<QueryParamValues | null>(null);
   const [currentBatch, setCurrentBatch] = useState(1);
   const [totalBatches, setTotalBatchesState] = useState<number | null>(null);
+  const loadingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeQuery = queries.find((q) => q.id === activeId) ?? queries[0];
 
   const setActiveQueryId = useCallback((id: string) => {
+    const query = queries.find((q) => q.id === id);
     setActiveId(id);
     setLastResultState(null);
     setCurrentBatch(1);
     setTotalBatchesState(null);
-  }, []);
+    // Only simulate loading for param-less queries; param queries load on form submit
+    if (!query?.params?.length) {
+      if (loadingTimer.current) clearTimeout(loadingTimer.current);
+      setIsLoading(true);
+      loadingTimer.current = setTimeout(() => setIsLoading(false), 1200);
+    }
+  }, [queries]);
 
   const setLastResult = useCallback((values: QueryParamValues) => {
     setLastResultState(values);
@@ -62,6 +73,8 @@ export function QueryProvider({ queries = PRESET_QUERIES, children }: QueryProvi
       value={{
         activeQuery,
         setActiveQueryId,
+        isLoading,
+        setIsLoading,
         lastResult,
         setLastResult,
         currentBatch,

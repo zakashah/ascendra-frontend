@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles, ChevronDown } from 'lucide-react';
+import { Sparkles, ChevronDown, Loader2 } from 'lucide-react';
 import { Button } from '@/components/custom/ui/button';
 import {
   DropdownMenu,
@@ -12,10 +12,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
 import { useQueryContext } from '@/hooks/use-query-context';
-import { PRESET_QUERIES } from '@/lib/query';
+import { PRESET_QUERIES, type QueryGroup } from '@/lib/query';
+
+const GROUP_LABELS: Record<QueryGroup, string> = {
+  query: 'Queries',
+  'user-query': 'My Queries',
+  filter: 'Filters',
+};
+
+const GROUP_ORDER: QueryGroup[] = ['query', 'user-query', 'filter'];
 
 export function QueryBar() {
-  const { activeQuery, setActiveQueryId } = useQueryContext();
+  const { activeQuery, setActiveQueryId, isLoading } = useQueryContext();
 
   return (
     <DropdownMenu>
@@ -24,12 +32,26 @@ export function QueryBar() {
           variant="secondary"
           className="w-full justify-start gap-2 px-3 font-normal"
         >
-          <Sparkles className="size-3 shrink-0 text-muted-foreground" strokeWidth={2} />
-          <span className="font-medium text-foreground">{activeQuery.title}</span>
+          {isLoading ? (
+            <Loader2
+              className="text-muted-foreground size-3 shrink-0 animate-spin"
+              strokeWidth={2}
+            />
+          ) : (
+            <Sparkles
+              className="text-muted-foreground size-3 shrink-0"
+              strokeWidth={2}
+            />
+          )}
+          <span className="text-foreground font-medium">
+            {activeQuery.title}
+          </span>
           <span className="text-muted-foreground/60">·</span>
-          <span className="text-muted-foreground">{activeQuery.description}</span>
+          <span className="text-muted-foreground">
+            {activeQuery.description}
+          </span>
           <ChevronDown
-            className="ml-auto size-3.5 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180"
+            className="text-muted-foreground ml-auto size-3.5 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
             strokeWidth={2}
           />
         </Button>
@@ -39,17 +61,30 @@ export function QueryBar() {
         align="start"
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
-        <DropdownMenuLabel>Queries</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={activeQuery.id} onValueChange={setActiveQueryId}>
-          {PRESET_QUERIES.map((query) => (
-            <DropdownMenuRadioItem key={query.id} value={query.id}>
-              <div className="flex flex-col">
-                <span className="font-medium">{query.title}</span>
-                <span className="text-xs text-muted-foreground">{query.description}</span>
+        <DropdownMenuRadioGroup
+          value={activeQuery.id}
+          onValueChange={setActiveQueryId}
+        >
+          {GROUP_ORDER.map((group, i) => {
+            const items = PRESET_QUERIES.filter((q) => q.group === group);
+            if (items.length === 0) return null;
+            return (
+              <div key={group}>
+                {i > 0 && <DropdownMenuSeparator />}
+                <DropdownMenuLabel>{GROUP_LABELS[group]}</DropdownMenuLabel>
+                {items.map((query) => (
+                  <DropdownMenuRadioItem key={query.id} value={query.id}>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{query.title}</span>
+                      <span className="text-muted-foreground text-xs">
+                        {query.description}
+                      </span>
+                    </div>
+                  </DropdownMenuRadioItem>
+                ))}
               </div>
-            </DropdownMenuRadioItem>
-          ))}
+            );
+          })}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
