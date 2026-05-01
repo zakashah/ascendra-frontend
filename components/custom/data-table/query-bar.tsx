@@ -23,7 +23,9 @@ const GROUP_LABELS: Record<QueryGroup, string> = {
 const GROUP_ORDER: QueryGroup[] = ['query', 'user-query', 'filter'];
 
 export function QueryBar() {
-  const { activeQuery, confirmedQueryId, setActiveQueryId, isLoading } = useQueryContext();
+  const { confirmedQueryId, setActiveQueryId, isLoading } = useQueryContext();
+  const confirmedQuery =
+    PRESET_QUERIES.find((q) => q.id === confirmedQueryId) ?? PRESET_QUERIES[0];
 
   return (
     <DropdownMenu>
@@ -44,11 +46,11 @@ export function QueryBar() {
             />
           )}
           <span className="text-foreground font-medium">
-            {activeQuery.title}
+            {confirmedQuery.title}
           </span>
           <span className="text-muted-foreground/60">·</span>
           <span className="text-muted-foreground">
-            {activeQuery.description}
+            {confirmedQuery.description}
           </span>
           <ChevronDown
             className="text-muted-foreground ml-auto size-3.5 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"

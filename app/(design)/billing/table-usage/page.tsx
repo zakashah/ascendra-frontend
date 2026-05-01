@@ -130,13 +130,11 @@ export default function TableUsagePage() {
                           <DataTableRow key={row.id}>
                             <DataTableCell column="invoiceNumber">
                               <div>
-                                <div className="font-medium">
-                                  <DataTableHighlight
-                                    text={row.invoiceNumber}
-                                    item={row}
-                                    itemKey="invoiceNumber"
-                                  />
-                                </div>
+                                <DataTableHighlight
+                                  text={row.invoiceNumber}
+                                  item={row}
+                                  itemKey="invoiceNumber"
+                                />
                                 <div className="text-muted-foreground text-xs">
                                   <DataTableHighlight
                                     text={row.title}
@@ -147,13 +145,11 @@ export default function TableUsagePage() {
                               </div>
                             </DataTableCell>
                             <DataTableCell column="clientName">
-                              <div className="font-medium">
-                                <DataTableHighlight
-                                  text={row.clientName}
-                                  item={row}
-                                  itemKey="clientName"
-                                />
-                              </div>
+                              <DataTableHighlight
+                                text={row.clientName}
+                                item={row}
+                                itemKey="clientName"
+                              />
                             </DataTableCell>
                             <DataTableCell column="status">
                               <SimpleBadge

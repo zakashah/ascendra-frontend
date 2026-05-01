@@ -1,20 +1,23 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMemo } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Button } from '@/components/custom/ui/button';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
+import { Button } from '@/components/custom/ui/button';
 import { useQueryContext } from '@/hooks/use-query-context';
-import { QueryFieldRenderer } from './query-field-renderer';
 import type { FieldDef, QueryParamValues } from '@/lib/query';
 import { cn } from '@/lib/utils';
-import { IoColorFilterOutline } from "react-icons/io5";
+import { FaPlay } from 'react-icons/fa';
+import { IoColorFilterOutline } from 'react-icons/io5';
+import { QueryFieldRenderer } from './query-field-renderer';
+import { MainSectionFooter } from '../layout/main-section-footer';
+import { InfoIcon, Loader2 } from 'lucide-react';
 
 function buildZodSchema(
   fields: FieldDef[]
@@ -125,8 +128,13 @@ export function QueryParamPanel() {
 }
 
 function QueryParamPanelInner() {
-  const { activeQuery, setLastResult, setIsLoading, confirmPending } =
-    useQueryContext();
+  const {
+    activeQuery,
+    setLastResult,
+    isLoading,
+    setIsLoading,
+    confirmPending,
+  } = useQueryContext();
   const fields = activeQuery.params!;
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
@@ -140,8 +148,8 @@ function QueryParamPanelInner() {
 
   function onSubmit(data: Record<string, unknown>) {
     setIsLoading(true);
-    setLastResult(data as QueryParamValues);
     setTimeout(() => {
+      setLastResult(data as QueryParamValues);
       confirmPending();
       setIsLoading(false);
     }, 2000);
@@ -177,16 +185,26 @@ function QueryParamPanelInner() {
                   </div>
                 ))}
               </div>
+            </MainSectionPanelItem>
+            <MainSectionPanelItem>
               <div className="flex justify-end gap-2">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => methods.reset(defaultValues)}
-                >
-                  Reset
-                </Button>
-                <Button type="submit" size="sm">
+                {!isLoading && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="text-muted-foreground hover:text-muted-foreground"
+                    onClick={() => methods.reset(defaultValues)}
+                  >
+                    Reset
+                  </Button>
+                )}
+                <Button type="submit" variant="secondary" disabled={isLoading}>
+                  {isLoading ? (
+                    <Loader2 className="size-3 animate-spin" />
+                  ) : (
+                    <FaPlay />
+                  )}
                   Run Query
                 </Button>
               </div>
@@ -194,6 +212,11 @@ function QueryParamPanelInner() {
           </form>
         </FormProvider>
       </MainSectionPanel>
+      <MainSectionFooter>
+        <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+        You need at least one MFA strategy enabled in order to enable this
+        feature.
+      </MainSectionFooter>
     </MainSection>
   );
 }

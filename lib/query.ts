@@ -99,7 +99,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         label: 'Statuses',
         type: 'multiselect',
         required: true,
-        span: 2,
+        span: 1,
         options: [
           { value: 'paid', label: 'Paid' },
           { value: 'pending', label: 'Pending' },
@@ -120,7 +120,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         label: 'Date Range',
         type: 'daterange',
         required: true,
-        span: 2,
+        span: 1,
       },
     ],
   },
