@@ -104,7 +104,7 @@ export default function TableUsagePage() {
                 </PageBar>
                 <DataTableFilterBar />
                 <DataTableWrapper>
-                  <DataTable scrollable>
+                  <DataTable scrollable vertical height={400}>
                     <DataTableHeader>
                       <DataTableHeaderRow>
                         <DataTableHead column="invoiceNumber">

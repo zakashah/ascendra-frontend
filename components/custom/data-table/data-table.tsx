@@ -42,9 +42,13 @@ export function DataTable({
         className={cn(
           '',
           scrollable && horizontal && '-mb-px overflow-x-auto pb-px',
-          scrollable && vertical && height && 'overflow-y-auto',
-          scrollable && vertical && height && `h-${height}`
+          scrollable && vertical && height && 'overflow-y-auto'
         )}
+        style={
+          scrollable && vertical && height
+            ? { height: `${height}px` }
+            : undefined
+        }
       >
         <table
           data-slot="table"
