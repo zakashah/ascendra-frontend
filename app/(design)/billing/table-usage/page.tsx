@@ -33,6 +33,9 @@ import { DataTable } from '@/components/custom/data-table/data-table';
 import { DataTableHeader } from '@/components/custom/data-table/data-table-header';
 import { DataTableWrapper } from '@/components/custom/data-table/data-table-wrapper';
 import { QueryBar } from '@/components/custom/data-table/query-bar';
+import { QueryParamPanel } from '@/components/custom/data-table/query-param-panel';
+import { BatchNavigator } from '@/components/custom/data-table/batch-navigator';
+import { QueryProvider } from '@/hooks/use-query-context';
 import { DataTableProvider } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { type ColumnDef } from '@/lib/table';
@@ -87,12 +90,14 @@ export default function TableUsagePage() {
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
+              <QueryProvider>
               <DataTableProvider
                 data={data?.data ?? []}
                 columns={INVOICE_COLUMNS}
                 isLoading={isLoading}
               >
                 <QueryBar />
+                <QueryParamPanel />
                 <DataTableBar>
                   <DataTableBarContent>
                     <DataTableSearchInput />
@@ -105,6 +110,7 @@ export default function TableUsagePage() {
                   </DataTableBarAction>
                 </DataTableBar>
                 <DataTableFilterBar />
+                <BatchNavigator />
                 <DataTableWrapper>
                   <DataTable scrollable vertical height={400}>
                     <DataTableHeader>
@@ -188,6 +194,7 @@ export default function TableUsagePage() {
                   <DataTableFoot />
                 </DataTableWrapper>
               </DataTableProvider>
+              </QueryProvider>
             </MainContent>
           </TabContent>
           <TabContent value="tab">
