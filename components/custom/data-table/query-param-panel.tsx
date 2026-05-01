@@ -5,19 +5,18 @@ import { useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { UnsavedChangesBar } from '@/components/custom/common-ui/unsaved-changes-bar';
 import { MainSection } from '@/components/custom/layout/main-section';
+import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { Button } from '@/components/custom/ui/button';
 import { useQueryContext } from '@/hooks/use-query-context';
 import type { FieldDef, QueryParamValues } from '@/lib/query';
 import { cn } from '@/lib/utils';
-import { FaPlay } from 'react-icons/fa';
+import { InfoIcon } from 'lucide-react';
 import { IoColorFilterOutline } from 'react-icons/io5';
 import { QueryFieldRenderer } from './query-field-renderer';
-import { MainSectionFooter } from '../layout/main-section-footer';
-import { InfoIcon, Loader2 } from 'lucide-react';
 
 function buildZodSchema(
   fields: FieldDef[]
@@ -30,17 +29,19 @@ function buildZodSchema(
     switch (field.type) {
       case 'text': {
         let s = z.string();
-        if (field.minLength != null) s = s.min(field.minLength);
-        if (field.maxLength != null) s = s.max(field.maxLength);
+        if (field.minLength != null)
+          s = s.min(field.minLength, `${field.label} must be at least ${field.minLength} characters`);
+        if (field.maxLength != null)
+          s = s.max(field.maxLength, `${field.label} cannot exceed ${field.maxLength} characters`);
         schema = field.required
           ? s.min(1, `${field.label} is required`)
           : s.optional();
         break;
       }
       case 'number': {
-        let s = z.coerce.number({ error: 'Must be a number' });
-        if (field.min != null) s = s.min(field.min);
-        if (field.max != null) s = s.max(field.max);
+        let s = z.coerce.number({ error: 'Must be a valid number' });
+        if (field.min != null) s = s.min(field.min, `Must be at least ${field.min}`);
+        if (field.max != null) s = s.max(field.max, `Cannot exceed ${field.max}`);
         schema = field.required ? s : s.optional();
         break;
       }
@@ -143,80 +144,81 @@ function QueryParamPanelInner() {
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues,
-    mode: 'onSubmit',
+    mode: 'onTouched',
   });
 
-  function onSubmit(data: Record<string, unknown>) {
-    setIsLoading(true);
-    setTimeout(() => {
-      setLastResult(data as QueryParamValues);
-      confirmPending();
-      setIsLoading(false);
-    }, 2000);
-  }
+  const handleRunQuery = async (): Promise<boolean> => {
+    // Trigger all fields so per-field errors surface immediately
+    const valid = await methods.trigger();
+    if (!valid) return false;
+
+    return new Promise<boolean>((resolve) => {
+      methods.handleSubmit((data) => {
+        setIsLoading(true);
+        setTimeout(() => {
+          setLastResult(data as QueryParamValues);
+          confirmPending();
+          setIsLoading(false);
+          resolve(true);
+        }, 2000);
+      })();
+    });
+  };
 
   return (
-    <MainSection>
-      <MainSectionHeader>
-        <div className="flex items-center gap-2">
-          <IoColorFilterOutline className="text-muted-foreground size-5" />
-          <div className="flex flex-col">
-            <span className="text-sm font-medium">{activeQuery.title}</span>
-            <p className="text-muted-foreground mt-0.5 text-xs">
-              {activeQuery.description}
-            </p>
+    <>
+      <MainSection>
+        <MainSectionHeader>
+          <div className="flex items-center gap-2">
+            <IoColorFilterOutline className="text-muted-foreground size-5" />
+            <div className="flex flex-col">
+              <span className="text-sm font-medium">{activeQuery.title}</span>
+              <p className="text-muted-foreground mt-0.5 text-xs">
+                {activeQuery.description}
+              </p>
+            </div>
           </div>
-        </div>
-      </MainSectionHeader>
-      <MainSectionPanel>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-            <MainSectionPanelItem>
-              <div
-                className={cn(
-                  'grid gap-3',
-                  'grid-cols-1 sm:grid-cols-2',
-                  'lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))]'
-                )}
-              >
-                {fields.map((field) => (
-                  <div key={field.name} className={getSpanClass(field)}>
-                    <QueryFieldRenderer field={field} />
-                  </div>
-                ))}
-              </div>
-            </MainSectionPanelItem>
-            <MainSectionPanelItem>
-              <div className="flex justify-end gap-2">
-                {!isLoading && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="text-muted-foreground hover:text-muted-foreground"
-                    onClick={() => methods.reset(defaultValues)}
-                  >
-                    Reset
-                  </Button>
-                )}
-                <Button type="submit" variant="secondary" disabled={isLoading}>
-                  {isLoading ? (
-                    <Loader2 className="size-3 animate-spin" />
-                  ) : (
-                    <FaPlay />
+        </MainSectionHeader>
+        <MainSectionPanel>
+          <FormProvider {...methods}>
+            <form noValidate>
+              <MainSectionPanelItem>
+                <div
+                  className={cn(
+                    'grid gap-3',
+                    'grid-cols-1 sm:grid-cols-2',
+                    'lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))]'
                   )}
-                  Run Query
-                </Button>
-              </div>
-            </MainSectionPanelItem>
-          </form>
-        </FormProvider>
-      </MainSectionPanel>
-      <MainSectionFooter>
-        <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
-        You need at least one MFA strategy enabled in order to enable this
-        feature.
-      </MainSectionFooter>
-    </MainSection>
+                >
+                  {fields.map((field) => (
+                    <div key={field.name} className={getSpanClass(field)}>
+                      <QueryFieldRenderer field={field} />
+                    </div>
+                  ))}
+                </div>
+              </MainSectionPanelItem>
+            </form>
+          </FormProvider>
+        </MainSectionPanel>
+        <MainSectionFooter>
+          <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+          Fields marked <span className="text-destructive mx-0.5 font-medium">*</span> are required before the query can run.
+        </MainSectionFooter>
+      </MainSection>
+
+      <UnsavedChangesBar
+        isDirty={true}
+        isSaving={isLoading}
+        isValid={true}
+        onSave={handleRunQuery}
+        onReset={() => methods.reset(defaultValues)}
+        saveLabel="Run Query"
+        resetLabel="Reset"
+        message="Filter parameters ready — run the query when done"
+        savingMessage="Running query…"
+        successMessage="Query applied"
+        errorMessage="Please fix the filter errors before running"
+      />
+    </>
   );
 }
