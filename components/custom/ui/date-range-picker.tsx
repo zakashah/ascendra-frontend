@@ -14,6 +14,7 @@ interface DateRangePickerProps {
   onChange?: (range: DateRange | undefined) => void;
   placeholder?: string;
   disabled?: boolean;
+  invalid?: boolean;
   className?: string;
   fromYear?: number;
   toYear?: number;
@@ -26,6 +27,7 @@ function DateRangePicker({
   onChange,
   placeholder = 'Pick a date range',
   disabled,
+  invalid,
   className,
   fromYear,
   toYear,
@@ -46,6 +48,7 @@ function DateRangePicker({
         <button
           type="button"
           disabled={disabled}
+          aria-invalid={invalid || undefined}
           data-slot="date-range-picker-trigger"
           className={cn(
             'flex h-8 w-full items-center gap-2 rounded-[.375rem] bg-white px-3 text-left text-sm transition',
@@ -55,6 +58,7 @@ function DateRangePicker({
             'hover:ring-(--color-umbra)/24',
             'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
             'disabled:cursor-not-allowed disabled:opacity-40',
+            invalid && 'outline-1 outline-destructive outline-offset-1',
             !label && 'text-gray-500 dark:text-gray-700',
             className
           )}

@@ -9,6 +9,10 @@ const badgeVariants = cva(
   'relative inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-[4px] px-1 py-0.5 font-medium transition-all text-[0.6875rem] leading-[0.875rem] tracking-[0.015em] ring-1 ring-inset overflow-hidden',
   {
     variants: {
+      size: {
+        default: '',
+        tiny: 'text-[9px] leading-[11px] px-0.5 py-px',
+      },
       variant: {
         /* Primary/Purple */
         default:
@@ -41,6 +45,7 @@ const badgeVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
+      size: 'default',
     },
   }
 );
@@ -48,6 +53,7 @@ const badgeVariants = cva(
 export function SimpleBadge({
   className,
   variant = 'default',
+  size = 'default',
   asChild = false,
   children,
   ...props
@@ -59,7 +65,8 @@ export function SimpleBadge({
     <Comp
       data-slot="simple-badge"
       data-variant={variant}
-      className={cn(badgeVariants({ variant }), className)}
+      data-size={size}
+      className={cn(badgeVariants({ variant, size }), className)}
       {...props}
     >
       {/* Using px-0.5 inside the wrapper to mimic the Clerk gap and alignment for badges with icons or text.

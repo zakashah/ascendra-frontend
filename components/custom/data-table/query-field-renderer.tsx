@@ -3,12 +3,14 @@
 import { useFormContext, Controller } from 'react-hook-form';
 import type { DateRange } from 'react-day-picker';
 
+import { LuTriangleAlert } from 'react-icons/lu';
+
 import {
   Field,
   FieldLabel,
-  FieldError,
   FieldDescription,
 } from '@/components/custom/ui/field';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { Input } from '@/components/custom/ui/input';
 import {
   Select,
@@ -53,16 +55,15 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
   const labelId = `qf-${field.name}-label`;
 
   return (
-    <Field data-invalid={error ? 'true' : undefined}>
-
-      {/* Label — checkbox renders its own inline label */}
+    <Field>
+      {/* Label + optional subtitle — checkbox renders its own inline label */}
       {field.type !== 'checkbox' && (
-        <FieldLabel id={labelId} htmlFor={inputId}>
-          {field.label}
-          {field.required && (
-            <span className="text-destructive ml-0.5" aria-hidden>*</span>
-          )}
-        </FieldLabel>
+        <div>
+          <FieldLabel id={labelId} htmlFor={inputId}>
+            {field.label}
+          </FieldLabel>
+          {field.info && <p className="mt-0.5 text-xs">{field.info}</p>}
+        </div>
       )}
 
       {/* ── text ─────────────────────────────────────────────────────── */}
@@ -95,7 +96,11 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           control={control}
           render={({ field: f }) => (
             <Select value={f.value ?? ''} onValueChange={f.onChange}>
-              <SelectTrigger id={inputId} className="w-full">
+              <SelectTrigger
+                id={inputId}
+                className="w-full"
+                aria-invalid={!!error || undefined}
+              >
                 <SelectValue
                   placeholder={field.placeholder ?? `Select ${field.label}`}
                 />
@@ -120,11 +125,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           render={({ field: f }) => {
             const selected: string[] = f.value ?? [];
             return (
-              <Combobox
-                multiple
-                value={selected}
-                onValueChange={f.onChange}
-              >
+              <Combobox multiple value={selected} onValueChange={f.onChange}>
                 <ComboboxChips aria-invalid={!!error || undefined}>
                   {selected.map((val) => {
                     const opt = field.options?.find((o) => o.value === val);
@@ -167,6 +168,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               value={f.value as Date | undefined}
               onChange={f.onChange}
               placeholder={field.placeholder ?? 'Pick a date'}
+              invalid={!!error}
             />
           )}
         />
@@ -182,6 +184,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               value={f.value as DateRange | undefined}
               onChange={f.onChange}
               placeholder={field.placeholder ?? 'Pick a date range'}
+              invalid={!!error}
             />
           )}
         />
@@ -200,11 +203,11 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
                 onCheckedChange={f.onChange}
                 aria-invalid={!!error}
               />
-              <FieldLabel htmlFor={inputId} className="cursor-pointer font-normal">
+              <FieldLabel
+                htmlFor={inputId}
+                className="cursor-pointer font-normal"
+              >
                 {field.label}
-                {field.required && (
-                  <span className="text-destructive ml-0.5" aria-hidden>*</span>
-                )}
               </FieldLabel>
             </Field>
           )}
@@ -224,7 +227,11 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               className="grid-cols-2 gap-y-1.5"
             >
               {field.options?.map((opt) => (
-                <Field key={opt.value} orientation="horizontal" className="items-center">
+                <Field
+                  key={opt.value}
+                  orientation="horizontal"
+                  className="items-center"
+                >
                   <RadioGroupItem
                     value={opt.value}
                     id={`${inputId}-${opt.value}`}
@@ -242,11 +249,30 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
         />
       )}
 
-      {field.description && (
-        <FieldDescription>{field.description}</FieldDescription>
+      {(error || field.description || field.mandatory || field.optional) && (
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0 flex-1">
+            {error ? (
+              <p className="text-destructive flex items-center gap-1 text-xs font-normal">
+                <LuTriangleAlert className="size-2.5 shrink-0" aria-hidden />
+                {(error as { message?: string }).message}
+              </p>
+            ) : field.description ? (
+              <FieldDescription>{field.description}</FieldDescription>
+            ) : null}
+          </div>
+          {field.mandatory && (
+            <SimpleBadge variant="secondary" size="tiny">
+              Mandatory
+            </SimpleBadge>
+          )}
+          {field.optional && (
+            <SimpleBadge variant="secondary" size="tiny">
+              Optional
+            </SimpleBadge>
+          )}
+        </div>
       )}
-
-      <FieldError errors={error ? [error as { message?: string }] : []} />
     </Field>
   );
 }

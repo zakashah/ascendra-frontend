@@ -9,11 +9,22 @@ import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
 
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
-import { Anchor } from '@/components/custom/common-ui/anchor';
+import { TableBar } from '@/components/custom/layout/table-bar';
+import { Button } from '@/components/custom/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/custom/ui/dropdown-menu';
 import {
   Empty,
   EmptyDescription,
@@ -21,6 +32,11 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '@/components/custom/ui/empty';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@/components/custom/ui/input-group';
 import { Switch } from '@/components/custom/ui/switch';
 import {
   EmptyBody,
@@ -34,25 +50,9 @@ import {
   TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
+import { InfoIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { LuLockKeyhole, LuSearch, LuShield, LuTrash2 } from 'react-icons/lu';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/custom/ui/dropdown-menu';
-import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/custom/ui/input-group';
-import { InfoIcon } from 'lucide-react';
-import { Button } from '@/components/custom/ui/button';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
-import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
-import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 
 export default function RestrictionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -179,7 +179,7 @@ export default function RestrictionsPage() {
                   </p>
                 </MainSectionHeader>
               </MainSection>
-              <DataTableBar className="mt-2 -mb-2">
+              <TableBar className="mt-2 -mb-2">
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -191,7 +191,7 @@ export default function RestrictionsPage() {
                 <DataTableBarAction>
                   <Button disabled>+ Add</Button>
                 </DataTableBarAction>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -235,7 +235,7 @@ export default function RestrictionsPage() {
                   </p>
                 </MainSectionHeader>
               </MainSection>
-              <DataTableBar className="mt-2 -mb-2">
+              <TableBar className="mt-2 -mb-2">
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -247,7 +247,7 @@ export default function RestrictionsPage() {
                 <DataTableBarAction>
                   <Button disabled>+ Add</Button>
                 </DataTableBarAction>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

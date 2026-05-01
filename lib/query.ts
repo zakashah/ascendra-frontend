@@ -15,13 +15,26 @@ export interface SelectOption {
   label: string;
 }
 
+export interface ColumnsConfig {
+  sm?: number;
+  md?: number;
+  lg?: number;
+}
+
 export interface FieldDef {
   name: string;
   label: string;
   type: FieldType;
   placeholder?: string;
   required?: boolean;
+  /** Subtitle shown below the label in text-xs (above the input) */
+  info?: string;
+  /** Helper text shown below the input */
   description?: string;
+  /** Shows a red "Mandatory" badge next to the description */
+  mandatory?: boolean;
+  /** Shows a gray "Optional" badge next to the description */
+  optional?: boolean;
   span?: 1 | 2 | 'full';
   options?: SelectOption[];
   min?: number;
@@ -42,6 +55,10 @@ export interface QueryDef {
   title: string;
   description: string;
   group: QueryGroup;
+  /** Rendered in MainSectionFooter when present */
+  info?: string;
+  /** Grid column count per breakpoint — defaults to sm:1, md:1, lg:1 */
+  columns?: ColumnsConfig;
   params?: FieldDef[];
 }
 
@@ -111,6 +128,8 @@ export const PRESET_QUERIES: QueryDef[] = [
     group: 'filter',
     title: 'Advanced Invoice Filter',
     description: 'Comprehensive filter covering all parameter types',
+    info: 'All active filters use AND logic — results must match every condition you set.',
+    columns: { sm: 1, md: 2, lg: 3 },
     params: [
       {
         name: 'clientName',
@@ -120,7 +139,9 @@ export const PRESET_QUERIES: QueryDef[] = [
         required: false,
         minLength: 2,
         maxLength: 50,
-        description: 'Partial match on client display name',
+        info: 'Partial match',
+        description: 'Matches any part of the client display name',
+        mandatory: true
       },
       {
         name: 'invoiceNumber',
@@ -129,6 +150,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         placeholder: 'INV-001',
         required: true,
         maxLength: 20,
+        info: 'Exact reference match',
       },
       {
         name: 'minAmount',
@@ -138,6 +160,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         required: false,
         min: 0,
         max: 9999999,
+        info: 'Inclusive lower bound',
+        optional: true
       },
       {
         name: 'maxAmount',
@@ -147,6 +171,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         required: true,
         min: 1,
         max: 9999999,
+        info: 'Inclusive upper bound',
       },
       {
         name: 'primaryStatus',
@@ -166,6 +191,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         type: 'multiselect',
         required: true,
         span: 2,
+        info: 'Select all that apply',
         options: [
           { value: 'tuition', label: 'Tuition' },
           { value: 'transport', label: 'Transport' },
@@ -179,7 +205,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         label: 'Issued From',
         type: 'date',
         required: true,
-        description: 'Show invoices issued on or after this date',
+        info: 'Inclusive start date',
+        description: 'Shows invoices issued on or after this date',
       },
       {
         name: 'dueDateRange',
@@ -187,6 +214,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         type: 'daterange',
         required: false,
         span: 2,
+        info: 'Optional date window',
         description: 'Optionally narrow results by due date window',
       },
       {

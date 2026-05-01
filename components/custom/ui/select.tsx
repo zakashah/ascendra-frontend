@@ -69,6 +69,8 @@ function SelectTrigger({
         'disabled:cursor-not-allowed disabled:opacity-40',
         /* Focus */
         'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
+        /* Invalid */
+        'aria-invalid:outline-1 aria-invalid:outline-destructive aria-invalid:outline-offset-1',
         size === 'sm' && 'h-5',
         size === 'default' && 'h-8',
         className

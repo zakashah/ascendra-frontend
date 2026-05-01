@@ -34,7 +34,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { TableBar } from '@/components/custom/layout/table-bar';
 import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 
@@ -53,7 +53,7 @@ export default function FeaturesPage() {
         <PageWrapper>
           <PageContent>
             <MainContent>
-              <DataTableBar className="-mb-2">
+              <TableBar className="-mb-2">
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -65,7 +65,7 @@ export default function FeaturesPage() {
                 <DataTableBarAction>
                   <Button>+ Add feature</Button>
                 </DataTableBarAction>
-              </DataTableBar>
+              </TableBar>
               <MainSection className="pb-0">
                 <TableWrapper>
                   <Table scrollable>

@@ -12,7 +12,7 @@ import { MainSectionHeader } from '@/components/custom/layout/main-section-heade
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
 import { useQueryContext } from '@/hooks/use-query-context';
-import type { FieldDef, QueryParamValues } from '@/lib/query';
+import type { ColumnsConfig, FieldDef, QueryParamValues } from '@/lib/query';
 import { cn } from '@/lib/utils';
 import { InfoIcon } from 'lucide-react';
 import { IoColorFilterOutline } from 'react-icons/io5';
@@ -110,6 +110,16 @@ function buildDefaultValues(fields: FieldDef[]): Record<string, unknown> {
   return defaults;
 }
 
+function getColumnsClass(columns?: ColumnsConfig): string {
+  const cfg = { sm: 1, md: 1, lg: 1, ...columns };
+  return cn(
+    'grid-cols-1',
+    `sm:grid-cols-${cfg.sm}`,
+    `md:grid-cols-${cfg.md}`,
+    `lg:grid-cols-${cfg.lg}`
+  );
+}
+
 function getSpanClass(field: FieldDef): string {
   if (field.span === 'full') return 'col-span-full';
   if (field.span === 2) return 'col-span-2';
@@ -183,13 +193,7 @@ function QueryParamPanelInner() {
           <FormProvider {...methods}>
             <form noValidate>
               <MainSectionPanelItem>
-                <div
-                  className={cn(
-                    'grid gap-3',
-                    'grid-cols-1 sm:grid-cols-2',
-                    'lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))]'
-                  )}
-                >
+                <div className={cn('grid gap-3', getColumnsClass(activeQuery.columns))}>
                   {fields.map((field) => (
                     <div key={field.name} className={getSpanClass(field)}>
                       <QueryFieldRenderer field={field} />
@@ -200,10 +204,12 @@ function QueryParamPanelInner() {
             </form>
           </FormProvider>
         </MainSectionPanel>
-        <MainSectionFooter>
-          <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
-          Fields marked <span className="text-destructive mx-0.5 font-medium">*</span> are required before the query can run.
-        </MainSectionFooter>
+        {activeQuery.info && (
+          <MainSectionFooter>
+            <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+            {activeQuery.info}
+          </MainSectionFooter>
+        )}
       </MainSection>
 
       <UnsavedChangesBar
