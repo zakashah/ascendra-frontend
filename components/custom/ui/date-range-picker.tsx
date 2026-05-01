@@ -12,6 +12,7 @@ import { Calendar } from '@/components/custom/ui/calendar';
 interface DateRangePickerProps {
   value?: DateRange;
   onChange?: (range: DateRange | undefined) => void;
+  onBlur?: () => void;
   placeholder?: string;
   disabled?: boolean;
   invalid?: boolean;
@@ -25,6 +26,7 @@ interface DateRangePickerProps {
 function DateRangePicker({
   value,
   onChange,
+  onBlur,
   placeholder = 'Pick a date range',
   disabled,
   invalid,
@@ -43,7 +45,13 @@ function DateRangePicker({
   }, [value]);
 
   return (
-    <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
+    <PopoverPrimitive.Root
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) onBlur?.();
+      }}
+    >
       <PopoverPrimitive.Trigger asChild>
         <button
           type="button"

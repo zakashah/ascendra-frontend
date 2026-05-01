@@ -95,7 +95,13 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           name={field.name}
           control={control}
           render={({ field: f }) => (
-            <Select value={f.value ?? ''} onValueChange={f.onChange}>
+            <Select
+              value={f.value ?? ''}
+              onValueChange={f.onChange}
+              onOpenChange={(open) => {
+                if (!open) f.onBlur();
+              }}
+            >
               <SelectTrigger
                 id={inputId}
                 className="w-full"
@@ -141,6 +147,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
                         ? ''
                         : (field.placeholder ?? `Select ${field.label}…`)
                     }
+                    onBlur={f.onBlur}
                   />
                 </ComboboxChips>
                 <ComboboxContent>
@@ -167,6 +174,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
             <DatePicker
               value={f.value as Date | undefined}
               onChange={f.onChange}
+              onBlur={f.onBlur}
               placeholder={field.placeholder ?? 'Pick a date'}
               invalid={!!error}
             />
@@ -183,6 +191,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
             <DateRangePicker
               value={f.value as DateRange | undefined}
               onChange={f.onChange}
+              onBlur={f.onBlur}
               placeholder={field.placeholder ?? 'Pick a date range'}
               invalid={!!error}
             />
@@ -201,6 +210,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
                 id={inputId}
                 checked={f.value as boolean}
                 onCheckedChange={f.onChange}
+                onBlur={f.onBlur}
                 aria-invalid={!!error}
               />
               <FieldLabel
@@ -223,6 +233,10 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
             <RadioGroup
               value={f.value ?? ''}
               onValueChange={f.onChange}
+              onBlurCapture={(e: React.FocusEvent) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node))
+                  f.onBlur();
+              }}
               aria-labelledby={labelId}
               className="grid-cols-2 gap-y-1.5"
             >
@@ -253,8 +267,11 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             {error ? (
-              <p className="text-destructive flex items-center gap-1 text-xs font-normal">
-                <LuTriangleAlert className="size-2.5 shrink-0" aria-hidden />
+              <p className="text-destructive flex items-start gap-1 text-xs font-normal">
+                <LuTriangleAlert
+                  className="mt-0.75 size-2.5 shrink-0"
+                  aria-hidden
+                />
                 {(error as { message?: string }).message}
               </p>
             ) : field.description ? (

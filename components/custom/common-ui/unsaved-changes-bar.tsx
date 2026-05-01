@@ -9,6 +9,8 @@ interface UnsavedChangesBarProps {
   isDirty: boolean;
   onSave?: () => boolean | Promise<boolean> | void;
   onReset?: () => void;
+  /** Called when Save is clicked but isValid is false — use to trigger field-level error display */
+  onInvalid?: () => void;
   saveLabel?: string;
   resetLabel?: string;
   /** Shown when the bar is in its default idle state */
@@ -31,6 +33,7 @@ export function UnsavedChangesBar({
   isDirty,
   onSave,
   onReset,
+  onInvalid,
   saveLabel = 'Save',
   resetLabel = 'Reset',
   message = 'Unsaved changes',
@@ -66,8 +69,6 @@ export function UnsavedChangesBar({
     setIsSuccess(false);
     setIsError(false);
   }
-
-  console.log('dirty is: ', isDirty);
 
   return (
     <div
@@ -113,8 +114,8 @@ export function UnsavedChangesBar({
               size="sm"
               className="h-6"
               onClick={async () => {
-                setTitle(savingMessage);
                 if (isValid) {
+                  setTitle(savingMessage);
                   setIconClass('text-white');
                   const isSuccess = await onSave?.();
                   if (isSuccess) {
@@ -138,6 +139,7 @@ export function UnsavedChangesBar({
                   setIconClass('text-red-500');
                   setTitle(validationMessage);
                   triggerNudge();
+                  onInvalid?.();
                   setTimeout(() => {
                     setSaveButtonLabel('Try again');
                   }, 200);

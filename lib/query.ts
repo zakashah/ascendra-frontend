@@ -310,7 +310,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         name: 'dueDateRange',
         label: 'Due Date Range',
         type: 'daterange',
-        required: false,
+        required: true,
         optional: true,
         span: 'full',
         info: 'Optional date window',
@@ -323,8 +323,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         name: 'sortOrder',
         label: 'Sort Order',
         type: 'radio',
-        required: true,
         mandatory: true,
+        required: true,
         span: 'full',
         options: [
           { value: 'newest', label: 'Newest First' },
@@ -340,6 +340,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         type: 'checkbox',
         span: 'full',
         description: 'Include archived invoices in results',
+        mandatory: true,
+        required: true
       },
     ],
   },

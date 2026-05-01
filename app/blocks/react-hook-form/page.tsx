@@ -145,6 +145,7 @@ export default function ReactHookFormPage() {
     handleSubmit,
     reset,
     watch,
+    trigger,
     formState: { errors, isDirty, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -739,16 +740,11 @@ export default function ReactHookFormPage() {
         isDirty={isDirty}
         onReset={() => reset()}
         onSave={async () => {
-          console.log('in onSave');
           submitForm();
           await sleep(6000);
           return false;
-          /* setSaving(true);
-          await sleep(6000);
-          setSaving(false);
-          return false; */
-          return false;
         }}
+        onInvalid={() => { void trigger(); }}
         isSaving={saving}
         isValid={isValid}
       />

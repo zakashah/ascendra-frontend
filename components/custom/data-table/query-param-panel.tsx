@@ -85,7 +85,13 @@ function buildZodSchema(
         break;
       }
       case 'checkbox': {
-        schema = z.boolean().optional();
+        schema = field.required
+          ? z
+              .boolean()
+              .refine((v) => v === true, {
+                message: `${field.label} is required`,
+              })
+          : z.boolean().optional();
         break;
       }
       default: {
@@ -292,15 +298,19 @@ function QueryParamPanelInner() {
       <UnsavedChangesBar
         isDirty={true}
         isSaving={isLoading}
-        isValid={true}
+        isValid={methods.formState.isValid}
         onSave={handleRunQuery}
         onReset={() => methods.reset(defaultValues)}
+        onInvalid={() => {
+          void methods.trigger();
+        }}
         saveLabel="Run Query"
         resetLabel="Reset"
         message="Filter parameters ready — run the query when done"
+        validationMessage="Please fix the filter errors before running"
         savingMessage="Running query…"
         successMessage="Query applied"
-        errorMessage="Please fix the filter errors before running"
+        errorMessage="Query failed — please try again"
       />
     </>
   );

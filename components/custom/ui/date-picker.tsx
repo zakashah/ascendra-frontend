@@ -11,6 +11,7 @@ import { Calendar } from '@/components/custom/ui/calendar';
 interface DatePickerProps {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
+  onBlur?: () => void;
   placeholder?: string;
   disabled?: boolean;
   invalid?: boolean;
@@ -23,6 +24,7 @@ interface DatePickerProps {
 function DatePicker({
   value,
   onChange,
+  onBlur,
   placeholder = 'Pick a date',
   disabled,
   invalid,
@@ -34,7 +36,13 @@ function DatePicker({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
+    <PopoverPrimitive.Root
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) onBlur?.();
+      }}
+    >
       <PopoverPrimitive.Trigger asChild>
         <button
           type="button"
