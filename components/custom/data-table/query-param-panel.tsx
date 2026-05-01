@@ -102,13 +102,23 @@ function getSpanClass(field: FieldDef): string {
 }
 
 export function QueryParamPanel() {
-  const { activeQuery } = useQueryContext();
-  if (!activeQuery.params?.length) return null;
-  return <QueryParamPanelInner key={activeQuery.id} />;
+  const { activeQuery, lastResult } = useQueryContext();
+  const showParamPanel = !!activeQuery.params?.length && lastResult === null;
+
+  return (
+    <div
+      className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+      style={{ gridTemplateRows: showParamPanel ? '1fr' : '0fr' }}
+    >
+      <div className="min-h-0 overflow-hidden">
+        {activeQuery.params?.length ? <QueryParamPanelInner key={activeQuery.id} /> : null}
+      </div>
+    </div>
+  );
 }
 
 function QueryParamPanelInner() {
-  const { activeQuery, setLastResult } = useQueryContext();
+  const { activeQuery, setLastResult, setIsLoading } = useQueryContext();
   const fields = activeQuery.params!;
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
@@ -122,6 +132,8 @@ function QueryParamPanelInner() {
 
   function onSubmit(data: Record<string, unknown>) {
     setLastResult(data as QueryParamValues);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1200);
   }
 
   return (
