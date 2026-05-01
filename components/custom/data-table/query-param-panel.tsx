@@ -12,7 +12,13 @@ import { MainSectionHeader } from '@/components/custom/layout/main-section-heade
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
 import { useQueryContext } from '@/hooks/use-query-context';
-import type { ColumnsConfig, FieldDef, QueryParamValues } from '@/lib/query';
+import type {
+  ColumnsConfig,
+  FieldDef,
+  ParamItem,
+  QueryParamValues,
+} from '@/lib/query';
+import { isFieldDef } from '@/lib/query';
 import { cn } from '@/lib/utils';
 import { InfoIcon } from 'lucide-react';
 import { IoColorFilterOutline } from 'react-icons/io5';
@@ -118,6 +124,33 @@ function buildDefaultValues(fields: FieldDef[]): Record<string, unknown> {
   return defaults;
 }
 
+interface SectionGroup {
+  title: string | null;
+  showTitle: boolean;
+  fields: FieldDef[];
+}
+
+function groupParamSections(params: ParamItem[]): SectionGroup[] {
+  const groups: SectionGroup[] = [];
+  let current: SectionGroup = { title: null, showTitle: false, fields: [] };
+
+  for (const item of params) {
+    if (isFieldDef(item)) {
+      current.fields.push(item);
+    } else {
+      if (current.fields.length > 0) groups.push(current);
+      current = {
+        title: item.title,
+        showTitle: item.showTitle ?? false,
+        fields: [],
+      };
+    }
+  }
+
+  if (current.fields.length > 0) groups.push(current);
+  return groups;
+}
+
 // Static lookup tables — template literals would be invisible to Tailwind's scanner
 const SM_COLS: Record<number, string> = {
   1: 'sm:grid-cols-1',
@@ -167,7 +200,9 @@ function QueryParamPanelInner() {
     setIsLoading,
     confirmPending,
   } = useQueryContext();
-  const fields = activeQuery.params!;
+  const params = activeQuery.params!;
+  const fields = useMemo(() => params.filter(isFieldDef), [params]);
+  const groups = useMemo(() => groupParamSections(params), [params]);
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
   const defaultValues = useMemo(() => buildDefaultValues(fields), [fields]);
@@ -213,20 +248,33 @@ function QueryParamPanelInner() {
         <MainSectionPanel>
           <FormProvider {...methods}>
             <form noValidate>
-              <MainSectionPanelItem>
-                <div
-                  className={cn(
-                    'grid gap-5',
-                    getColumnsClass(activeQuery.columns)
-                  )}
+              {groups.map((group, i) => (
+                <MainSectionPanelItem
+                  key={i}
+                  className={cn(group.showTitle && 'relative')}
                 >
-                  {fields.map((field) => (
-                    <div key={field.name} className={getSpanClass(field)}>
-                      <QueryFieldRenderer field={field} />
-                    </div>
-                  ))}
-                </div>
-              </MainSectionPanelItem>
+                  {group.showTitle && group.title && (
+                    <>
+                      <div className="absolute inset-0 -top-px border-t border-dashed border-gray-400/50" />
+                      <div className="text-muted-foreground bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed border-gray-400/50 px-1.5 py-0.5 text-[11px] opacity-100">
+                        {group.title}
+                      </div>
+                    </>
+                  )}
+                  <div
+                    className={cn(
+                      'grid gap-5',
+                      getColumnsClass(activeQuery.columns)
+                    )}
+                  >
+                    {group.fields.map((field) => (
+                      <div key={field.name} className={getSpanClass(field)}>
+                        <QueryFieldRenderer field={field} />
+                      </div>
+                    ))}
+                  </div>
+                </MainSectionPanelItem>
+              ))}
             </form>
           </FormProvider>
         </MainSectionPanel>

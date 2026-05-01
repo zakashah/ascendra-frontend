@@ -43,6 +43,19 @@ export interface FieldDef {
   maxLength?: number;
 }
 
+export interface SectionBreak {
+  _type: 'section';
+  title: string;
+  /** When true, renders a floating pill label on the panel item border */
+  showTitle?: boolean;
+}
+
+export type ParamItem = FieldDef | SectionBreak;
+
+export function isFieldDef(item: ParamItem): item is FieldDef {
+  return !('_type' in item);
+}
+
 export type QueryParamValues = Record<
   string,
   string | number | boolean | Date | DateRange | string[] | undefined
@@ -59,7 +72,7 @@ export interface QueryDef {
   info?: string;
   /** Grid column count per breakpoint — defaults to sm:1, md:1, lg:1 */
   columns?: ColumnsConfig;
-  params?: FieldDef[];
+  params?: ParamItem[];
 }
 
 export const PRESET_QUERIES: QueryDef[] = [
@@ -154,6 +167,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         span: 1,
         info: 'Partial match',
       },
+      { _type: 'section', title: 'Filters' },
       {
         name: 'gradeLevel',
         label: 'Grade Level',
@@ -302,6 +316,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         info: 'Optional date window',
         description: 'Optionally narrow results by due date window',
       },
+      // ── Sort & Options section ────────────────────────────────────────────
+      { _type: 'section', title: 'Sort & Options', showTitle: true },
       // Row 5 (lg): [sortOrder ×full]
       {
         name: 'sortOrder',
