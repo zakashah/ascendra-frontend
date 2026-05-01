@@ -232,6 +232,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         required: true,
         mandatory: true,
         span: 1,
+        info: '\u00A0',
         options: [
           { value: 'paid', label: 'Paid' },
           { value: 'pending', label: 'Pending' },
@@ -281,7 +282,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         type: 'multiselect',
         required: true,
         optional: true,
-        span: 2,
+        span:  'full',
         info: 'Select all that apply',
         options: [
           { value: 'tuition', label: 'Tuition' },
@@ -297,7 +298,7 @@ export const PRESET_QUERIES: QueryDef[] = [
         type: 'daterange',
         required: false,
         optional: true,
-        span: 2,
+        span: 'full',
         info: 'Optional date window',
         description: 'Optionally narrow results by due date window',
       },

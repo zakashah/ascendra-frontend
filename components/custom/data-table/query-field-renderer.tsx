@@ -62,7 +62,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           <FieldLabel id={labelId} htmlFor={inputId}>
             {field.label}
           </FieldLabel>
-          {field.info && <p className="mt-0.5 text-xs">{field.info}</p>}
+          <p className="mt-0.5 text-xs">{field.info}</p>
         </div>
       )}
 
@@ -261,14 +261,9 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               <FieldDescription>{field.description}</FieldDescription>
             ) : null}
           </div>
-          {field.mandatory && (
-            <SimpleBadge variant="secondary" size="tiny">
-              Mandatory
-            </SimpleBadge>
-          )}
-          {field.optional && (
-            <SimpleBadge variant="secondary" size="tiny">
-              Optional
+          {(field.mandatory || field.optional) && (
+            <SimpleBadge variant="secondary" size="tiny" className="mt-1">
+              {field.mandatory ? 'Mandatory' : 'Optional'}
             </SimpleBadge>
           )}
         </div>
