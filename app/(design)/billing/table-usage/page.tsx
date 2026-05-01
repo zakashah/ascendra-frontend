@@ -1,20 +1,20 @@
 'use client';
 
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { DataFilterBar } from '@/components/custom/data-table/data-filter-bar';
+import { DataTableFilterBar } from '@/components/custom/data-table/data-table-filter-bar';
 import { DataTableBody } from '@/components/custom/data-table/data-table-body';
 import { DataTableCell } from '@/components/custom/data-table/data-table-cell';
 import { DataTableFoot } from '@/components/custom/data-table/data-table-foot';
 import { DataTableHead } from '@/components/custom/data-table/data-table-head';
 import { DataTableHeaderRow } from '@/components/custom/data-table/data-table-header-row';
 import { DataTableRow } from '@/components/custom/data-table/data-table-row';
-import { Highlight } from '@/components/custom/data-table/highlight';
-import { TableColumnManager } from '@/components/custom/data-table/table-column-manager';
-import { TableEmptyBody } from '@/components/custom/data-table/table-empty-body';
-import { TableFilterDropdown } from '@/components/custom/data-table/table-filter-dropdown';
-import { TableLoadingBody } from '@/components/custom/data-table/table-loading-body';
-import { TableSearchInput } from '@/components/custom/data-table/table-search-input';
-import { TableSortDropdown } from '@/components/custom/data-table/table-sort-dropdown';
+import { DataTableHighlight } from '@/components/custom/data-table/data-table-highlight';
+import { DataTableColumnManager } from '@/components/custom/data-table/data-table-column-manager';
+import { DataTableEmptyBody } from '@/components/custom/data-table/data-table-empty-body';
+import { DataTableFilterDropdown } from '@/components/custom/data-table/data-table-filter-dropdown';
+import { DataTableLoadingBody } from '@/components/custom/data-table/data-table-loading-body';
+import { DataTableSearchInput } from '@/components/custom/data-table/data-table-search-input';
+import { DataTableSortDropdown } from '@/components/custom/data-table/data-table-sort-dropdown';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageBar } from '@/components/custom/layout/page-bar';
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
@@ -29,7 +29,9 @@ import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
 import { Button } from '@/components/custom/ui/button';
-import { Table, TableHeader, TableWrapper } from '@/components/custom/ui/table';
+import { DataTable } from '@/components/custom/data-table/data-table';
+import { DataTableHeader } from '@/components/custom/data-table/data-table-header';
+import { DataTableWrapper } from '@/components/custom/data-table/data-table-wrapper';
 import { DataTableProvider } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { type ColumnDef } from '@/lib/table';
@@ -91,19 +93,19 @@ export default function TableUsagePage() {
               >
                 <PageBar>
                   <PageBarContent>
-                    <TableSearchInput />
-                    <TableColumnManager />
-                    <TableSortDropdown />
-                    <TableFilterDropdown />
+                    <DataTableSearchInput />
+                    <DataTableColumnManager />
+                    <DataTableSortDropdown />
+                    <DataTableFilterDropdown />
                   </PageBarContent>
                   <PageBarAction>
                     <Button>+ Add item</Button>
                   </PageBarAction>
                 </PageBar>
-                <DataFilterBar />
-                <TableWrapper>
-                  <Table scrollable>
-                    <TableHeader>
+                <DataTableFilterBar />
+                <DataTableWrapper>
+                  <DataTable scrollable>
+                    <DataTableHeader>
                       <DataTableHeaderRow>
                         <DataTableHead column="invoiceNumber">
                           Invoice #
@@ -116,21 +118,21 @@ export default function TableUsagePage() {
                         <DataTableHead column="dueDate" />
                         <DataTableHead column="issuedAt" />
                       </DataTableHeaderRow>
-                    </TableHeader>
+                    </DataTableHeader>
                     <DataTableBody>
                       {(row: Invoice) => (
                         <DataTableRow key={row.id}>
                           <DataTableCell column="invoiceNumber">
                             <div>
                               <div className="font-medium">
-                                <Highlight
+                                <DataTableHighlight
                                   text={row.invoiceNumber}
                                   item={row}
                                   itemKey="invoiceNumber"
                                 />
                               </div>
                               <div className="text-muted-foreground text-xs">
-                                <Highlight
+                                <DataTableHighlight
                                   text={row.title}
                                   item={row}
                                   itemKey="title"
@@ -140,7 +142,7 @@ export default function TableUsagePage() {
                           </DataTableCell>
                           <DataTableCell column="clientName">
                             <div className="font-medium">
-                              <Highlight
+                              <DataTableHighlight
                                 text={row.clientName}
                                 item={row}
                                 itemKey="clientName"
@@ -155,21 +157,21 @@ export default function TableUsagePage() {
                             </SimpleBadge>
                           </DataTableCell>
                           <DataTableCell column="amount">
-                            <Highlight
+                            <DataTableHighlight
                               text={formatAmount(row.amount)}
                               item={row}
                               itemKey="amount"
                             />
                           </DataTableCell>
                           <DataTableCell column="dueDate">
-                            <Highlight
+                            <DataTableHighlight
                               text={formatDate(row.dueDate)}
                               item={row}
                               itemKey="dueDate"
                             />
                           </DataTableCell>
                           <DataTableCell column="issuedAt">
-                            <Highlight
+                            <DataTableHighlight
                               text={formatDate(row.issuedAt)}
                               item={row}
                               itemKey="issuedAt"
@@ -178,11 +180,11 @@ export default function TableUsagePage() {
                         </DataTableRow>
                       )}
                     </DataTableBody>
-                  </Table>
-                  <TableLoadingBody />
-                  <TableEmptyBody />
+                  </DataTable>
+                  <DataTableLoadingBody />
+                  <DataTableEmptyBody />
                   <DataTableFoot />
-                </TableWrapper>
+                </DataTableWrapper>
               </DataTableProvider>
             </MainContent>
           </TabContent>

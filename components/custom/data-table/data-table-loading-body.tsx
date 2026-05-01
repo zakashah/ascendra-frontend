@@ -11,7 +11,7 @@ import { EmptyBody } from '@/components/custom/ui/table';
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { LuLoader } from 'react-icons/lu';
 
-export function TableLoadingBody() {
+export function DataTableLoadingBody() {
   const { isLoading } = useDataTableContext();
 
   if (!isLoading) return null;

@@ -1,7 +1,7 @@
 import { useDataTableContext } from '@/hooks/use-data-table';
-import { DataFilterItem } from './data-filter-item';
+import { DataTableFilterItem } from './data-table-filter-item';
 
-export function DataFilterBar() {
+export function DataTableFilterBar() {
   const { filters, columns, getOptionsFor, setFilterValue, removeFilter, clearFilters } =
     useDataTableContext();
 
@@ -12,7 +12,7 @@ export function DataFilterBar() {
       {filters.map((f) => {
         const col = columns.find((c) => String(c.key) === f.key);
         return (
-          <DataFilterItem
+          <DataTableFilterItem
             key={f.key}
             columnKey={f.key}
             label={col?.label ?? f.key}

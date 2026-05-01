@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { LuInbox, LuTextSearch } from 'react-icons/lu';
+import { LuTextSearch } from 'react-icons/lu';
 
 import {
   Empty,
@@ -13,17 +13,17 @@ import {
 import { EmptyBody } from '@/components/custom/ui/table';
 import { useDataTableContext } from '@/hooks/use-data-table';
 
-interface TableEmptyBodyProps {
+interface DataTableEmptyBodyProps {
   icon?: React.ReactNode;
   title?: string;
   description?: string;
 }
 
-export function TableEmptyBody({
+export function DataTableEmptyBody({
   icon = <LuTextSearch strokeWidth={2} />,
   title = 'No results found',
   description = 'There are no items to display right now.',
-}: TableEmptyBodyProps) {
+}: DataTableEmptyBodyProps) {
   const { isLoading, pagedData } = useDataTableContext();
 
   if (isLoading || pagedData.length > 0) return null;

@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils';
 import { RxCrossCircled } from 'react-icons/rx';
 
-interface DataFilterItemProps {
+interface DataTableFilterItemProps {
   columnKey: string;
   label: string;
   options: string[];
@@ -20,7 +20,7 @@ interface DataFilterItemProps {
   onRemove: (key: string) => void;
 }
 
-export function DataFilterItem({
+export function DataTableFilterItem({
   columnKey,
   label,
   options,
@@ -28,7 +28,7 @@ export function DataFilterItem({
   displayValue,
   onChange,
   onRemove,
-}: DataFilterItemProps) {
+}: DataTableFilterItemProps) {
   const display = (raw: string) => (displayValue ? displayValue(raw) : raw);
 
   return (

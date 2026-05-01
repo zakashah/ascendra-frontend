@@ -10,7 +10,7 @@ import {
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { LuFilter } from 'react-icons/lu';
 
-export function TableFilterDropdown() {
+export function DataTableFilterDropdown() {
   const { filterableColumns, filters, addFilter } = useDataTableContext();
 
   return (

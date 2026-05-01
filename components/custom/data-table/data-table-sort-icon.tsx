@@ -1,11 +1,11 @@
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { LuArrowDown, LuArrowUp } from 'react-icons/lu';
 
-interface SortIconProps {
+interface DataTableSortIconProps {
   column: string;
 }
 
-export function SortIcon({ column }: SortIconProps) {
+export function DataTableSortIcon({ column }: DataTableSortIconProps) {
   const { sortConfig, isColSortable } = useDataTableContext();
 
   if (!isColSortable(column)) return null;

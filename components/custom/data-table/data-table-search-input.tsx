@@ -12,7 +12,7 @@ import { useRef, useState } from 'react';
 import { LuSearch, LuX } from 'react-icons/lu';
 import { VscSearchFuzzy } from 'react-icons/vsc';
 
-export function TableSearchInput() {
+export function DataTableSearchInput() {
   const { searchTerm, setSearchTerm, fuzzy, setFuzzy } = useDataTableContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchHovered, setSearchHovered] = useState(false);

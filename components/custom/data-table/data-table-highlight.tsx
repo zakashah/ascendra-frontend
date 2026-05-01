@@ -6,7 +6,7 @@ function escapeRegex(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-interface HighlightProps {
+interface DataTableHighlightProps {
   text: string;
   item: unknown;
   itemKey: PropertyKey;
@@ -14,7 +14,7 @@ interface HighlightProps {
 
 const markClass = 'bg-yellow-200/50 text-inherit dark:bg-yellow-400/30';
 
-export function Highlight({ text, item, itemKey }: HighlightProps) {
+export function DataTableHighlight({ text, item, itemKey }: DataTableHighlightProps) {
   const { searchTerm, getRanges } = useDataTableContext();
 
   const ranges = getRanges(item, itemKey);

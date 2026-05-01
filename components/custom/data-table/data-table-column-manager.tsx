@@ -13,11 +13,11 @@ import { useDataTableContext } from '@/hooks/use-data-table';
 import { LuLock, LuSettings } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 
-interface TableColumnManagerProps {
+interface DataTableColumnManagerProps {
   icon?: boolean;
 }
 
-export function TableColumnManager({ icon = false }: TableColumnManagerProps) {
+export function DataTableColumnManager({ icon = false }: DataTableColumnManagerProps) {
   const { columns, toggleColumnActive, reorderColumns } = useDataTableContext();
   const dragKeyRef = useRef<string | null>(null);
   const [dragOverKey, setDragOverKey] = useState<string | null>(null);

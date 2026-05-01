@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useDataTableContext } from '@/hooks/use-data-table';
 import { cn } from '@/lib/utils';
-import { SortIcon } from './sort-icon';
+import { DataTableSortIcon } from './data-table-sort-icon';
 
 interface DataTableHeadProps {
   column: string;
@@ -28,7 +28,7 @@ export function DataTableHead({ column, children, className }: DataTableHeadProp
     >
       <div className="flex items-center gap-1.5">
         {label}
-        <SortIcon column={column} />
+        <DataTableSortIcon column={column} />
       </div>
     </th>
   );

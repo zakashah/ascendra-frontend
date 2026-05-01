@@ -13,11 +13,11 @@ import { useDataTableContext } from '@/hooks/use-data-table';
 import { cn } from '@/lib/utils';
 import { LuArrowDown, LuArrowUp, LuArrowUpDown } from 'react-icons/lu';
 
-interface TableSortDropdownProps {
+interface DataTableSortDropdownProps {
   icon?: boolean;
 }
 
-export function TableSortDropdown({ icon = false }: TableSortDropdownProps) {
+export function DataTableSortDropdown({ icon = false }: DataTableSortDropdownProps) {
   const { columns, sortConfig, handleSort, clearSort } = useDataTableContext();
 
   return (
