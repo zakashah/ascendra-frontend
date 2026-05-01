@@ -46,7 +46,7 @@ export function DataTable({
         )}
         style={
           scrollable && vertical && height
-            ? { height: `${height}px` }
+            ? { maxHeight: `${height}px` }
             : undefined
         }
       >
