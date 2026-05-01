@@ -1,6 +1,5 @@
 'use client';
 
-import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';

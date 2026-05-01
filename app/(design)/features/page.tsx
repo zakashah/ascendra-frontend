@@ -2,7 +2,6 @@
 
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
-import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -12,7 +11,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFoot,
   TableHead,
   TableHeader,
   TableHeaderRow,
@@ -27,9 +25,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
 import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
-import { LuEye, LuSearch, LuSettings, LuTrash2 } from 'react-icons/lu';
-import { Separator } from '@/components/ui/separator';
-import { CopyText } from '@/components/custom/util/copy-text';
+import { LuSearch, LuSettings, LuTrash2 } from 'react-icons/lu';
 import { Button } from '@/components/custom/ui/button';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
@@ -40,13 +36,8 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/custom/ui/select';
+
+
 import { PageBarAction } from '@/components/custom/layout/page-bar-action';
 
 export default function FeaturesPage() {

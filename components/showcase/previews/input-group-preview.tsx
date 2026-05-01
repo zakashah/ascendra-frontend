@@ -12,7 +12,7 @@ import {
   InputGroupTextarea,
 } from '@/components/custom/ui/input-group';
 import { registry } from '@/lib/showcase/registry';
-import { LuSearch, LuCopy, LuGlobe, LuLink } from 'react-icons/lu';
+import { LuSearch, LuCopy, LuGlobe } from 'react-icons/lu';
 
 const meta = registry['input-group'];
 

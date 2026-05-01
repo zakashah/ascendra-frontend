@@ -5,7 +5,7 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
-import { LucideChevronsUpDown, LucideUser } from 'lucide-react';
+import { LucideChevronsUpDown } from 'lucide-react';
 
 export function SideBarHeader({
   className,

@@ -1,14 +1,11 @@
 'use client';
 
-import { ProBadge } from '@/components/custom/common-ui/pro-badge';
-import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { MainSectionPanelItemGroup } from '@/components/custom/layout/main-section-panel-item-group';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -25,7 +22,7 @@ import {
 import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
 import { InfoIcon } from 'lucide-react';
-import { LuArrowRight, LuInfo } from 'react-icons/lu';
+import { LuArrowRight } from 'react-icons/lu';
 import { Input } from '@/components/custom/ui/input';
 
 export default function AttackProtectionPage() {

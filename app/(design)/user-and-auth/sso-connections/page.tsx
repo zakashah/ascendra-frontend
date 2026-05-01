@@ -47,8 +47,7 @@ import {
 } from '@/components/custom/ui/table';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { LuChevronDown, LuGitBranch, LuSearch } from 'react-icons/lu';
-import { GitBranch } from 'lucide-react';
+import { LuGitBranch, LuSearch } from 'react-icons/lu';
 import Link from 'next/link';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 

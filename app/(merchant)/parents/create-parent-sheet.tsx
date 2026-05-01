@@ -9,8 +9,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogBody,
-  DialogFooter,
-  DialogClose,
 } from '@/components/custom/ui/dialog';
 import { Button } from '@/components/custom/ui/button';
 import { Input } from '@/components/custom/ui/input';

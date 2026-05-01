@@ -1,6 +1,5 @@
 'use client';
 
-import { Input } from '@/components/custom/ui/input';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';

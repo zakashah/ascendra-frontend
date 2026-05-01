@@ -46,7 +46,6 @@ import {
   LuCircleSlash,
   LuExternalLink,
   LuFolderLock,
-  LuSearch,
   LuUsersRound,
 } from 'react-icons/lu';
 import { TbExternalLink } from 'react-icons/tb';

@@ -25,7 +25,7 @@ import {
 } from '@/components/custom/ui/select';
 import { Switch } from '@/components/custom/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
-import { LuCircleSlash, LuInfo } from 'react-icons/lu';
+import { LuCircleSlash } from 'react-icons/lu';
 
 export default function OrganizationSettingsPage() {
   return (

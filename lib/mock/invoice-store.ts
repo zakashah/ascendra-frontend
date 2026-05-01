@@ -7,7 +7,7 @@ import {
 
 // Persists across Next.js hot reloads in development
 declare global {
-  // eslint-disable-next-line no-var
+   
   var _invoiceStore: Invoice[] | undefined;
 }
 

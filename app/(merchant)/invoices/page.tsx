@@ -20,7 +20,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
-import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import {
   InputGroup,
   InputGroupAddon,

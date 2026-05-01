@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import { StatusDot } from '@/components/custom/common-ui/status-dot';
 import { MainContainer } from '@/components/custom/layout/main-container';

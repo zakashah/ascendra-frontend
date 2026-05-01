@@ -30,7 +30,7 @@ import { SideBarToggle } from '@/components/custom/side-bar/side-bar-toggle';
 import { ThemeToggle } from '@/components/custom/util/theme-toggle';
 import { ContentArea } from '@/components/custom/layout/content-area';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { LuUsers, LuFileText, LuSettings, LuLayoutDashboard } from 'react-icons/lu';
+import { LuUsers, LuFileText, LuSettings } from 'react-icons/lu';
 
 export default function MerchantLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();

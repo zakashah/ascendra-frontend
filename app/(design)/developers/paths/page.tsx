@@ -20,22 +20,11 @@ import {
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
 import { RadioGroup, RadioGroupItem } from '@/components/custom/ui/radio-group';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/custom/ui/select';
-import { Switch } from '@/components/custom/ui/switch';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+
+
+
+
 import { InfoIcon } from 'lucide-react';
-import { AiTwotoneQuestionCircle } from 'react-icons/ai';
-import { LuBookOpen } from 'react-icons/lu';
 
 export default function PathsPage() {
   return (

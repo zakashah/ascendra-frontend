@@ -10,7 +10,6 @@ import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
-import { Input } from '@/components/custom/ui/input';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
@@ -39,15 +38,12 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { useEffect, useRef, useState } from 'react';
-import { AiOutlineSecurityScan } from 'react-icons/ai';
 import {
-  LuInfo,
   LuLockKeyhole,
   LuSearch,
   LuShield,
   LuTrash2,
 } from 'react-icons/lu';
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import {
   DropdownMenu,
   DropdownMenuContent,

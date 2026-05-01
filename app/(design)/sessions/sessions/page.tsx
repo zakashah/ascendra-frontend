@@ -9,7 +9,6 @@ import { MainSectionFooter } from '@/components/custom/layout/main-section-foote
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { MainSectionPanelItemGroup } from '@/components/custom/layout/main-section-panel-item-group';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -21,9 +20,7 @@ import Image from 'next/image';
 import {
   LuArrowRight,
   LuBookOpen,
-  LuCopy,
   LuEye,
-  LuInfo,
 } from 'react-icons/lu';
 import {
   Accordion,
@@ -36,7 +33,6 @@ import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { Checkbox } from '@/components/custom/ui/checkbox';
 import { MdCode } from 'react-icons/md';
 import { CopyText } from '@/components/custom/util/copy-text';
-import { sleep } from '@/lib/utils';
 import { Button } from '@/components/custom/ui/button';
 
 const userFields = [

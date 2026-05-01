@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { InfoIcon, CheckCircle2, Loader2 } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { InfoIcon, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/custom/ui/button';
 

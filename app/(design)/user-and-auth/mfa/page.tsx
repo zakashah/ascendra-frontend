@@ -19,7 +19,6 @@ import { Switch } from '@/components/custom/ui/switch';
 import { cn } from '@/lib/utils';
 import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
-import { LuInfo } from 'react-icons/lu';
 
 export default function MFAPage() {
   const [shake, setShake] = useState(false);

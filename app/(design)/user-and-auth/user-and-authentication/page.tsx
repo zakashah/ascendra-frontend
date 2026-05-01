@@ -31,7 +31,7 @@ import {
 import { Switch } from '@/components/custom/ui/switch';
 import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
-import { LuChevronDown, LuCode, LuEye, LuFolderLock } from 'react-icons/lu';
+import { LuCode, LuEye, LuFolderLock } from 'react-icons/lu';
 
 export default function UserAndAuthenticationPage() {
   const [hidden, setHidden] = useState(true);

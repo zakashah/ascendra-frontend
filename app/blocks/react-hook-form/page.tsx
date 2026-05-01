@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { GlobeIcon, InfoIcon, PhoneIcon } from 'lucide-react';
 import { LuChevronDown, LuDownload, LuFileText, LuUserX } from 'react-icons/lu';
-import { type DateRange } from 'react-day-picker';
 
 import { Button } from '@/components/custom/ui/button';
 import { Checkbox } from '@/components/custom/ui/checkbox';
