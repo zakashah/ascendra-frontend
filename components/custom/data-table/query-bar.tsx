@@ -23,7 +23,7 @@ const GROUP_LABELS: Record<QueryGroup, string> = {
 const GROUP_ORDER: QueryGroup[] = ['query', 'user-query', 'filter'];
 
 export function QueryBar() {
-  const { activeQuery, setActiveQueryId, isLoading } = useQueryContext();
+  const { activeQuery, confirmedQueryId, setActiveQueryId, isLoading } = useQueryContext();
 
   return (
     <DropdownMenu>
@@ -62,7 +62,7 @@ export function QueryBar() {
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         <DropdownMenuRadioGroup
-          value={activeQuery.id}
+          value={confirmedQueryId}
           onValueChange={setActiveQueryId}
         >
           {GROUP_ORDER.map((group, i) => {

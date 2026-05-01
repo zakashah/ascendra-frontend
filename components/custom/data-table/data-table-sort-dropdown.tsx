@@ -17,7 +17,9 @@ interface DataTableSortDropdownProps {
   icon?: boolean;
 }
 
-export function DataTableSortDropdown({ icon = false }: DataTableSortDropdownProps) {
+export function DataTableSortDropdown({
+  icon = false,
+}: DataTableSortDropdownProps) {
   const { columns, sortConfig, handleSort, clearSort } = useDataTableContext();
 
   return (
@@ -34,14 +36,10 @@ export function DataTableSortDropdown({ icon = false }: DataTableSortDropdownPro
             <>
               <LuArrowUpDown className="sm:hidden" />
               <span className="hidden font-normal sm:inline">Sort by:</span>
-              <span
-                className={cn(
-                  'hidden sm:inline',
-                  sortConfig ? 'font-medium' : 'text-muted-foreground font-normal'
-                )}
-              >
+              <span className={cn('hidden font-medium sm:inline')}>
                 {sortConfig
-                  ? (columns.find((c) => c.key === sortConfig.key)?.label ?? String(sortConfig.key))
+                  ? (columns.find((c) => c.key === sortConfig.key)?.label ??
+                    String(sortConfig.key))
                   : 'None'}
               </span>
               <DropDownChevron className="hidden sm:block" />
@@ -54,7 +52,10 @@ export function DataTableSortDropdown({ icon = false }: DataTableSortDropdownPro
         align="start"
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
-        <DropdownMenuItem className={cn(!sortConfig && 'font-medium')} onClick={clearSort}>
+        <DropdownMenuItem
+          className={cn(!sortConfig && 'font-medium')}
+          onClick={clearSort}
+        >
           None
         </DropdownMenuItem>
         <DropdownMenuSeparator />

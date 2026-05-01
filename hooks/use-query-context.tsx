@@ -6,7 +6,10 @@ import { PRESET_QUERIES } from '@/lib/query';
 
 interface QueryContextValue {
   activeQuery: QueryDef;
+  confirmedQueryId: string;
+  pendingQueryId: string | null;
   setActiveQueryId: (id: string) => void;
+  confirmPending: () => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
   lastResult: QueryParamValues | null;
@@ -27,27 +30,40 @@ interface QueryProviderProps {
 
 export function QueryProvider({ queries = PRESET_QUERIES, children }: QueryProviderProps) {
   const [activeId, setActiveId] = useState(queries[0].id);
+  const [pendingQueryId, setPendingQueryId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [lastResult, setLastResultState] = useState<QueryParamValues | null>(null);
   const [currentBatch, setCurrentBatch] = useState(1);
   const [totalBatches, setTotalBatchesState] = useState<number | null>(null);
   const loadingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeQuery = queries.find((q) => q.id === activeId) ?? queries[0];
+  const displayId = pendingQueryId ?? activeId;
+  const activeQuery = queries.find((q) => q.id === displayId) ?? queries[0];
 
   const setActiveQueryId = useCallback((id: string) => {
     const query = queries.find((q) => q.id === id);
-    setActiveId(id);
-    setLastResultState(null);
     setCurrentBatch(1);
     setTotalBatchesState(null);
-    // Only simulate loading for param-less queries; param queries load on form submit
-    if (!query?.params?.length) {
+    setLastResultState(null);
+
+    if (query?.group === 'filter') {
+      // Filters are not confirmed until Run Query completes
+      setPendingQueryId(id);
+    } else {
+      setActiveId(id);
+      setPendingQueryId(null);
       if (loadingTimer.current) clearTimeout(loadingTimer.current);
       setIsLoading(true);
       loadingTimer.current = setTimeout(() => setIsLoading(false), 1200);
     }
   }, [queries]);
+
+  const confirmPending = useCallback(() => {
+    if (pendingQueryId) {
+      setActiveId(pendingQueryId);
+      setPendingQueryId(null);
+    }
+  }, [pendingQueryId]);
 
   const setLastResult = useCallback((values: QueryParamValues) => {
     setLastResultState(values);
@@ -72,7 +88,10 @@ export function QueryProvider({ queries = PRESET_QUERIES, children }: QueryProvi
     <QueryContext.Provider
       value={{
         activeQuery,
+        confirmedQueryId: activeId,
+        pendingQueryId,
         setActiveQueryId,
+        confirmPending,
         isLoading,
         setIsLoading,
         lastResult,

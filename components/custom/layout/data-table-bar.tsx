@@ -9,10 +9,10 @@ export function DataTableBar({
   ...props
 }: React.ComponentProps<'div'>) {
   const { activeQuery, lastResult } = useQueryContext();
-    const showParamPanel = !!activeQuery.params?.length && lastResult === null;
+  const showParamPanel = !!activeQuery.params?.length && lastResult === null;
   return (
     <div
-      data-slot="page-bar"
+      data-slot="data-table-bar"
       className={cn(
         'flex w-full flex-col items-start justify-between gap-4 px-0.5 sm:flex-row sm:items-center',
         showParamPanel && 'hidden',

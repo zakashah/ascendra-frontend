@@ -105,20 +105,13 @@ export function QueryParamPanel() {
   const { activeQuery, lastResult } = useQueryContext();
   const showParamPanel = !!activeQuery.params?.length && lastResult === null;
 
-  return (
-    <div
-      className="grid transition-[grid-template-rows] duration-300 ease-in-out"
-      style={{ gridTemplateRows: showParamPanel ? '1fr' : '0fr' }}
-    >
-      <div className="min-h-0 overflow-hidden">
-        {activeQuery.params?.length ? <QueryParamPanelInner key={activeQuery.id} /> : null}
-      </div>
-    </div>
-  );
+  if (!showParamPanel) return null;
+
+  return <QueryParamPanelInner key={activeQuery.id} />;
 }
 
 function QueryParamPanelInner() {
-  const { activeQuery, setLastResult, setIsLoading } = useQueryContext();
+  const { activeQuery, setLastResult, setIsLoading, confirmPending } = useQueryContext();
   const fields = activeQuery.params!;
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
@@ -131,9 +124,12 @@ function QueryParamPanelInner() {
   });
 
   function onSubmit(data: Record<string, unknown>) {
-    setLastResult(data as QueryParamValues);
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1200);
+    setLastResult(data as QueryParamValues);
+    setTimeout(() => {
+      confirmPending();
+      setIsLoading(false);
+    }, 2000);
   }
 
   return (
