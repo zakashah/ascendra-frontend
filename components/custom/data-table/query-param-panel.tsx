@@ -14,8 +14,11 @@ import { useQueryContext } from '@/hooks/use-query-context';
 import { QueryFieldRenderer } from './query-field-renderer';
 import type { FieldDef, QueryParamValues } from '@/lib/query';
 import { cn } from '@/lib/utils';
+import { IoColorFilterOutline } from "react-icons/io5";
 
-function buildZodSchema(fields: FieldDef[]): z.ZodObject<Record<string, z.ZodTypeAny>> {
+function buildZodSchema(
+  fields: FieldDef[]
+): z.ZodObject<Record<string, z.ZodTypeAny>> {
   const shape: Record<string, z.ZodTypeAny> = {};
 
   for (const field of fields) {
@@ -26,7 +29,9 @@ function buildZodSchema(fields: FieldDef[]): z.ZodObject<Record<string, z.ZodTyp
         let s = z.string();
         if (field.minLength != null) s = s.min(field.minLength);
         if (field.maxLength != null) s = s.max(field.maxLength);
-        schema = field.required ? s.min(1, `${field.label} is required`) : s.optional();
+        schema = field.required
+          ? s.min(1, `${field.label} is required`)
+          : s.optional();
         break;
       }
       case 'number': {
@@ -39,12 +44,16 @@ function buildZodSchema(fields: FieldDef[]): z.ZodObject<Record<string, z.ZodTyp
       case 'select':
       case 'radio': {
         const s = z.string();
-        schema = field.required ? s.min(1, `${field.label} is required`) : s.optional();
+        schema = field.required
+          ? s.min(1, `${field.label} is required`)
+          : s.optional();
         break;
       }
       case 'multiselect': {
         const s = z.array(z.string());
-        schema = field.required ? s.min(1, `Select at least one ${field.label}`) : s.optional();
+        schema = field.required
+          ? s.min(1, `Select at least one ${field.label}`)
+          : s.optional();
         break;
       }
       case 'date': {
@@ -101,7 +110,8 @@ function getSpanClass(field: FieldDef): string {
   if (field.span === 'full') return 'col-span-full';
   if (field.span === 2) return 'col-span-2';
   if (field.span === 1) return 'col-span-1';
-  if (field.type === 'daterange' || field.type === 'multiselect') return 'col-span-2';
+  if (field.type === 'daterange' || field.type === 'multiselect')
+    return 'col-span-2';
   return 'col-span-1';
 }
 
@@ -115,7 +125,8 @@ export function QueryParamPanel() {
 }
 
 function QueryParamPanelInner() {
-  const { activeQuery, setLastResult, setIsLoading, confirmPending } = useQueryContext();
+  const { activeQuery, setLastResult, setIsLoading, confirmPending } =
+    useQueryContext();
   const fields = activeQuery.params!;
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
@@ -139,8 +150,15 @@ function QueryParamPanelInner() {
   return (
     <MainSection>
       <MainSectionHeader>
-        <div className="text-sm font-medium">{activeQuery.title}</div>
-        <p className="text-muted-foreground mt-0.5 text-xs">{activeQuery.description}</p>
+        <div className="flex items-center gap-2">
+          <IoColorFilterOutline className="text-muted-foreground size-5" />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">{activeQuery.title}</span>
+            <p className="text-muted-foreground mt-0.5 text-xs">
+              {activeQuery.description}
+            </p>
+          </div>
+        </div>
       </MainSectionHeader>
       <MainSectionPanel>
         <FormProvider {...methods}>
