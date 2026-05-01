@@ -1,26 +1,26 @@
 'use client';
 
+import { Anchor } from '@/components/custom/common-ui/anchor';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { Button } from '@/components/custom/ui/button';
-import { Input } from '@/components/custom/ui/input';
+import { HeaderChevron } from '@/components/custom/header/header-chevron';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 import { PageHeader } from '@/components/custom/layout/page-header';
+import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { HeaderChevron } from '@/components/custom/header/header-chevron';
-import { Anchor } from '@/components/custom/common-ui/anchor';
 import { TabContent } from '@/components/custom/tabs/tab-content';
 import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
+import { Button } from '@/components/custom/ui/button';
+import { Input } from '@/components/custom/ui/input';
 import {
   InputGroup,
   InputGroupAddon,
@@ -63,11 +63,11 @@ export default function RolesPage() {
             <Anchor>Learn more</Anchor>
           </PageSubtitle>
         </PageHeaderGroup>
-        <DataTableBarAction>
+        <PageHeaderAction>
           <Button>
             View <TbExternalLink />
           </Button>
-        </DataTableBarAction>
+        </PageHeaderAction>
       </PageHeader>
       <PageMain>
         <Tabs defaultValue="overview">

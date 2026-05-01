@@ -9,7 +9,7 @@ export function DataTableBar({
     <div
       data-slot="page-bar"
       className={cn(
-        'flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center',
+        'flex w-full flex-col items-start justify-between gap-4 px-0.5 sm:flex-row sm:items-center',
         className
       )}
       {...props}

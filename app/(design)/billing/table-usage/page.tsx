@@ -32,6 +32,7 @@ import { Button } from '@/components/custom/ui/button';
 import { DataTable } from '@/components/custom/data-table/data-table';
 import { DataTableHeader } from '@/components/custom/data-table/data-table-header';
 import { DataTableWrapper } from '@/components/custom/data-table/data-table-wrapper';
+import { QueryBar } from '@/components/custom/data-table/query-bar';
 import { DataTableProvider } from '@/hooks/use-data-table';
 import { useInvoiceList } from '@/hooks/use-invoices';
 import { type ColumnDef } from '@/lib/table';
@@ -91,6 +92,7 @@ export default function TableUsagePage() {
                 columns={INVOICE_COLUMNS}
                 isLoading={isLoading}
               >
+                <QueryBar />
                 <DataTableBar>
                   <DataTableBarContent>
                     <DataTableSearchInput />
