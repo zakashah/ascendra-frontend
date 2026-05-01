@@ -30,9 +30,15 @@ function buildZodSchema(
       case 'text': {
         let s = z.string();
         if (field.minLength != null)
-          s = s.min(field.minLength, `${field.label} must be at least ${field.minLength} characters`);
+          s = s.min(
+            field.minLength,
+            `${field.label} must be at least ${field.minLength} characters`
+          );
         if (field.maxLength != null)
-          s = s.max(field.maxLength, `${field.label} cannot exceed ${field.maxLength} characters`);
+          s = s.max(
+            field.maxLength,
+            `${field.label} cannot exceed ${field.maxLength} characters`
+          );
         schema = field.required
           ? s.min(1, `${field.label} is required`)
           : s.optional();
@@ -40,8 +46,10 @@ function buildZodSchema(
       }
       case 'number': {
         let s = z.coerce.number({ error: 'Must be a valid number' });
-        if (field.min != null) s = s.min(field.min, `Must be at least ${field.min}`);
-        if (field.max != null) s = s.max(field.max, `Cannot exceed ${field.max}`);
+        if (field.min != null)
+          s = s.min(field.min, `Must be at least ${field.min}`);
+        if (field.max != null)
+          s = s.max(field.max, `Cannot exceed ${field.max}`);
         schema = field.required ? s : s.optional();
         break;
       }
@@ -110,22 +118,35 @@ function buildDefaultValues(fields: FieldDef[]): Record<string, unknown> {
   return defaults;
 }
 
+// Static lookup tables — template literals would be invisible to Tailwind's scanner
+const SM_COLS: Record<number, string> = {
+  1: 'sm:grid-cols-1',
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-3',
+  4: 'sm:grid-cols-4',
+};
+const MD_COLS: Record<number, string> = {
+  1: 'md:grid-cols-1',
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-3',
+  4: 'md:grid-cols-4',
+};
+const LG_COLS: Record<number, string> = {
+  1: 'lg:grid-cols-1',
+  2: 'lg:grid-cols-2',
+  3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
+};
+
 function getColumnsClass(columns?: ColumnsConfig): string {
   const cfg = { sm: 1, md: 1, lg: 1, ...columns };
-  return cn(
-    'grid-cols-1',
-    `sm:grid-cols-${cfg.sm}`,
-    `md:grid-cols-${cfg.md}`,
-    `lg:grid-cols-${cfg.lg}`
-  );
+  return cn('grid-cols-1', SM_COLS[cfg.sm], MD_COLS[cfg.md], LG_COLS[cfg.lg]);
 }
 
 function getSpanClass(field: FieldDef): string {
-  if (field.span === 'full') return 'col-span-full';
-  if (field.span === 2) return 'col-span-2';
-  if (field.span === 1) return 'col-span-1';
-  if (field.type === 'daterange' || field.type === 'multiselect')
-    return 'col-span-2';
+  const span = field.span ?? 'full';
+  if (span === 'full') return 'col-span-full';
+  if (span === 2) return 'col-span-2';
   return 'col-span-1';
 }
 
@@ -193,7 +214,12 @@ function QueryParamPanelInner() {
           <FormProvider {...methods}>
             <form noValidate>
               <MainSectionPanelItem>
-                <div className={cn('grid gap-3', getColumnsClass(activeQuery.columns))}>
+                <div
+                  className={cn(
+                    'grid gap-5',
+                    getColumnsClass(activeQuery.columns)
+                  )}
+                >
                   {fields.map((field) => (
                     <div key={field.name} className={getSpanClass(field)}>
                       <QueryFieldRenderer field={field} />
@@ -206,7 +232,10 @@ function QueryParamPanelInner() {
         </MainSectionPanel>
         {activeQuery.info && (
           <MainSectionFooter>
-            <InfoIcon className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+            <InfoIcon
+              className="mt-0.5 mr-2 size-3 shrink-0"
+              strokeWidth={2.5}
+            />
             {activeQuery.info}
           </MainSectionFooter>
         )}

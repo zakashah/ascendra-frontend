@@ -87,6 +87,7 @@ export const PRESET_QUERIES: QueryDef[] = [
     title: 'Class 10 Fees',
     description: 'All fee invoices for class 10 students',
   },
+  // ── 1-column filters ─────────────────────────────────────────────────────
   {
     id: 'by-status',
     group: 'filter',
@@ -98,7 +99,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         label: 'Statuses',
         type: 'multiselect',
         required: true,
-        span: 1,
+        mandatory: true,
+        // no span → defaults to 'full'
         options: [
           { value: 'paid', label: 'Paid' },
           { value: 'pending', label: 'Pending' },
@@ -119,10 +121,77 @@ export const PRESET_QUERIES: QueryDef[] = [
         label: 'Date Range',
         type: 'daterange',
         required: true,
-        span: 1,
+        mandatory: true,
+        // no span → defaults to 'full'
       },
     ],
   },
+
+  // ── 2-column filter — tests sm:1 md:2 lg:2 + mixed spans ────────────────
+  {
+    id: 'by-client',
+    group: 'filter',
+    title: 'By Client & Student',
+    description: 'Search by client name, student, grade level, and payment status',
+    columns: { sm: 1, md: 2, lg: 2 },
+    params: [
+      {
+        name: 'clientName',
+        label: 'Client Name',
+        type: 'text',
+        placeholder: 'e.g. Ahmed Family',
+        optional: true,
+        span: 1,
+        info: 'Partial match',
+        description: 'Matches any part of the client display name',
+      },
+      {
+        name: 'studentName',
+        label: 'Student Name',
+        type: 'text',
+        placeholder: 'e.g. Hamza',
+        optional: true,
+        span: 1,
+        info: 'Partial match',
+      },
+      {
+        name: 'gradeLevel',
+        label: 'Grade Level',
+        type: 'select',
+        optional: true,
+        span: 1,
+        options: [
+          { value: 'class-9', label: 'Class 9' },
+          { value: 'class-10', label: 'Class 10' },
+          { value: 'class-11', label: 'Class 11' },
+          { value: 'class-12', label: 'Class 12' },
+        ],
+      },
+      {
+        name: 'paymentStatus',
+        label: 'Payment Status',
+        type: 'select',
+        optional: true,
+        span: 1,
+        options: [
+          { value: 'paid', label: 'Paid' },
+          { value: 'pending', label: 'Pending' },
+          { value: 'overdue', label: 'Overdue' },
+        ],
+      },
+      {
+        name: 'issueDateRange',
+        label: 'Issue Date Range',
+        type: 'daterange',
+        optional: true,
+        span: 'full',
+        info: 'Optional date window',
+        description: 'Narrow results to a specific issue date window',
+      },
+    ],
+  },
+
+  // ── 3-column filter — tests sm:1 md:2 lg:3 + span 1 / 2 / full ─────────
   {
     id: 'advanced-filter',
     group: 'filter',
@@ -131,17 +200,19 @@ export const PRESET_QUERIES: QueryDef[] = [
     info: 'All active filters use AND logic — results must match every condition you set.',
     columns: { sm: 1, md: 2, lg: 3 },
     params: [
+      // Row 1 (lg): [clientName][invoiceNumber][primaryStatus]
       {
         name: 'clientName',
         label: 'Client Name',
         type: 'text',
         placeholder: 'e.g. Ahmed Family',
         required: false,
+        optional: true,
+        span: 1,
         minLength: 2,
         maxLength: 50,
         info: 'Partial match',
         description: 'Matches any part of the client display name',
-        mandatory: true
       },
       {
         name: 'invoiceNumber',
@@ -149,35 +220,18 @@ export const PRESET_QUERIES: QueryDef[] = [
         type: 'text',
         placeholder: 'INV-001',
         required: true,
+        mandatory: true,
+        span: 1,
         maxLength: 20,
         info: 'Exact reference match',
-      },
-      {
-        name: 'minAmount',
-        label: 'Min Amount (PKR)',
-        type: 'number',
-        placeholder: '0',
-        required: false,
-        min: 0,
-        max: 9999999,
-        info: 'Inclusive lower bound',
-        optional: true
-      },
-      {
-        name: 'maxAmount',
-        label: 'Max Amount (PKR)',
-        type: 'number',
-        placeholder: '500,000',
-        required: true,
-        min: 1,
-        max: 9999999,
-        info: 'Inclusive upper bound',
       },
       {
         name: 'primaryStatus',
         label: 'Invoice Status',
         type: 'select',
         required: true,
+        mandatory: true,
+        span: 1,
         options: [
           { value: 'paid', label: 'Paid' },
           { value: 'pending', label: 'Pending' },
@@ -185,11 +239,48 @@ export const PRESET_QUERIES: QueryDef[] = [
           { value: 'cancelled', label: 'Cancelled' },
         ],
       },
+      // Row 2 (lg): [minAmount][maxAmount][issuedFrom]
+      {
+        name: 'minAmount',
+        label: 'Min Amount (PKR)',
+        type: 'number',
+        placeholder: '0',
+        required: false,
+        optional: true,
+        span: 1,
+        min: 0,
+        max: 9999999,
+        info: 'Inclusive lower bound',
+      },
+      {
+        name: 'maxAmount',
+        label: 'Max Amount (PKR)',
+        type: 'number',
+        placeholder: '500,000',
+        required: true,
+        mandatory: true,
+        span: 1,
+        min: 1,
+        max: 9999999,
+        info: 'Inclusive upper bound',
+      },
+      {
+        name: 'issuedFrom',
+        label: 'Issued From',
+        type: 'date',
+        required: true,
+        mandatory: true,
+        span: 1,
+        info: 'Inclusive start date',
+        description: 'Invoices issued on or after this date',
+      },
+      // Row 3 (lg): [feeCategories ×2][dueDateRange ×2 wraps to row 4]
       {
         name: 'feeCategories',
         label: 'Fee Categories',
         type: 'multiselect',
         required: true,
+        optional: true,
         span: 2,
         info: 'Select all that apply',
         options: [
@@ -201,27 +292,23 @@ export const PRESET_QUERIES: QueryDef[] = [
         ],
       },
       {
-        name: 'issuedFrom',
-        label: 'Issued From',
-        type: 'date',
-        required: true,
-        info: 'Inclusive start date',
-        description: 'Shows invoices issued on or after this date',
-      },
-      {
         name: 'dueDateRange',
         label: 'Due Date Range',
         type: 'daterange',
         required: false,
+        optional: true,
         span: 2,
         info: 'Optional date window',
         description: 'Optionally narrow results by due date window',
       },
+      // Row 5 (lg): [sortOrder ×full]
       {
         name: 'sortOrder',
         label: 'Sort Order',
         type: 'radio',
         required: true,
+        mandatory: true,
+        span: 'full',
         options: [
           { value: 'newest', label: 'Newest First' },
           { value: 'oldest', label: 'Oldest First' },
@@ -229,10 +316,12 @@ export const PRESET_QUERIES: QueryDef[] = [
           { value: 'lowest', label: 'Lowest Amount' },
         ],
       },
+      // Row 6 (lg): [includeArchived ×full]
       {
         name: 'includeArchived',
         label: 'Include Archived',
         type: 'checkbox',
+        span: 'full',
         description: 'Include archived invoices in results',
       },
     ],
