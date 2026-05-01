@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/custom/ui/button';
 import { MainContent } from '@/components/custom/layout/main-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
@@ -10,9 +9,13 @@ import { TabContent } from '@/components/custom/tabs/tab-content';
 import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
+import { Button } from '@/components/custom/ui/button';
 
+import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { TableBar } from '@/components/custom/layout/table-bar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,12 +47,9 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { LuGitBranch, LuSearch } from 'react-icons/lu';
-import Link from 'next/link';
-import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
-import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 
 export default function SSOConnectionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -109,7 +109,7 @@ export default function SSOConnectionsPage() {
           </TabList>
           <TabContent value="all">
             <MainContent>
-              <DataTableBar className="-mb-2">
+              <TableBar className="-mb-2">
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -118,7 +118,7 @@ export default function SSOConnectionsPage() {
                     </InputGroupAddon>
                   </InputGroup>
                 </DataTableBarContent>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -210,7 +210,7 @@ export default function SSOConnectionsPage() {
           </TabContent>
           <TabContent value="social">
             <MainContent>
-              <DataTableBar>
+              <TableBar>
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -219,7 +219,7 @@ export default function SSOConnectionsPage() {
                     </InputGroupAddon>
                   </InputGroup>
                 </DataTableBarContent>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -301,7 +301,7 @@ export default function SSOConnectionsPage() {
           </TabContent>
           <TabContent value="enterprise">
             <MainContent>
-              <DataTableBar>
+              <TableBar>
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -310,7 +310,7 @@ export default function SSOConnectionsPage() {
                     </InputGroupAddon>
                   </InputGroup>
                 </DataTableBarContent>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

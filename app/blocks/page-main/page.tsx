@@ -73,14 +73,14 @@ export default function Page() {
   return (
     <PageMain>
       <MainContent>
-        <DataTableBar>
+        <TableBar>
           <DataTableBarContent>
             {/* Search input, filters */}
           </DataTableBarContent>
           <DataTableBarAction>
             <Button>Add parent</Button>
           </DataTableBarAction>
-        </DataTableBar>
+        </TableBar>
         {/* Table or list */}
       </MainContent>
     </PageMain>

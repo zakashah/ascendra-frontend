@@ -1,11 +1,8 @@
 'use client';
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
-import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { TableBar } from '@/components/custom/layout/table-bar';
 import { Button } from '@/components/custom/ui/button';
 import {
   InputGroup,
@@ -13,7 +10,10 @@ import {
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
 import { registry } from '@/lib/showcase/registry';
-import { LuSearch, LuSlidersHorizontal, LuPlus } from 'react-icons/lu';
+import { LuPlus, LuSearch, LuSlidersHorizontal } from 'react-icons/lu';
+import { ComponentPreview } from '../component-preview';
+import { PropsTable } from '../props-table';
+import { SectionHeader } from '../section-header';
 
 const meta = registry['page-bar'];
 
@@ -24,7 +24,7 @@ export function PageBarDocContent() {
         align="start"
         code={`import { PageBar, PageBarContent, PageBarAction } from "@/components/custom/layout/page-bar";
 
-<DataTableBar>
+<TableBar>
   <PageBarContent>
     <InputGroup>
       <InputGroupAddon align="inline-start">
@@ -39,10 +39,10 @@ export function PageBarDocContent() {
       Add
     </Button>
   </DataTableBarAction>
-</DataTable>`}
+</TableBar>`}
       >
         <div className="w-full">
-          <DataTableBar>
+          <TableBar>
             <DataTableBarContent>
               <div className="w-56">
                 <InputGroup>
@@ -59,7 +59,7 @@ export function PageBarDocContent() {
                 Add
               </Button>
             </DataTableBarAction>
-          </DataTableBar>
+          </TableBar>
         </div>
       </ComponentPreview>
 
@@ -76,7 +76,7 @@ export function PageBarDocContent() {
           </p>
           <ComponentPreview
             align="start"
-            code={`<DataTableBar>
+            code={`<TableBar>
   <PageBarContent>
     <InputGroup>
       <InputGroupAddon align="inline-start">
@@ -95,10 +95,10 @@ export function PageBarDocContent() {
       Add Parent
     </Button>
   </DataTableBarAction>
-</DataTableBar>`}
+</TableBar>`}
           >
             <div className="w-full">
-              <DataTableBar>
+              <TableBar>
                 <DataTableBarContent>
                   <div className="w-56">
                     <InputGroup>
@@ -119,7 +119,7 @@ export function PageBarDocContent() {
                     Add Parent
                   </Button>
                 </DataTableBarAction>
-              </DataTableBar>
+              </TableBar>
             </div>
           </ComponentPreview>
         </div>

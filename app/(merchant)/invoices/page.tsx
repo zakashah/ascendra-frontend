@@ -2,22 +2,34 @@
 
 import { useState } from 'react';
 
-import { Button } from '@/components/custom/ui/button';
+import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 import { MainContent } from '@/components/custom/layout/main-content';
+import { PageContent } from '@/components/custom/layout/page-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { PageWrapper } from '@/components/custom/layout/page-wrapper';
+import { TableBar } from '@/components/custom/layout/table-bar';
+import { Button } from '@/components/custom/ui/button';
+import { Checkbox } from '@/components/custom/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/custom/ui/empty';
 import {
   InputGroup,
   InputGroupAddon,
@@ -35,33 +47,21 @@ import {
   TableRow,
   TableWrapper,
 } from '@/components/custom/ui/table';
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/components/custom/ui/empty';
-import { Checkbox } from '@/components/custom/ui/checkbox';
+import { formatAmount } from '@/lib/format';
 import {
   LuChevronDown,
+  LuDownload,
   LuEye,
   LuFilter,
   LuLock,
   LuPlus,
-  LuSearch,
-  LuSettings,
-  LuDownload,
   LuPrinter,
   LuReceipt,
+  LuSearch,
+  LuSettings,
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
-import { PageWrapper } from '@/components/custom/layout/page-wrapper';
-import { PageContent } from '@/components/custom/layout/page-content';
-import { formatAmount } from '@/lib/format';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
-import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 
 type Status = 'paid' | 'pending' | 'overdue';
 
@@ -210,7 +210,7 @@ export default function InvoicesPage() {
         <PageWrapper>
           <PageContent>
             <MainContent>
-              <DataTableBar>
+              <TableBar>
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput
@@ -289,7 +289,7 @@ export default function InvoicesPage() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </DataTableBarContent>
-              </DataTableBar>
+              </TableBar>
 
               {/* Active filter pills */}
               {hasActiveFilters && (

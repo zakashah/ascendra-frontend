@@ -6,6 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import { Button } from '@/components/custom/ui/button';
+import { MainSection } from '@/components/custom/layout/main-section';
+import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
+import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
+import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
 import { useQueryContext } from '@/hooks/use-query-context';
 import { QueryFieldRenderer } from './query-field-renderer';
 import type { FieldDef, QueryParamValues } from '@/lib/query';
@@ -133,37 +137,45 @@ function QueryParamPanelInner() {
   }
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-        <div
-          className={cn(
-            'rounded-md border border-border bg-background/50 p-3',
-            'grid gap-3',
-            'grid-cols-1 sm:grid-cols-2',
-            'lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))]'
-          )}
-        >
-          {fields.map((field) => (
-            <div key={field.name} className={getSpanClass(field)}>
-              <QueryFieldRenderer field={field} />
-            </div>
-          ))}
-
-          <div className="col-span-full flex justify-end gap-2 pt-1">
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={() => methods.reset(defaultValues)}
-            >
-              Reset
-            </Button>
-            <Button type="submit" size="sm">
-              Run Query
-            </Button>
-          </div>
-        </div>
-      </form>
-    </FormProvider>
+    <MainSection>
+      <MainSectionHeader>
+        <div className="text-sm font-medium">{activeQuery.title}</div>
+        <p className="text-muted-foreground mt-0.5 text-xs">{activeQuery.description}</p>
+      </MainSectionHeader>
+      <MainSectionPanel>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+            <MainSectionPanelItem>
+              <div
+                className={cn(
+                  'grid gap-3',
+                  'grid-cols-1 sm:grid-cols-2',
+                  'lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))]'
+                )}
+              >
+                {fields.map((field) => (
+                  <div key={field.name} className={getSpanClass(field)}>
+                    <QueryFieldRenderer field={field} />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => methods.reset(defaultValues)}
+                >
+                  Reset
+                </Button>
+                <Button type="submit" size="sm">
+                  Run Query
+                </Button>
+              </div>
+            </MainSectionPanelItem>
+          </form>
+        </FormProvider>
+      </MainSectionPanel>
+    </MainSection>
   );
 }

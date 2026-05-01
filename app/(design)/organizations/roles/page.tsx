@@ -11,12 +11,28 @@ import { Tabs } from '@/components/custom/tabs/tabs';
 
 import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { TableBar } from '@/components/custom/layout/table-bar';
+import { Button } from '@/components/custom/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@/components/custom/ui/input-group';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/custom/ui/select';
 import {
   Table,
   TableBody,
@@ -35,22 +51,6 @@ import {
   LuTicketCheck,
   LuTrash2,
 } from 'react-icons/lu';
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/custom/ui/input-group';
-import { Button } from '@/components/custom/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/custom/ui/select';
-import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
-import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 
 export default function RolesPage() {
   return (
@@ -66,7 +66,7 @@ export default function RolesPage() {
           </TabList>
           <TabContent value="role-sets">
             <MainContent>
-              <DataTableBar className="-mb-2">
+              <TableBar className="-mb-2">
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -93,7 +93,7 @@ export default function RolesPage() {
                   <div className="text-[11px]">3/10 used</div>
                   <Button>+ Create role set</Button>
                 </DataTableBarAction>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -208,7 +208,7 @@ export default function RolesPage() {
           </TabContent>
           <TabContent value="all-roles">
             <MainContent>
-              <DataTableBar className="-mb-2">
+              <TableBar className="-mb-2">
                 <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
@@ -235,7 +235,7 @@ export default function RolesPage() {
                   <div className="text-[11px]">3/10 used</div>
                   <Button>+ Add role</Button>
                 </DataTableBarAction>
-              </DataTableBar>
+              </TableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

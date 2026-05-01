@@ -48,12 +48,12 @@ import { PlusIcon, SearchIcon, MoreHorizontalIcon } from 'lucide-react';
 export default function InvoicesPage() {
   return (
     <>
-      <DataTableBar>
+      <TableBar>
         <PageBarContent>All Invoices</DataTableBarContent>
         <DataTableBarAction>
           {/* Optional: quick filters or secondary nav */}
         </DataTableBarAction>
-      </DataTable>
+      </TableBar>
 
       <PageHeader>
         <PageHeaderGroup>

@@ -60,8 +60,8 @@ import {
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
-import { DataTableBar } from '@/components/custom/layout/data-table-bar';
 import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { TableBar } from '@/components/custom/layout/table-bar';
 
 type Status = 'active' | 'inactive' | 'suspended';
 
@@ -207,7 +207,7 @@ export default function ParentsPage() {
       </PageHeader>
       <PageMain>
         <MainContent>
-          <DataTableBar>
+          <TableBar>
             <DataTableBarContent>
               <InputGroup className="max-w-xs">
                 <InputGroupInput
@@ -286,7 +286,7 @@ export default function ParentsPage() {
                 </DropdownMenuContent>
               </DropdownMenu>
             </DataTableBarContent>
-          </DataTableBar>
+          </TableBar>
 
           {/* Active filter pills */}
           {hasActiveFilters && (

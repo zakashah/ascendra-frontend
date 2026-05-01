@@ -97,7 +97,7 @@ import {
   PageBarAction,
 } from '@/components/custom/layout/page-bar';
 
-<DataTableBar>
+<TableBar>
   <PageBarContent>Invoices / Term 1 2025</DataTableBarContent>
   <DataTableBarAction>
     <Button variant="outline" size="sm">
