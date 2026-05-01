@@ -11,8 +11,6 @@ import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import { NameAvatar } from '@/components/custom/common-ui/name-avatar';
@@ -62,6 +60,8 @@ import {
 } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 import { RxCrossCircled } from 'react-icons/rx';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 
 type Status = 'active' | 'inactive' | 'suspended';
 
@@ -207,8 +207,8 @@ export default function ParentsPage() {
       </PageHeader>
       <PageMain>
         <MainContent>
-          <PageBar>
-            <PageBarContent>
+          <DataTableBar>
+            <DataTableBarContent>
               <InputGroup className="max-w-xs">
                 <InputGroupInput
                   placeholder="Search by name or phone..."
@@ -285,8 +285,8 @@ export default function ParentsPage() {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-            </PageBarContent>
-          </PageBar>
+            </DataTableBarContent>
+          </DataTableBar>
 
           {/* Active filter pills */}
           {hasActiveFilters && (

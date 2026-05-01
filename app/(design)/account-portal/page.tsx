@@ -9,7 +9,7 @@ import { MainSectionFooter } from '@/components/custom/layout/main-section-foote
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
 import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -63,11 +63,11 @@ export default function RolesPage() {
             <Anchor>Learn more</Anchor>
           </PageSubtitle>
         </PageHeaderGroup>
-        <PageBarAction>
+        <DataTableBarAction>
           <Button>
             View <TbExternalLink />
           </Button>
-        </PageBarAction>
+        </DataTableBarAction>
       </PageHeader>
       <PageMain>
         <Tabs defaultValue="overview">

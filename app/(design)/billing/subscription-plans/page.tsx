@@ -9,9 +9,9 @@ import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
 
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 import { RxCrossCircled } from 'react-icons/rx';
 import {
   DropdownMenu,
@@ -47,7 +47,6 @@ import {
 } from '@/components/custom/ui/input-group';
 import { Button } from '@/components/custom/ui/button';
 
-
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { Checkbox } from '@/components/custom/ui/checkbox';
@@ -75,8 +74,8 @@ export default function RolesPage() {
           </TabList>
           <TabContent value="organization-plans">
             <MainContent>
-              <PageBar>
-                <PageBarContent>
+              <DataTableBar>
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
@@ -156,11 +155,11 @@ export default function RolesPage() {
                       <DropdownMenuItem>Annual Amount</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <Button>+ Create plan</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <div className="mt-1 -mb-2 flex flex-wrap items-center gap-2">
                 <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
                   <div className="flex cursor-pointer items-center gap-1 px-1.5">
@@ -244,8 +243,8 @@ export default function RolesPage() {
           </TabContent>
           <TabContent value="user-plans">
             <MainContent>
-              <PageBar>
-                <PageBarContent>
+              <DataTableBar>
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
@@ -281,11 +280,11 @@ export default function RolesPage() {
                   <Button variant="secondary" size="icon">
                     <LuFilter />
                   </Button>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <Button>+ Create plan</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

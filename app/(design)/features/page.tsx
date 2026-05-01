@@ -29,16 +29,14 @@ import { LuSearch, LuSettings, LuTrash2 } from 'react-icons/lu';
 import { Button } from '@/components/custom/ui/button';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/custom/ui/input-group';
-
-
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 
 export default function FeaturesPage() {
   return (
@@ -55,19 +53,19 @@ export default function FeaturesPage() {
         <PageWrapper>
           <PageContent>
             <MainContent>
-              <PageBar className="-mb-2">
-                <PageBarContent>
+              <DataTableBar className="-mb-2">
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <Button>+ Add feature</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <MainSection className="pb-0">
                 <TableWrapper>
                   <Table scrollable>

@@ -13,9 +13,6 @@ import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { MainSection } from '@/components/custom/layout/main-section';
 import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
 import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { Anchor } from '@/components/custom/common-ui/anchor';
 import {
   Empty,
@@ -38,12 +35,7 @@ import {
   TableWrapper,
 } from '@/components/custom/ui/table';
 import { useEffect, useRef, useState } from 'react';
-import {
-  LuLockKeyhole,
-  LuSearch,
-  LuShield,
-  LuTrash2,
-} from 'react-icons/lu';
+import { LuLockKeyhole, LuSearch, LuShield, LuTrash2 } from 'react-icons/lu';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -58,6 +50,9 @@ import {
 } from '@/components/custom/ui/input-group';
 import { InfoIcon } from 'lucide-react';
 import { Button } from '@/components/custom/ui/button';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 
 export default function RestrictionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -184,19 +179,19 @@ export default function RestrictionsPage() {
                   </p>
                 </MainSectionHeader>
               </MainSection>
-              <PageBar className="mt-2 -mb-2">
-                <PageBarContent>
+              <DataTableBar className="mt-2 -mb-2">
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <Button disabled>+ Add</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -240,19 +235,19 @@ export default function RestrictionsPage() {
                   </p>
                 </MainSectionHeader>
               </MainSection>
-              <PageBar className="mt-2 -mb-2">
-                <PageBarContent>
+              <DataTableBar className="mt-2 -mb-2">
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <Button disabled>+ Add</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

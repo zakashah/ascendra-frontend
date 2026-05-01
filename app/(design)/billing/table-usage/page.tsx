@@ -16,9 +16,9 @@ import { DataTableLoadingBody } from '@/components/custom/data-table/data-table-
 import { DataTableSearchInput } from '@/components/custom/data-table/data-table-search-input';
 import { DataTableSortDropdown } from '@/components/custom/data-table/data-table-sort-dropdown';
 import { MainContent } from '@/components/custom/layout/main-content';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 import { PageHeader } from '@/components/custom/layout/page-header';
 import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
@@ -91,17 +91,17 @@ export default function TableUsagePage() {
                 columns={INVOICE_COLUMNS}
                 isLoading={isLoading}
               >
-                <PageBar>
-                  <PageBarContent>
+                <DataTableBar>
+                  <DataTableBarContent>
                     <DataTableSearchInput />
                     <DataTableColumnManager />
                     <DataTableSortDropdown />
                     <DataTableFilterDropdown />
-                  </PageBarContent>
-                  <PageBarAction>
+                  </DataTableBarContent>
+                  <DataTableBarAction>
                     <Button>+ Add item</Button>
-                  </PageBarAction>
-                </PageBar>
+                  </DataTableBarAction>
+                </DataTableBar>
                 <DataTableFilterBar />
                 <DataTableWrapper>
                   <DataTable scrollable vertical height={400}>

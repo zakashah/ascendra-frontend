@@ -3,9 +3,9 @@
 import { ComponentPreview } from '../component-preview';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 import { Button } from '@/components/custom/ui/button';
 import {
   InputGroup,
@@ -20,12 +20,11 @@ const meta = registry['page-bar'];
 export function PageBarDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         align="start"
         code={`import { PageBar, PageBarContent, PageBarAction } from "@/components/custom/layout/page-bar";
 
-<PageBar>
+<DataTableBar>
   <PageBarContent>
     <InputGroup>
       <InputGroupAddon align="inline-start">
@@ -33,18 +32,18 @@ export function PageBarDocContent() {
       </InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
     </InputGroup>
-  </PageBarContent>
-  <PageBarAction>
+  </DataTableBarContent>
+  <DataTableBarAction>
     <Button>
       <LuPlus />
       Add
     </Button>
-  </PageBarAction>
-</PageBar>`}
+  </DataTableBarAction>
+</DataTable>`}
       >
         <div className="w-full">
-          <PageBar>
-            <PageBarContent>
+          <DataTableBar>
+            <DataTableBarContent>
               <div className="w-56">
                 <InputGroup>
                   <InputGroupAddon align="inline-start">
@@ -53,14 +52,14 @@ export function PageBarDocContent() {
                   <InputGroupInput placeholder="Search..." />
                 </InputGroup>
               </div>
-            </PageBarContent>
-            <PageBarAction>
+            </DataTableBarContent>
+            <DataTableBarAction>
               <Button>
                 <LuPlus />
                 Add
               </Button>
-            </PageBarAction>
-          </PageBar>
+            </DataTableBarAction>
+          </DataTableBar>
         </div>
       </ComponentPreview>
 
@@ -68,11 +67,16 @@ export function PageBarDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Search + Filter + Action</h3>
-          <p className="text-xs text-muted-foreground">Full toolbar pattern: search on the left, filter and primary CTA on the right.</p>
+          <h3 className="text-foreground text-sm font-medium">
+            Search + Filter + Action
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Full toolbar pattern: search on the left, filter and primary CTA on
+            the right.
+          </p>
           <ComponentPreview
             align="start"
-            code={`<PageBar>
+            code={`<DataTableBar>
   <PageBarContent>
     <InputGroup>
       <InputGroupAddon align="inline-start">
@@ -80,8 +84,8 @@ export function PageBarDocContent() {
       </InputGroupAddon>
       <InputGroupInput placeholder="Search parents..." />
     </InputGroup>
-  </PageBarContent>
-  <PageBarAction>
+  </DataTableBarContent>
+  <DataTableBarAction>
     <Button variant="secondary">
       <LuSlidersHorizontal />
       Filter
@@ -90,12 +94,12 @@ export function PageBarDocContent() {
       <LuPlus />
       Add Parent
     </Button>
-  </PageBarAction>
-</PageBar>`}
+  </DataTableBarAction>
+</DataTableBar>`}
           >
             <div className="w-full">
-              <PageBar>
-                <PageBarContent>
+              <DataTableBar>
+                <DataTableBarContent>
                   <div className="w-56">
                     <InputGroup>
                       <InputGroupAddon align="inline-start">
@@ -104,8 +108,8 @@ export function PageBarDocContent() {
                       <InputGroupInput placeholder="Search parents..." />
                     </InputGroup>
                   </div>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <Button variant="secondary">
                     <LuSlidersHorizontal />
                     Filter
@@ -114,8 +118,8 @@ export function PageBarDocContent() {
                     <LuPlus />
                     Add Parent
                   </Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
             </div>
           </ComponentPreview>
         </div>

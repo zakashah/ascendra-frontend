@@ -13,8 +13,6 @@ import { Tabs } from '@/components/custom/tabs/tabs';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,6 +48,8 @@ import { useEffect, useRef, useState } from 'react';
 import { LuGitBranch, LuSearch } from 'react-icons/lu';
 import Link from 'next/link';
 import { DropDownChevron } from '@/components/custom/common-ui/drop-down-chevron';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 
 export default function SSOConnectionsPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -109,16 +109,16 @@ export default function SSOConnectionsPage() {
           </TabList>
           <TabContent value="all">
             <MainContent>
-              <PageBar className="-mb-2">
-                <PageBarContent>
+              <DataTableBar className="-mb-2">
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                </PageBarContent>
-              </PageBar>
+                </DataTableBarContent>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -210,16 +210,16 @@ export default function SSOConnectionsPage() {
           </TabContent>
           <TabContent value="social">
             <MainContent>
-              <PageBar>
-                <PageBarContent>
+              <DataTableBar>
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                </PageBarContent>
-              </PageBar>
+                </DataTableBarContent>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -301,16 +301,16 @@ export default function SSOConnectionsPage() {
           </TabContent>
           <TabContent value="enterprise">
             <MainContent>
-              <PageBar>
-                <PageBarContent>
+              <DataTableBar>
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
                       <LuSearch className="text-foreground size-3.5" />
                     </InputGroupAddon>
                   </InputGroup>
-                </PageBarContent>
-              </PageBar>
+                </DataTableBarContent>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>

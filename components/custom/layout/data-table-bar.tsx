@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-export function PageBar({
+export function DataTableBar({
   className,
   children,
   ...props

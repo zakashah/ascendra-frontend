@@ -10,8 +10,6 @@ import { PageHeaderGroup } from '@/components/custom/layout/page-header-group';
 import { PageMain } from '@/components/custom/layout/page-main';
 import { PageSubtitle } from '@/components/custom/layout/page-subtitle';
 import { PageTitle } from '@/components/custom/layout/page-title';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
 import {
@@ -62,6 +60,8 @@ import { RxCrossCircled } from 'react-icons/rx';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { formatAmount } from '@/lib/format';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
 
 type Status = 'paid' | 'pending' | 'overdue';
 
@@ -191,7 +191,6 @@ export default function InvoicesPage() {
 
   const hasActiveFilters = statusFilter !== null;
 
-
   return (
     <>
       <PageHeader>
@@ -211,8 +210,8 @@ export default function InvoicesPage() {
         <PageWrapper>
           <PageContent>
             <MainContent>
-              <PageBar>
-                <PageBarContent>
+              <DataTableBar>
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput
                       placeholder="Search by ID or parent name..."
@@ -289,8 +288,8 @@ export default function InvoicesPage() {
                       ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
-                </PageBarContent>
-              </PageBar>
+                </DataTableBarContent>
+              </DataTableBar>
 
               {/* Active filter pills */}
               {hasActiveFilters && (

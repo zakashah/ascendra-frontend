@@ -34,16 +34,15 @@ app/(dashboard)/layout.tsx
 ---
 
 ## PageLayout
+
 **File:** `components/custom/layout/page-layout.tsx`
 
 Root wrapper for every page. Sets up the grid.
 
 ```tsx
-import { PageLayout } from '@/components/custom/layout/page-layout'
+import { PageLayout } from '@/components/custom/layout/page-layout';
 
-<PageLayout>
-  {children}
-</PageLayout>
+<PageLayout>{children}</PageLayout>;
 ```
 
 CSS: `grid grid-cols-1 grid-rows-[auto_auto_1fr] min-h-screen relative`
@@ -53,22 +52,24 @@ Has `id="app-layout"` and `data-sidebar="closed"` for sidebar state tracking.
 ---
 
 ## MainContainer
+
 **File:** `components/custom/layout/main-container.tsx`
 
 Flex row wrapper that holds the sidebar and main content side by side.
 
 ```tsx
-import { MainContainer } from '@/components/custom/layout/main-container'
+import { MainContainer } from '@/components/custom/layout/main-container';
 
 <MainContainer>
   <SideBar />
   <SectionMain>...</SectionMain>
-</MainContainer>
+</MainContainer>;
 ```
 
 ---
 
 ## SectionMain
+
 **File:** `components/custom/layout/section-main.tsx`
 
 The main scrollable content area to the right of the sidebar. Takes `flex-1`.
@@ -76,6 +77,7 @@ The main scrollable content area to the right of the sidebar. Takes `flex-1`.
 ---
 
 ## PageWrapper
+
 **File:** `components/custom/layout/page-wrapper.tsx`
 
 Inner wrapper inside `SectionMain`. Houses `PageBar`, `PageHeader`, and `PageContent`.
@@ -83,21 +85,26 @@ Inner wrapper inside `SectionMain`. Houses `PageBar`, `PageHeader`, and `PageCon
 ---
 
 ## PageBar
+
 **File:** `components/custom/layout/page-bar.tsx`
 
 A slim horizontal bar above the page header. Used for breadcrumbs, secondary navigation, or quick stats.
 
 ```tsx
-import { PageBar, PageBarContent, PageBarAction } from '@/components/custom/layout/page-bar'
+import {
+  PageBar,
+  PageBarContent,
+  PageBarAction,
+} from '@/components/custom/layout/page-bar';
 
-<PageBar>
-  <PageBarContent>
-    Invoices / Term 1 2025
-  </PageBarContent>
-  <PageBarAction>
-    <Button variant="outline" size="sm">Export</Button>
-  </PageBarAction>
-</PageBar>
+<DataTableBar>
+  <PageBarContent>Invoices / Term 1 2025</DataTableBarContent>
+  <DataTableBarAction>
+    <Button variant="outline" size="sm">
+      Export
+    </Button>
+  </DataTableBarAction>
+</DataTable>;
 ```
 
 `PageBarContent` — left side
@@ -106,12 +113,19 @@ import { PageBar, PageBarContent, PageBarAction } from '@/components/custom/layo
 ---
 
 ## PageHeader
+
 **File:** `components/custom/layout/page-header.tsx`
 
 Defines the top of the page content area with title and subtitle.
 
 ```tsx
-import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup, PageHeaderAction } from '@/components/custom/layout/'
+import {
+  PageHeader,
+  PageTitle,
+  PageSubTitle,
+  PageHeaderGroup,
+  PageHeaderAction,
+} from '@/components/custom/layout/';
 
 <PageHeader>
   <PageHeaderGroup>
@@ -124,7 +138,7 @@ import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup, PageHeaderAction 
       New Invoice
     </Button>
   </PageHeaderAction>
-</PageHeader>
+</PageHeader>;
 ```
 
 **PageTitle:** `text-2xl font-medium`
@@ -135,16 +149,15 @@ import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup, PageHeaderAction 
 ---
 
 ## PageContent / PageMain
+
 **File:** `components/custom/layout/page-content.tsx`, `page-main.tsx`
 
 ```tsx
-import { PageContent, PageMain } from '@/components/custom/layout/'
+import { PageContent, PageMain } from '@/components/custom/layout/';
 
 <PageContent>
-  <PageMain>
-    {/* Your actual content */}
-  </PageMain>
-</PageContent>
+  <PageMain>{/* Your actual content */}</PageMain>
+</PageContent>;
 ```
 
 `PageContent` handles the container/padding. `PageMain` is the flex column content area.
@@ -162,7 +175,7 @@ import {
   MainSectionPanel,
   MainSectionPanelItem,
   MainSectionFooter,
-} from '@/components/custom/layout/'
+} from '@/components/custom/layout/';
 
 <MainSection>
   <MainSectionHeader
@@ -186,7 +199,7 @@ import {
   <MainSectionFooter>
     <Button variant="primary">Save changes</Button>
   </MainSectionFooter>
-</MainSection>
+</MainSection>;
 ```
 
 **`MainSectionPanelItem`:** Label on the left, children (control) on the right. Full-width horizontal layout with `justify-between`.
@@ -196,17 +209,19 @@ import {
 ---
 
 ## Sidebar
+
 **File:** `components/ui/sidebar.tsx` + `components/custom/side-bar/`
 
 ### Dimensions
 
-| Mode | Width |
-|---|---|
-| Desktop | `w-62` (248px) |
-| Mobile | `w-80` (320px) — Sheet/drawer overlay |
-| Collapsed (icon mode) | `w-12` (48px) |
+| Mode                  | Width                                 |
+| --------------------- | ------------------------------------- |
+| Desktop               | `w-62` (248px)                        |
+| Mobile                | `w-80` (320px) — Sheet/drawer overlay |
+| Collapsed (icon mode) | `w-12` (48px)                         |
 
 ### State Management
+
 - State is tracked in a cookie: `sidebar_state`
 - Context exposed via `useSidebar()` hook
 - Toggle keyboard shortcut: `Ctrl+B` / `Cmd+B`
@@ -215,9 +230,7 @@ import {
 
 ```tsx
 <SideBar>
-  <SideBarHeader>
-    {/* Logo, workspace name */}
-  </SideBarHeader>
+  <SideBarHeader>{/* Logo, workspace name */}</SideBarHeader>
   <SideBarMain>
     <SideBarMenuSet label="Invoice Management">
       <SideBarMenuItem href="/invoices" icon={<FileTextIcon />}>
@@ -236,9 +249,7 @@ import {
       </SideBarMenuItem>
     </SideBarMenuSet>
   </SideBarMain>
-  <SideBarFooter>
-    {/* User account, settings */}
-  </SideBarFooter>
+  <SideBarFooter>{/* User account, settings */}</SideBarFooter>
 </SideBar>
 ```
 
@@ -249,14 +260,15 @@ import {
 ---
 
 ## Navigation (Top Nav)
+
 **File:** `components/custom/nav/nav.tsx`, `nav-link.tsx`, `nav-link-badge.tsx`
 
 Horizontal tab-style navigation bar. Rendered between `MenuHeader` and `MainContainer`.
 
 ```tsx
-import { Nav } from '@/components/custom/nav/nav'
-import { NavLink } from '@/components/custom/nav/nav-link'
-import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge'
+import { Nav } from '@/components/custom/nav/nav';
+import { NavLink } from '@/components/custom/nav/nav-link';
+import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge';
 
 <Nav>
   <NavLink href="/dashboard">Dashboard</NavLink>
@@ -265,7 +277,7 @@ import { NavLinkBadge } from '@/components/custom/nav/nav-link-badge'
     <NavLinkBadge>12</NavLinkBadge>
   </NavLink>
   <NavLink href="/settings">Settings</NavLink>
-</Nav>
+</Nav>;
 ```
 
 Active link gets an underline/highlight via route matching.
@@ -273,16 +285,15 @@ Active link gets an underline/highlight via route matching.
 ---
 
 ## MenuHeader (Top Breadcrumb Bar)
+
 **File:** `components/custom/menu-header/`
 
 The very top bar with breadcrumb trail, workspace switcher, and user controls.
 
 ```tsx
-import { MenuHeader } from '@/components/custom/menu-header/menu-header'
+import { MenuHeader } from '@/components/custom/menu-header/menu-header';
 
-<MenuHeader>
-  {/* Breadcrumb items are configured inside */}
-</MenuHeader>
+<MenuHeader>{/* Breadcrumb items are configured inside */}</MenuHeader>;
 ```
 
 Six variants exist for different breadcrumb layouts. See `components/custom/menu-header/` for all files.
@@ -290,6 +301,7 @@ Six variants exist for different breadcrumb layouts. See `components/custom/menu
 ---
 
 ## Overlay (Mobile Sidebar)
+
 **File:** `components/custom/layout/side-bar-overlay.tsx`
 
 Rendered alongside `SideBar` in mobile view. A semi-transparent backdrop that closes the sidebar when tapped.
@@ -297,6 +309,7 @@ Rendered alongside `SideBar` in mobile view. A semi-transparent backdrop that cl
 ---
 
 ## AsideContent
+
 **File:** `components/custom/layout/aside-content.tsx`
 
 Optional right-side panel for secondary content within `MainContainer`. Used for detail panels or secondary navigation.
@@ -304,12 +317,18 @@ Optional right-side panel for secondary content within `MainContainer`. Used for
 ---
 
 ## Tabs
+
 **File:** `components/custom/tab/`
 
 Page-level tabs for sub-navigation within a page (e.g., "Overview | Invoices | Settings" inside a school detail page).
 
 ```tsx
-import { TabsUI, TabsList, TabsTrigger, TabsContent } from '@/components/custom/tab/'
+import {
+  TabsUI,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@/components/custom/tab/';
 
 <TabsUI defaultValue="invoices">
   <TabsList>
@@ -320,7 +339,7 @@ import { TabsUI, TabsList, TabsTrigger, TabsContent } from '@/components/custom/
   <TabsContent value="invoices">...</TabsContent>
   <TabsContent value="students">...</TabsContent>
   <TabsContent value="settings">...</TabsContent>
-</TabsUI>
+</TabsUI>;
 ```
 
 Custom trigger has a bottom-border active indicator style.
@@ -329,13 +348,13 @@ Custom trigger has a bottom-border active indicator style.
 
 ## Layout Spacing Reference
 
-| Location | Spacing |
-|---|---|
-| Page content sides | `--app-layout-spacing` (1.5rem mobile / 2.5rem desktop) |
-| Section gap (vertical stacking) | `gap-6` |
-| PageHeader bottom | `pb-6` |
-| Panel item height | min `h-12` or content-driven |
-| Card to card gap | `gap-4` |
+| Location                        | Spacing                                                 |
+| ------------------------------- | ------------------------------------------------------- |
+| Page content sides              | `--app-layout-spacing` (1.5rem mobile / 2.5rem desktop) |
+| Section gap (vertical stacking) | `gap-6`                                                 |
+| PageHeader bottom               | `pb-6`                                                  |
+| Panel item height               | min `h-12` or content-driven                            |
+| Card to card gap                | `gap-4`                                                 |
 
 ---
 
@@ -343,12 +362,12 @@ Custom trigger has a bottom-border active indicator style.
 
 The project uses Tailwind's default breakpoints:
 
-| Prefix | Min-width | Notes |
-|---|---|---|
-| (none) | 0px | Mobile-first base |
-| `sm:` | 640px | Rarely used |
-| `md:` | 768px | Most layout changes happen here |
-| `lg:` | 1024px | |
-| `xl:` | 1280px | |
+| Prefix | Min-width | Notes                           |
+| ------ | --------- | ------------------------------- |
+| (none) | 0px       | Mobile-first base               |
+| `sm:`  | 640px     | Rarely used                     |
+| `md:`  | 768px     | Most layout changes happen here |
+| `lg:`  | 1024px    |                                 |
+| `xl:`  | 1280px    |                                 |
 
 Sidebar becomes an overlay at below `md`. Container padding changes at `md`. Most responsive layout shifts use `md:` as the breakpoint.

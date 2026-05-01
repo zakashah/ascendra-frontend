@@ -9,28 +9,51 @@ Recipes for composing the three most common page types in the app. Follow these 
 Used for: Invoice list, Payment history, Student list, Parent list, School list.
 
 ```tsx
-'use client'
+'use client';
 
-import { PageBar, PageBarContent, PageBarAction } from '@/components/custom/layout/page-bar'
-import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup, PageHeaderAction } from '@/components/custom/layout/page-header'
-import { PageContent, PageMain } from '@/components/custom/layout/page-content'
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table'
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge'
-import { Button } from '@/components/custom/input/button'
-import { Input } from '@/components/custom/input/input'
-import { PaginationButton } from '@/components/custom/common-ui/pagination-button'
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
-import { PlusIcon, SearchIcon, MoreHorizontalIcon } from 'lucide-react'
+import {
+  PageBar,
+  PageBarContent,
+  PageBarAction,
+} from '@/components/custom/layout/page-bar';
+import {
+  PageHeader,
+  PageTitle,
+  PageSubTitle,
+  PageHeaderGroup,
+  PageHeaderAction,
+} from '@/components/custom/layout/page-header';
+import { PageContent, PageMain } from '@/components/custom/layout/page-content';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '@/components/ui/table';
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { Button } from '@/components/custom/input/button';
+import { Input } from '@/components/custom/input/input';
+import { PaginationButton } from '@/components/custom/common-ui/pagination-button';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
+import { PlusIcon, SearchIcon, MoreHorizontalIcon } from 'lucide-react';
 
 export default function InvoicesPage() {
   return (
     <>
-      <PageBar>
-        <PageBarContent>All Invoices</PageBarContent>
-        <PageBarAction>
+      <DataTableBar>
+        <PageBarContent>All Invoices</DataTableBarContent>
+        <DataTableBarAction>
           {/* Optional: quick filters or secondary nav */}
-        </PageBarAction>
-      </PageBar>
+        </DataTableBarAction>
+      </DataTable>
 
       <PageHeader>
         <PageHeaderGroup>
@@ -50,12 +73,16 @@ export default function InvoicesPage() {
           {/* Search + filter bar */}
           <div className="flex items-center justify-between gap-3 pb-4">
             <div className="relative">
-              <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
-              <Input placeholder="Search invoices..." className="pl-8 w-64" />
+              <SearchIcon className="text-muted-foreground absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
+              <Input placeholder="Search invoices..." className="w-64 pl-8" />
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="secondary" size="sm">Filter</Button>
-              <Button variant="secondary" size="sm">Export</Button>
+              <Button variant="secondary" size="sm">
+                Filter
+              </Button>
+              <Button variant="secondary" size="sm">
+                Export
+              </Button>
             </div>
           </div>
 
@@ -75,11 +102,15 @@ export default function InvoicesPage() {
             <TableBody>
               {invoices.map((invoice) => (
                 <TableRow key={invoice.id}>
-                  <TableCell className="font-medium">{invoice.number}</TableCell>
+                  <TableCell className="font-medium">
+                    {invoice.number}
+                  </TableCell>
                   <TableCell>{invoice.student}</TableCell>
                   <TableCell>{invoice.school}</TableCell>
                   <TableCell>PKR {invoice.amount.toLocaleString()}</TableCell>
-                  <TableCell className="text-muted-foreground">{invoice.dueDate}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {invoice.dueDate}
+                  </TableCell>
                   <TableCell>
                     <SimpleBadge variant={statusVariant(invoice.status)}>
                       {invoice.status}
@@ -88,7 +119,11 @@ export default function InvoicesPage() {
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon-sm" className="text-muted-foreground">
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          className="text-muted-foreground"
+                        >
                           <MoreHorizontalIcon />
                         </Button>
                       </DropdownMenuTrigger>
@@ -96,7 +131,9 @@ export default function InvoicesPage() {
                         <DropdownMenuItem>View</DropdownMenuItem>
                         <DropdownMenuItem>Send reminder</DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+                        <DropdownMenuItem variant="destructive">
+                          Delete
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -107,25 +144,27 @@ export default function InvoicesPage() {
 
           {/* Pagination */}
           <div className="flex items-center justify-between pt-4">
-            <span className="text-sm text-muted-foreground">Showing 1–20 of 143</span>
+            <span className="text-muted-foreground text-sm">
+              Showing 1–20 of 143
+            </span>
             <PaginationButton />
           </div>
         </PageMain>
       </PageContent>
     </>
-  )
+  );
 }
 
 // Map status strings to SimpleBadge variants
 function statusVariant(status: string) {
   const map: Record<string, 'green' | 'orange' | 'secondary' | 'default'> = {
-    'Paid': 'green',
-    'Pending': 'orange',
-    'Overdue': 'orange',
-    'Cancelled': 'secondary',
-    'Draft': 'default',
-  }
-  return map[status] ?? 'secondary'
+    Paid: 'green',
+    Pending: 'orange',
+    Overdue: 'orange',
+    Cancelled: 'secondary',
+    Draft: 'default',
+  };
+  return map[status] ?? 'secondary';
 }
 ```
 
@@ -136,19 +175,30 @@ function statusVariant(status: string) {
 Used for: School settings, Billing config, Notification preferences, Invoice defaults.
 
 ```tsx
-'use client'
+'use client';
 
-import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup } from '@/components/custom/layout/page-header'
-import { PageContent, PageMain } from '@/components/custom/layout/page-content'
-import { MainSection } from '@/components/custom/layout/main-section'
-import { MainSectionHeader } from '@/components/custom/layout/main-section-header'
-import { MainSectionPanel } from '@/components/custom/layout/main-section-panel'
-import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item'
-import { MainSectionFooter } from '@/components/custom/layout/main-section-footer'
-import { Switch } from '@/components/ui/switch'
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select'
-import { Input } from '@/components/custom/input/input'
-import { Button } from '@/components/custom/input/button'
+import {
+  PageHeader,
+  PageTitle,
+  PageSubTitle,
+  PageHeaderGroup,
+} from '@/components/custom/layout/page-header';
+import { PageContent, PageMain } from '@/components/custom/layout/page-content';
+import { MainSection } from '@/components/custom/layout/main-section';
+import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
+import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
+import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
+import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
+import { Switch } from '@/components/ui/switch';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/ui/select';
+import { Input } from '@/components/custom/input/input';
+import { Button } from '@/components/custom/input/button';
 
 export default function InvoiceSettingsPage() {
   return (
@@ -156,7 +206,9 @@ export default function InvoiceSettingsPage() {
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Invoice Settings</PageTitle>
-          <PageSubTitle>Configure defaults for invoice generation and delivery</PageSubTitle>
+          <PageSubTitle>
+            Configure defaults for invoice generation and delivery
+          </PageSubTitle>
         </PageHeaderGroup>
       </PageHeader>
 
@@ -191,7 +243,9 @@ export default function InvoiceSettingsPage() {
               </MainSectionPanelItem>
             </MainSectionPanel>
             <MainSectionFooter>
-              <Button variant="primary" size="sm">Save</Button>
+              <Button variant="primary" size="sm">
+                Save
+              </Button>
             </MainSectionFooter>
           </MainSection>
 
@@ -231,13 +285,15 @@ export default function InvoiceSettingsPage() {
               </MainSectionPanelItem>
             </MainSectionPanel>
             <MainSectionFooter>
-              <Button variant="primary" size="sm">Save</Button>
+              <Button variant="primary" size="sm">
+                Save
+              </Button>
             </MainSectionFooter>
           </MainSection>
         </PageMain>
       </PageContent>
     </>
-  )
+  );
 }
 ```
 
@@ -248,19 +304,43 @@ export default function InvoiceSettingsPage() {
 Used for: Create invoice, Add student, Add school, Edit parent profile.
 
 ```tsx
-'use client'
+'use client';
 
-import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup, PageHeaderAction } from '@/components/custom/layout/page-header'
-import { PageContent, PageMain } from '@/components/custom/layout/page-content'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
-import { Field, FieldLabel, FieldDescription, FieldError, FieldGroup } from '@/components/ui/field'
-import { Input } from '@/components/custom/input/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select'
-import { Button } from '@/components/custom/input/button'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import {
+  PageHeader,
+  PageTitle,
+  PageSubTitle,
+  PageHeaderGroup,
+  PageHeaderAction,
+} from '@/components/custom/layout/page-header';
+import { PageContent, PageMain } from '@/components/custom/layout/page-content';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
+import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+} from '@/components/ui/field';
+import { Input } from '@/components/custom/input/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/ui/select';
+import { Button } from '@/components/custom/input/button';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 const schema = z.object({
   studentName: z.string().min(1, 'Student name is required'),
@@ -268,12 +348,16 @@ const schema = z.object({
   amount: z.number().min(1, 'Amount must be greater than 0'),
   term: z.string().min(1, 'Please select a term'),
   notes: z.string().optional(),
-})
+});
 
 export default function CreateInvoicePage() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(schema),
-  })
+  });
 
   return (
     <>
@@ -283,7 +367,9 @@ export default function CreateInvoicePage() {
           <PageSubTitle>Create a fee invoice for a student</PageSubTitle>
         </PageHeaderGroup>
         <PageHeaderAction>
-          <Button variant="secondary" size="default">Cancel</Button>
+          <Button variant="secondary" size="default">
+            Cancel
+          </Button>
         </PageHeaderAction>
       </PageHeader>
 
@@ -316,7 +402,9 @@ export default function CreateInvoicePage() {
                       aria-invalid={!!errors.parentEmail}
                       {...register('parentEmail')}
                     />
-                    <FieldDescription>Invoice will be sent to this address</FieldDescription>
+                    <FieldDescription>
+                      Invoice will be sent to this address
+                    </FieldDescription>
                     <FieldError>{errors.parentEmail?.message}</FieldError>
                   </Field>
 
@@ -359,8 +447,12 @@ export default function CreateInvoicePage() {
               </CardContent>
               <CardFooter>
                 <div className="flex items-center gap-2">
-                  <Button type="submit" variant="primary">Create Invoice</Button>
-                  <Button type="button" variant="secondary">Save Draft</Button>
+                  <Button type="submit" variant="primary">
+                    Create Invoice
+                  </Button>
+                  <Button type="button" variant="secondary">
+                    Save Draft
+                  </Button>
                 </div>
               </CardFooter>
             </Card>
@@ -368,7 +460,7 @@ export default function CreateInvoicePage() {
         </PageMain>
       </PageContent>
     </>
-  )
+  );
 }
 ```
 
@@ -378,33 +470,33 @@ export default function CreateInvoicePage() {
 
 Quick reference for which component to use in which situation:
 
-| Need | Use |
-|---|---|
-| Primary action button | `Button` from `custom/input/button` with `variant="primary"` |
-| Secondary/cancel button | `Button` from `custom/input/button` with `variant="secondary"` |
-| Dangerous action (delete) | `Button` from `custom/input/button` with `variant="destructive"` |
-| Ghost/icon toolbar button | `Button` from `ui/button` with `variant="ghost"` |
-| Status label (paid/pending) | `SimpleBadge` from `custom/common-ui/simple-badge` |
-| Count indicator | `BubbleBadge` from `custom/common-ui/bubble-badge` |
-| Tiny status dot | `StatusDot` from `custom/common-ui/status-dot` |
-| Text input | `Input` from `custom/input/input` |
-| Multiline input | `Textarea` from `ui/textarea` |
-| Dropdown select | `Select` from `ui/select` |
-| Toggle | `Switch` from `ui/switch` |
-| Checkbox | `Checkbox` from `ui/checkbox` |
-| Radio options | `RadioGroup` from `ui/radio-group` |
-| Form field with label+error | `Field` + `FieldLabel` + `FieldError` from `ui/field` |
-| Multiple form fields | `FieldGroup` from `ui/field` |
-| Data table | `Table` + sub-components from `ui/table` |
-| Row action menu | `DropdownMenu` from `ui/dropdown-menu` |
-| Content container | `Card` from `ui/card` |
-| Settings section | `MainSection` family from `custom/layout/` |
-| Page title + subtitle | `PageTitle` + `PageSubTitle` from `custom/layout/` |
-| Page action (top right) | `PageHeaderAction` from `custom/layout/` |
-| Empty state | `Empty` from `ui/empty` |
-| Loading placeholder | `Skeleton` from `ui/skeleton` |
-| Hover info | `Tooltip` from `ui/tooltip` |
-| Confirmation dialog | `AlertDialog` from `ui/alert-dialog` |
+| Need                        | Use                                                              |
+| --------------------------- | ---------------------------------------------------------------- |
+| Primary action button       | `Button` from `custom/input/button` with `variant="primary"`     |
+| Secondary/cancel button     | `Button` from `custom/input/button` with `variant="secondary"`   |
+| Dangerous action (delete)   | `Button` from `custom/input/button` with `variant="destructive"` |
+| Ghost/icon toolbar button   | `Button` from `ui/button` with `variant="ghost"`                 |
+| Status label (paid/pending) | `SimpleBadge` from `custom/common-ui/simple-badge`               |
+| Count indicator             | `BubbleBadge` from `custom/common-ui/bubble-badge`               |
+| Tiny status dot             | `StatusDot` from `custom/common-ui/status-dot`                   |
+| Text input                  | `Input` from `custom/input/input`                                |
+| Multiline input             | `Textarea` from `ui/textarea`                                    |
+| Dropdown select             | `Select` from `ui/select`                                        |
+| Toggle                      | `Switch` from `ui/switch`                                        |
+| Checkbox                    | `Checkbox` from `ui/checkbox`                                    |
+| Radio options               | `RadioGroup` from `ui/radio-group`                               |
+| Form field with label+error | `Field` + `FieldLabel` + `FieldError` from `ui/field`            |
+| Multiple form fields        | `FieldGroup` from `ui/field`                                     |
+| Data table                  | `Table` + sub-components from `ui/table`                         |
+| Row action menu             | `DropdownMenu` from `ui/dropdown-menu`                           |
+| Content container           | `Card` from `ui/card`                                            |
+| Settings section            | `MainSection` family from `custom/layout/`                       |
+| Page title + subtitle       | `PageTitle` + `PageSubTitle` from `custom/layout/`               |
+| Page action (top right)     | `PageHeaderAction` from `custom/layout/`                         |
+| Empty state                 | `Empty` from `ui/empty`                                          |
+| Loading placeholder         | `Skeleton` from `ui/skeleton`                                    |
+| Hover info                  | `Tooltip` from `ui/tooltip`                                      |
+| Confirmation dialog         | `AlertDialog` from `ui/alert-dialog`                             |
 
 ---
 
@@ -412,53 +504,109 @@ Quick reference for which component to use in which situation:
 
 ```ts
 // Layout
-import { PageLayout } from '@/components/custom/layout/page-layout'
-import { PageHeader, PageTitle, PageSubTitle, PageHeaderGroup, PageHeaderAction } from '@/components/custom/layout/page-header'
-import { PageBar, PageBarContent, PageBarAction } from '@/components/custom/layout/page-bar'
-import { PageContent, PageMain } from '@/components/custom/layout/page-content'
-import { MainSection } from '@/components/custom/layout/main-section'
-import { MainSectionHeader } from '@/components/custom/layout/main-section-header'
-import { MainSectionPanel } from '@/components/custom/layout/main-section-panel'
-import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item'
-import { MainSectionFooter } from '@/components/custom/layout/main-section-footer'
-import { MainContainer } from '@/components/custom/layout/main-container'
-import { SectionMain } from '@/components/custom/layout/section-main'
+import { PageLayout } from '@/components/custom/layout/page-layout';
+import {
+  PageHeader,
+  PageTitle,
+  PageSubTitle,
+  PageHeaderGroup,
+  PageHeaderAction,
+} from '@/components/custom/layout/page-header';
+import {
+  PageBar,
+  PageBarContent,
+  PageBarAction,
+} from '@/components/custom/layout/page-bar';
+import { PageContent, PageMain } from '@/components/custom/layout/page-content';
+import { MainSection } from '@/components/custom/layout/main-section';
+import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
+import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
+import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
+import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
+import { MainContainer } from '@/components/custom/layout/main-container';
+import { SectionMain } from '@/components/custom/layout/section-main';
 
 // Buttons
-import { Button } from '@/components/custom/input/button'        // ← use this for CTAs
-import { Button } from '@/components/ui/button'                  // ← use for ghost/icon/outline
+import { Button } from '@/components/custom/input/button'; // ← use this for CTAs
+import { Button } from '@/components/ui/button'; // ← use for ghost/icon/outline
 
 // Badges & Status
-import { SimpleBadge } from '@/components/custom/common-ui/simple-badge'
-import { BubbleBadge } from '@/components/custom/common-ui/bubble-badge'
-import { StatusDot } from '@/components/custom/common-ui/status-dot'
-import { ProBadge } from '@/components/custom/common-ui/pro-badge'
+import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
+import { BubbleBadge } from '@/components/custom/common-ui/bubble-badge';
+import { StatusDot } from '@/components/custom/common-ui/status-dot';
+import { ProBadge } from '@/components/custom/common-ui/pro-badge';
 
 // Inputs
-import { Input } from '@/components/custom/input/input'           // ← use this for forms
-import { Input } from '@/components/ui/input'                    // ← only in shadcn compositions
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import { Checkbox } from '@/components/ui/checkbox'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Input } from '@/components/custom/input/input'; // ← use this for forms
+import { Input } from '@/components/ui/input'; // ← only in shadcn compositions
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 // Form Field Composition
-import { Field, FieldLabel, FieldContent, FieldDescription, FieldError, FieldGroup } from '@/components/ui/field'
+import {
+  Field,
+  FieldLabel,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+} from '@/components/ui/field';
 
 // Data Display
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableFooter, TableCaption } from '@/components/ui/table'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from '@/components/ui/card'
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel } from '@/components/ui/dropdown-menu'
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableFooter,
+  TableCaption,
+} from '@/components/ui/table';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  CardAction,
+} from '@/components/ui/card';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+} from '@/components/ui/dropdown-menu';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion';
 
 // Feedback
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Separator } from '@/components/ui/separator'
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Separator } from '@/components/ui/separator';
 
 // Utilities
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 ```
 
 ---

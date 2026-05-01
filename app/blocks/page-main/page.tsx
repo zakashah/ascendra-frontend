@@ -4,9 +4,9 @@ import { PageMain } from '@/components/custom/layout/page-main';
 import { PageWrapper } from '@/components/custom/layout/page-wrapper';
 import { PageContent } from '@/components/custom/layout/page-content';
 import { MainContent } from '@/components/custom/layout/main-content';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 import { Tabs } from '@/components/custom/tabs/tabs';
 import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
@@ -73,14 +73,14 @@ export default function Page() {
   return (
     <PageMain>
       <MainContent>
-        <PageBar>
-          <PageBarContent>
+        <DataTableBar>
+          <DataTableBarContent>
             {/* Search input, filters */}
-          </PageBarContent>
-          <PageBarAction>
+          </DataTableBarContent>
+          <DataTableBarAction>
             <Button>Add parent</Button>
-          </PageBarAction>
-        </PageBar>
+          </DataTableBarAction>
+        </DataTableBar>
         {/* Table or list */}
       </MainContent>
     </PageMain>
@@ -98,13 +98,19 @@ export default async function PageMainBlocksPage() {
     <div className="flex flex-col gap-10">
       <div>
         <h1 className="text-lg font-semibold">Page Main</h1>
-        <p className="text-sm text-muted-foreground mt-1 max-w-lg">
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">PageMain</code> is the semantic
-          root for all page content. The key fork: settings pages wrap content in{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">PageWrapper</code>, while tabbed
-          and list pages skip it and go directly to{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">Tabs</code> or{' '}
-          <code className="text-xs bg-muted px-1 py-0.5 rounded">MainContent</code>.
+        <p className="text-muted-foreground mt-1 max-w-lg text-sm">
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">PageMain</code>{' '}
+          is the semantic root for all page content. The key fork: settings
+          pages wrap content in{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            PageWrapper
+          </code>
+          , while tabbed and list pages skip it and go directly to{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">Tabs</code> or{' '}
+          <code className="bg-muted rounded px-1 py-0.5 text-xs">
+            MainContent
+          </code>
+          .
         </p>
       </div>
 
@@ -118,7 +124,7 @@ export default async function PageMainBlocksPage() {
           <PageWrapper>
             <PageContent>
               <MainContent>
-                <div className="rounded-xl border-2 border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                <div className="border-border text-muted-foreground rounded-xl border-2 border-dashed p-8 text-center text-sm">
                   MainSection(s) go here
                 </div>
               </MainContent>
@@ -141,14 +147,14 @@ export default async function PageMainBlocksPage() {
             </TabList>
             <TabContent value="overview">
               <MainContent>
-                <div className="rounded-xl border-2 border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                <div className="border-border text-muted-foreground rounded-xl border-2 border-dashed p-8 text-center text-sm">
                   Overview tab content
                 </div>
               </MainContent>
             </TabContent>
             <TabContent value="details">
               <MainContent>
-                <div className="rounded-xl border-2 border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                <div className="border-border text-muted-foreground rounded-xl border-2 border-dashed p-8 text-center text-sm">
                   Details tab content
                 </div>
               </MainContent>
@@ -165,17 +171,19 @@ export default async function PageMainBlocksPage() {
       >
         <PageMain>
           <MainContent>
-            <PageBar className="-mb-2">
-              <PageBarContent>
-                <div className="flex h-8 w-52 items-center rounded-md border border-border px-3">
-                  <span className="text-xs text-muted-foreground">Search parents...</span>
+            <DataTableBar className="-mb-2">
+              <DataTableBarContent>
+                <div className="border-border flex h-8 w-52 items-center rounded-md border px-3">
+                  <span className="text-muted-foreground text-xs">
+                    Search parents...
+                  </span>
                 </div>
-              </PageBarContent>
-              <PageBarAction>
+              </DataTableBarContent>
+              <DataTableBarAction>
                 <Button size="sm">Add parent</Button>
-              </PageBarAction>
-            </PageBar>
-            <div className="rounded-xl border border-border/60 bg-muted/20 p-6 text-center text-sm text-muted-foreground">
+              </DataTableBarAction>
+            </DataTableBar>
+            <div className="border-border/60 bg-muted/20 text-muted-foreground rounded-xl border p-6 text-center text-sm">
               Table goes here
             </div>
           </MainContent>

@@ -11,9 +11,6 @@ import { Tabs } from '@/components/custom/tabs/tabs';
 
 import { RowActionButton } from '@/components/custom/common-ui/row-action-button';
 import { SimpleBadge } from '@/components/custom/common-ui/simple-badge';
-import { PageBar } from '@/components/custom/layout/page-bar';
-import { PageBarAction } from '@/components/custom/layout/page-bar-action';
-import { PageBarContent } from '@/components/custom/layout/page-bar-content';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,6 +48,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/custom/ui/select';
+import { DataTableBarContent } from '@/components/custom/layout/data-table-bar-content';
+import { DataTableBar } from '@/components/custom/layout/data-table-bar';
+import { DataTableBarAction } from '@/components/custom/layout/data-table-bar-action';
 
 export default function RolesPage() {
   return (
@@ -66,8 +66,8 @@ export default function RolesPage() {
           </TabList>
           <TabContent value="role-sets">
             <MainContent>
-              <PageBar className="-mb-2">
-                <PageBarContent>
+              <DataTableBar className="-mb-2">
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
@@ -88,12 +88,12 @@ export default function RolesPage() {
                       ))}
                     </SelectContent>
                   </Select>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <div className="text-[11px]">3/10 used</div>
                   <Button>+ Create role set</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
@@ -208,8 +208,8 @@ export default function RolesPage() {
           </TabContent>
           <TabContent value="all-roles">
             <MainContent>
-              <PageBar className="-mb-2">
-                <PageBarContent>
+              <DataTableBar className="-mb-2">
+                <DataTableBarContent>
                   <InputGroup className="max-w-xs">
                     <InputGroupInput placeholder="Search..." className="w-65" />
                     <InputGroupAddon>
@@ -230,12 +230,12 @@ export default function RolesPage() {
                       ))}
                     </SelectContent>
                   </Select>
-                </PageBarContent>
-                <PageBarAction>
+                </DataTableBarContent>
+                <DataTableBarAction>
                   <div className="text-[11px]">3/10 used</div>
                   <Button>+ Add role</Button>
-                </PageBarAction>
-              </PageBar>
+                </DataTableBarAction>
+              </DataTableBar>
               <TableWrapper>
                 <Table scrollable>
                   <TableHeader>
