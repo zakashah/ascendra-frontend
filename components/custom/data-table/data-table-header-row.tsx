@@ -5,9 +5,7 @@ import { useDataTableContext } from '@/hooks/use-data-table';
 import { cn } from '@/lib/utils';
 import { filterChildrenByColumn } from './filter-by-column';
 
-interface DataTableHeaderRowProps extends React.ComponentProps<'tr'> {}
-
-export function DataTableHeaderRow({ className, children, ...props }: DataTableHeaderRowProps) {
+export function DataTableHeaderRow({ className, children, ...props }: React.ComponentProps<'tr'>) {
   const { columns } = useDataTableContext();
 
   return (
