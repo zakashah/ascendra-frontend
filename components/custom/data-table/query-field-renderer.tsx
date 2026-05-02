@@ -85,7 +85,9 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           type="number"
           placeholder={field.placeholder}
           aria-invalid={!!error}
-          {...register(field.name, { valueAsNumber: true })}
+          {...register(field.name, {
+            setValueAs: (v: string) => (v === '' ? undefined : Number(v)),
+          })}
         />
       )}
 

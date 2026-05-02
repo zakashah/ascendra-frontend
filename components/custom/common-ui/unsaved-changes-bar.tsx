@@ -27,6 +27,8 @@ interface UnsavedChangesBarProps {
   isSaving: boolean;
   /** Is Form Valid */
   isValid: boolean;
+  /** Extra classes on the outer wrapper — use to offset centering when a sidebar is present */
+  className?: string;
 }
 
 export function UnsavedChangesBar({
@@ -43,6 +45,7 @@ export function UnsavedChangesBar({
   errorMessage = 'Failed to save. Please try again.',
   isSaving = false,
   isValid = true,
+  className,
 }: UnsavedChangesBarProps) {
   const barRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +79,8 @@ export function UnsavedChangesBar({
         'fixed bottom-8 left-1/2 z-50 min-w-85 -translate-x-1/2 transition-all duration-300',
         isOpen || isDirty
           ? 'pointer-events-auto translate-y-0 opacity-100'
-          : 'pointer-events-none translate-y-3 opacity-0'
+          : 'pointer-events-none translate-y-3 opacity-0',
+        className ?? 'lg:left-[calc(50%+7.75rem)]'
       )}
     >
       <div

@@ -295,7 +295,7 @@ function QueryParamPanelInner() {
       </MainSection>
 
       <UnsavedChangesBar
-        isDirty={true}
+        isDirty={methods.formState.isDirty}
         isSaving={isLoading}
         isValid={methods.formState.isValid}
         onSave={handleRunQuery}
@@ -305,11 +305,12 @@ function QueryParamPanelInner() {
         }}
         saveLabel="Run Query"
         resetLabel="Reset"
-        message="Filter parameters ready — run the query when done"
-        validationMessage="Please fix the filter errors before running"
+        message="Fill the filter values"
+        validationMessage="Fix the filter errors before running"
         savingMessage="Running query…"
         successMessage="Query applied"
         errorMessage="Query failed — please try again"
+        className="lg:left-[calc(50%+7.75rem)]"
       />
     </>
   );

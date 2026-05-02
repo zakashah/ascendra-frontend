@@ -48,7 +48,8 @@ function SelectTrigger({
         'group relative inline-flex items-center px-1',
         'min-w-fit overflow-hidden rounded-[0.25rem]',
         /* Base Colors */
-        'text-foreground font-medium',
+        'text-foreground text-sm font-medium',
+        'data-placeholder:text-muted-foreground data-placeholder:font-normal',
         'bg-secondary',
         /* Layered Shadow System */
         'shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]',
@@ -70,7 +71,7 @@ function SelectTrigger({
         /* Focus */
         'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
         /* Invalid */
-        'aria-invalid:outline-1 aria-invalid:outline-destructive aria-invalid:outline-offset-1',
+        'aria-invalid:outline-destructive aria-invalid:outline-1 aria-invalid:outline-offset-1',
         size === 'sm' && 'h-5',
         size === 'default' && 'h-8',
         className
@@ -102,7 +103,7 @@ function SelectContent({
         position={position}
         align={align}
         className={cn(
-          `bg-secondary isolate flex max-w-[calc(100vw-(--spacing(4))*2)] origin-(--radix-select-content-transform-origin) flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 duration-100 dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/8 [:where(&)]:dark:ring-[#111113]/32`,
+          `bg-secondary data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 isolate flex max-w-[calc(100vw-(--spacing(4))*2)] origin-(--radix-select-content-transform-origin) flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 duration-100 dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/8 [:where(&)]:dark:ring-[#111113]/32`,
           position === 'popper' &&
             'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
           className
