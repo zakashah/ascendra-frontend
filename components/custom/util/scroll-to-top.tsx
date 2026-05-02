@@ -7,10 +7,13 @@ export function ScrollToTop() {
   const pathname = usePathname();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;

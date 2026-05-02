@@ -16,6 +16,9 @@ function DialogOverlay({
       className={cn(
         'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0',
         'fixed inset-0 z-200 bg-black/40 duration-300 supports-backdrop-filter:backdrop-blur-sm',
+        // Dot-grid texture layered over the semi-transparent base
+        'bg-[radial-gradient(rgba(255,255,255,0.07)_2px,transparent_2px)]',
+        'bg-size-[20px_20px]',
         className
       )}
       {...props}
