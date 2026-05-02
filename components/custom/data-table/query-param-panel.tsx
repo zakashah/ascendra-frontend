@@ -216,7 +216,7 @@ function QueryParamPanelInner() {
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues,
-    mode: 'onTouched',
+    mode: 'all',
   });
 
   const handleRunQuery = async (): Promise<boolean> => {
