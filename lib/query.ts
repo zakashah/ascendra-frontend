@@ -289,23 +289,24 @@ export const PRESET_QUERIES: QueryDef[] = [
         info: 'Inclusive start date',
         description: 'Invoices issued on or after this date',
       },
+
       // Row 3 (lg): [feeCategories ×2][dueDateRange ×2 wraps to row 4]
-      {
-        name: 'feeCategories',
-        label: 'Fee Categories',
-        type: 'multiselect',
-        required: true,
-        optional: true,
-        span:  'full',
-        info: 'Select all that apply',
-        options: [
-          { value: 'tuition', label: 'Tuition' },
-          { value: 'transport', label: 'Transport' },
-          { value: 'uniform', label: 'Uniform' },
-          { value: 'exam', label: 'Exam Fee' },
-          { value: 'activity', label: 'Activity Fee' },
-        ],
-      },
+      // {
+      //   name: 'feeCategories',
+      //   label: 'Fee Categories',
+      //   type: 'multiselect',
+      //   required: true,
+      //   optional: true,
+      //   span:  'full',
+      //   info: 'Select all that apply',
+      //   options: [
+      //     { value: 'tuition', label: 'Tuition' },
+      //     { value: 'transport', label: 'Transport' },
+      //     { value: 'uniform', label: 'Uniform' },
+      //     { value: 'exam', label: 'Exam Fee' },
+      //     { value: 'activity', label: 'Activity Fee' },
+      //   ],
+      // },
       {
         name: 'dueDateRange',
         label: 'Due Date Range',
@@ -316,8 +317,10 @@ export const PRESET_QUERIES: QueryDef[] = [
         info: 'Optional date window',
         description: 'Optionally narrow results by due date window',
       },
+
       // ── Sort & Options section ────────────────────────────────────────────
       { _type: 'section', title: 'Sort & Options', showTitle: true },
+
       // Row 5 (lg): [sortOrder ×full]
       {
         name: 'sortOrder',
@@ -333,6 +336,7 @@ export const PRESET_QUERIES: QueryDef[] = [
           { value: 'lowest', label: 'Lowest Amount' },
         ],
       },
+
       // Row 6 (lg): [includeArchived ×full]
       {
         name: 'includeArchived',

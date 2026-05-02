@@ -86,11 +86,9 @@ function buildZodSchema(
       }
       case 'checkbox': {
         schema = field.required
-          ? z
-              .boolean()
-              .refine((v) => v === true, {
-                message: `${field.label} is required`,
-              })
+          ? z.boolean().refine((v) => v === true, {
+              message: `${field.label} is required`,
+            })
           : z.boolean().optional();
         break;
       }
@@ -212,6 +210,7 @@ function QueryParamPanelInner() {
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
   const defaultValues = useMemo(() => buildDefaultValues(fields), [fields]);
+  console.log('defaultValues are: ', defaultValues);
 
   const methods = useForm({
     resolver: zodResolver(schema),
