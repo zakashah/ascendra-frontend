@@ -2,7 +2,23 @@
   "permissions": {
     "allow": [
       "Bash(xargs grep *)",
-      "Bash(xargs sed *)"
+      "Bash(xargs sed *)",
+      "Bash(cp -r /Users/zakashah/ascendra/ascendra-frontend/components/ui/. /Users/zakashah/ascendra/ui/src/components/ui/)",
+      "Bash(cp -r /Users/zakashah/ascendra/ascendra-frontend/components/custom/. /Users/zakashah/ascendra/ui/src/components/custom/)",
+      "Bash(cp /Users/zakashah/ascendra/ascendra-frontend/lib/utils.ts /Users/zakashah/ascendra/ui/src/lib/utils.ts)",
+      "Bash(cp /Users/zakashah/ascendra/ascendra-frontend/lib/table.ts /Users/zakashah/ascendra/ui/src/lib/table.ts)",
+      "Bash(cp /Users/zakashah/ascendra/ascendra-frontend/lib/query.ts /Users/zakashah/ascendra/ui/src/lib/query.ts)",
+      "Bash(python3 -)",
+      "Bash(sed \"s/\\\\.tsx\\\\?$//\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(xargs cat *)",
+      "Read(//Users/zakashah/ascendra/ui/**)",
+      "Bash(npm run *)",
+      "Bash(node -e ' *)",
+      "Bash(gtimeout 15 npm run dev)",
+      "Bash(npx next *)"
     ]
   }
 }

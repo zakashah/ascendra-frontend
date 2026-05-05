@@ -43,7 +43,7 @@ export function CopyTextDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">With Tooltip</h3>
-          <p className="text-xs text-muted-foreground">Show a "Copied" tooltip confirmation by passing <code className="rounded bg-muted px-1 font-mono text-xs">showTooltip</code>.</p>
+          <p className="text-xs text-muted-foreground">Show a &quot;Copied&quot; tooltip confirmation by passing <code className="rounded bg-muted px-1 font-mono text-xs">showTooltip</code>.</p>
           <ComponentPreview
             code={`<CopyText value="admin@beacon.edu.pk" showTooltip opaque>
   admin@beacon.edu.pk

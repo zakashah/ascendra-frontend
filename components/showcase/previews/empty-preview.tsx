@@ -49,7 +49,7 @@ export function EmptyDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">With Icon Media</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">EmptyMedia variant="icon"</code> for a boxed icon above the title.</p>
+          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">EmptyMedia variant=&quot;icon&quot;</code> for a boxed icon above the title.</p>
           <ComponentPreview
             code={`<Empty>
   <EmptyHeader>

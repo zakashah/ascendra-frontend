@@ -30,7 +30,7 @@ export function SimpleBadgeDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
           <p className="text-xs text-muted-foreground">
-            Seven semantic color variants matching the project's color system.
+            Seven semantic color variants matching the project&apos;s color system.
           </p>
           <ComponentPreview
             code={`<SimpleBadge variant="default">Default</SimpleBadge>
