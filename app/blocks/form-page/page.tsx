@@ -12,7 +12,7 @@ import { PageTitle } from '@/components/custom/layout/page-title';
 
 import { PageHeaderAction } from '@/components/custom/layout/page-header-action';
 import { Button } from '@/components/custom/ui/button';
-import { LuChevronDown, LuCode, LuEye } from 'react-icons/lu';
+import { LuChevronDown, LuCode, LuEye, LuFolderLock } from 'react-icons/lu';
 import { TbExternalLink } from 'react-icons/tb';
 
 import { ProBadge } from '@/components/custom/common-ui/pro-badge';
@@ -23,12 +23,28 @@ import {
   DropdownMenuTrigger,
 } from '@/components/custom/ui/dropdown-menu';
 
+import { SimpleAlert } from '@/components/custom/common-ui/simple-alert';
+import { MainSection } from '@/components/custom/layout/main-section';
+import { MainSectionFooter } from '@/components/custom/layout/main-section-footer';
+import { MainSectionHeader } from '@/components/custom/layout/main-section-header';
+import { MainSectionHeaderSubtitle } from '@/components/custom/layout/main-section-header-subtitle';
+import { MainSectionHeaderTitle } from '@/components/custom/layout/main-section-header-title';
+import { MainSectionPanel } from '@/components/custom/layout/main-section-panel';
+import { MainSectionPanelItem } from '@/components/custom/layout/main-section-panel-item';
+import { MainSectionPanelItemGroup } from '@/components/custom/layout/main-section-panel-item-group';
 import { TabContent } from '@/components/custom/tabs/tab-content';
 import { TabList } from '@/components/custom/tabs/tab-list';
 import { TabTrigger } from '@/components/custom/tabs/tab-trigger';
 import { Tabs } from '@/components/custom/tabs/tabs';
+import { Switch } from '@/components/custom/ui/switch';
+import { InfoIcon } from 'lucide-react';
+import { useState } from 'react';
+import { AsideContent } from '@/components/custom/layout/aside-content';
+import { Anchor } from '@/components/custom/common-ui/anchor';
 
 export default function FormPage() {
+  const [hidden, setHidden] = useState(true);
+  const [dimmed, setDimmed] = useState(true);
   return (
     <>
       <>
@@ -204,6 +220,259 @@ export default function FormPage() {
               <MainContent></MainContent>
             </TabContent>
           </Tabs>
+        </PageMain>
+      </>
+      <div className="h-10" />
+      <>
+        <PageHeader>
+          <PageHeaderGroup>
+            <PageTitle>Title</PageTitle>
+            <PageSubtitle>Main section simple with header only</PageSubtitle>
+          </PageHeaderGroup>
+        </PageHeader>
+        <PageMain>
+          <PageWrapper>
+            <PageContent>
+              <MainContent>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Section header title
+                    </MainSectionHeaderTitle>
+                    <MainSectionHeaderSubtitle>
+                      Section header optional sub title
+                    </MainSectionHeaderSubtitle>
+                  </MainSectionHeader>
+                </MainSection>
+              </MainContent>
+            </PageContent>
+          </PageWrapper>
+        </PageMain>
+      </>
+      <div className="h-10" />
+      <>
+        <PageHeader>
+          <PageHeaderGroup>
+            <PageTitle>Title</PageTitle>
+            <PageSubtitle>Main section with header and footer</PageSubtitle>
+          </PageHeaderGroup>
+        </PageHeader>
+        <PageMain>
+          <PageWrapper>
+            <PageContent>
+              <MainContent>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Section header title
+                    </MainSectionHeaderTitle>
+                  </MainSectionHeader>
+                  <MainSectionFooter>
+                    <InfoIcon
+                      className="mt-0.5 mr-2 size-3 shrink-0"
+                      strokeWidth={2.5}
+                    />
+                    footer
+                  </MainSectionFooter>
+                </MainSection>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Another main section
+                    </MainSectionHeaderTitle>
+                  </MainSectionHeader>
+                </MainSection>
+              </MainContent>
+            </PageContent>
+          </PageWrapper>
+        </PageMain>
+      </>
+      <div className="h-10" />
+      <>
+        <PageHeader>
+          <PageHeaderGroup>
+            <PageTitle>Title</PageTitle>
+            <PageSubtitle>Main content with simple alert</PageSubtitle>
+          </PageHeaderGroup>
+        </PageHeader>
+        <PageMain>
+          <PageWrapper>
+            <PageContent>
+              <MainContent>
+                <SimpleAlert>Simple alert</SimpleAlert>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Section header title
+                    </MainSectionHeaderTitle>
+                  </MainSectionHeader>
+                </MainSection>
+              </MainContent>
+            </PageContent>
+          </PageWrapper>
+        </PageMain>
+      </>
+      <div className="h-10" />
+      <>
+        <PageHeader>
+          <PageHeaderGroup>
+            <PageTitle>Title</PageTitle>
+            <PageSubtitle>Main content with simple alert</PageSubtitle>
+          </PageHeaderGroup>
+        </PageHeader>
+        <PageMain>
+          <PageWrapper>
+            <PageContent>
+              <MainContent>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Section with one panel
+                    </MainSectionHeaderTitle>
+                  </MainSectionHeader>
+                  <MainSectionPanel>
+                    <MainSectionPanelItem>
+                      Allow users to delete their accounts
+                    </MainSectionPanelItem>
+                  </MainSectionPanel>
+                </MainSection>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Section with multiple panels
+                    </MainSectionHeaderTitle>
+                  </MainSectionHeader>
+                  <MainSectionPanel>
+                    <MainSectionPanelItem>
+                      Allow users to delete their accounts
+                    </MainSectionPanelItem>
+                    <MainSectionPanelItem>
+                      <Button variant="secondary">
+                        Apply to existing users
+                      </Button>
+                    </MainSectionPanelItem>
+                  </MainSectionPanel>
+                </MainSection>
+                <MainSection>
+                  <MainSectionHeader>
+                    <MainSectionHeaderTitle>
+                      Section with panel item group which manages the space-y
+                    </MainSectionHeaderTitle>
+                  </MainSectionHeader>
+                  <MainSectionPanel>
+                    <MainSectionPanelItem>
+                      <MainSectionPanelItemGroup>
+                        <div>Allow users to delete their accounts</div>
+                        <SimpleAlert>Alert inside panel item group</SimpleAlert>
+                      </MainSectionPanelItemGroup>
+                    </MainSectionPanelItem>
+                  </MainSectionPanel>
+                </MainSection>
+              </MainContent>
+            </PageContent>
+          </PageWrapper>
+        </PageMain>
+      </>
+      <div className="h-10" />
+      <>
+        <PageHeader>
+          <PageHeaderGroup>
+            <PageTitle>Title</PageTitle>
+            <PageSubtitle>Collapseable panel</PageSubtitle>
+          </PageHeaderGroup>
+        </PageHeader>
+        <PageMain>
+          <PageWrapper>
+            <PageContent>
+              <MainContent>
+                <MainSection>
+                  <MainSectionHeader>
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        onClick={() => setHidden((prev) => !prev)}
+                        checked={!hidden}
+                      />
+                      <MainSectionHeaderTitle>
+                        Hide main section panel
+                      </MainSectionHeaderTitle>
+                    </div>
+                  </MainSectionHeader>
+                  <MainSectionPanel collapsed={hidden}>
+                    <MainSectionPanelItem>
+                      <div>Allow users to sign up with their email address</div>
+                    </MainSectionPanelItem>
+                  </MainSectionPanel>
+                  <MainSectionFooter>
+                    this is footer of main section
+                  </MainSectionFooter>
+                </MainSection>
+              </MainContent>
+            </PageContent>
+          </PageWrapper>
+        </PageMain>
+      </>
+      <div className="h-10" />
+      <>
+        <PageHeader>
+          <PageHeaderGroup>
+            <PageTitle>Title</PageTitle>
+            <PageSubtitle>Main content and aside content</PageSubtitle>
+          </PageHeaderGroup>
+        </PageHeader>
+        <PageMain>
+          <PageWrapper>
+            <PageContent>
+              <MainContent>
+                <MainSection>
+                  <MainSectionHeader>
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        onClick={() => setDimmed((prev) => !prev)}
+                        checked={!hidden}
+                      />
+                      <label className="text-base font-medium">
+                        Sign-up with password
+                      </label>
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 ml-8 text-xs">
+                      Require users to sign up with a password
+                    </p>
+                  </MainSectionHeader>
+                </MainSection>
+              </MainContent>
+              <AsideContent dimmed={dimmed}>
+                <div className="flex min-w-60 flex-col">
+                  <div className="border-border border-b pb-3">
+                    <p className="mb-1 text-xs">Minimum password length</p>
+                    <p>8 characters</p>
+                  </div>
+                  <div className="border-border border-b pt-4 pb-3">
+                    <p className="mb-1 text-xs">Reject compromised passwords</p>
+                    <p>On</p>
+                  </div>
+                  <div className="border-border border-b pt-4 pb-3">
+                    <p className="mb-1 text-xs">
+                      Enforce minimum password strength
+                    </p>
+                    <p>Off</p>
+                  </div>
+                  <div className="border-border border-b pt-4 pb-3">
+                    <p className="mb-1 text-xs">Password rules</p>
+                    <p>None</p>
+                  </div>
+                  <div className="p-1 pt-4">
+                    <Anchor
+                      href="#"
+                      className="text-primary flex gap-1 text-xs font-medium"
+                    >
+                      <LuFolderLock />
+                      Update password requirement
+                    </Anchor>
+                  </div>
+                </div>
+              </AsideContent>
+            </PageContent>
+          </PageWrapper>
         </PageMain>
       </>
       <div className="h-10" />
